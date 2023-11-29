@@ -1,0 +1,50 @@
+Command ===>                                                  Scroll ===> CSR  
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+000100 //MATEDK91 JOB CLASS=A,                                                 
+000200 //             MSGCLASS=H,                                              
+000300 //             MSGLEVEL=(1,1),                                          
+000400 //             NOTIFY=&SYSUID                                           
+000410 //*---------------------------------------------------------------      
+000420 //* COPYING DATA FROM DSN1 = SYSUT1 TO A NEW DSN = SYSUT2        *      
+000430 //*---------------------------------------------------------------      
+000500 //STEP01   EXEC PGM=IEBGENER                                            
+000600 //SYSUT1   DD DSN=MATEDK.NOV29T,DISP=SHR                                
+000700 //SYSUT2   DD DSN=&SYSUID..NOV30TH,                                     
+000710 //            DISP=(NEW,CATLG,DELETE),                                  
+000720 //            UNIT=SYSDA,                                               
+000730 //            SPACE=(TRK,(8,10),RLSE),                                  
+000740 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),             
+000750 //            VOL=SER=DEVHD3                                            
+000800 //SYSIN    DD DUMMY                                                     
+
+WHAT IS HAPPENING IS THAT I AM USING AN EXISTING DATASET MATEDK.NOV29T AND COPYING THE DATA FROM THERE INTO A NEW DATASET &SYSUID..NOV30TH  
+
+ALSO I CAN ADD MANUALLY DATA MYSELF FOR EXAMPLE BELOW
+
+
+Command ===>                                                  Scroll ===> CS
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----
+000200 //             MSGCLASS=H,                                           
+000300 //             MSGLEVEL=(1,1),                                       
+000400 //             NOTIFY=&SYSUID                                        
+000410 //*---------------------------------------------------------------   
+000420 //* COPYING DATA FROM DSN1 = SYSUT1 TO A NEW DSN = SYSUT2        *   
+000430 //*---------------------------------------------------------------   
+000500 //STEP01   EXEC PGM=IEBGENER                                         
+000600 //SYSUT1   DD *                                                      
+000610   DATA1                                                              
+000620   DATA2                                                              
+000700 //SYSUT2   DD DSN=&SYSUID..NOV30TH,DISP=SHR                          
+000800 //SYSIN    DD DUMMY                                                  
+000900 //SYSPRINT DD SYSOUT=*                                               
+001000 //SYSOUT   DD SYSOUT=*                                               
+****** **************************** Bottom of Data *************************
+
+USING THE IEBGENER UTILITY ADDING THE DATA FROM SYSUT1 INTO SYSUT2
+
+ONLY THING IS SYSUT2 DSN IS ALREADY CREATED SO DISP=SHR SHARING AND DATASET IS ALREADY MADE. CAN ALSO SEARCH THIS DSN IN 3.4 
+
+IF I WOULD HAVE LEFT IT AS BEFORE IN THE FIRST SESSION LIKE DISP(NEW,CATLG,DELETE) AND OTHER PARAMS 
+
+I WOULD HAVE GOTTEN A JCL ABEND BECAUSE ITS A DUPICALTE DSN
