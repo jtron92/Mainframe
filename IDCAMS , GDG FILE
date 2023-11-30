@@ -1,0 +1,71 @@
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+000001 //CREATGDG JOB CLASS=A,                                                 
+000002 //             MSGLEVEL=(1,1),                                          
+000003 //             MSGCLASS=H,                                              
+000004 //             NOTIFY=&SYSUID                                           
+000005 //STEP01   EXEC PGM=IDCAMS                                              
+000006 //*-----------------------------------------------                      
+000007 //* CREATE A GDG BASE (IDCAMS) STEP01                                   
+000008 //*-----------------------------------------------                      
+000009 //SYSIN    DD *                                                         
+000010   DEFINE GDG(NAME(Z37931.NOV30.GDGBASE)-                                
+000011                   LIMIT(3)             -                                
+000012                   NOEMPTY              -                                
+000013                   SCRATCH)                                              
+000014 /*                                                                      
+000015 //SYSPRINT DD SYSOUT=*                                                  
+000016 //SYSOUT   DD SYSOUT=*                                                  
+000017 //AMSDUMP  DD SYSOUT=*                                                  
+000018 //*----------------------------------------                             
+000019 //* CREATING A GDG FILE USING IEFBR14                                   
+000020 //*----------------------------------------                             
+000021 //STEP02   EXEC PGM=IEFBR14                                             
+000022 //DD1      DD DSN=Z37931.NOV30.GDGBASE(+1),                             
+000023 //            DISP=(NEW,CATLG,DELETE),                                  
+000024 //            UNIT=SYSDA,                                               
+000025 //            SPACE=(TRK,(8,10),RLSE),                                  
+000026 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)              
+000027 //SYSPRINT DD SYSOUT=*                                                  
+000028 //SYSOUT   DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+TO CREATE A GDG BASE , IDCAMS IS NEEDED FOR THIS
+
+IN SYSIN DD * MUST DEFINE THE GDG 
+
+DEFINE GDG(NAME(Z37931.NOV30.GDGBASE)  <--- DEFINING THE GDG THEN THE NAME 
+AFTER THAT FOR A CONTUINATION ADD A - SIGN 
+WE ARE SETTING THE LIMIT OF FILES BEFORE BEING DELETE AND UNCATLGED TO 3 FILES 
+
+LIMIT(3)
+
+THEN NO EMPTY WHICH MEANS UNCATLG THE LAST FILE ADDED IF THE LIMIT IS OVER
+
+SCRATCH WHICH MEANS DELETE THE FILE AFTER HITTING THE LIMIT
+
+
+IN DATA SET LIST UTILITY     (3.4) 
+ ------------------------------------------------------------------------------ 
+                             Data Set List Utility                              
+                                                                    More:     + 
+    blank Display data set list               P Print data set list             
+        V Display VTOC information           PV Print VTOC information          
+                                                                                
+ Enter one or both of the parameters below:                                     
+    Dsname Level . . . Z37931.NOV30.GDGBASE                                     
+    Volume serial  . .                                                          
+
+
+
+
+------------------------------------------------------------------------------ 
+DSLIST - Data Sets Matching Z37931.NOV30.GDGBASE                    Row 1 of 2 
+                                                                               
+Command - Enter "/" to select action                  Message           Volume 
+-------------------------------------------------------------------------------
+         Z37931.NOV30.GDGBASE                                           ?????? 
+         Z37931.NOV30.GDGBASE.G0001V00                                  ZXPL01 
+***************************** End of Data Set list ****************************
+                                                                               
+                                                                               
