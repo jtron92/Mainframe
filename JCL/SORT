@@ -1,0 +1,52 @@
+Command ===>                                                  Scroll ===> CSR  
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+000100 //MATEDK91 JOB CLASS=A,                                                 
+000200 //             MSGCLASS=H,                                              
+000300 //             MSGLEVEL=(1,1),                                          
+000400 //             NOTIFY=&SYSUID                                           
+000410 //*---------------------------------------------------------------      
+000420 //* SORTING DATA FROM DSN                                        *      
+000430 //*---------------------------------------------------------------      
+000500 //STEP01   EXEC PGM=SORT                                                
+000600 //SYSIN    DD *                                                         
+000610   SORT FIELDS=(3,6,CH,A)                                                
+000620 /*                                                                      
+000700 //SORTIN   DD DSN=&SYSUID..NOV30TH,DISP=SHR                             
+000800 //SORTOUT  DD DSN=MATEDK.NOV29T,DISP=SHR                                
+000900 //SYSPRINT DD SYSOUT=*                                                  
+001000 //SYSOUT   DD SYSOUT=*                                                  
+001100 //AMSDUMP  DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+ABOVE UTILITY SORT IS BEING USED
+
+SORTING FIELDS FROM LINE 3 , ALSO THE DATA IS CHARACTERS AND ACSENDING ORDER 
+
+THE DSN THAT IS BEING SORTED IN QUESTION IS &SYSUID..NOV30TH
+
+AND ITS BEING SORTED OUT TO DSN MATEDK.NOV29T WHICH ALREADY EXIST  DISP=SHR
+
+COULD ALSO IF NEEDED CREATE A NEW DSN TO SORTOUT THE DATA INTO BELOW IS EXAMPLE:
+
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7-
+000420 //* SORTING DATA FROM DSN                                        *     
+000430 //*---------------------------------------------------------------     
+000500 //STEP01   EXEC PGM=SORT                                               
+000600 //SYSIN    DD *                                                        
+000610   SORT FIELDS=(3,6,CH,A)                                               
+000620 /*                                                                     
+000700 //SORTIN   DD DSN=&SYSUID..NOV30TH,DISP=SHR                            
+000800 //SORTOUT  DD DSN=&SYSUID..NOV31ST,                                    
+000810 //            DISP=(NEW,CATLG,DELETE),                                 
+000820 //            UNIT=SYSDA,                                              
+000830 //            SPACE=(TRK,(8,10),RLSE),                                 
+000840 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),            
+000850 //            VOL=SER=DEVHD3                                           
+000900 //SYSPRINT DD SYSOUT=*                                                 
+001000 //SYSOUT   DD SYSOUT=*                                                 
+001100 //AMSDUMP  DD SYSOUT=*                                                 
+****** **************************** Bottom of Data ***************************
+
+
+
+
