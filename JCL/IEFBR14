@@ -37,4 +37,17 @@ Command ===>                                                  Scroll ===> CSR
 ****** **************************** Bottom of Data ****************************
 
 
-YOU CAN ALSO ADD A
+YOU CAN ALSO ADD ADD A GDG FILE LIKE BELOW 
+
+
+000021 //STEP02   EXEC PGM=IEFBR14                                        
+000022 //DD1      DD DSN=Z37931.NOV30.GDGBASE(+1),                        
+000023 //            DISP=(NEW,CATLG,DELETE),                             
+000024 //            UNIT=SYSDA,                                          
+000025 //            SPACE=(TRK,(8,10),RLSE),                             
+000026 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)         
+000027 //SYSPRINT DD SYSOUT=*                                             
+000028 //SYSOUT   DD SYSOUT=*                                             
+****** **************************** Bottom of Data ***********************
+
+TO DEFINE THE GDG BASE CLICK ON TAB IDCAMS
