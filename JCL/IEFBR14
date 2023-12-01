@@ -19,3 +19,22 @@ Command ===>                                                  Scroll ===> CSR
 Above is a basic utility called IEFBR14 which is mainly used to exec a simple program like this one
 
 This is to create a new file with the parameters added on space, data control block , etc 
+
+You can also delete a dsn using IEFBR14 just change the disp = (old,delete) and delete the rest of the dsn params like below: 
+
+
+Command ===>                                                  Scroll ===> CSR  
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+000100 //MATEDK01 JOB CLASS=A,                                                 
+000200 //             MSGCLASS=H,                                              
+000300 //             MSGLEVEL=(1,1),                                          
+000400 //             NOTIFY=&SYSUID                                           
+000500 //STEP01   EXEC PGM=IEFBR14                                             
+000600 //DD1      DD DSN=&SYSUID..BRAVO.TASK141,DISP=(OLD,DELETE)                                                                          
+001200 //SYSOUT   DD SYSOUT=*                                                  
+001300 //SYSPRINT DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+
+YOU CAN ALSO ADD A
