@@ -1,38 +1,61 @@
-000100 IDENTIFICATION DIVISION.                                      
-000200 PROGRAM-ID. SCRIM.                                            
-000300 ENVIRONMENT DIVISION.                                         
-000400 INPUT-OUTPUT SECTION.                                         
-000500 FILE-CONTROL.                                                 
-000600 DATA DIVISION.                                                
-000700 WORKING-STORAGE SECTION.                                      
-000710 01 STORE-TABLE.                                               
-000720   05 STORE-ID OCCURS 3 TIMES.                                 
-000730     10 PRODUCTS OCCURS 5 TIMES PIC 9(8).                      
-000740 01 I   PIC 9(1).                                              
-000750 01 J   PIC 9(1).                                              
-000800 LINKAGE SECTION.                                              
-000900 01 LS-SEQ     PIC 9(8).                                       
-001000 PROCEDURE DIVISION USING LS-SEQ.                              
-000500 FILE-CONTROL.                                             
-000600 DATA DIVISION.                                            
-000700 WORKING-STORAGE SECTION.                                  
-000710 01 STORE-TABLE.                                           
-000720   05 STORE-ID OCCURS 3 TIMES.                             
-000730     10 PRODUCTS OCCURS 5 TIMES PIC 9(8).                  
-000740 01 I   PIC 9(1).                                          
-000750 01 J   PIC 9(1).                                          
-000800 LINKAGE SECTION.                                          
-000900 01 LS-SEQ     PIC 9(8).                                   
-001000 PROCEDURE DIVISION USING LS-SEQ.                          
-001100 000-MAIN.                                                 
-001200      PERFORM NEXT-PARA VARYING I FROM 1 BY 1 UNTIL I > 3  
-001300      AFTER J FROM 1 BY 1 UNTIL J > 5.                     
-001400      EXIT PROGRAM.                                        
-001500 NEXT-PARA.                                                
-001600      MOVE LS-SEQ TO PRODUCTS(I, J)                        
-            DISPLAY "PRODUCTS" I " , " J "  " PRODUCTS(I, J).    
-001900      ADD 1 TO LS-SEQ. 
+000100 IDENTIFICATION DIVISION.                         
+000200 PROGRAM-ID. SCRIM.                                
+000300 ENVIRONMENT DIVISION.                            
+000400 INPUT-OUTPUT SECTION.                            
+000500 FILE-CONTROL.                                    
+000600 DATA DIVISION.                                   
+000700 FILE SECTION.                                    
+000800 WORKING-STORAGE SECTION.                         
+000900 01 STORE.                                        
+001000   05 STORE-ID   OCCURS 3 TIMES.                  
+001100     10 PRODUCTS OCCURS 5 TIMES PIC 9(8).         
+001200 01 WS-TIME  PIC 9(8).                            
+001210 01 J        PIC 9(1).                            
+001220 01 I        PIC 9(1).   
+001000   05 STORE-ID   OCCURS 3 TIMES.                          
+001100     10 PRODUCTS OCCURS 5 TIMES PIC 9(8).                 
+001200 01 WS-TIME  PIC 9(8).                                    
+001210 01 J        PIC 9(1).                                    
+001220 01 I        PIC 9(1).                                    
+001300 LINKAGE SECTION.                                         
+001400 01 WS-SEQ PIC   9(8).                                    
+001500 PROCEDURE DIVISION USING WS-SEQ.                         
+001600 000-MAIN.                                                
+001700      DISPLAY "THIS IS A 2 D TABLE".                      
+001800      PERFORM NEXT-PARA VARYING I FROM 1 BY 1 UNTIL I > 3 
+001900      AFTER J FROM 1 BY 1 UNTIL J > 5.                    
+002000      STOP RUN.                                           
+002100 NEXT-PARA.                                               
+002200      ACCEPT WS-SEQ FROM TIME.                            
+002300      MOVE WS-SEQ TO PRODUCTS(I, J).                      
+002400      DISPLAY "PRODUCTS: " I " , " J "  "                 
+002500      PRODUCTS(I, J).                                             
+002600      ADD 1 TO WS-SEQ.                                            
+**************************** Bottom of Data ****************************
 
+
+
+ABOVE THIS CODE IS PERFORMING LOOPS USING I AND J 
+
+BOTH I AND J ARE STARTING FROM 1 AND BEING ADDED BY 1 UNTIL THEY ARE BOTH GREATER THAN THE NUMBERS IN QUESTION. 
+
+THIS LOOPS THE NEXT PARAGRAPH CALLED NEXT-PARA IN THE PERFORM SECTION
+
+WE SET PRODUCTS TO OCCUR 5 TIMES WHICH IS WHY J IS GOING TO LOOP 5 TIMES AND THE PIC IS 9(8) 99999999 FOR ACCEPTING THE CURRENT TIME
+
+WS-SEQ IS STORING THE CURRENT TIME --> ACCEPT WS-SEQ FROM TIME.
+
+THEN MOVING THE TIME WITH WS-SEQ TO PRODUCTS(I, J) SUBSCRIPTS 
+
+AFTER GOING TO DISPLAY PRODUCTS(I, J)
+
+THEN ADDING 1 TO WS-SEQ (TIME)
+
+I IS GOING TO LOOP PRODUCTS SHOWING PRODUCTS1 , PRODUCTS2 AND PRODUCTS 3 ALSO AT THE END SHOWING THE TIME ADDED BY 1
+J IS GOING TO LOOP 5 TIMES DOWN WITH PRODUCTS AND TIME IT WILL MAKE MORE SENSE WITH THE OUTPUT BELOW
+
+
+THEN WE ARE GOING TO USE THIS PROGRAM TO CALL THE PROGRAM ABOVE
 
 000100 IDENTIFICATION DIVISION.                 
 000200 PROGRAM-ID. RUBY.                        
@@ -50,25 +73,26 @@
 001400      CALL "SCRIM" USING WS-SEQ.          
 001500      STOP RUN.                           
 
+NOTHING SPECIAL BUT WE ARE MAKING A CALL TO SCRIM USING WS-SEQ. THE PROCEDURE FROM SCRIM SHOULD NOW WORK IN SYNC WITH THIS PROGRAM
 
-   Display  Filter  View  Print  
- --------------------------------
- SDSF OUTPUT DISPLAY MATEDK9  JOB
- COMMAND INPUT ===>              
-THIS IS A 2 D TABLE              
-PRODUCTS1 , 1  08464965          
-PRODUCTS1 , 2  08464966          
-PRODUCTS1 , 3  08464967          
-PRODUCTS1 , 4  08464968          
-PRODUCTS1 , 5  08464969          
-PRODUCTS2 , 1  08464970          
-PRODUCTS2 , 2  08464971          
-PRODUCTS2 , 3  08464972          
-PRODUCTS2 , 4  08464973          
-PRODUCTS2 , 5  08464974          
-PRODUCTS3 , 1  08464975          
-PRODUCTS3 , 2  08464976          
-PRODUCTS3 , 3  08464977          
-PRODUCTS3 , 4  08464978          
-PRODUCTS3 , 5  08464979          
-******************************** 
+ONCE COMPLIED AND RAN THIS IS THE OUTPUT
+
+ SDSF OUTPUT DISPLAY MATEDKZ  JO
+ COMMAND INPUT ===>             
+THIS IS A 2 D TABLE             
+PRODUCTS: 1 , 1  09225962       
+PRODUCTS: 1 , 2  09225963       
+PRODUCTS: 1 , 3  09225964       
+PRODUCTS: 1 , 4  09225965       
+PRODUCTS: 1 , 5  09225966       
+PRODUCTS: 2 , 1  09225967       
+PRODUCTS: 2 , 2  09225968       
+PRODUCTS: 2 , 3  09225969       
+PRODUCTS: 2 , 4  09225970       
+PRODUCTS: 2 , 5  09225971       
+PRODUCTS: 3 , 1  09225972       
+PRODUCTS: 3 , 2  09225973       
+PRODUCTS: 3 , 3  09225974       
+PRODUCTS: 3 , 4  09225975       
+PRODUCTS: 3 , 5  09225976       
+********************************
