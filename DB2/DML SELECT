@@ -1,18 +1,133 @@
+                                                                             
+ Enter the input data set name:        (Can be sequential or partitioned)    
+  1  DATA SET NAME ... ===> 'Z37931.GREY59.DELGEN(ONE)'                      
+  2  VOLUME SERIAL ... ===>            (Enter if not cataloged)              
+  3  DATA SET PASSWORD ===>            (Enter if password protected)         
+                                                                             
+ Enter the output data set name:       (Must be a sequential data set)       
+  4  DATA SET NAME ... ===> SQL.OUT                                          
+                                                                             
+ Specify processing options:                                                 
+  5  CHANGE DEFAULTS   ===> YES        (Y/N - Display SPUFI defaults panel?) 
+  6  EDIT INPUT ...... ===> YES        (Y/N - Enter SQL statements?)         
+  7  EXECUTE ......... ===> YES        (Y/N - Execute SQL statements?)       
+  8  AUTOCOMMIT ...... ===> YES        (Y/N - Commit after successful run?)  
+  9  BROWSE OUTPUT ... ===> YES        (Y/N - Browse output data set?)       
+                                                                             
+ For remote SQL processing:                                                  
+ 10  CONNECT LOCATION  ===>                                                  
+                    .------------------------------------.                   
+                    | DSNE361I SPUFI PROCESSING COMPLETE |                   
+  F1=HELP      F2=S '------------------------------------' IND     F6=RCHANGE
+
+                            CURRENT SPUFI DEFAULTS             SSID: DBCG       
+ ===>                                                                           
+                                                                                
+  1  SQL TERMINATOR .. ===> ;          (SQL Statement Terminator)               
+  2  ISOLATION LEVEL   ===> CS         (RR=Repeatable Read, CS=Cursor Stability,
+                                        UR=Uncommitted Read)                    
+  3  MAX SELECT LINES  ===> 250        (Max lines to be return from SELECT)     
+  4  ALLOW SQL WARNINGS===> NO         (Continue fetching after sqlwarning)     
+  5  CHANGE PLAN NAMES ===> NO         (Change the plan names used by SPUFI)    
+  6  SQL FORMAT....... ===> SQL        (SQL, SQLCOMNT, or SQLPL)                
+ Output data set characteristics:                                               
+  7  SPACE UNIT ...... ===> TRK        (TRK or CYL)                             
+  8  PRIMARY SPACE ... ===> 6          (Primary space allocation 1-999)         
+  9  SECONDARY SPACE . ===> 5          (Secondary space allocation 0-999)       
+ 10  RECORD LENGTH ... ===> 4092       (LRECL=Logical record length)            
+ 11  BLOCK SIZE ...... ===> 4096       (Size of one block)                      
+ 12  RECORD FORMAT ... ===> VB         (RECFM=F, FB, FBA, V, VB, or VBA)        
+ 13  DEVICE TYPE ..... ===> SYSDA      (Must be DASD unit name)                 
+ Output format characteristics:                                                 
+ 14  MAX NUMERIC FIELD ===> 33         (Maximum width for numeric fields)       
+ 15  MAX CHAR FIELD .. ===> 80         (Maximum width for character fields)     
+ 16  COLUMN HEADING .. ===> NAMES      (NAMES, LABELS, ANY or BOTH)             
+  F1=HELP      F2=SPLIT     F3=END       F4=RETURN    F5=RFIND     F6=RCHANGE   
+  F7=UP        F8=DOWN      F9=SWAP     F10=LEFT     F11=RIGHT    F12=RETRIEVE  
+
+
+
+DID A SEARCH ON 
+
+SELECT * FROM DSN8120.DEPT;     
+
+-------------------------------------------------------------------------------
+ BROWSE    Z37931.SQL.OUT                           Line 0000000000 Col 001 080 
 ********************************* Top of Data **********************************
 ---------+---------+---------+---------+---------+---------+---------+---------+
---CREATE TABLE EMPLOYEE(EMPNO INT, NAME CHAR(20))                       00000210
---    IN DBMATE1.TSMATEDK;                                              00000220
---INSERT INTO EMPLOYEE VALUES(100,'SRINIVAS');                          00000300
---INSERT INTO EMPLOYEE VALUES(200,'GANESH B');                          00000400
-  SELECT * FROM EMPLOYEE;                                               00000500
+SELECT * FROM DSN8120.DEPT;                                             00010015
 ---------+---------+---------+---------+---------+---------+---------+---------+
-      EMPNO  NAME                                                               
+DEPTNO  DEPTNAME                              MGRNO   ADMRDEPT  LOCATION        
 ---------+---------+---------+---------+---------+---------+---------+---------+
-        100  SRINIVAS                                                           
-        200  GANESH B                                                           
-        102  SUJI                                                               
-DSNE610I NUMBER OF ROWS DISPLAYED IS 3                                          
+A00     SPIFFY COMPUTER SERVICE DIV.          000010  A00       Los Angeles     
+B01     PLANNING                              000020  A00       Los Angeles     
+C01     INFORMATION CENTER                    000030  A00       Los Angeles     
+D01     DEVELOPMENT CENTER                    000130  A00       Beverly Hills   
+D11     MANUFACTURING SYSTEMS                 000060  D01       Los Angeles     
+D21     ADMINISTRATION SYSTEMS                000070  D01       Los Angeles     
+E01     SUPPORT SERVICES                      000050  A00       Los Angeles     
+E11     OPERATIONS                            000090  E01       Los Angeles     
+E21     SOFTWARE SUPPORT                      000100  E01       Los Angeles     
+F22     BRANCH OFFICE F2                      000130  E01       Beverly Hills   
+G22     BRANCH OFFICE G2                      000130  E01       Beverly Hills   
+H22     BRANCH OFFICE H2                      000130  E01       Beverly Hills   
+
+A SIMPLE SELECT QUERY 
+
+
+
+TO NARROW THE SEARCH CAN DO A SEARCH ON DEPTNO OR DEPTNAME ETC ETC EXAMPLE:
+
+BELOW IS THE INPUT DSN IN SPUFI AND WILL HAVE RESULTS ON THE OUTPUT DSN
+-------------------------------------------------------------------------------
+EDIT       Z37931.GREY59.DELGEN(ONE) - 01.16               Columns 00001 00072 
+****** ***************************** Top of Data ******************************
+000100 SELECT * FROM DSN8120.DEPT WHERE DEPTNO = 'C01';                        
+****** **************************** Bottom of Data ****************************
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Command ===>     END;;;                                             Scroll ===> PAGE 
+
+ -------------------------------------------------------------------------------
+ BROWSE    Z37931.SQL.OUT                           Line 0000000000 Col 001 080 
+********************************* Top of Data **********************************
+---------+---------+---------+---------+---------+---------+---------+---------+
+SELECT * FROM DSN8120.DEPT WHERE DEPTNO = 'C01';                        00010016
+---------+---------+---------+---------+---------+---------+---------+---------+
+DEPTNO  DEPTNAME                              MGRNO   ADMRDEPT  LOCATION        
+---------+---------+---------+---------+---------+---------+---------+---------+
+C01     INFORMATION CENTER                    000030  A00       Los Angeles     
+DSNE610I NUMBER OF ROWS DISPLAYED IS 1                                          
 DSNE616I STATEMENT EXECUTION WAS SUCCESSFUL, SQLCODE IS 100                     
 ---------+---------+---------+---------+---------+---------+---------+---------+
 ---------+---------+---------+---------+---------+---------+---------+---------+
 DSNE617I COMMIT PERFORMED, SQLCODE IS 0                                         
+DSNE616I STATEMENT EXECUTION WAS SUCCESSFUL, SQLCODE IS 0                       
+---------+---------+---------+---------+---------+---------+---------+---------+
+DSNE601I SQL STATEMENTS ASSUMED TO BE BETWEEN COLUMNS 1 AND 72                  
+DSNE620I NUMBER OF SQL STATEMENTS PROCESSED IS 1                                
+DSNE621I NUMBER OF INPUT RECORDS READ IS 1                                      
+DSNE622I NUMBER OF OUTPUT RECORDS WRITTEN IS 17                                
+
+EXECUTION WAS SUCCESSFUL
+
+SELECT * FROM DSN8120.DEPT WHERE DEPTNO = 'C01';  
+
+QUERY SHOWS DEPTNO = 'C01' WHICH IS THE  INFORMATION CENTER  
+
+
+
+
