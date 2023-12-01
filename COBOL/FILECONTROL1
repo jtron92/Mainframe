@@ -51,19 +51,8 @@
 005000      OPEN OUTPUT OFILE.                        
 005100      IF  FILE-STATUS2                          
 005200         CONTINUE                               
-005300      ELSE                                      
-004300      OPEN INPUT IFILE.                      
-004400      IF FILE-STATUS1                        
-004500         CONTINUE                            
-004600      ELSE                                   
-004700         DISPLAY "FAILURE TO OPEN" FLAG1     
-004800      GO TO EXIT-PARA                        
-004900      END-IF.                                
-005000      OPEN OUTPUT OFILE.                     
-005100      IF  FILE-STATUS2                       
-005200         CONTINUE                            
-005300      ELSE                                   
-005400         DISPLAY "FAILURE TO OPEN" FLAG2     
+005300      ELSE                                                             
+005400      DISPLAY "FAILURE TO OPEN" FLAG2     
 005500      GO TO EXIT-PARA                        
 005600      END-IF.                                
 005700 OPEN-CLOSE.                                 
