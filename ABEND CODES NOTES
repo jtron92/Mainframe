@@ -1,0 +1,315 @@
+
+RETURN CODE 12 
+
+STEPNAME PROCSTEP    RC   EXCP   CONN  
+STEP02   STEP01              12     11      1  
+
+
+SYSIN    DD STATEMENT MISSING 
+
+ADD THE SYSIN DD DUMMY 
+
+*****************************************************************
+
+JCL ERROR 
+PROCEDURE PROC9 WAS NOT FOUND 
+
+
+
+
+ADD SYSPRINT DD SYSOUT=* 
+ADD SYSIN        DD DUMMY
+ADD SYSOUT    DD SYSOUT=*
+AFTER PEND AND AFTER STEP EXEC PROC
+
+/*                                                         
+//SYSUT2   DD DSN=&DNAME,DISP=(NEW,CATLG,DELETE),          
+//            SPACE=(TRK,(100,100),RLSE),UNIT=SYSDA,       
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800) 
+//         PEND                                            
+//STEP02   EXEC PROC=PROC09,DNAME=Z38515.TUES              
+//SYSPRINT DD SYSOUT=*                                     
+//SYSOUT   DD SYSOUT=*                                     
+//SYSIN    DD DUMMY                                        
+
+*****************************************************************
+JCL ERROR FLUSH
+-                                      -
+-STEPNAME PROCSTEP    RC   EXCP   CONN  
+-STEP02   STEP01   FLUSH      0      0  
+IEF453I SCRIM - JOB FAILED - JCL ERROR  
+-SCRIM    ENDED.  NAME-                 
+
+NOT DEFINED BECAUSE DUPLICATE NAME EXISTS IN CATALOG
+RETURN CODE IS 8 REASON CODE IS 38 IGG0CLEH         
+
+DELETE DSN IN QUESTION THEN RERUN THE JOB
+
+******************************************************************
+
+
+JCL ERROR 
+
+5 IEFC019I MISPLACED DD STATEMENT  
+6 IEFC601I INVALID JCL STATEMENT   
+7 IEFC601I INVALID JCL STATEMENT   
+8 IEFC601I INVALID JCL STATEMENT   
+9 IEFC019I MISPLACED DD STATEMENT  
+
+Using a proc eliminate the sys dd statements to correct issue
+
+**********************************************************************
+
+15 IEFC641I IMPROPER SUBPARAMETER LIST IN THE RECFM FIELD 
+
+Make sure the recfm  is valid and not also repeated by mistake
+
+****************************************************************
+
+IEFC605I UNIDENTIFIED OPERATION FIELD
+IEFC605I UNIDENTIFIED OPERATION FIELD
+
+Common error either a invalid word, missing comma, or too many spaces in the statements
+
+******************************************************************
+ 7 IEFC009I KEYWORD SPACE IS MUTUALLY EXCLUSIVE WITH KEYWORD SPACE ON THE DD STATMENT
+
+THERE WAS TWO SPACE=(TRK,(100,100),RLSE)  DELETE ONE TO FIX ISSUE
+
+*******************************************************************
+
+15 IEFC008I PEND STATEMENT FOUND BEFORE END OF PROCEDURE   
+
+PROCEDURE KEY WORK PEND WAS NOT ON THE BOTTOM OF THE JCL 
+
+PLCE IT ON THE BOTTOM TO RUN THE ENTIRE JCL PROC
+
+*********************************************************************
+
+IEF236I ALLOC. FOR GUST92 STEP02 STEP01                             
+IEF237I JES2 ALLOCATED TO SYSIN                                     
+IDC4999I UABORT CODE 36                                             
+IEC130I AMSDUMP  DD STATEMENT MISSING                               
+IEF142I GUST92 STEP02 STEP01 - STEP WAS EXECUTED - COND CODE 0016   
+
+*********************************************************************
+
+ ALLOCATION FAILED DUE TO DATA FACILITY SYSTEM ERROR
+IGD17045I SPACE NOT SPECIFIED FOR ALLOCATION OF DATA SET 
+
+FOR THIS ERROR DSN DID NOT HAVE A , OR DISP
+
+**********************************************************************
+
+DATA SET UTILITY - GENERATE                                             
+IEB351I I/O ERROR ,ZACK    ,STEP01  ,JES ,I,SYSIN   ,GET   ,READ ERROR  
+
+RECTURN CODE 12 
+
+SYSIN DD SYSOUT=*           <———— INCORRECT CHANGE TO SYSIN DD DUMMY
+
+*************************************************************************
+
+
+ICE201I C RECORD TYPE IS F - DATA STARTS IN POSITION 1                          
+ICE805I 1 JOBNAME: VINCE    , STEPNAME: STEP02                                  
+ICE802I 0 BLOCKSET     TECHNIQUE IN CONTROL                                     
+ICE000I J - CONTROL STATEMENTS FOR 5650-ZOS, Z/OS DFSORT V2R4  - 17:37 ON FRI NO
+            SORT FIELDS=(3,6,CH,D)                                              
+ICE201I J RECORD TYPE IS F - DATA STARTS IN POSITION 1                          
+ICE056A N SORTOUT  NOT DEFINED                                                  
+ICE052I J END OF DFSORT    
+
+SORTIN DD 
+SOROUT DD WERE MISSING
+
+****************************************************************************
+RETURN CODE 08 COBOL
+
+-STEPNAME PROCSTEP    RC   EXCP   CONN 
+-STEP01   COBOL       08  12784    161 
+-STEP01   LKED        00    270     33 
+                                                        
+The "ENVIRONMENT DIVISION" header was not found.  A "ENV
+DIVISION" header was assumed before "INPUT-OUTPUT".     
+
+MISSING ENVIRONMENT DIVISION 
+
+******************************************************************************
+
+STEP01 STEP01 SYSUT2 - UNIT FIELD SPECIFIES INCORRECT DEVICE NAM
+
+NEED TO ADD UNIT=SYSDA
+
+*****************************************************************************
+
+ 15 IEF647I FIRST CHARACTER OF NAME NOT ALPHABETIC OR NOT NATIONAL IN THE DSNAME FIELD 
+
+ ERROR I HAD DSN=SYSUID FOR THE NAME IT SHOULD BE DSN=&SYSUID
+
+*******************************************************************************
+
+ 32  IGYPS2121-S   "FIRSTNAME" was not defined as a data-name.  The statement
+
+IN WORKING-STORAGE SECTION FIRSTNAME WAS NOT DEFINED 
+
+********************************************************************************
+
+
+14 IEFC625I INCORRECT USE OF PARENTHESIS ON THE DD STATEMENT   
+14 IEFC620I UNIDENTIFIABLE CHARACTER < ON THE DD STATEMENT     
+15 IEFC605I UNIDENTIFIED OPERATION FIELD                       
+
+CHARACTER < WAS PLACE AND SHOULD HAVE BEEN A COMMA
+
+***************************************************************************
+
+ -STEPNAME PROCSTEP    RC 
+ -STEP01               20 
+
+RECTURN CODE 020
+
+MAKE SURE TO ADD AMSDUMP DD SYSOUT= * TO SELECT PGMS
+
+*****************************************************************************
+                                                        
+                                                                               
+   29  IGYPS0088-S   The "STRING" statement was invalid.  Expected "DELIMITED",
+                                                                               
+                     Same message on line:     31                              
+                                                                               
+   36  IGYPS0001-W   A blank was missing before character "G" in column 61.  A 
+                                                                               
+                     Same message on line:     37                              
+essages    Total    Informational    Warning    Error    Severe    Terminating 
+rinted:       4                          2                   2                 
+
+^^^ FOR EXAMPLE 
+
+ MOVE 30 TO AGE.                                         
+ EVALUATE AGE                                            
+  WHEN 20 DISPLAY FULL-NAME " IS " AGE " AND "GENDER     <—— THIS NEEDS A SPACE 
+  WHEN 30 DISPLAY FULL-NAME " IS " AGE " AND "GENDER    <—— THIS NEEDS A SPACE
+ END-EVALUATE.                                           
+
+********************************************************************************
+
+
+                                                                    
+IGYPS0001-W   A blank was missing before character "J" in column 37.
+                                                                    
+IGYPS0001-W   A blank was missing before character """ in column 38.
+                                                                    
+IGYPS0001-W   A blank was missing before character "J" in column 34.
+
+Too many blanks
+
+***********************************************************************************
+
+
+ Too many subscripts or indices were specified for "STORE-T
+ discarded.                                                
+
+^^^^^^ 
+
+ WORKING-STORAGE SECTION.                        
+ 01 STORE-TABLE.                                 
+   05 STORE-TABLES      OCCURS 3 TIMES.          
+     10 PRODUCTS        OCCURS 5 TIMES PIC 9(8). 
+
+I HAD STORE-TABLES AND IT WAS SUPPOSE TO BE PRODUCTS
+
+***************************************************************************************
+
+
+ "WS-SEQ" or one of its subordinates was referenced, but "W
+ have addressability.  This reference will not be resolved 
+Informational    Warning    Error    Severe    Terminating 
+
+
+
+***************************************************************************************
+
+                                                                            
+ 30  IGYPS2074-S   "CUST-MAST" was defined as a type that was invalid in thi
+sages    Total    Informational    Warning    Error    Severe    Terminating
+nted:       2           1                                  1                
+
+I HAD THE WRONG DATA TYPE VALUE ^^^^ 
+
+SHOULD HAVE BEEN CUST-NAME 
+
+**************************************************************************************
+
+
+MATEDK01 STEP02 SORTOUT - UNIT FIELD SPECIFIES INCORRECT DEVICE NAME
+
+
+WAS MISSING UNIT=SYSDA IN THE DSN FIELD WHEN CREATING A NEW DSN
+
+
+***************************************************************************************
+
+
+"ZELDA" or one of its subordinates was referenced, but "ZE
+addressability.  This reference will not be resolved succe
+
+Seems we did not reference Zelda in the procedure division using Zelda. Call can t be made from another Pgm or 
+
+CALL “ZELDA” USING LS-SEQ was not in the procedure 
+
+*****************************************************************************************
+
+
+Return code 0                                                                   
+z/OS V1 R13 BINDER     14:30:19 WEDNESDAY NOVEMBER 22, 2023                     
+BATCH EMULATOR  JOB(MATEDK1 ) STEP(STEP01  ) PGM= IEWBLINK  PROCEDURE(LKED    ) 
+IEW2456E 9207 SYMBOL GREY59 UNRESOLVED.  MEMBER COULD NOT BE INCLUDED FROM THE D
+
+
+-STEPNAME PROCSTEP    RC 
+-STEP01   COBOL       00 
+-STEP01   LKED        08 
+
+LKED error make sure you have everything set up correctly and pointing to the right complier as well.
+
+*********************************************************************************************
+
+
+IGYDS1103-E   Expected "SECTION", but found ". ".  "SECTION" was assumed
+    Total    Informational    Warning    Error    Severe    Terminating 
+
+Record code 8   I forgot to add section to working storage 
+
+-STEPNAME PROCSTEP    RC   EXCP 
+-STEP01   COBOL       08    279 
+-STEP01   LKED        00    161 
+
+*************************************************************************************************
+
+
+ABENDED S806 U0000 CN(INT 
+
+CANT FIND THE PGM , PROBABLY WRONG PGM OR LOAD MUDLE 
+
+***************************************************************************************************
+
+ABENDED S000 U4038 CN(INTER
+
+FORGET TO ADD STOP RUN.
+
+***************************************************************************************************
+
+The result of the comparison of operands I and 10 is known
+operands.  Unconditional code was generated.              
+nformational    Warning    Error    Severe    Terminating 
+
+THIS ERROR IS BECAUSE 
+
+01 I PIC 9(1) <— 10 IS LARGER THAN 1 NEEDS TO BE 2 OR HIGHER
+
+*****************************************************************************************************
+
+SEB37 SPACE ISSUES 
+
+ABEND S806 PROGRAM NOT FOUND YOU WONT AN INVALID ULITIES OR PROC 
