@@ -1,0 +1,18 @@
+********************************* Top of Data **********************************
+---------+---------+---------+---------+---------+---------+---------+---------+
+--CREATE TABLE EMPLOYEE(EMPNO INT, NAME CHAR(20))                       00000210
+--    IN DBMATE1.TSMATEDK;                                              00000220
+--INSERT INTO EMPLOYEE VALUES(100,'SRINIVAS');                          00000300
+--INSERT INTO EMPLOYEE VALUES(200,'GANESH B');                          00000400
+  SELECT * FROM EMPLOYEE;                                               00000500
+---------+---------+---------+---------+---------+---------+---------+---------+
+      EMPNO  NAME                                                               
+---------+---------+---------+---------+---------+---------+---------+---------+
+        100  SRINIVAS                                                           
+        200  GANESH B                                                           
+        102  SUJI                                                               
+DSNE610I NUMBER OF ROWS DISPLAYED IS 3                                          
+DSNE616I STATEMENT EXECUTION WAS SUCCESSFUL, SQLCODE IS 100                     
+---------+---------+---------+---------+---------+---------+---------+---------+
+---------+---------+---------+---------+---------+---------+---------+---------+
+DSNE617I COMMIT PERFORMED, SQLCODE IS 0                                         
