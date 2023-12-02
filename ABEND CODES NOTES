@@ -332,3 +332,7 @@ FILE-CONTROL SECTION WAS NOT ADDED
 
 **********************************************************************************************************
 
+The explicit scope terminator "END-READ" was found without a matching 
+verb.  The scope terminator was discarded.                            
+
+THERE WAS A DISPLAY STATMENT THAT HAD A PERIOD AT THE END BREKAING THIS EEALRY IN THE READ JUST REMOVE THE PEROID
