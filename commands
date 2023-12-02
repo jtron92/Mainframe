@@ -69,6 +69,13 @@ Bn        REPEAT THE COPY OF MOVE N TIMES BEFORE THIS LINE
 
 
 
+-------------------
+
+ref , refresh
+
+sort %        to view percentage of usage of a file
+append 'dsn'   adds other dsn with the same values 
+exlude 'dsn'   excludes values from other dsns , only shows what you want to see
 
 
 
