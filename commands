@@ -13,3 +13,30 @@ SDSF COMMANDS ******
 
 FILTER MAX 'CC 0000'                     <---------- FILTERS IN SDSF THE JOBS THAT RC OF 0000
 FILTER MX  'JCL ERROR'                   <---------- FILTERS IN SDSF THE JOBS WITH JCL ERRORS
+
+
+CA7 COMMANDS ******
+
+LIST
+
+FRQJOB,JOB=
+
+LQ
+
+LQ,JOB=RSTR
+
+FSTRUC,JOB=
+XQ,JOB= 
+
+LPRRN,JOB=xxxxxxxx,LIST=ALL
+
+LQ,SEQ=JOB
+
+LRDY
+
+LJOB,JOB=xxxxxxxx,LIST=NOOD
+
+
+
+
+
