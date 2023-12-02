@@ -313,3 +313,22 @@ THIS ERROR IS BECAUSE
 SEB37 SPACE ISSUES 
 
 ABEND S806 PROGRAM NOT FOUND YOU WONT AN INVALID ULITIES OR PROC 
+
+*****************************************************************************************************
+
+                                                                              
+  12  IGYDS1024-E   An "FD" or "SD" level-indicator was found preceding the ""FILE SECTION" header.  The "FILE SECTION" header was
+                    assumed to precede the "FD" or "SD" level-indicator.      
+ssages    Total    Informational    Warning    Error    Severe    Terminating 
+
+FILE SECTION WAS NOT ADDED IN HEADER 
+
+********************************************************************************************************
+
+IGYDS1011-E   The "SELECT" entry was found outside of the "FILE-CONTROL"
+              the "FILE-CONTROL" paragraph.                             
+
+FILE-CONTROL SECTION WAS NOT ADDED
+
+**********************************************************************************************************
+
