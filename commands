@@ -1,11 +1,15 @@
-C ALL             <-COPY KEY WORD AND CHANGE TO KEYWORD EXMAPLE C ALL ONE TWO           ALL WORDS ONE IS NOW TWO
+C ALL                                    <-COPY KEY WORD AND CHANGE TO KEYWORD EXAMPLE C ALL ONE TWO           ALL WORDS ONE IS NOW TWO
 CREATE .ZF .ZL MEMBERNAME                <--- COPYS FIRST LINE AND LAST LINE AND CREATES A MEMBER 
-CREATE .A .B MEMBERNAME                  <---- COPYS FROM LINE A TO B AND CREATES A MEMBER
+CREATE .A .B MEMBERNAME                  <---- COPIES FROM LINE A TO B AND CREATES A MEMBER
 NUM ON STD COBOL , NUM ON STD COB        <----- ADDS THE COBOL HILITE AND NUMBERS 
 TSO DEL "DSNNAME"                        <------ DELETES THE DSN
 F ALL                                    <------ FINDS ALL KEYWORD
 =X                                       <------- EXITS THE PAGE/SCREEN
+CUT                                      <-------- CUTS THE ENTIRE PAGE WITH DESIRE CODE
+PASTE                                    <--------- PASTE THE CODE, ALSO MAKE SURE THE SCREEN IS EMPTY AND TYPE RES AS WELL BEFORE PASTING
+HILITE ON /OFF                           <---------- HILITES JCLS IF NEEDED AS WELL AS COBOL
 
-SDSF COMMANDS
+SDSF COMMANDS ******
+
 FILTER MAX 'CC 0000'                     <---------- FILTERS IN SDSF THE JOBS THAT RC OF 0000
 FILTER MX  'JCL ERROR'                   <---------- FILTERS IN SDSF THE JOBS WITH JCL ERRORS
