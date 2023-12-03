@@ -1,3 +1,18 @@
+                                                                               
+22.21.16 JOB09819 $HASP165 COBCOP   ENDED AT SVSCJES2 - ABENDED S000 U4038 CN(I
+TERNAL)                                                                        
+***                                                                            
+
+WHEN RUNNING THE CODE AFTER BEING COMPLIER THE ASSIGN DSN FROM THE COBOL SOURCE CODE WAS NOT THE SAME IN THE JCL 
+
+IN FILE-CONTROL
+
+IFILE ASSIGN TO CUSTDD
+
+IN THE JCL THE DD NAME WAS INFILEDD AND NOT CUSTDD WHICH IT NEEDED TO BE 
+
+***************************************************************************************************
+
 
 RETURN CODE 12 
 
