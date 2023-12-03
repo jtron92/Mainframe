@@ -71,3 +71,15 @@ Processing Options:
     3. None             3. Record number      Binary mode, reclen 80          
     4. Create dynamic   4. Formatted key                                      
 Command ===>                                        
+
+
+---------------------------------------------------------------------------
+Edit             Z38515.EMP.KSDS                                   Top of 3
+                            Type KSDS     RBA                      Format C
+Key                                          Col 1       Insert Length 80  
+       <===+>---10---+----2----+----3----+----4----+----5----+----6----+---
+****** ****  Top of data  ****                                             
+000001 000001 BRAXTON WELLS                                                
+000002 000002 JORGE CINTRON                                                
+000003 000003 TYRONE MORRIS                                                
+****** ****  End of data  ****   
