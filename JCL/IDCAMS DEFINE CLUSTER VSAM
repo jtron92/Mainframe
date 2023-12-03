@@ -1,0 +1,29 @@
+000100 //CREATGDG JOB CLASS=A,                           
+000200 //             MSGCLASS=H,                        
+000300 //             MSGLEVEL=(1,1),                    
+000400 //             NOTIFY=&SYSUID                     
+000500 //*-------------------------                      
+000600 //* END OF JOB CARD                               
+000700 //*-------------------------                      
+000800 //STEP01   EXEC PGM=IDCAMS                        
+000810 //SYSIN    DD *                                   
+000820   DEFINE CLUSTER(NAME(Z38515.EMP.KSDS) -          
+000821   INDEXED -                                       
+000822   KEYS(6 0)-                                      
+000823   RECORDSIZE(80 80) -                             
+000824   CYLINDERS(5 2) -                                
+000825   FREESPACE(10 10) -                
+000826   )                                 
+000827   DATA(NAME(Z38515.EMP.KSDS)-       
+000828   )                                 
+000829   INDEX(NAME(Z38515.EMP.KSDS)-      
+000830   )                                 
+000831 /*                                  
+001500 //SYSPRINT DD SYSOUT=*              
+001600 //SYSOUT   DD SYSOUT=*              
+001700 //AMSDUMP  DD SYSOUT=*              
+
+
+Z38515.EMP.KSDS                                                *VSAM*
+Z38515.EMP.KSDS.DATA                                           ZXPL01
+Z38515.EMP.KSDS.INDEX                                          ZXPL01
