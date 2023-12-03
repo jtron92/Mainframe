@@ -22,8 +22,52 @@
 001500 //SYSPRINT DD SYSOUT=*              
 001600 //SYSOUT   DD SYSOUT=*              
 001700 //AMSDUMP  DD SYSOUT=*              
-
+ONCE CLUSTER IS DEFINE THIS IS THE RESULTS BELOW:
 
 Z38515.EMP.KSDS                                                *VSAM*
 Z38515.EMP.KSDS.DATA                                           ZXPL01
 Z38515.EMP.KSDS.INDEX                                          ZXPL01
+
+
+IN FILE MANANGER LOOKING UP THE VSAM
+ -----------------------------------------------------------------
+ File Manager                 Primary Option Menu                 
+                                                                  
+ 0  Settings      Set processing options                 User ID .
+ 1  View          View data                              System ID
+ 2  Edit          Edit data                              Appl ID .
+ 3  Utilities     Perform utility functions              Version .
+ 4  Tapes         Tape specific functions                Terminal.
+ 5  Disk/VSAM     Disk track and VSAM CI functions       Screen. .
+ 6  OAM           Work with OAM objects                  Date. . .
+ 7  Templates     Template and copybook utilities        Time. . .
+ 8  HFS           Access Hierarchical File System                 
+ 9  WebSphere MQ  List, view and edit MQ data                     
+ 10 CICS          FM/CICS                                         
+ 11 Remote        Remote System Definition                        
+ X  Exit          Terminate File Manager                          
+                                                                  
+                                                                  
+                                                                  
+ Command ===> 1                                                   
+
+------------------------------------------------------------------------------
+File Manager                   View Entry Panel                               
+                                                                              
+Input Partitioned, Sequential or VSAM Data Set, or HFS file:                  
+   Data set/path name 'Z38515.EMP.KSDS'                               +       
+   Member . . . . . .              (Blank or pattern for member list)         
+   Volume serial  . .              (If not cataloged)                         
+   Start position . .                                 +                       
+   Record limit . . .              Record sampling                            
+                                                                              
+Copybook or Template:                                                         
+   Data set name  . .                                                         
+   Member . . . . . .              (Blank or pattern for member list)         
+Processing Options:                                                           
+ Copybook/template   Start position type   Enter "/" to select option         
+ 3  1. Above         1  1. Key                Edit template    Type (1,2,S)   
+    2. Previous         2. RBA                Include only selected records   
+    3. None             3. Record number      Binary mode, reclen 80          
+    4. Create dynamic   4. Formatted key                                      
+Command ===>                                        
