@@ -11,6 +11,15 @@ IFILE ASSIGN TO CUSTDD
 
 IN THE JCL THE DD NAME WAS INFILEDD AND NOT CUSTDD WHICH IT NEEDED TO BE 
 
+==MSG>           your edit profile using the command RECOVERY ON.        
+000100 //COBCOP   JOB CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1),NOTIFY=&SYSUID   
+000200 //STEP01   EXEC PGM=KDSDS                                         
+000400 //STEPLIB  DD DSN=Z38515.CBLOADER(KDSDS),DISP=SHR                 
+000500 //SYSPRINT DD SYSOUT=*                                            
+000600 //SYSOUT   DD SYSOUT=*                                            
+000700 //CUSTDD   DD DSN=Z38515.EMP.KSDS,DISP=SHR                        
+****** **************************** Bottom of Data **********************
+
 ***************************************************************************************************
 
 
