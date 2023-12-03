@@ -56,7 +56,38 @@
        CLOSE-EXIT.                                       
             EXIT.                                        
        EXIT-PARA.                                        
-            EXIT.               
+            EXIT.     
+
+The file is defined with indexed organization and random access mode, with EMP-ID as its record key. The program checks and handles file status using a flag defined in the Working-Storage Section.
+THE VSAM HAS 6 ZEROS (KEYS) AND HAS RECORD SIZE OF 80 , SO ENOUGH FOR AN EMPLOYEES NAME SO ADDED THESE VALUES AND PIC CLAUSE TO MATCH
+
+ALSO ADDED A FILE STATUS NAMED FLAG JUST TO SEE THE STATUS OF THE FILE WHEN ITS OPEN , WRITTEN AND CLOSE
+
+SINCE THIS LOGICAL FILE TO PHYSICAL FILE IS NOT JUST BEING READ BUT WRITTEN PUTTING THIS INTO I-O MODE
+
+OPENING IN I-O MODE IN THE PARAGRAPH OPEN-FILE.
+
+NEXT SEEING IF FILE-OK IS TRUE WHICH IF IT IS THE FILE CODE IS 00 IF THIS CONDITION IS TRUE CONTUINE TO NEXT PARAGRAPH AND SKIP ELSE
+
+IF ELSE DISPLAY "FAILURE" AND THE FLAG WHICH IS THE FILE STATUS AFTER THAT THERES A GO TO NEXT-PARA WHICH GOES TO THE END OF THE PROGRAM EXIT.
+
+NEXT PARAGRAPH IS PROCESS-FILE
+
+WERE MOVING A NUMBER TO EMP-ID
+THEN READING THE FILE
+KEY IS EMP-ID
+IF INVALID KEY DISPLAY "INVALID KEY" 
+IF ITS NOT AN INVALID KEY
+DISPLAY "EMP" EMPLOYEE NAME
+THEN END READ
+
+MOVE "NAME OF EMPLOYEE" TO EMPOLYEE-NAME
+THEN DISPLAY NEW EMPL NAME
+AND REWRITE IN THE FILE 
+THEN CLOSE REWRITE
+
+AFTER THIS COMPLIE THE CODE AND RUN IT BELOW IS THE JCL TO DEFINE THE CLUSTER
+
 
 
 000100 //CREATGDG JOB CLASS=A,                           
@@ -84,11 +115,14 @@
 001600 //SYSOUT   DD SYSOUT=*              
 001700 //AMSDUMP  DD SYSOUT=*              
 
+ONCE CLUSTER IS DEFINE THIS IS THE RESULTS BELOW:
 
 Z38515.EMP.KSDS                                                *VSAM*
 Z38515.EMP.KSDS.DATA                                           ZXPL01
 Z38515.EMP.KSDS.INDEX                                          ZXPL01
 
+
+IN FILE MANANGER LOOKING UP THE VSAM
  -----------------------------------------------------------------
  File Manager                 Primary Option Menu                 
                                                                   
@@ -131,11 +165,14 @@ Processing Options:
     4. Create dynamic   4. Formatted key                                      
 Command ===>                                                                  
 
+THIS IS THE DATA I ADDED AND WILL CHANGE EMP-ID 000003 EMP NAME
 ---------------------------------------------------------------------------
 Edit             Z38515.EMP.KSDS                                   Top of 3
                             Type KSDS     RBA                      Format C
 Key                                          Col 1       Insert Length 80  
-       <===+>---10---+----2----+----3----+----4----+----5----+----6----+---
+ 
+<===+>---10---+----2----+----3----+----4----+----5----+----6----+---
+BEFORE THE CHANGE
 ****** ****  Top of data  ****                                             
 000001 000001 BRAXTON WELLS                                                
 000002 000002 JORGE CINTRON                                                
@@ -143,13 +180,7 @@ Key                                          Col 1       Insert Length 80
 ****** ****  End of data  ****      
 
 
-
- SDSF OUTPUT DISPLAY COBCOP   JOB
- COMMAND INPUT ===>              
-EMP-NAME BEFORE :RAUL ESTREAS    
-EMP-NAME AFTER : TYRONE MORRIS   
-******************************** 
-
+AFTER RUNNING THE COBOL CODE:
 
 ---------------------------------------------------------------------------
 Edit             Z38515.EMP.KSDS                                   Top of 3
@@ -160,6 +191,19 @@ Key                                          Col 1       Insert Length 80
 000001 000001 BRAXTON WELLS                                                
 000002 000002 JORGE CINTRON                                                
 000003 000003 TYRONE MORRIS                                                
-****** ****  End of data  ****                                             
+****** ****  End of data  ****        
+
+
+OUTPUT JES2
+
+
+ SDSF OUTPUT DISPLAY COBCOP   JOB
+ COMMAND INPUT ===>              
+EMP-NAME BEFORE :RAUL ESTREAS    
+EMP-NAME AFTER : TYRONE MORRIS   
+******************************** 
+
+
+                                     
                                                                            
                                                                            
