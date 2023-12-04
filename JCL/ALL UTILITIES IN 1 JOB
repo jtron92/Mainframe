@@ -151,4 +151,444 @@ OUTPUT
 19.34.19 JOB01828  -STEP0006 PROC6000    00     26      7       .00       .00   
 19.34.20 JOB01828  -STEP0007 PROC7000    00      8      2       .00       .00   
 19.34.20 JOB01828  -STEP0008 PROC8000    00     14      1       .00       .00   
-                                                                               
+
+
+19.34.20 JOB01828  $HASP395 MATEDK92 ENDED - RC=0000                            
+------ JES2 JOB STATISTICS ------                                               
+  03 DEC 2023 JOB EXECUTION DATE                                                
+          110 CARDS READ                                                        
+          474 SYSOUT PRINT RECORDS                                              
+            0 SYSOUT PUNCH RECORDS                                              
+           36 SYSOUT SPOOL KBYTES                                               
+         0.09 MINUTES EXECUTION TIME                                            
+        1 //MATEDK92 JOB CLASS=A,                                               
+          //             MSGLEVEL=(1,1),                                        
+          //             MSGCLASS=H,                                            
+          //             NOTIFY=&SYSUID                                         
+          //*--------------------------                                         
+          //* END OF JOB                                                        
+          //*--------------------------                                         
+          IEFC653I SUBSTITUTION JCL - CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,NOTIFY=Z
+        2 //PROC0001 PROC                                                       
+COMMAND INPUT ===>                                            SCROLL =
+         //PROC1000 EXEC PGM=IEBGENER                                 
+         //SYSUT1   DD *                                              
+         //SYSUT2   DD DSN=&SYSUID..DEC03,                            
+         //            DISP=(NEW,CATLG,DELETE),                       
+         //            UNIT=SYSDA,                                    
+         //            SPACE=(TRK,(8,10),RLSE),                       
+         //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)   
+         //SYSPRINT DD SYSOUT=*                                       
+         //SYSOUT   DD SYSOUT=*                                       
+         //SYSIN    DD DUMMY                                          
+         //PROC0001 PEND                                              
+       3 //STEP0001 EXEC PROC0001                                     
+       4 ++PROC0001 PROC                                              
+       5 ++PROC1000 EXEC PGM=IEBGENER                                 
+       6 ++SYSUT1   DD *                                              
+       7 ++SYSUT2   DD DSN=&SYSUID..DEC03,                            
+         ++            DISP=(NEW,CATLG,DELETE),                       
+COMMAND INPUT ===>                                            SCROLL ===> PAGE 
+         ++            UNIT=SYSDA,                                             
+         ++            SPACE=(TRK,(8,10),RLSE),                                
+         ++            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)            
+         IEFC653I SUBSTITUTION JCL - DSN=Z38515.DEC03,DISP=(NEW,CATLG,DELETE),U
+         DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)                          
+       8 ++SYSPRINT DD SYSOUT=*                                                
+       9 ++SYSOUT   DD SYSOUT=*                                                
+      10 ++SYSIN    DD DUMMY                                                   
+         //*--------------------                                               
+      11 //PROC0002 PROC                                                       
+         //PROC2000 EXEC PGM=SORT                                              
+         //SYSIN    DD *                                                       
+         //SORTIN   DD DSN=&SYSUID..DEC03,DISP=SHR                             
+         //SORTOUT  DD DSN=&SYSUID..DEC04,                                     
+         //            DISP=(NEW,CATLG,DELETE),                                
+         //            SPACE=(TRK,(8,10),RLSE),                                
+         //            UNIT=SYSDA                                              
+         //SYSOUT   DD SYSOUT=*                                                
+         //SYSPRINT DD SYSOUT=*                                                
+         //AMSDUMP  DD SYSOUT=*                                                
+         //PROC0002 PEND                                                       
+      12 //STEP0002 EXEC PROC0002                                              
+      13 ++PROC0002 PROC                                                       
+      14 ++PROC2000 EXEC PGM=SORT                                              
+      15 ++SYSIN    DD *                                                       
+      16 ++SORTIN   DD DSN=&SYSUID..DEC03,DISP=SHR                             
+         IEFC653I SUBSTITUTION JCL - DSN=Z38515.DEC03,DISP=SHR                 
+      17 ++SORTOUT  DD DSN=&SYSUID..DEC04,                                     
+         ++            DISP=(NEW,CATLG,DELETE),                                
+         ++            SPACE=(TRK,(8,10),RLSE),                                
+         ++            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),           
+         ++            UNIT=SYSDA                                              
+         IEFC653I SUBSTITUTION JCL - DSN=Z38515.DEC04,DISP=(NEW,CATLG,DELETE),S
+         LRECL=80,RECFM=FB,BLKSIZE=800),UNIT=SYSDA         
+      18 ++SYSOUT   DD SYSOUT=*                            
+      19 ++SYSPRINT DD SYSOUT=*                            
+      20 ++AMSDUMP  DD SYSOUT=*                            
+         //*----------------------                         
+      21 //PROC0003 PROC                                   
+         //PROC3000 EXEC PGM=IDCAMS                        
+         //SYSIN    DD *                                   
+         //SYSPRINT DD SYSOUT=*                            
+         //AMSDUMP  DD SYSOUT=*                            
+         //SYSOUT   DD SYSOUT=*                            
+         //PROC0003 PEND                                   
+      22 //STEP0003 EXEC PROC0003                          
+      23 ++PROC0003 PROC                                   
+      24 ++PROC3000 EXEC PGM=IDCAMS                        
+      25 ++SYSIN    DD *                                   
+      26 ++SYSPRINT DD SYSOUT=*                            
+      27 ++AMSDUMP  DD SYSOUT=*                                         
+      28 ++SYSOUT   DD SYSOUT=*                                         
+      29 //PROC0004 PROC                                                
+         //PROC4000 EXEC PGM=IEFBR14                                    
+         //DD1      DD DSN=Z38515.MAKE.GDGBASE(+1),                     
+         //            DISP=(NEW,CATLG,DELETE),                         
+         //            UNIT=SYSDA,                                      
+         //            SPACE=(TRK,(8,10),RLSE),                         
+         //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)     
+         //SYSPRINT DD SYSOUT=*                                         
+         //SYSOUT   DD SYSOUT=*                                         
+         //PROC0004 PEND                                                
+      30 //STEP0004 EXEC PROC0004                                       
+      31 ++PROC0004 PROC                                                
+      32 ++PROC4000 EXEC PGM=IEFBR14                                    
+      33 ++DD1      DD DSN=Z38515.MAKE.GDGBASE(+1),                     
+         ++            DISP=(NEW,CATLG,DELETE),                         
+         ++            UNIT=SYSDA,                                     
+         ++            SPACE=(TRK,(8,10),RLSE),                        
+         ++            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)    
+      34 ++SYSPRINT DD SYSOUT=*                                        
+      35 ++SYSOUT   DD SYSOUT=*                                        
+      36 //PROC0005 PROC                                               
+         //PROC5000 EXEC PGM=IEBCOPY                                   
+         //SYSUT1   DD DSN=Z38515.JCL,DISP=SHR                         
+         //SYSUT2   DD DSN=&SYSUID..JCLCOPY,                           
+         //            DISP=(NEW,CATLG,DELETE),                        
+         //            UNIT=SYSDA,                                     
+         //            SPACE=(TRK,(8,15,15),RLSE),                     
+         //            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)    
+         //SYSIN    DD *                                               
+         //SYSPRINT DD SYSOUT=*                                        
+         //SYSOUT   DD SYSOUT=*                                        
+         //AMSDUMP  DD SYSOUT=*                                        
+         //PROC0005 PEND                                                       
+      37 //STEP0005 EXEC PROC0005                                              
+      38 ++PROC0005 PROC                                                       
+      39 ++PROC5000 EXEC PGM=IEBCOPY                                           
+      40 ++SYSUT1   DD DSN=Z38515.JCL,DISP=SHR                                 
+      41 ++SYSUT2   DD DSN=&SYSUID..JCLCOPY,                                   
+         ++            DISP=(NEW,CATLG,DELETE),                                
+         ++            UNIT=SYSDA,                                             
+         ++            SPACE=(TRK,(8,15,15),RLSE),                             
+         ++            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)            
+         IEFC653I SUBSTITUTION JCL - DSN=Z38515.JCLCOPY,DISP=(NEW,CATLG,DELETE)
+         DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)                          
+      42 ++SYSIN    DD *                                                       
+      43 ++SYSPRINT DD SYSOUT=*                                                
+      44 ++SYSOUT   DD SYSOUT=*                                                
+      45 ++AMSDUMP  DD SYSOUT=*                                                
+      46 //PROC0006 PROC                                                       
+         //PROC6000 EXEC PGM=IDCAMS                               
+         //SYSIN    DD *                                          
+         //SYSPRINT DD SYSOUT=*                                   
+         //AMSDUMP  DD SYSOUT=*                                   
+         //SYSOUT   DD SYSOUT=*                                   
+         //PROC0006 PEND                                          
+      47 //STEP0006 EXEC PROC0006                                 
+      48 ++PROC0006 PROC                                          
+      49 ++PROC6000 EXEC PGM=IDCAMS                               
+      50 ++SYSIN    DD *                                          
+      51 ++SYSPRINT DD SYSOUT=*                                   
+      52 ++AMSDUMP  DD SYSOUT=*                                   
+      53 ++SYSOUT   DD SYSOUT=*                                   
+      54 //PROC0007 PROC                                          
+         //PROC7000 EXEC PGM=IEFBR14                              
+         //DD1      DD DSN=Z38515.MAKE.GDGBASE,DISP=(OLD,DELETE)  
+         //SYSOUT   DD SYSOUT=*                                   
+         //SYSPRINT DD SYSOUT=*                                     
+         //PROC0007 PEND                                            
+      55 //STEP0007 EXEC PROC0007                                   
+      56 ++PROC0007 PROC                                            
+      57 ++PROC7000 EXEC PGM=IEFBR14                                
+      58 ++DD1      DD DSN=Z38515.MAKE.GDGBASE,DISP=(OLD,DELETE)    
+      59 ++SYSOUT   DD SYSOUT=*                                     
+      60 ++SYSPRINT DD SYSOUT=*                                     
+      61 //PROC0008 PROC                                            
+         //PROC8000 EXEC PGM=IDCAMS                                 
+         //SYSIN    DD *                                            
+         //SYSPRINT DD SYSOUT=*                                     
+         //AMSDUMP  DD SYSOUT=*                                     
+         //SYSOUT   DD SYSOUT=*                                     
+         //PROC0008 PEND                                            
+      62 //STEP0008 EXEC PROC0008                                   
+      63 ++PROC0008 PROC                                            
+       64 ++PROC8000 EXEC PGM=IDCAMS                                            
+       65 ++SYSIN    DD *                                                       
+       66 ++SYSPRINT DD SYSOUT=*                                                
+       67 ++AMSDUMP  DD SYSOUT=*                                                
+       68 ++SYSOUT   DD SYSOUT=*                                                
+ STMT NO. MESSAGE                                                               
+        3 IEFC001I PROCEDURE PROC0001 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       12 IEFC001I PROCEDURE PROC0002 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       22 IEFC001I PROCEDURE PROC0003 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       30 IEFC001I PROCEDURE PROC0004 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       37 IEFC001I PROCEDURE PROC0005 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       47 IEFC001I PROCEDURE PROC0006 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       55 IEFC001I PROCEDURE PROC0007 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+       62 IEFC001I PROCEDURE PROC0008 WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+               
+           
+IEF236I ALLOC. FOR MATEDK92 PROC1000 STEP0001                              
+IEF237I JES2 ALLOCATED TO SYSUT1                                           
+IGD101I SMS ALLOCATED TO DDNAME (SYSUT2  )                                 
+        DSN (Z38515.DEC03                                )                 
+        STORCLAS (ZXPS) MGMTCLAS (        ) DATACLAS (ZXPDX)               
+        VOL SER NOS= ZXPL01                                                     
+IEF237I JES2 ALLOCATED TO SYSPRINT                                              
+IEF237I JES2 ALLOCATED TO SYSOUT                                                
+IEF237I DMY  ALLOCATED TO SYSIN                                                 
+IEF142I MATEDK92 PROC1000 STEP0001 - STEP WAS EXECUTED - COND CODE 0000         
+IEF285I   Z38515.MATEDK92.JOB01828.D0000101.?          SYSIN                    
+IGD104I Z38515.DEC03                                 RETAINED,  DDNAME=SYSUT2   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000107.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000108.?          SYSOUT                   
+IEF373I STEP/PROC1000/START 2023337.1934                                        
+IEF032I STEP/PROC1000/STOP  2023337.1934                                        
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:    68K  SYS:   252K  EXT:        4K  SYS:    11368K               
+        ATB- REAL:                  1056K  SLOTS:                     0K        
+             VIRT- ALLOC:      13M SHRD:       0M                               
+IEF236I ALLOC. FOR MATEDK92 PROC2000 STEP0002                                   
+IEF237I JES2 ALLOCATED TO SYSIN                                                 
+IGD103I SMS ALLOCATED TO DDNAME SORTIN                                          
+IGD101I SMS ALLOCATED TO DDNAME (SORTOUT )                                      
+        DSN (Z38515.DEC04                                )                      
+        STORCLAS (ZXPS) MGMTCLAS (        ) DATACLAS (ZXPDX)                    
+        VOL SER NOS= ZXPL01                                                     
+IEF237I JES2 ALLOCATED TO SYSOUT                                                
+IEF237I JES2 ALLOCATED TO SYSPRINT                                              
+IEF237I JES2 ALLOCATED TO AMSDUMP                                               
+IEF142I MATEDK92 PROC2000 STEP0002 - STEP WAS EXECUTED - COND CODE 0000         
+IEF285I   Z38515.MATEDK92.JOB01828.D0000102.?          SYSIN                    
+IGD104I Z38515.DEC03                                 RETAINED,  DDNAME=SORTIN   
+IGD104I Z38515.DEC04                                 RETAINED,  DDNAME=SORTOUT  
+IEF285I   Z38515.MATEDK92.JOB01828.D0000109.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000110.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000111.?          SYSOUT                   
+IEF373I STEP/PROC2000/START 2023337.1934                                        
+IEF032I STEP/PROC2000/STOP  2023337.1934                                        
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC   
+        VIRT:  1068K  SYS:   252K  EXT:     6160K  SYS:    11384K              
+        ATB- REAL:                  1056K  SLOTS:                     0K       
+             VIRT- ALLOC:      13M SHRD:       0M                              
+IEF236I ALLOC. FOR MATEDK92 PROC3000 STEP0003                                  
+IEF237I JES2 ALLOCATED TO SYSIN                                                
+IEF237I JES2 ALLOCATED TO SYSPRINT                                             
+IEF237I JES2 ALLOCATED TO AMSDUMP                                              
+IEF237I JES2 ALLOCATED TO SYSOUT                                               
+IEF142I MATEDK92 PROC3000 STEP0003 - STEP WAS EXECUTED - COND CODE 0000        
+IEF285I   Z38515.MATEDK92.JOB01828.D0000103.?          SYSIN                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000112.?          SYSOUT                  
+IEF285I   Z38515.MATEDK92.JOB01828.D0000113.?          SYSOUT                  
+IEF285I   Z38515.MATEDK92.JOB01828.D0000114.?          SYSOUT                  
+IEF373I STEP/PROC3000/START 2023337.1934                                       
+IEF032I STEP/PROC3000/STOP  2023337.1934                                       
+        VIRT:   352K  SYS:   248K  EXT:        8K  SYS:    11460K              
+        ATB- REAL:                  1068K  SLOTS:                     0K       
+             VIRT- ALLOC:      15M SHRD:       0M                              
+IEF236I ALLOC. FOR MATEDK92 PROC4000 STEP0004                                  
+IGD101I SMS ALLOCATED TO DDNAME (DD1     )                                     
+        DSN (Z38515.MAKE.GDGBASE.G0001V00                )                     
+        STORCLAS (ZXPS) MGMTCLAS (        ) DATACLAS (ZXPDX)                   
+        VOL SER NOS= ZXPL01                                                    
+IEF237I JES2 ALLOCATED TO SYSPRINT                                             
+IEF237I JES2 ALLOCATED TO SYSOUT                                               
+IEF142I MATEDK92 PROC4000 STEP0004 - STEP WAS EXECUTED - COND CODE 0000        
+IGD107I Z38515.MAKE.GDGBASE.G0001V00                 ROLLED IN, DDNAME=DD1     
+IEF285I   Z38515.MATEDK92.JOB01828.D0000115.?          SYSOUT                  
+IEF285I   Z38515.MATEDK92.JOB01828.D0000116.?          SYSOUT                  
+IEF373I STEP/PROC4000/START 2023337.1934                                       
+IEF032I STEP/PROC4000/STOP  2023337.1934                                       
+        VIRT:     4K  SYS:   232K  EXT:        0K  SYS:    11256K             
+        ATB- REAL:                  1068K  SLOTS:                     0K      
+             VIRT- ALLOC:      15M SHRD:       0M                             
+IEF236I ALLOC. FOR MATEDK92 PROC5000 STEP0005                                 
+IGD103I SMS ALLOCATED TO DDNAME SYSUT1                                        
+IGD101I SMS ALLOCATED TO DDNAME (SYSUT2  )                                    
+        DSN (Z38515.JCLCOPY                              )                    
+        STORCLAS (ZXPS) MGMTCLAS (        ) DATACLAS (ZXPDX)                  
+        VOL SER NOS= ZXPL01                                                   
+IEF237I JES2 ALLOCATED TO SYSIN                                               
+IEF237I JES2 ALLOCATED TO SYSPRINT                                            
+IEF237I JES2 ALLOCATED TO SYSOUT                                              
+IEF237I JES2 ALLOCATED TO AMSDUMP                                             
+IEF142I MATEDK92 PROC5000 STEP0005 - STEP WAS EXECUTED - COND CODE 0000       
+IGD104I Z38515.JCL                                   RETAINED,  DDNAME=SYSUT1 
+IGD104I Z38515.JCLCOPY                               RETAINED,  DDNAME=SYSUT2 
+IEF285I   Z38515.MATEDK92.JOB01828.D0000104.?          SYSIN                  
+IEF285I   Z38515.MATEDK92.JOB01828.D0000117.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000118.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000119.?          SYSOUT                   
+IEF373I STEP/PROC5000/START 2023337.1934                                        
+IEF032I STEP/PROC5000/STOP  2023337.1934                                        
+        CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:  1024K  SYS:   316K  EXT:       36K  SYS:    11920K               
+        ATB- REAL:                  1068K  SLOTS:                     0K        
+             VIRT- ALLOC:      15M SHRD:       0M                               
+IEF236I ALLOC. FOR MATEDK92 PROC6000 STEP0006                                   
+IEF237I JES2 ALLOCATED TO SYSIN                                                 
+IEF237I JES2 ALLOCATED TO SYSPRINT                                              
+IEF237I JES2 ALLOCATED TO AMSDUMP                                               
+IEF237I JES2 ALLOCATED TO SYSOUT                                                
+IGD103I SMS ALLOCATED TO DDNAME SYS00001                                        
+IGD104I Z38515.DEC03                                 RETAINED,  DDNAME=SYS00001 
+IGD103I SMS ALLOCATED TO DDNAME SYS00002                                        
+IGD104I Z38515.DEC04                                 RETAINED,  DDNAME=SYS00002 
+IGD103I SMS ALLOCATED TO DDNAME SYS00003                                        
+IGD104I Z38515.JCLCOPY                               RETAINED,  DDNAME=SYS00003 
+IEF142I MATEDK92 PROC6000 STEP0006 - STEP WAS EXECUTED - COND CODE 0000         
+IEF285I   Z38515.MATEDK92.JOB01828.D0000105.?          SYSIN                    
+IEF285I   Z38515.MATEDK92.JOB01828.D0000120.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000121.?          SYSOUT                   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000122.?          SYSOUT                   
+IEF373I STEP/PROC6000/START 2023337.1934                                        
+IEF032I STEP/PROC6000/STOP  2023337.1934                                        
+        CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   252K  SYS:   268K  EXT:        8K  SYS:    11536K               
+        ATB- REAL:                  1068K  SLOTS:                     0K        
+             VIRT- ALLOC:      15M SHRD:       0M                               
+IEF236I ALLOC. FOR MATEDK92 PROC7000 STEP0007                                   
+IGD103I SMS ALLOCATED TO DDNAME DD1                                             
+IEF237I JES2 ALLOCATED TO SYSOUT                                                
+IEF237I JES2 ALLOCATED TO SYSPRINT                                           
+IEF142I MATEDK92 PROC7000 STEP0007 - STEP WAS EXECUTED - COND CODE 0000      
+IGD105I Z38515.MAKE.GDGBASE.G0001V00                 DELETED,   DDNAME=DD1   
+IEF285I   Z38515.MATEDK92.JOB01828.D0000123.?          SYSOUT                
+IEF285I   Z38515.MATEDK92.JOB01828.D0000124.?          SYSOUT                
+IEF373I STEP/PROC7000/START 2023337.1934                                     
+IEF032I STEP/PROC7000/STOP  2023337.1934                                     
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC 
+        VIRT:     4K  SYS:   232K  EXT:        0K  SYS:    11304K            
+        ATB- REAL:                  1068K  SLOTS:                     0K     
+             VIRT- ALLOC:      15M SHRD:       0M                            
+IEF236I ALLOC. FOR MATEDK92 PROC8000 STEP0008                                
+IEF237I JES2 ALLOCATED TO SYSIN                                              
+IEF237I JES2 ALLOCATED TO SYSPRINT                                           
+IEF237I JES2 ALLOCATED TO AMSDUMP                                            
+IEF237I JES2 ALLOCATED TO SYSOUT                                             
+IEF142I MATEDK92 PROC8000 STEP0008 - STEP WAS EXECUTED - COND CODE 0000      
+IEF285I   Z38515.MATEDK92.JOB01828.D0000106.?          SYSIN                 
+IEF285I   Z38515.MATEDK92.JOB01828.D0000125.?          SYSOUT                
+IEF285I   Z38515.MATEDK92.JOB01828.D0000126.?          SYSOUT                
+IEF285I   Z38515.MATEDK92.JOB01828.D0000127.?          SYSOUT                
+IEF373I STEP/PROC8000/START 2023337.1934                                     
+IEF032I STEP/PROC8000/STOP  2023337.1934                                     
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC 
+        VIRT:   244K  SYS:   248K  EXT:        8K  SYS:    11476K            
+        ATB- REAL:                  1068K  SLOTS:                     0K     
+             VIRT- ALLOC:      15M SHRD:       0M                            
+IEF375I  JOB/MATEDK92/START 2023337.1934                                     
+IEF033I  JOB/MATEDK92/STOP  2023337.1934                                     
+        CPU:     0 HR  00 MIN  00.02 SEC    SRB:     0 HR  00 MIN  00.00 SEC 
+DATA SET UTILITY - GENERATE                                                  
+                                                                             
+PROCESSING ENDED AT EOD                                                      
+ICE201I C RECORD TYPE IS F - DATA STARTS IN POSITION 1                       
+ICE751I 0 C5-I79518 C6-I90068 C7-I76949 C8-I75151 E4-I90068 C9-NONE   E5-I92416 
+ICE143I 0 BLOCKSET     SORT  TECHNIQUE SELECTED                                 
+ICE250I 0 VISIT http://www.ibm.com/storage/dfsort FOR DFSORT PAPERS, EXAMPLES AN
+ICE000I 1 - CONTROL STATEMENTS FOR 5650-ZOS, Z/OS DFSORT V2R4  - 19:34 ON SUN DE
+            SORT FIELDS=(3,6,CH,A)                                              
+ICE193I 0 ICEAM1 INVOCATION ENVIRONMENT IN EFFECT - ICEAM1 ENVIRONMENT SELECTED 
+ICE252I 1 PARMLIB OPTIONS WERE MERGED WITH INSTALLATION MODULE DEFAULTS         
+ICE088I 1 MATEDK92.STEP0002.PROC2000, INPUT LRECL = 80, BLKSIZE = 800, TYPE = FB
+ICE093I 0 MAIN STORAGE = (MAX,6291456,6278238)                                  
+ICE156I 0 MAIN STORAGE ABOVE 16MB = (6217712,6217712)                           
+ICE127I 0 OPTIONS: OVFLO=RC0 ,PAD=RC0 ,TRUNC=RC0 ,SPANINC=RC16,VLSCMP=N,SZERO=Y,
+ICE128I 0 OPTIONS: SIZE=6291456,MAXLIM=1048576,MINLIM=450560,EQUALS=N,LIST=Y,ERE
+ICE129I 0 OPTIONS: VIO=N,RESDNT=ALL ,SMF=NO   ,WRKSEC=Y,OUTSEC=Y,VERIFY=Y,CHALT=
+ICE130I 0 OPTIONS: RESALL=4096,RESINV=0,SVC=109 ,CHECK=Y,WRKREL=Y,OUTREL=Y,CKPT=
+ICE131I 0 OPTIONS: TMAXLIM=6291456,ARESALL=0,ARESINV=0,OVERRGN=65536,CINV=Y,CFW=
+ICE132I 0 OPTIONS: VLSHRT=N,ZDPRINT=Y,IEXIT=N,TEXIT=N,LISTX=N,EFS=NONE    ,EXITC
+ICE133I 0 OPTIONS: HIPRMAX=OPTIMAL,DSPSIZE=MAX ,ODMAXBF=0,SOLRF=Y,VLLONG=N,VSAMI
+ICE235I 0 OPTIONS: NULLOUT=RC0                                                 
+ICE236I 0 OPTIONS: DYNAPCT=10 ,MOWRK=Y,TUNE=STOR,EXPMAX=MAX    ,EXPOLD=50%    ,
+ICE084I 0 BSAM ACCESS METHOD USED FOR SORTOUT                                  
+ICE084I 0 BSAM ACCESS METHOD USED FOR SORTIN                                   
+ICE750I 0 DC 800 TC 0 CS DSVVV KSZ 6 VSZ 6                                     
+ICE752I 0 FSZ=10 RC  IGN=0 E  AVG=80 0  WSP=1 C  DYN=0 0                       
+ICE751I 1 DE-I80637 D5-I76949 D9-I76949 E8-I76949                              
+ICE090I 0 OUTPUT LRECL = 80, BLKSIZE = 800, TYPE = FB                          
+ICE080I 0 IN MAIN STORAGE SORT                                                 
+ICE055I 0 INSERT 0, DELETE 0                                                   
+ICE054I 0 RECORDS - IN: 2, OUT: 2                                              
+ICE134I 0 NUMBER OF BYTES SORTED: 160                                          
+ICE253I 0 RECORDS SORTED - PROCESSED: 2, EXPECTED: 10                          
+ICE199I 0 MEMORY OBJECT USED AS MAIN STORAGE = 0M BYTES                        
+ICE299I 0 MEMORY OBJECT USED AS WORK STORAGE = 0M BYTES                        
+ICE399I 0 MEMORY OBJECT USED IN ZSORT PATH = 0M BYTES                          
+ICE180I 0 HIPERSPACE STORAGE USED = 0K BYTES  
+ICE188I 0 DATA SPACE STORAGE USED = 0K BYTES                                    
+ICE267I 0 ZSORT ACCELERATOR PATH NOT USED    RSN=194                            
+ICE052I 0 END OF DFSORT                                                         
+IDCAMS  SYSTEM SERVICES                                           TIME: 19:34:16
+                                                                                
+  DEFINE GDG (NAME(Z38515.MAKE.GDGBASE)-                                00420000
+             LIMIT(3)-                                                  00430000
+             NOEMPTY-                                                   00440000
+             SCRATCH)                                                   00450000
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0               
+                                         IEBCOPY MESSAGES AND CONTROL STATEMENTS
+IEB1135I IEBCOPY  FMID HDZ2240  SERVICE LEVEL UJ05519  DATED 20210505 DFSMS 02.0
+IEB1035I MATEDK92 PROC5000 STEP0005 19:34:17 SUN 03 DEC 2023 PARM=''            
+  COPY INDD=SYSUT1,OUTDD=SYSUT2                                         00666000
+IEB1013I COPYING FROM PDSE  INDD=SYSUT1   VOL=ZXPM02 DSN=Z38515.JCL             
+IEB1014I           TO PDS  OUTDD=SYSUT2   VOL=ZXPL01 DSN=Z38515.JCLCOPY      
+IGW01551I MEMBER CREATGD  HAS BEEN COPIED                                    
+IGW01551I MEMBER DAD  HAS BEEN COPIED                                        
+IGW01551I MEMBER DEFVSAM  HAS BEEN COPIED                                    
+IGW01551I MEMBER DELGDG  HAS BEEN COPIED                                     
+IGW01551I MEMBER FILE4  HAS BEEN COPIED                                      
+IGW01551I MEMBER JCL2  HAS BEEN COPIED                                       
+IGW01551I MEMBER JCL3  HAS BEEN COPIED                                       
+IGW01551I MEMBER JES2JOB1 HAS BEEN COPIED                                    
+IGW01551I MEMBER KDSDS  HAS BEEN COPIED                                      
+IGW01551I MEMBER MAKGDG  HAS BEEN COPIED                                     
+IGW01551I MEMBER MERGSORT HAS BEEN COPIED                                    
+IGW01551I MEMBER PDS1CCAT HAS BEEN COPIED                                    
+IGW01551I MEMBER REXX  HAS BEEN COPIED                                       
+IGW01551I MEMBER SAT  HAS BEEN COPIED                                        
+IGW01551I MEMBER SEVEN  HAS BEEN COPIED                                      
+IGW01551I MEMBER SUN  HAS BEEN COPIED                                        
+ICE188I 0 DATA SPACE STORAGE USED = 0K BYTES                                    
+ICE267I 0 ZSORT ACCELERATOR PATH NOT USED    RSN=194                            
+IGW01550I 16 OF 16  MEMBERS WERE COPIED                                         
+IEB147I END OF JOB - 0 WAS HIGHEST SEVERITY CODE                                
+IDCAMS  SYSTEM SERVICES                                           TIME: 19:34:17
+                                                                                
+  DELETE Z38515.DEC03                                                   00750000
+IDC0550I ENTRY (A) Z38515.DEC03 DELETED                                         
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+  DELETE Z38515.DEC04                                                   00760000
+IDC0550I ENTRY (A) Z38515.DEC04 DELETED                                         
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+  DELETE Z38515.JCLCOPY                                                 00770000
+IDC0550I ENTRY (A) Z38515.JCLCOPY DELETED                                       
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+
+IDCAMS  SYSTEM SERVICES                                           TIME: 19:34:20
+                                                                                
+  DELETE (Z38515.MAKE.GDGBASE) GDG FORCE                                00940000
+IDC0550I ENTRY (B) Z38515.MAKE.GDGBASE DELETED                                  
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0               
+******************************** BOTTOM OF DATA ********************************
+                                                                                
+
