@@ -1,0 +1,154 @@
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+000100 //MATEDK92 JOB CLASS=A,                                                 
+000200 //             MSGLEVEL=(1,1),                                          
+000300 //             MSGCLASS=H,                                              
+000400 //             NOTIFY=&SYSUID                                           
+000500 //*----------------------------------------------------------           
+000600 //* END OF JOB CARD USING IEBGENER TO ADD DATA INTO A DSN               
+000700 //*----------------------------------------------------------           
+000800 //PROC0001 PROC                                                         
+000900 //PROC1000 EXEC PGM=IEBGENER                                            
+001000 //SYSUT1   DD *                                                         
+001100   DATA1                                                                 
+001200   DATA2                                                                 
+001300 /*                                                                      
+001400 //SYSUT2   DD DSN=&SYSUID..DEC03,                                       
+001500 //            DISP=(NEW,CATLG,DELETE),                                  
+001600 //            UNIT=SYSDA,                                               
+001700 //            SPACE=(TRK,(8,10),RLSE),                                  
+001800 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)              
+001900 //SYSPRINT DD SYSOUT=*                                                  
+002000 //SYSOUT   DD SYSOUT=*                                                  
+002100 //SYSIN    DD DUMMY                                                     
+002200 //PROC0001 PEND                                                         
+002300 //STEP0001 EXEC PROC0001                                                
+002400 //*-------------------------------------------------------------------- 
+002410 //* STEP01 COMPLETED USING SORT TO SORT FIELDS FROM DSN THAT WAS CREATED
+002420 //* IN STEP01                                                           
+002430 //*-------------------------------------------------------------------- 
+002500 //PROC0002 PROC                                                         
+002600 //PROC2000 EXEC PGM=SORT                                                
+002700 //SYSIN    DD *                                                         
+002800   SORT FIELDS=(3,6,CH,A)                                                
+002900 /*                                                                      
+003000 //SORTIN   DD DSN=&SYSUID..DEC03,DISP=SHR                               
+003100 //SORTOUT  DD DSN=&SYSUID..DEC04,                                       
+003110 //            DISP=(NEW,CATLG,DELETE),                                  
+003200 //            SPACE=(TRK,(8,10),RLSE),                                  
+003300 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),             
+003400 //            UNIT=SYSDA                                                
+003500 //SYSOUT   DD SYSOUT=*                                                  
+003600 //SYSPRINT DD SYSOUT=*                                                  
+003700 //AMSDUMP  DD SYSOUT=*                                                  
+003710 //PROC0002 PEND                                                         
+003720 //STEP0002 EXEC PROC0002                                                
+003800 //*-------------------------------------------------------------------- 
+003810 //* END OF STEP02 , USING IDCAMS TO DEFINE A GDG BASE                   
+003820 //*-------------------------------------------------------------------- 
+003900 //PROC0003 PROC                                                         
+004000 //PROC3000 EXEC PGM=IDCAMS                                              
+004100 //SYSIN    DD *                                                         
+004200   DEFINE GDG (NAME(Z38515.MAKE.GDGBASE)-                                
+004300              LIMIT(3)-                                                 
+004400              NOEMPTY-                                                  
+004500              SCRATCH)                                                  
+004600 /*                                                                     
+004700 //SYSPRINT DD SYSOUT=*                                                 
+004800 //AMSDUMP  DD SYSOUT=*                                                 
+004900 //SYSOUT   DD SYSOUT=*                                                 
+005000 //PROC0003 PEND                                                        
+005100 //STEP0003 EXEC PROC0003                                               
+005110 //*------------------------------------------------------------------  
+005120 //* END OF STEP03 , USING IEFBR14 TO CREATE ADD A GENERATIONAL FILE    
+005130 //*------------------------------------------------------------------  
+005200 //PROC0004 PROC                                                        
+005300 //PROC4000 EXEC PGM=IEFBR14                                            
+005400 //DD1      DD DSN=Z38515.MAKE.GDGBASE(+1),                             
+005500 //            DISP=(NEW,CATLG,DELETE),                                 
+005600 //            UNIT=SYSDA,                                              
+005700 //            SPACE=(TRK,(8,10),RLSE),                                  
+005800 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)              
+005900 //SYSPRINT DD SYSOUT=*                                                  
+006000 //SYSOUT   DD SYSOUT=*                                                  
+006100 //PROC0004 PEND                                                         
+006200 //STEP0004 EXEC PROC0004                                                
+006210 //*-------------------------------------------------------------------- 
+006220 //* USING IEBCOPY TO COPY AN EXISTING PDS INTO A NEW PDS ALSO COPYING   
+006221 //* ALL MEMBERS FROM THAT PDS NOT EXCLUDING OR ONLY INCLUDING           
+006230 //*-------------------------------------------------------------------- 
+006300 //PROC0005 PROC                                                         
+006400 //PROC5000 EXEC PGM=IEBCOPY                                             
+006500 //SYSUT1   DD DSN=Z38515.JCL,DISP=SHR                                   
+006600 //SYSUT2   DD DSN=&SYSUID..JCLCOPY,                                     
+006610 //            DISP=(NEW,CATLG,DELETE),                                  
+006620 //            UNIT=SYSDA,                                               
+006630 //            SPACE=(TRK,(8,15,15),RLSE),                               
+006640 //            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)              
+006650 //SYSIN    DD *                                                         
+006660   COPY INDD=SYSUT1,OUTDD=SYSUT2                                         
+006670 /*                                                                      
+006700 //SYSPRINT DD SYSOUT=*                                                  
+006800 //SYSOUT   DD SYSOUT=*                                                  
+006900 //AMSDUMP  DD SYSOUT=*                                                  
+007000 //PROC0005 PEND                                                         
+007100 //STEP0005 EXEC PROC0005                                                
+007110 //*-------------------------------------------------------------------  
+007120 //* DELETING FILES JUST CREATED FROM PREVIOUS STEPS ABOVE               
+007130 //*-------------------------------------------------------------------  
+007200 //PROC0006 PROC                                                         
+007300 //PROC6000 EXEC PGM=IDCAMS                                              
+007400 //SYSIN    DD *                                                         
+007500   DELETE Z38515.DEC03                                                   
+007600   DELETE Z38515.DEC04                                                   
+007700   DELETE Z38515.JCLCOPY                                                 
+007800 /*                                                                      
+007900 //SYSPRINT DD SYSOUT=*                                                  
+008000 //AMSDUMP  DD SYSOUT=*                                                  
+008100 //SYSOUT   DD SYSOUT=*                                                  
+008200 //PROC0006 PEND                                                         
+008300 //STEP0006 EXEC PROC0006                                                
+008310 //*------------------------------------------------------------------   
+008320 //* DELETING GEN FILE FROM THE GDG BASE IN ORDER TO DELETE THE GDG BASE 
+008321 //* IN NEXT STEP0008                                                    
+008330 //*------------------------------------------------------------------   
+008400 //PROC0007 PROC                                                         
+008500 //PROC7000 EXEC PGM=IEFBR14                                             
+008600 //DD1      DD DSN=Z38515.MAKE.GDGBASE,DISP=(OLD,DELETE)                 
+008700 //SYSOUT   DD SYSOUT=*                                                  
+008800 //SYSPRINT DD SYSOUT=*                                                  
+008900 //PROC0007 PEND                                                         
+009000 //STEP0007 EXEC PROC0007                                                
+009010 //*------------------------------------------------------------------   
+009020 //* LAST STEP , DELETING THE GDG BASE AND THIS MARKS EVEYTHING CREATED  
+009021 //* WAS DELETED IN ONE JOB                                              
+009030 //*----------------------------------------------------------------     
+009100 //PROC0008 PROC                                                         
+009200 //PROC8000 EXEC PGM=IDCAMS                                              
+009300 //SYSIN    DD *                                                         
+009400   DELETE (Z38515.MAKE.GDGBASE) GDG FORCE                                
+009500 /*                                                                      
+009600 //SYSPRINT DD SYSOUT=*                                                  
+009700 //AMSDUMP  DD SYSOUT=*                                                  
+009800 //SYSOUT   DD SYSOUT=*                                                  
+009900 //PROC0008 PEND                                                         
+010000 //STEP0008 EXEC PROC0008                                                
+****** **************************** Bottom of Data ****************************
+
+OUTPUT 
+
+19.34.14 JOB01828 ---- SUNDAY,    03 DEC 2023 ----                              
+19.34.14 JOB01828  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
+19.34.15 JOB01828  ICH70001I Z38515   LAST ACCESS AT 18:42:08 ON SUNDAY, DECEMBE
+19.34.15 JOB01828  $HASP373 MATEDK92 STARTED - INIT 1    - CLASS A        - SYS 
+19.34.16 JOB01828  -                                      -----TIMINGS (MINS.)--
+19.34.16 JOB01828  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+19.34.16 JOB01828  -STEP0001 PROC1000    00     26      5       .00       .00   
+19.34.16 JOB01828  -STEP0002 PROC2000    00     37      6       .00       .00   
+19.34.16 JOB01828  -STEP0003 PROC3000    00     14      1       .00       .00   
+19.34.17 JOB01828  -STEP0004 PROC4000    00      3      0       .00       .00   
+19.34.17 JOB01828  -STEP0005 PROC5000    00    264     33       .00       .00   
+19.34.19 JOB01828  -STEP0006 PROC6000    00     26      7       .00       .00   
+19.34.20 JOB01828  -STEP0007 PROC7000    00      8      2       .00       .00   
+19.34.20 JOB01828  -STEP0008 PROC8000    00     14      1       .00       .00   
+                                                                               
