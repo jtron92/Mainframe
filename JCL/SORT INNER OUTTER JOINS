@@ -1,0 +1,19 @@
+****** ***************************** Top of Data ******************************
+000001 //BROLYLLS JOB CLASS=A,                                                 
+000002 //             MSGCLASS=H,                                              
+000003 //             MSGLEVEL=(1,1),                                          
+000004 //             NOTIFY=&SYSUID                                           
+000005 //STEP01   EXEC PGM=SORT                                                
+000006 //DD1      DD DSN=&SYSUID..MATRIX1,DISP=SHR                             
+000007 //DD2      DD DSN=&SYSUID..MATRIX2,DISP=SHR                             
+000008 //SORTOUT  DD DSN=&SYSUID..MATRIX4,DISP=SHR                             
+000009 //SYSIN    DD *                                                         
+000010   SORT FIELDS=COPY                                                      
+000011   JOINKEYS F1=DD1,FIELDS=(1,10,A)                                       
+000012   JOINKEYS F2=DD2,FIELDS=(1,10,A)                                       
+000013   JOIN UNPAIRED,F1,ONLY                                                 
+000014   REFORMAT FIELDS=(F1:1,10,F2:1,10)                                     
+000015 /*                                                                      
+000016 //SYSPRINT DD SYSOUT=*                                                  
+000017 //AMSDUMP  DD SYSOUT=*                                                  
+
