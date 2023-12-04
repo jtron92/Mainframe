@@ -135,7 +135,13 @@
 010000 //STEP0008 EXEC PROC0008                                                
 ****** **************************** Bottom of Data ****************************
 
-OUTPUT 
+
+
+
+
+
+
+OUTPUT ****************************
 
 19.34.14 JOB01828 ---- SUNDAY,    03 DEC 2023 ----                              
 19.34.14 JOB01828  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
