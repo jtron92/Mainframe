@@ -204,6 +204,29 @@ EMP-NAME AFTER : TYRONE MORRIS
 ******************************** 
 
 
+
+TO DELETE A RECORD JUST CHANGE THE CODE HERE 
+
+DELETE REWRITE WITH DELETE (FILE) RECORD
+
+003900  PROCESS-FILE.                            
+004010       MOVE 000002 TO EMP-ID               
+004100       READ IFILE                          
+004200       KEY IS EMP-ID                       
+004300       INVALID KEY                         
+004400       DISPLAY "INVALID KEY"               
+004500       NOT INVALID KEY                     
+004600       DISPLAY "EMP NAME : " EMP-NME       
+004700       END-READ.                           
+004800       DELETE IFILE RECORD                 
+005000       END-DELETE.                         
+005100  PROCESS-EXIT.                            
+005200       EXIT.                               
+005300  CLOSE-FILE.                              
+005400       CLOSE IFILE.                        
+005500  CLOSE-EXIT.                              
+
+
                                      
                                                                            
                                                                            
