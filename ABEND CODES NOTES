@@ -379,3 +379,9 @@ NTERNAL)
 
 
 MAKE SURE TO RUN THE CORRECT PGM IN THE JCL FOR THE LOAD MODULE
+
+******************************************************************************************************************
+
+Neither an "FD" nor an "SD" was found in this program for file 
+
+IN THE FILE SECTION THE FD WAS NAMED FD FILE SHOULD HAVE BEEN FD IFILE , FILE IS A KEY WORD SO IT COULDNT WORK
