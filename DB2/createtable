@@ -1,0 +1,18 @@
+Command ===>                                                  Scroll ===>
+****** ***************************** Top of Data ************************
+==MSG> -Warning- The UNDO command is not available until you change      
+==MSG>           your edit profile using the command RECOVERY ON.        
+000100 --CREATE TABLE EMP(EMPNO INT,NAME CHAR(20))                       
+000200 --IN DBMATE1.TSMATEDK;                                            
+000300 --INSERT INTO EMP VALUES (100,'JORGE');                           
+000400 --INSERT INTO EMP VALUES (200,'RAUL');                            
+000500 --SELECT * FROM EMP;                                              
+000800 --UPDATE EMP SET NAME = 'JEROME' WHERE NAME = 'RAUL'              
+000900 --INSERT INTO EMP VALUES (300,'AMIT');                            
+001000 SELECT * FROM EMP;                                                
+****** **************************** Bottom of Data **********************
+                                                                         
+                                                                         
+
+
+      
