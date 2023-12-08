@@ -1,0 +1,20 @@
+000100 //MATEDKD JOB MSGLEVEL=(1,1),NOTIFY=&SYSUID                      
+000200 //*                                                              
+000300 //*  COBOL DB2 RUN JCL                                           
+000400 //*                                                              
+000500 //STEP01   EXEC PGM=IKJEFT01,                                    
+000600 //             DYNAMNBR=20,REGION=4096K                          
+000700 //STEPLIB  DD  DISP=SHR,DSN=DSNA10.DBAG.SDSNEXIT                 
+000800 //         DD  DISP=SHR,DSN=DSNA10.SDSNLOAD                      
+000900 //SYSPRINT DD  SYSOUT=*                                          
+001000 //SYSTSPRT DD  SYSOUT=*                                          
+001100 //SYSUDUMP DD  SYSOUT=*                                          
+001200 //SYSOUT   DD  SYSOUT=*                                          
+001300 //SYSTSIN  DD  *                                                 
+001400 DSN SYSTEM (DBAG   )    
+001500   RUN PROGRAM   (DBA)       -   
+001600       PLAN      (MATEDKA ) -                 
+001700       LIBRARY   ('MATEDK.LOAD.LIB')          
+001800 END                                          
+001900 /*                                           
+****** **************************** Bottom of Data *
