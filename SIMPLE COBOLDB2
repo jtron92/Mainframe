@@ -1,0 +1,30 @@
+000100        IDENTIFICATION DIVISION.                                        
+000200        PROGRAM-ID. COBDB01.                                            
+000900        ENVIRONMENT DIVISION.                                           
+001000        DATA DIVISION.                                                  
+001100        WORKING-STORAGE SECTION.                                        
+001200        01 DCLEMP.                                                      
+001300          10 EMPNO       PIC S9(9) USAGE COMP.                          
+001400          10 NAME                 PIC X(20).                            
+001500        01 WS-EMPNO       PIC S9(9) USAGE COMP.                         
+001600        01 WS-NAME                 PIC X(20).                           
+001610             EXEC SQL                                                   
+001620               INCLUDE SQLCA                                            
+001630             END-EXEC.                                                  
+001640             EXEC SQL                                                   
+001650                INCLUDE EMP                                             
+001660             END-EXEC.                                                  
+001700        PROCEDURE DIVISION.                                
+001800             EXEC SQL                                      
+001900               SELECT EMPNO,NAME INTO                      
+002000               :WS-EMPNO,:WS-NAME FROM EMP WHERE           
+002100               EMPNO =  300                                
+002200             END-EXEC                                      
+002300             IF SQLCODE = 00                               
+002400             DISPLAY 'RECORD FETCHED'                      
+002500             DISPLAY 'EMPNO : ' WS-EMPNO                   
+002600             DISPLAY 'EMP NAME : ' WS-NAME                 
+002700             ELSE                                          
+002800             DISPLAY SQLCODE                               
+002900             END-IF.                                       
+003000             STOP RUN.                                     
