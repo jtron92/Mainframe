@@ -1,0 +1,26 @@
+000100 //MATEDKD JOB MSGLEVEL=(1,1),NOTIFY=&SYSUID               
+000200 //*                                                       
+000300 //*  DB2 BIND JCL                                         
+000400 //*                                                       
+000500 //BIND     EXEC PGM=IKJEFT01                              
+000600 //STEPLIB  DD  DISP=SHR,DSN=DSNA10.DBAG.SDSNEXIT          
+000700 //         DD  DISP=SHR,DSN=DSNA10.SDSNLOAD               
+000800 //DBRMLIB  DD  DSN=MATEDK.GREYDRM,DISP=SHR                
+000900 //SYSPRINT DD  SYSOUT=*                                   
+001000 //SYSTSPRT DD  SYSOUT=*                                   
+001100 //SYSUDUMP DD  SYSOUT=*                                   
+001200 //SYSTSIN  DD  *                                          
+001300 DSN SYSTEM (DBAG   )                                      
+001400 BIND  MEMBER    (DBA     )  -                             
+001500       PLAN      (MATEDKA ) -                       
+001600       ACTION    (REP)       -                      
+001700       ISOLATION (CS)        -                      
+001800       VALIDATE  (BIND)      -                      
+001900       RELEASE   (COMMIT)    -                      
+002000       OWNER     (MATEDK )  -                       
+002100       QUALIFIER (MATEDK )  -                       
+002200       ENCODING  (1047)                             
+002300 END                                                
+002400 /*                                                 
+****** **************************** Bottom of Data *******
+
