@@ -1,0 +1,20 @@
+=COLS> ----+----1----+----2----+----3----+----4-
+****** ***************************** Top of Data
+000100 //LISTCAT1 JOB CLASS=A,                  
+000200 //             MSGCLASS=H,               
+000300 //             MSGLEVEL=(1,1),           
+000400 //             NOTIFY=&SYSUID            
+000500 //STEP01   EXEC PGM=IDCAMS               
+000600   LISTCAT ENTRY (Z38515.EMP.KSDS)-       
+000700   ALL)                                   
+000800 /*                                       
+000900 //SYSPRINT DD SYSOUT=*                   
+001000 //AMSDUMP  DD SYSOUT=*                   
+001100 //SYSOUT   DD SYSOUT=*                   
+****** **************************** Bottom of Da
+
+
+
+THIS IS TO VIEW THE PROPERTIES OF THE VSAM FILE IN QUESTION IF YOU DONT HAPPEN TO KNOW WHATS INSIDE THE FILE RUN THIS JCL
+
+ALSO CAN SWITCH THE SYSPRINT T0 SYSPRINT DD DISP=SHR,DSN=DATASET   IF YOU WANT IT TO PRINT INTO A DSN
