@@ -65,7 +65,7 @@
 005400         DISPLAY "FAILURE TO OPEN" FLAG2    
 005500      GO TO EXIT-PARA                       
 005600      END-IF.                               
-005700 OPEN-CLOSE.                                
+005700 PROCESS-CLOSE.                                
 005800      EXIT.                                 
 005900 PROCESS-FILE.                              
 006000      PERFORM UNTIL FILE-EOF1               
