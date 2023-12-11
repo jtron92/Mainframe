@@ -19,6 +19,10 @@ EDIT       Z38515.JCL(JCLZ) - 01.02                        Columns 00001 00072
                                                                               
 COPYING DATA FROM INFILE TO OUTFILE 
 
+CAN COPY FROM PS FILE TO VSAM OR VSAM TO PS OR VSAM TO VSAM
+
+FOR KSDS MAKE SURE THERE ARE NO DUPS IN THE RECORDS IF THERE IS THE JOB WILL FAIL
+
                                                                              
   Process   View   Options   Help                                            
 .............................................................................
