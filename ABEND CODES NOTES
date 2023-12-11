@@ -1,4 +1,5 @@
-                                                                               
+
+
 22.21.16 JOB09819 $HASP165 COBCOP   ENDED AT SVSCJES2 - ABENDED S000 U4038 CN(I
 TERNAL)                                                                        
 ***                                                                            
@@ -392,4 +393,9 @@ IN THE FILE SECTION THE FD WAS NAMED FD FILE SHOULD HAVE BEEN FD IFILE , FILE IS
 
 6 IEFC621I EXPECTED CONTINUATION NOT RECEIVED 
 
-MAKE SURE THE JCL IS FINISHED AND DOESNT END WITH A COMMA
+MAKE SURE THE JCL IS FINISHED AND DOES END WITH A COMMA
+
+
+*******************************************************************************************************************
+
+S0e37  out of space make sure to compress the folder where the ps file is located
