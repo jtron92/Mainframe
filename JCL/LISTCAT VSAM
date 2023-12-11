@@ -1,3 +1,4 @@
+
 =COLS> ----+----1----+----2----+----3----+----4-
 ****** ***************************** Top of Data
 000100 //LISTCAT1 JOB CLASS=A,                  
@@ -143,4 +144,69 @@ IDCAMS  SYSTEM SERVICES                                           TIME: 07:53:20
                    SPACE -----------------0                                     
                    USERCATALOG -----------0                                     
                    TAPELIBRARY -----------0                                     
-                   TAPEVOLUME ------------0                                     
+                   TAPEVOLUME ------------0                                  
+
+
+------------------------------------------------------------------------------ 
+DSLIST - Data Sets Matching Z38515*                                Row 1 of 25 
+                                                                               
+Command - Enter "/" to select action                  Message           Volume 
+-------------------------------------------------------------------------------
+         Z38515                                                         *ALIAS 
+         Z38515.CBCOMPL                                                 ZXPM07 
+         Z38515.CBLOADER                                                ZXPL01 
+         Z38515.CBSOURCE                                                ZXPM07 
+         Z38515.COMPLETE                                                ZXPM04 
+         Z38515.COPY.TOOL                                               ZXPM07 
+         Z38515.COURSE.JCLLIB                                           ZXPM06 
+         Z38515.CUSTOMER.FILE1                                          ZXPM03 
+         Z38515.DITPROF                                                 ZXPL01 
+I        Z38515.EMP.KSDS                              Info - I          *VSAM* 
+         Z38515.EMP.KSDS.DATA                                           ZXPL01 
+
+
+------------------------------------------------------------------------------ 
+                           List Catalog Information                            
+                                                                               
+                                               Enter "/" to select option      
+                                               /  Edit IDCAMS command          
+ Listcat Name  . . . Z38515.EMP.KSDS                                           
+    Level  . . . . .                                                           
+                                                                   More:     + 
+                                 Enter any of the following keywords:          
+                                                                               
+ Catalog Data Type               Name, History, Volume,                        
+ 3   1.  Alias                   ALLOcation, All  . . . ALL                    
+     2.  Alternate Index                                                       
+     3.  Cluster                                                               
+     4.  Data                                                                  
+     5.  Generation Data Group                                                 
+     6.  Index                                                                 
+     7.  Non-VSAM                                                              
+     8.  Page Space                                                            
+     9.  Path                                                                  
+
+  -------------------------------------------------------------------------------
+                                                             Columns 00001 00072 
+                                                                                 
+      Instructions:                                                              
+                                                                                 
+        Enter EXECute command to issue request.                                  
+                                                                                 
+        Enter CANcel, END, or RETURN command to cancel request.                  
+  ****** ***************************** Top of Data ******************************
+  ==MSG> -Warning- The UNDO command is not available until you change            
+  ==MSG>           your edit profile using the command RECOVERY ON.              
+  000001  /* IDCAMS COMMAND */                                                   
+  000002     LISTCAT ENTRIES(Z38515.EMP.KSDS) -                                  
+  000003             CLUSTER -                                                   
+  000004             ALL                                                         
+  ****** **************************** Bottom of Data ****************************
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+  Command ===> EXECUTE                                          Scroll ===> PAGE 
+   F1=Help      F2=Split     F3=Exit      F4=Expand    F5=Rfind     F6=Rchange   
+   F7=Up        F8=Down      F9=Swap     F10=Left     F11=Right    F12=Cancel    
+
