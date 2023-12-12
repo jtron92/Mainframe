@@ -41,3 +41,25 @@
 
 
 IN CASE NEEDED YOU CAN ADD RESTART IN JOB CARD IF JOB NEEDS TO SKIP A STEP USE RESTART
+
+
+
+
+
+ONCE SUBMITTED THE JOB HAS SKIPPED STEP01 STEP02 AND RAN ON STEP03
+
+********************************* TOP OF DATA **********************************
+                       J E S 2  J O B  L O G  --  S Y S T E M  M A T E  --  N O 
+                                                                                
+17.59.49 JOB03818 ---- TUESDAY,   12 DEC 2023 ----                              
+17.59.49 JOB03818  IRR010I  USERID MATEDK   IS ASSIGNED TO THIS JOB.            
+17.59.49 JOB03818  IEF677I WARNING MESSAGE(S) FOR JOB MATEDK01 ISSUED           
+17.59.49 JOB03818  ICH70001I MATEDK   LAST ACCESS AT 17:51:46 ON TUESDAY, DECEMB
+17.59.49 JOB03818  $HASP373 MATEDK01 STARTED - INIT 1    - CLASS A - SYS MATE   
+17.59.49 JOB03818  IEF403I MATEDK01 - STARTED - TIME=17.59.49                   
+17.59.49 JOB03818  -                                      -----TIMINGS (MINS.)--
+17.59.49 JOB03818  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+17.59.49 JOB03818  -STEP03               00     13      0       .00       .00   
+17.59.49 JOB03818  IEF404I MATEDK01 - ENDED - TIME=17.59.49                     
+17.59.49 JOB03818  -MATEDK01 ENDED.  NAME-                     TOTAL TCB CPU TIM
+17.59.49 JOB03818  $HASP395 MATEDK01 ENDED                                      
