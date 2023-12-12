@@ -11,12 +11,7 @@
 001100     10 PRODUCTS OCCURS 5 TIMES PIC 9(8).         
 001200 01 WS-TIME  PIC 9(8).                            
 001210 01 J        PIC 9(1).                            
-001220 01 I        PIC 9(1).   
-001000   05 STORE-ID   OCCURS 3 TIMES.                          
-001100     10 PRODUCTS OCCURS 5 TIMES PIC 9(8).                 
-001200 01 WS-TIME  PIC 9(8).                                    
-001210 01 J        PIC 9(1).                                    
-001220 01 I        PIC 9(1).                                    
+001220 01 I        PIC 9(1).                                  
 001300 LINKAGE SECTION.                                         
 001400 01 WS-SEQ PIC   9(8).                                    
 001500 PROCEDURE DIVISION USING WS-SEQ.                         
