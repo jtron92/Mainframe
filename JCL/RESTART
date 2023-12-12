@@ -1,0 +1,43 @@
+****** ***************************** Top of Data ******************************
+000100 //MATEDK01 JOB CLASS=A,                                                 
+000200 //             MSGLEVEL=(1,1),                                          
+000300 //             MSGCLASS=H,                                              
+000400 //             NOTIFY=&SYSUID,                                          
+000410 //             RESTART=STEP03                                           
+000500 //STEP01   EXEC PGM=IEBGENER                                            
+000600 //SYSUT1   DD DSN=MATEDK.BRAVO.TASK141,DISP=SHR                         
+000700 //SYSUT2   DD DSN=&&TEMP,                                               
+000800 //            DISP=(NEW,PASS,DELETE),                                   
+000900 //            UNIT=SYSDA,                                               
+001000 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=0,RECFM=FB),               
+001100 //            VOL=SER=DEVHD3,                                           
+001200 //            SPACE=(TRK,(1,1),RLSE)                                    
+001300 //AMSDUMP  DD SYSOUT=*                                                  
+001400 //SYSPRINT DD SYSOUT=*                                                  
+001500 //SYSOUT   DD SYSOUT=*                                                  
+001600 //SYSIN    DD DUMMY                                                     
+001700 //STEP02   EXEC PGM=IEBGENER                                       
+001800 //SYSUT1   DD DSN=&&TEMP,DISP=SHR                                  
+001900 //SYSUT2   DD DSN=&SYSUID..GREEN89,                                
+001910 //            DISP=(NEW,CATLG,DELETE),                             
+001920 //            UNIT=SYSDA,                                          
+001930 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB),        
+001940 //            VOL=SER=DEVHD3,                                      
+001950 //            SPACE=(TRK,(1,1),RLSE)                               
+001960 //AMSDUMP  DD SYSOUT=*                                             
+001970 //SYSPRINT DD SYSOUT=*                                             
+001980 //SYSOUT   DD SYSOUT=*                                             
+001990 //SYSIN    DD DUMMY                                                
+002000 //STEP03   EXEC PGM=IEFBR14                                        
+002001 //DD1      DD DSN=&SYSUID..POPS1,                                  
+002010 //            DISP=(NEW,CATLG,DELETE),                             
+002020 //            UNIT=SYSDA,                                          
+002030 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB),        
+002040 //            VOL=SER=DEVHD3,                                      
+002050 //            SPACE=(TRK,(1,1),RLSE)                                    
+002060 //SYSPRINT DD SYSOUT=*                                                  
+002070 //SYSOUT   DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+
+IN CASE NEEDED YOU CAN ADD RESTART IN JOB CARD IF JOB NEEDS TO SKIP A STEP USE RESTART
