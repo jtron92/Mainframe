@@ -1,0 +1,58 @@
+IN CASE NEED TO COPY THE OUTPUT FOR LOGGING AND RESEARCH USE XDC AND MAKE A NEW FILE WITH THE DATA IN IT
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  
+   Display  Filter  View  Print  Options  Search  Help                      
+ ---------------------------------------------------------------------------
+ SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-10 (10)      
+ COMMAND INPUT ===>                                            SCROLL ===> P
+ NP   JOBNAME  JobID    Owner    Prty Queue      C  Pos  SAff  ASys Status  
+      MATEDK   TSU03823 MATEDK     15 EXECUTION          MATE  MATE         
+      MATEDK01 JOB03809 MATEDK      1 PRINT      A     2                    
+      MATEDK01 JOB03812 MATEDK      1 PRINT      A     5                    
+      MATEDK01 JOB03813 MATEDK      1 PRINT      A     6                    
+      MATEDK01 JOB03814 MATEDK      1 PRINT      A     7                    
+      MATEDK01 JOB03815 MATEDK      1 PRINT      A     8                    
+      MATEDK01 JOB03816 MATEDK      1 PRINT      A     9                    
+ XDC  MATEDK01 JOB03818 MATEDK      1 PRINT      A    11                    
+
+COMMAND INPUT ===>                                            SCROLL ===> PA
+                                                                            
+                                                                            
+Data set name  ===> 'MATEDK.FOLDER59'                                       
+Member to use  ===>  XDC                                                    
+Disposition    ===> NEW        (OLD, NEW, SHR, MOD)                         
+                                                                            
+Management class     ===>           (Blank for default management class)    
+Storage class        ===>           (Blank for default storage class)       
+  Volume serial      ===> DEVHD3    (Blank for authorized default volume)   
+  Device type        ===>           (Generic unit or device address)        
+Data class           ===>           (Blank for default data class)          
+  Space units        ===> TRKS      (BLKS, TRKS, CYLS, BY, KB, or MB)       
+  Primary quantity   ===> 8         (In above units)                        
+  Secondary quantity ===> 10        (In above units)                        
+  Directory blocks   ===>           (Zero for sequential data set)          
+  Record format      ===> FB                                                
+  Record length      ===> 80                                                
+  Block size         ===> 800                                               
+
+
+
+EDIT       MATEDK.TESTXDC9                                 Columns 00009 00080 
+Command ===>                                                  Scroll ===> CSR  
+****** ***************************** Top of Data ******************************
+==MSG> -Warning- The UNDO command is not available until you change            
+==MSG>           your edit profile using the command RECOVERY ON.              
+000001                 J E S 2  J O B  L O G  --  S Y S T E M  M A T E  --  N O
+000002                                                                         
+000003 9 JOB03818 ---- TUESDAY,   12 DEC 2023 ----                             
+000004 9 JOB03818  IRR010I  USERID MATEDK   IS ASSIGNED TO THIS JOB.           
+000005 9 JOB03818  IEF677I WARNING MESSAGE(S) FOR JOB MATEDK01 ISSUED          
+000006 9 JOB03818  ICH70001I MATEDK   LAST ACCESS AT 17:51:46 ON TUESDAY, DECEM
+000007 9 JOB03818  $HASP373 MATEDK01 STARTED - INIT 1    - CLASS A - SYS MATE  
+000008 9 JOB03818  IEF403I MATEDK01 - STARTED - TIME=17.59.49                  
+000009 9 JOB03818  -                                      -----TIMINGS (MINS.)-
+000010 9 JOB03818  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  
+000011 9 JOB03818  -STEP03               00     13      0       .00       .00  
+000012 9 JOB03818  IEF404I MATEDK01 - ENDED - TIME=17.59.49                    
+000013 9 JOB03818  -MATEDK01 ENDED.  NAME-                     TOTAL TCB CPU TI
+000014 9 JOB03818  $HASP395 MATEDK01 ENDED                                     
+
