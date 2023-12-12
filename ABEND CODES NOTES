@@ -399,3 +399,10 @@ MAKE SURE THE JCL IS FINISHED AND DOES END WITH A COMMA
 *******************************************************************************************************************
 
 S0e37  out of space make sure to compress the folder where the ps file is located
+
+********************************************************************************************************************
+
+
+ABENDED S000 U4038 CN(INTER
+
+FORGOT TO ADD STOP RUN LOL
