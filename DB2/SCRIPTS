@@ -1,0 +1,8 @@
+ EXEC SQL            
+     SELECT COUNT(*) 
+       INTO          
+     :TOTAL-COUNT    
+   FROM EMP          
+ END-EXEC.             -- TO COUNT RECORDS IN TABLE
+
+
