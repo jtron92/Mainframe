@@ -2,7 +2,7 @@
      SELECT COUNT(*) 
        INTO          
      :TOTAL-COUNT    
-   FROM EMP          
+   FROM EMP                                                                             77 TOTAL-COUNT            PIC S9(9) USAGE COMP. 
  END-EXEC.             -- TO COUNT RECORDS IN TABLE
 
 
