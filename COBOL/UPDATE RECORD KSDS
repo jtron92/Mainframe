@@ -228,5 +228,19 @@ DELETE REWRITE WITH DELETE (FILE) RECORD
 
 
                                      
-                                                                           
+ALSO TO ADD RECORDS USE WRITE 
+
+
+PROCESS-FILE.                         
+    MOVE 000004 TO EMP-ID             
+    READ IFILE                        
+    KEY IS EMP-ID                     
+    INVALID KEY                       
+    DISPLAY "INVALID"                 
+    NOT INVALID KEY                   
+    DISPLAY "EMP NAME" EMP-NAME       
+    END-READ.                         
+    MOVE "BOB" TO EMP-NAME            
+    WRITE IFILE-RECS                  
+    DISPLAY EMP-NAME.                 
                                                                            
