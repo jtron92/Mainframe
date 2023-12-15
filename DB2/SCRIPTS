@@ -24,3 +24,9 @@ EXEC SQL
     VALUES (:HV-COLS1,:HS-COLS2,:HS-COL3)
 END-EXEC.
 
+EXEC SQL
+    DELETE FROM your_table_name
+    WHERE name_column = 'MARY'
+    AND id_column = specific_id
+END-EXEC.
+
