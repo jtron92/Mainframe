@@ -73,3 +73,22 @@ EXAMPLE:
   STOPAFT=2           
 
 THIS ONLY COPIES 2 RECORDS FROM THE DSN ITS COPYING
+
+
+
+
+
+  SORT FIELDS=COPY                                            
+  SUM FIELDS=NONE,XSUM             <---- YOU MAY NEED TO USE ICETOOL IF XSUM ISNT SUPPORTED                           
+/*                                                            
+//SORTIN   DD DSN=Z38515.JCL(JCL34),DISP=SHR                  
+//SORTOUT  DD DSN=&SYSUID..CHAPT2,                            
+//            DISP=(OLD,CATLG,DELETE),                        
+//            UNIT=SYSDA,                                     
+//            SPACE=(TRK,(8,10),RLSE),                        
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)    
+//SORTXSUM DD DSN=&SYSUID..XSUM,                              
+//            DISP=(NEW,CATLG,DELETE),                        
+//            UNIT=SYSDA,                                     
+//            SPACE=(TRK,(8,10),RLSE),                        
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)    
