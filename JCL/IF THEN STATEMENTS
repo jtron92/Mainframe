@@ -1,0 +1,30 @@
+****** ***************************** Top of Data ***************************
+000100 //MATEDK01 JOB CLASS=A,                                              
+000200 //             MSGLEVEL=(1,1),                                       
+000300 //             MSGCLASS=H,                                           
+000400 //             NOTIFY=&SYSUID                                        
+000500 //STEP01   EXEC PGM=IEBGENER                                         
+000600 //SYSUT1   DD DSN=MATEDK.BRAV10,DISP=SHR                             
+000700 //SYSUT2   DD DSN=&SYSUID..MLEY,DISP=(OLD,CATLG,DELETE),             
+000800 //            UNIT=SYSDA,                                            
+000900 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),          
+000910 //            SPACE=(TRK,(8,10),RLSE),                               
+000920 //            VOL=SER=DEVHD3                                         
+001000 //SYSIN    DD DUMMY                                                  
+001100 //AMSDUMP  DD SYSOUT=*                                               
+001700 //SYSPRINT DD SYSOUT=*                                               
+001800 //SYSOUT   DD SYSOUT=*                                               
+002000 //         IF  (STEP01.RC = 4) THEN                                  
+002100 //STEP02   EXEC PGM=IEFBR14                                          
+002200 //DD1      DD DSN=&SYSUID..FILEZ,DISP=(NEW,CATLG,DELETE),      
+002300 //            UNIT=SYSDA,                                      
+002400 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),    
+002500 //            SPACE=(TRK,(8,10),RLSE),                         
+002600 //            VOL=SER=DEVHD3                                   
+002700 //         ENDIF                                               
+****** **************************** Bottom of Data *******************
+
+
+ON PURPOSE I DO NOT WANT STEP02 TO RUN AN EXAMPLE ON HOW IF THEN ELSE STATEMENTS CAN WORK
+SINCE I KNOW THAT STEP01 WILL EXECUTE AND COMPLETE WILL A RC 0 THEN STEP02 WILL NOT WORK BECAUSE 
+THE IF ELSE STATEMENTS CONDITION HAS IT SET TO RUN IF STEP01 EQUALS 4
