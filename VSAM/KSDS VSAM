@@ -1,0 +1,34 @@
+EDIT       Z38515.CBCOMPL(JCLK) - 01.02                    Columns 00001 00072 
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+000100 //USER01D  JOB CLASS=A,                                                 
+000200 //             MSGLEVEL=(1,1),                                          
+000300 //             MSGCLASS=H,                                              
+000400 //             NOTIFY=&SYSUID                                           
+000500 //****************************************************                  
+000600 //* DEFINE VSAM KSDS CLUSTER                                            
+000700 //****************************************************                  
+000800 //JS010    EXEC PGM=IDCAMS                                              
+000900 //SYSIN    DD *                                                         
+001000   DEFINE CLUSTER (NAME(Z38515.EMPLOYEE)-                                
+001100   RECSZ(80 80)-                                                         
+001200   TRK(2,1)-                                                             
+001300   FREESPACE(5,10)-                                                      
+001400   KEYS(4,0)-                                                            
+001500   CISZ(4096)-                                                           
+001600   INDEXED)-                                                             
+001700   INDEX(NAME(Z38515.EMPLOYEE.INDEX))-                                   
+001800   DATA(NAME(Z38515.EMPLOYEE.DATA))                                      
+001900 /*                                                                      
+002000 //SYSPRINT DD SYSOUT=*                                                  
+002100 //AMSDUMP  DD SYSOUT=*                                                  
+002200 //SYSOUT   DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+
+
+ Command - Enter "/" to select action                  Message           Volume 
+ -------------------------------------------------------------------------------
+          Z38515.EMPLOYEE                                                *VSAM* 
+          Z38515.EMPLOYEE.DATA                                           ZXPM06 
+          Z38515.EMPLOYEE.INDEX                                          ZXPM06 
