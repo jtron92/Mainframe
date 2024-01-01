@@ -52,4 +52,68 @@ EDIT       Z38515.EMPLOYEE.LOAD                                 Data set saved
 ****** **************************** Bottom of Data ****************************
 
 
+MAKE A JCL TO LOAD FORM THE TEXT FILE INTO VSAM FILE
 
+EDIT       Z38515.CBCOMPL(JCL1) - 01.02                    Columns 00001 00072 
+****** ***************************** Top of Data ******************************
+000100 //JCLVOOL  JOB CLASS=A,                                                 
+000200 //             MSGCLASS=H,                                              
+000300 //             MSGLEVEL=(1,1),                                          
+000400 //             NOTIFY=&SYSUID                                           
+000410 //****************************************************                  
+000420 //* REPRO/COPY DATA FROM PS TO VSAM KSDS                                
+000430 //****************************************************                  
+000500 //STEP01   EXEC PGM=IDCAMS                                              
+000600 //SYSIN    DD *                                                         
+000700   REPRO-                                                                
+000800   INDATASET (Z38515.EMPLOYEE.LOAD)-                                     
+000900   OUTDATASET(Z38515.EMPLOYEE)                                           
+001000 /*                                                                      
+001100 //SYSPRINT DD SYSOUT=*                                                  
+001200 //AMSDUMP  DD SYSOUT=*                                                  
+001300 //SYSOUT   DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+
+
+GO TO FILE MANGER AND SET DSN TO DATASET PATH: 
+
+ ------------------------------------------------------------------------------
+ File Manager                   View Entry Panel                               
+                                                                               
+ Input Partitioned, Sequential or VSAM Data Set, or HFS file:                  
+    Data set/path name 'Z38515.EMPLOYEE'                               +       
+    Member . . . . . .              (Blank or pattern for member list)         
+    Volume serial  . .              (If not cataloged)                         
+    Start position . .                                 +                       
+    Record limit . . .              Record sampling                            
+                                                                               
+ Copybook or Template:                                                         
+    Data set name  . .                                                         
+    Member . . . . . .              (Blank or pattern for member list)         
+ Processing Options:                                                           
+  Copybook/template   Start position type   Enter "/" to select option         
+  3  1. Above         1  1. Key                Edit template    Type (1,2,S)   
+     2. Previous         2. RBA                Include only selected records   
+     3. None             3. Record number      Binary mode, reclen 80          
+     4. Create dynamic   4. Formatted key                                      
+                                                                               
+ Command ===>                                                                  
+
+
+-------------------------------------------------------------------------------
+View             Z38515.EMPLOYEE                                   Top of 6    
+                            Type KSDS     RBA                      Format CHAR 
+Key                                          Col 1       Insert Length 80      
+       <==>+----10---+----2----+----3----+----4----+----5----+----6----+----7--
+****** ****  Top of data  ****                                                 
+000001 1122JENKINS                       DEBORAH             052016-09-01      
+000002 3217JOHNSON                       EDWARD              042017-01-01      
+000003 4720SCHULTZ                       TIM                 092017-01-01      
+000004 6288WILLARD                       JOE                 062016-01-01      
+000005 7459STEWART                       BETTY               072016-07-31      
+000006 9134FRANKLIN                      BRIANNA             032016-10-01      
+****** ****  End of data  ****                                                 
+                                                                               
+                                                                               
+                                                                               
