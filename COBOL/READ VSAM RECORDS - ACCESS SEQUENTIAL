@@ -63,6 +63,25 @@
  **************************** Bottom of Data ****************************
 
 
+FILE MANAGER : 
+-------------------------------------------------------------------------
+View             Z38515.EMPLOYEE                                   Top of
+                            Type KSDS     RBA                      Format
+Key                                          Col 1       Insert Length 80
+       <==>+----10---+----2----+----3----+----4----+----5----+----6----+-
+****** ****  Top of data  ****                                           
+000001 1111CINTRON                       JORGE               032018-05-01
+000002 1122JENKINS                       DEBORAH             052016-09-01
+000003 1992MCGEE                         JAMES               102020-12-01
+000004 2021WAYNE                         BRUCE               2023-01-0123
+000005 2222LASHELY                       BILLY               2022-02-2800
+000006 4720SCHULTZ                       TIM                 092017-01-01
+000007 6288WILLARD                       JOE                 062016-01-01
+000008 7459STEWART                       BETTY               072016-07-31
+000009 9134FRANKLIN                      BRIANNA             032016-10-01
+****** ****  End of data  ****                                           
+                                                                         
+                                                                         
 
 
 SDSF OUTPUT : 
