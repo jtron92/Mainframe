@@ -17,3 +17,21 @@ EDIT       Z37931.SOURCE(ASM12) - 01.02                    Columns 00001 00072
 007400 //STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR                                
 007500 //PRINT    DD SYSOUT=*                                                  
 ****** **************************** Bottom of Data ****************************
+
+
+in sdsf
+
+
+19.17.31 JOB00111 ---- MONDAY,    26 FEB 2024 ----                              
+19.17.31 JOB00111  IRR010I  USERID Z37931   IS ASSIGNED TO THIS JOB.            
+19.17.31 JOB00111  IEF677I WARNING MESSAGE(S) FOR JOB ASMPGM   ISSUED           
+19.17.31 JOB00111  ICH70001I Z37931   LAST ACCESS AT 19:17:04 ON MONDAY, FEBRUAR
+19.17.31 JOB00111  $HASP373 ASMPGM   STARTED - INIT 4    - CLASS A        - SYS 
+19.17.32 JOB00111  -                                      -----TIMINGS (MINS.)--
+19.17.32 JOB00111  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+19.17.32 JOB00111  -ASMPGM   C           00     76     11       .00       .00   
+19.17.32 JOB00111  -ASMPGM   L           00     79      5       .00       .00   
+19.17.32 JOB00111  -GO                   00     10      0       .00       .00   
+19.17.32 JOB00111  -ASMPGM   ENDED.  NAME-                     TOTAL TCB CPU TIM
+19.17.32 JOB00111  $HASP395 ASMPGM   ENDED - RC=0000                            
+
