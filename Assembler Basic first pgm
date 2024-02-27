@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+EDIT       Z37931.SOURCE(ASM12) - 01.02                    Columns 00001 00072 
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+==MSG> -Warning- The UNDO command is not available until you change            
+==MSG>           your edit profile using the command RECOVERY ON.              
+000100 //ASMPGM   JOB 1,NOTIFY=&SYSUID                                         
+000200 //ASMPGM  EXEC ASMACL,MBR=ASM12                                         
+000300 //C.SYSIN  DD *                                                         
+000310          TITLE 'BASIC PROGRAM TEMPLATE'                                 
+000320 BASICPGM CSECT         ESTABLISH THE CONTROL SECTION FOR BASICPGM       
+000330          USING *,12    ASSUME BASE REGISTER 12 FOR ADDRESSING           
+000340          SR    15,15   SET THE RETURN CODE TO 0 (R15 = R15 -R15)        
+000350          BR    14      RETURN TO THE CALLER USING THE ADDRESS IN R14    
+000360          END   BASICPGM      END OF BASICPGM CONTROL SECTION            
+007300 //GO      EXEC PGM=ASMPGM                                               
+007400 //STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR                                
+007500 //PRINT    DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
