@@ -10,7 +10,8 @@ EDIT       Z37931.SOURCE(ASM12) - 01.02                    Columns 00001 00072
 000310          TITLE 'BASIC PROGRAM TEMPLATE'                                 
 000320 BASICPGM CSECT         ESTABLISH THE CONTROL SECTION FOR BASICPGM       
 000330          USING *,12    ASSUME BASE REGISTER 12 FOR ADDRESSING           
-000340          SR    15,15   SET THE RETURN CODE TO 0 (R15 = R15 -R15)        
+000340          SR    15,15   SET THE RETURN CODE TO 0 (R15 = R15 -R15)   
+000345          WTO   'HELLO,WORLD'
 000350          BR    14      RETURN TO THE CALLER USING THE ADDRESS IN R14    
 000360          END   BASICPGM      END OF BASICPGM CONTROL SECTION            
 007300 //GO      EXEC PGM=ASMPGM                                               
@@ -30,7 +31,8 @@ in sdsf
 19.17.32 JOB00111  -                                      -----TIMINGS (MINS.)--
 19.17.32 JOB00111  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
 19.17.32 JOB00111  -ASMPGM   C           00     76     11       .00       .00   
-19.17.32 JOB00111  -ASMPGM   L           00     79      5       .00       .00   
+19.17.32 JOB00111  -ASMPGM   L           00     79      5       .00       .00  
+19.17.32 JOB00111  +HELLO 
 19.17.32 JOB00111  -GO                   00     10      0       .00       .00   
 19.17.32 JOB00111  -ASMPGM   ENDED.  NAME-                     TOTAL TCB CPU TIM
 19.17.32 JOB00111  $HASP395 ASMPGM   ENDED - RC=0000                            
