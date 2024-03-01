@@ -32,8 +32,43 @@ in sdsf
 19.17.32 JOB00111  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
 19.17.32 JOB00111  -ASMPGM   C           00     76     11       .00       .00   
 19.17.32 JOB00111  -ASMPGM   L           00     79      5       .00       .00  
-19.17.32 JOB00111  +HELLO 
+19.17.32 JOB00111  +HELLO,WORLD
 19.17.32 JOB00111  -GO                   00     10      0       .00       .00   
 19.17.32 JOB00111  -ASMPGM   ENDED.  NAME-                     TOTAL TCB CPU TIM
 19.17.32 JOB00111  $HASP395 ASMPGM   ENDED - RC=0000                            
+
+
+
+
+000100 //ASMBLER0  JOB CLASS=A,MSGLEVEL=(1,1),NOTIFY=&SYSUID,MSGCLASS=H  
+000200 //ASMPGM2   EXEC ASMACL,MBR=ASMPGM2                               
+000300 //C.SYSIN   DD *                                                  
+000400 ASMPGM2  TITLE 'HELLO WORLD'                                      
+000500 ASMPGM2  CSECT                                                    
+000600          USING *,R15                                              
+000700          SR    R15,R15                                            
+000800          WTO   'HELLO,WORLD'                                      
+000900          BR    R14                                                
+000910 R0       EQU   0                                                  
+000920 R1       EQU   1                                                  
+000930 R2       EQU   2                                                  
+000940 R3       EQU   3                                                  
+000950 R4       EQU   4                                                  
+000960 R5       EQU   5                                                  
+000970 R6       EQU   6                                                  
+000980 R7       EQU   7                                                        
+000990 R8       EQU   8                                                        
+000991 R9       EQU   9                                                        
+000992 R10      EQU   10                                                       
+000993 R11      EQU   11                                                       
+000994 R12      EQU   12                                                       
+000995 R13      EQU   13                                                       
+000996 R14      EQU   14                                                       
+000997 R15      EQU   15                                                       
+001000          END   ASMPGM2                                                  
+001100 /*                                                                      
+001200 //GO        EXEC PGM=ASMPGM2                                            
+001300 //STEPLIB   DD DSN=&SYSUID..LOAD,DISP=SHR                               
+001400 //PRINT     DD SYSOUT=*                                                 
+****** **************************** Bottom of Data ****************************
 
