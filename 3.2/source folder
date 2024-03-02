@@ -1,0 +1,32 @@
+General Data                          Current Allocation                  
+ Management class . . : **None**       Allocated tracks  . : 4            
+ Storage class  . . . : SCSPDS         Allocated extents . : 4            
+  Volume serial . . . : ZXPM02         Maximum dir. blocks : NOLIMIT      
+  Device type . . . . : 3390                                              
+ Data class . . . . . : SPDS                                              
+  Organization  . . . : PO            Current Utilization                 
+  Record format . . . : FB             Used pages  . . . . : 43           
+  Record length . . . : 80             % Utilized  . . . . : 89           
+  Block size  . . . . : 32720          Number of members . : 24           
+  1st extent tracks . : 1                                                 
+  Secondary tracks  . : 1                                                 
+  Data set name type  : LIBRARY       Dates                               
+  Data set encryption : NO             Creation date . . . : 2023/10/06   
+  Data set version  . : 1              Referenced date . . : 2024/03/02   
+                                       Expiration date . . : ***None***   
+
+Management class: Leave this as blank or **None** if you don't want to assign a specific management class and want to use the default system management.
+Storage class: Enter SCSPDS if you want to allocate this data set using this specific storage class.
+Volume serial: Enter ZXPM02 to specify the volume where the dataset should reside.
+Device type: Usually, this is determined by the system based on the volume serial, so you might leave this as blank.
+Data class: Enter SPDS for the specific data class attributes for the dataset.
+Organization: Enter PO to specify a Partitioned Organization, which is typical for a dataset that contains members, such as a PDS (Partitioned Data Set).
+Record format: Enter FB for Fixed Block.
+Record length: Enter 80 which is a common record length for datasets containing code or text that fits within an 80-character width.
+Block size: Enter 32720 which should be a multiple of the record length and less than or equal to the maximum block size that can be handled by the device type (3390).
+Primary quantity: Enter 1 to allocate 1 track as the primary space.
+Secondary quantity: Enter 1 to allocate 1 track as the secondary space.
+Maximum dir. blocks: Leave it as NOLIMIT or specify the maximum directory blocks if there's a limit you want to enforce.
+Data set name type: LIBRARY indicates it's a PDS or PDSE. Ensure this is set correctly.
+Data set encryption: Set to NO if you do not require dataset encryption.
+Data set version: Usually this is managed by the system, set to 1 if creating a new dataset.
