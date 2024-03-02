@@ -1,0 +1,40 @@
+Data Set Name  . . . : Z37931.LOAD                                      
+                                                                        
+General Data                          Current Allocation                
+ Management class . . : **None**       Allocated tracks  . : 20         
+ Storage class  . . . : SCSLOAD        Allocated extents . : 6          
+  Volume serial . . . : ZXPM01         Maximum dir. blocks : NOLIMIT    
+  Device type . . . . : 3390                                            
+ Data class . . . . . : SLOAD                                           
+  Organization  . . . : PO            Current Utilization               
+  Record format . . . : U              Used pages  . . . . : 97         
+  Record length . . . : 0              % Utilized  . . . . : 40         
+  Block size  . . . . : 4096           Number of members . : 21         
+  1st extent tracks . : 1                                               
+  Secondary tracks  . : 1                                               
+  Data set name type  : LIBRARY       Dates                             
+  Data set encryption : NO             Creation date . . . : 2023/10/06 
+  Data set version  . : 1              Referenced date . . : 2024/03/02 
+                                       Expiration date . . : ***None*** 
+
+
+
+
+
+
+
+Data Set Name: You would not change this; it's already provided as Z37931.LOAD.LOADLIB.
+Management class: If you have a specific management class you want to apply, enter it here; otherwise, you can leave it blank to use the system default.
+Storage class: Enter SCSLOAD if that is the storage class you wish to use, as it pertains to the performance and handling of the data set.
+Volume serial: Enter ZXPM01 if you want to allocate this data set to a specific volume; otherwise, leave it blank for the system to choose.
+Device type: Generally, this is left blank to allow the system to select the appropriate device type.
+Data class: Enter SLOAD if that is the data class that applies to your data set; otherwise, leave it blank to use the system default.
+Space units: TRACK is already specified, which is what you want based on the previous conversation.
+Average record unit: This is typically used with RECORDS space units and can be left blank for TRACK allocations.
+Primary quantity: Enter 1 for one track as the primary space allocation.
+Secondary quantity: Enter 1 for one track as the secondary space allocation.
+Directory blocks: If this is a Partitioned Data Set (PDS) or a Library, you may need directory blocks. The number 8 is already there, which usually suffices for a moderate number of members.
+Record format: U (undefined) is correct if you are creating a load library.
+Record length: Leave at 0 for a load library with undefined record format.
+Block size: Enter 4096 as the block size.
+Data set name type: LIBRARY is already specified, indicating a PDS or PDSE (Partitioned Data Set Extended), which is typical for load libraries.
