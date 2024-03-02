@@ -1,0 +1,26 @@
+000100 //ASMPGM01 JOB CLASS=A,MSGLEVEL=(1,1),NOTIFY=&SYSUID,MSGCLASS=H      
+000200 //ASMPGM2  EXEC ASMACL,MBR=PI7                                       
+000300 //C.SYSIN  DD *                                                      
+000400 HELLO      CSECT                                                     
+000500            USING *,15                                                
+000600            LA    1,5         ADD 5 TO REG 1                          
+000700            LA    2,10        ADD 10 TO REG 2                         
+000800            AR    1,2         ADD REGS 2 TO 1                         
+000900            ST 1,RESULT       STORE RESULT TO REG 1                   
+001000            L  1,=A(RESULT)                                           
+001100            WTO MF=(E,RESULTMSG)                                      
+001200            SR 15,15               SUBTRACT REG 15 -15                
+001300            BR 14                  RETURN TO CALLER                   
+001400 RESULT     DS F                                                      
+001500 RESULTMSG  DC AL2(RESULT),C'RESULT='                                 
+001600            END  HELLO                                                
+001500 RESULTMSG  DC AL2(RESULT),C'RESULT='                                    
+001600            END  HELLO                                                   
+001700 /*                                                                      
+001800 //GO       EXEC PGM=ASMPGM2                                             
+001900 //STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR                                
+002000 //PRINT    DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+
+                                                                               
