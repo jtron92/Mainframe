@@ -1,2 +1,23 @@
  193  IFO198      INVALID TYPE DECLARED ON DC/DS/DXD CONSTANT NEAR OPERAND COLU D CONSTANT NEAR OPERAND COLUMN 1
 this is because i typed TOTALLNE DS  OCL133   it should be TOTALLNE DS  0CL133   O to zero
+
+
+
+
+                                                  ASSEMBLER DIAGNOSTICS AND STAT
+STMT  ERROR CODE   MESSAGE                                                      
+   27  IFO188      PAYRECS IS AN UNDEFINED SYMBOL                               
+   46  IFO188      ZTOTSAL IS AN UNDEFINED SYMBOL                               
+   88  IFO188      INLOS IS AN UNDEFINED SYMBOL                                 
+  195  IFO196      PSALARY HAS BEEN PREVIOUSLY DEFINED                          
+  196  IFO196      OFILLER HAS BEEN PREVIOUSLY DEFINED                          
+NUMBER OF STATEMENTS FLAGGED IN THIS ASSEMBLY =     5                           
+HIGHEST SEVERITY WAS    8                                                       
+OPTIONS FOR THIS ASSEMBLY                                                       
+  ALIGN, ALOGIC, BUFSIZE(STD), NODECK, ESD, FLAG(0), LINECOUNT(55), LIST, NOMCAL
+
+I had PAYREC defined TYPO
+same with ZTOTSAL should have been ZTOTAL
+with PSALARY I PLACED IT TWICE
+SAME WITH OFILLER
+this caused a SOC1
