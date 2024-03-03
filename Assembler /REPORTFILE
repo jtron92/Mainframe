@@ -1,0 +1,32 @@
+  64KB ----+----1----+----2----+----3----+----4----+----5----+----6----+----
+****** ****ZAP****AUTOSAVE********** TOP OF DATA ***************************
+000001 //JORGEC       JOB CLASS=A,                                              
+000002 //             MSGCLASS=H,                                           
+000003 //             MSGLEVEL=(1,1),                                       
+000004 //             NOTIFY=HERC01                                         
+000005 //STEP01   EXEC ASMFCG,PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB',     
+000006 //             REGION.GO=428K                                        
+000007 //ASM.SYSLIB DD                                                      
+000008 //           DD DISP=SHR,DSN=SYS1.MACLIB                             
+000009 //ASM.SYSIN  DD *                                                    
+000010          PRINT GEN                                                   
+000011 REPORT   CSECT                                                       
+000012          SAVE  (14,12)                                               
+000013          BASR  R12,0                                                 
+000014          USING *,R12                                                 
+000015          ST    R13,SAVEA+4                                           
+000016          LA    R13,SAVEA                                             
+000017 *----------------------------------------------------*               
+000018 OPENFILE OPEN (INDCB,INPUT,OUTDCB,OUTPUT)                            
+000019 WRITEFIL PUT  OUTDCB,PTITLE                                          
+000020 *----------------------------------------------------*               
+000021 READREC  GET  OUTDCB,PAYREC                              
+000022 *-----------------------------------------------------*  
+000023 CPYSTUFF MVC  PEMPID,EMPID                               
+000024          MVC  PEMPLOYE,EMPLOYEE                          
+000025          MVC  PSALARY,SALARY                             
+000026 PACKIT   PACK ZSALARY,SALARY                             
+000027          AP   ZTOTAL,SALARY                              
+000028          PUT  OUTDCB,OUTAREA                             
+000029          B    READREC                                    
+000030 *-----------------------------------------------------)  
