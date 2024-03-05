@@ -56,3 +56,23 @@
 
 
 will paste the rest of the source code once i am done
+
+below is the input file that the code is pulling from  empid 1001 employee gage steele salary 3039 for examples
+
+
+  64KB ----+----1----+----2----+----3----+----4----+----5----+----6-
+****** ***********AUTOSAVE********** TOP OF DATA *******************
+000001 1001      GAGE STEELE            3039                        
+000002 1017      COLBY MCCARTHY         4762                        
+000003 1021      GRADY PERASON          3287                        
+000004 1040      DUSTIN MADDOX          3187                        
+000005 1050      ACTON TUCKER           3742                        
+000006 1060      NORMAN BISHOP          7955                        
+000007 1012      MASON MIDDLETON        3029                        
+****** ***********AUTOSAVE********* BOTTOM OF DATA *****************
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
