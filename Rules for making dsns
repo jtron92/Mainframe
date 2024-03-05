@@ -1,0 +1,13 @@
+Length : 1 to 44 characters (standard)
+         1 to 35 characters (gdgs)
+         Only first 17 characters are used for tape data sets
+
+Characters : Alphanumeric (A-Z,0-9)
+             National (@,#,and $)
+             Period(.)
+
+Qualifiers : Data set names with more than 8 characters must be broken into qualifers that each contain between 1 and 8 characters. Seperate qualiferes from one another with periods. The periods are counted in the overall length of the dsn.
+
+First character : The first character of each qualifer must be a ltter or national character
+
+Last character : The last character of a dsn should not be a period. 
