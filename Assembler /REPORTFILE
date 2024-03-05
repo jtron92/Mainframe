@@ -1,32 +1,58 @@
-  64KB ----+----1----+----2----+----3----+----4----+----5----+----6----+----
-****** ****ZAP****AUTOSAVE********** TOP OF DATA ***************************
-000001 //JORGEC       JOB CLASS=A,                                              
-000002 //             MSGCLASS=H,                                           
-000003 //             MSGLEVEL=(1,1),                                       
-000004 //             NOTIFY=HERC01                                         
-000005 //STEP01   EXEC ASMFCG,PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB',     
-000006 //             REGION.GO=428K                                        
-000007 //ASM.SYSLIB DD                                                      
-000008 //           DD DISP=SHR,DSN=SYS1.MACLIB                             
-000009 //ASM.SYSIN  DD *                                                    
-000010          PRINT GEN                                                   
-000011 REPORT   CSECT                                                       
-000012          SAVE  (14,12)                                               
-000013          BASR  R12,0                                                 
-000014          USING *,R12                                                 
-000015          ST    R13,SAVEA+4                                           
-000016          LA    R13,SAVEA                                             
-000017 *----------------------------------------------------*               
-000018 OPENFILE OPEN (INDCB,INPUT,OUTDCB,OUTPUT)                            
-000019 WRITEFIL PUT  OUTDCB,PTITLE                                          
-000020 *----------------------------------------------------*               
-000021 READREC  GET  OUTDCB,PAYREC                              
-000022 *-----------------------------------------------------*  
-000023 CPYSTUFF MVC  PEMPID,EMPID                               
-000024          MVC  PEMPLOYE,EMPLOYEE                          
-000025          MVC  PSALARY,SALARY                             
-000026 PACKIT   PACK ZSALARY,SALARY                             
-000027          AP   ZTOTAL,SALARY                              
-000028          PUT  OUTDCB,OUTAREA                             
-000029          B    READREC                                    
-000030 *-----------------------------------------------------)  
+  64KB ----+----1----+----2----+----3----+----4----+----5----+----6----+----7
+****** ****ZAP****AUTOSAVE********** TOP OF DATA ****************************
+000001 //TESTING JOB CLASS=A,                                                
+000002 //            MSGCLASS=H,                                             
+000003 //            MSGLEVEL=(1,1),                                         
+000004 //            NOTIFY=HERC01                                           
+000005 //STEP01  EXEC ASMFCG,PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB',       
+000006 //            REGION.GO=428K                                          
+000007 //ASM.SYSLIB DD                                                       
+000008 //           DD DISP=SHR,DSN=SYS1.MACLIB                              
+000009 //ASM.SYSIN  DD *                                                     
+000010          PRINT GEN                                                    
+000011 REPORT   CSECT              CONTROL SECTION                           
+000012          SAVE (14,12)                                                 
+000013          BASR R12,0         BASE REG 12 ESTABLISHING                  
+000014          USING *,R12                                                  
+000015          ST   R13,SAVEA+4       STORE REG 13                          
+000016          LA   R13,SAVEA         LOAD ADDRESS                          
+000017 *--------------------------------------------------------------------*
+000018 OPENFILE OPEN (INDCB,INPUT,OUTDCB,OUTPUT)   OPEN INPUT AND OUTPUT DCBS
+000019 WRITFILE PUT OUTDCB,PTITLE                WRITE TO OUTPUT DCB         
+000020 *--------------------------------------------------------------------*
+000021 READREC  GET INDCB,PAYREC           READ FROM INPUT DCB NAMED PAYREC   
+000022 *--------------------------------------------------------------------* 
+000023 CPYSTFF  MVC PEMPID,EMPID          MOVING/COPYING EMPID TO PEMPID      
+000024          MVC PEMLOYE,EMPLOYEE                   PEMPLOYEE TO EMPLOYEE  
+000025          MVC PSALARY,SALARY                                            
+000026 PACKIT   PACK ZSALARY,SALARY            PACKING TOTAL                  
+000027          AP  ZTOTAL,ZSALARY                ADDING TOTAL                
+000028 WRITPR   PUT OUTDCB,OUTAREA                                            
+000029          B   READREC           LOOP BACK TO READREC TO READ EACH REC   
+000030 *--------------------------------------------------------------------* 
+000031 INCLOS   MVC ATOTAL,EDWD                                               
+000032          LA  R1,ATOTAL                                                 
+000033          ED ATOTAL,ZTOTAL          MATH THESE OUT                      
+000034          PUT OUTDCB,TOTALLNE         COPY/DATA TO OUTAREA FOR OUTPUT   
+000035 CLSALL   CLOSE (INDCB,,OUTDCB)       CLOSE THE FILES INPUT AND OUTPUT  
+000036          L  R13,SAVEA+4                                                
+000037          RETURN (14,12),RC=0        RETURN CODE SUCCESSFUL             
+000038          LTORG                                                         
+000039 SAVEA    DS 18F                    18 FULL WORDS BYTES                 
+000040 *--------------------------------------------------------------------* 
+000041 INDCB    DCB MACRF=GM,DDNAME=INDD,DSORG=PS,EODAD=INCLOS                
+000042 OUTDCB   DCB MACRF=GM,DDNAME=OUTDD,DSORG=PS  INPUT/OUTPUT FILES         
+000043 *--------------------------------------------------------------------*  
+000044 PAYREC   DS 0CL80      80 BYTES FOR THE INDCB FILE (INPUT)              
+000045 EMPID    DS CL4        4 BYTES BECAUSE INPUT FILE EMPID ONLY HAS 4 NMBR 
+000046          DS CL6        6 SPACES BETWEEN EMPID AND EMPLOYEE              
+000047 EMPLOYEE DS CL21       21 BYTES FOR EMPLOYEE NAME                       
+000048          DS CL2                                                         
+000049 SALARY   DS CL4                                                         
+000050 ENDING   DS CL43       43 BECAUSE NEEDED A NUMBER TO SUM UP TO 80       
+000051 *---------------------------------------------------------------------* 
+000052 PTITLE   DC CL121' P A Y R O L L  R E P O R T  -  B I M  C O R P.'   
+
+
+
+will paste the rest of the source code once i am done
