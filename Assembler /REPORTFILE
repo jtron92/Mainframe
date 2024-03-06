@@ -52,10 +52,63 @@
 000050 ENDING   DS CL43       43 BECAUSE NEEDED A NUMBER TO SUM UP TO 80       
 000051 *---------------------------------------------------------------------* 
 000052 PTITLE   DC CL121' P A Y R O L L  R E P O R T  -  B I M  C O R P.'   
+000053 OUTAREA  DC  0CL133' '                
+000054 EMPTY    DC  CL1' '                   
+000055 PEMPID   DS  CL4' '                   
+000056          DC  CL6' '                   
+000057 PEMPLOYE DS  CL20' '                  
+000058          DC  CL2' '                   
+000059 PDOLLAR  DC  CL1' '                   
+000060 PSALARY  DS  CL5' '                   
+000061 OFILLER  DC  CL94' '                  
+000062 *                                     
+000053 OUTAREA  DC  0CL133' '                           
+000054 EMPTY    DC  CL1' '                              
+000055 PEMPID   DS  CL4' '                              
+000056          DC  CL6' '                              
+000057 PEMPLOYE DS  CL20' '                             
+000058          DC  CL2' '                              
+000059 PDOLLAR  DC  CL1' '                              
+000060 PSALARY  DS  CL5' '                              
+000061 OFILLER  DC  CL94' '                             
+000062 *                                                
+000063 ZSALARY  DC  PL3'0'                              
+000064 ZTOTAL   DC  PL05'0'                             
+000065 EDWD     DC  X'4020202020206B2020'               
+000066 TOTALLNE DS  0CL133                              
+000067 SKIP     DC  CL1'0'                              
+000068 TFILL1   DC  CL09' '                             
+000069 TFILL2   DC  CL17' '                             
+000070 TDOLLAR  DC  CL1'$'                              
+000071 ATOTAL   DC  CL10' '                             
+000072 TFILL3   DC  CL12' '                             
+000073 TOTMSG   DC  CL61'TOTAL MONTHLY WAGES'           
+000074 TFILL4   DC  CL33' '              
+000075 R0       EQU 0                    
+000076 R1       EQU 1                    
+000077 R2       EQU 2                    
+000078 R3       EQU 3                    
+000079 R4       EQU 4                    
+000080 R5       EQU 5                    
+000081 R6       EQU 6                    
+000082 R7       EQU 7                    
+000083 R8       EQU 8                    
+000084 R9       EQU 9                    
+000085 R10      EQU 10                   
+000086 R11      EQU 11                   
+000087 R12      EQU 12                   
+000088 R13      EQU 13                   
+000089 R14      EQU 14                   
+000090 R15      EQU 15                   
+000091          END                      
+000092 /*                                
+000093 //GO.SYSPRINT DD SYSOUT=*         
+000094 //GO.SYSUDUMP DD SYSOUT=*         
+000095 //GO.SYSABEND DD SYSOUT=*                                               
+000096 //GO.OUTDD    DD SYSOUT=*,DCB=(RECFM=FBA,LRECL=122,BLKSIZE=122)         
+000097 //GO.INDD     DD DSN=HERC01.SALARIES,DISP=SHR                           
+****** ****ZAP****AUTOSAVE********* BOTTOM OF DATA ****************************
 
-
-
-will paste the rest of the source code once i am done
 
 below is the input file that the code is pulling from  empid 1001 employee gage steele salary 3039 for examples
 
