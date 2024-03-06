@@ -1,0 +1,48 @@
+000100 //IEFBR14  JOB (DSNJOB),JORGE.CINTRON,                           
+000200 //             CLASS=A,                                          
+000300 //             MSGCLASS=H,                                       
+000400 //             MSGLEVEL=(1,1),                                   
+000500 //             NOTIFY=&SYSUID                                    
+000600 //*-----------------------------------------------               
+000700 //* END OF JOB CARD                                              
+000800 //*-----------------------------------------------               
+000900 //STEP01   EXEC PGM=IEFBR14                                      
+001000 //DD1      DD DSN=&SYSUID..JOB2,                                 
+001100 //            DISP=(NEW,CATLG,DELETE),                           
+001200 //            UNIT=SYSDA,                                        
+001300 //            SPACE=(TRK,(8,10,10),RLSE),                        
+001400 //            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)       
+001500 //STEP02   EXEC PGM=IEBGENER,COND=(0,EQ,STEP01)                  
+000100 //IEFBR14  JOB (DSNJOB),JORGE.CINTRON,                       
+000200 //             CLASS=A,                                      
+000300 //             MSGCLASS=H,                                   
+000400 //             MSGLEVEL=(1,1),                               
+000500 //             NOTIFY=&SYSUID                                
+000600 //*-----------------------------------------------           
+000700 //* END OF JOB CARD                                          
+000800 //*-----------------------------------------------           
+000900 //STEP01   EXEC PGM=IEFBR14                                  
+001000 //DD1      DD DSN=&SYSUID..JOB2,                             
+001100 //            DISP=(NEW,CATLG,DELETE),                       
+001200 //            UNIT=SYSDA,                                    
+001300 //            SPACE=(TRK,(8,10,10),RLSE),                    
+001400 //            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)   
+001500 //STEP02   EXEC PGM=IEBGENER,COND=(0,EQ,STEP01)          */ IF STEP01 RETURNS WITH A ZERO SKIP THIS STEP02 AND GO TO STEP04    
+001600 //SYSUT1   DD *                                              
+001700   DEREK                                                      
+001800 /*                                                           
+001900 //SYSPRINT DD SYSOUT=*                                              
+002000 //AMSDUMP  DD SYSOUT=*                                              
+002100 //SYSOUT   DD SYSOUT=*                                              
+002200 //SYSUT2   DD DSN=Z38515.JOB2(JOB1),                                
+002210 //            DISP=(MOD,CATLG,DELETE),                              
+002220 //            UNIT=SYSDA,                                           
+002230 //            SPACE=(TRK,(8,10),RLSE),                              
+002240 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)          
+002250 //SYSIN    DD DUMMY                                                 
+002260 //STEP04   EXEC PGM=IEFBR14                                         
+002270 //DD1      DD DSN=Z38515.JOB2,DISP=(OLD,DELETE)                     
+****** **************************** Bottom of Data ************************
+                                                                           
+
+
