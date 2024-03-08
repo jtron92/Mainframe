@@ -1,20 +1,36 @@
 Attempting to access an uninitialized pointer or base register: This happens when a program tries to use a pointer or base register that hasn't been set to a valid storage location.
+
 Reference to a memory location outside the allocated storage area: This could be due to incorrect calculation of addresses or indexes that point beyond the memory or storage that has been allocated to the program.
+
 Incorrect setup of the program's address space: This can occur if the program or the operating system's job control language (JCL) hasn't correctly defined the necessary resources or if there's a mismatch between the program's expectations and the actual resources provided.
+
 Faulty or missing data sets: If the program expects certain data sets to be available and they are not found, improperly allocated, or have access issues, it might attempt to access storage that is not valid, leading to a SOC1 error.
 
 
 Tried to read a file that was not open.
+
 Misspelled DDNAME followed by attempted I/O to same file.
+
 Error in parameters passed to subroutines. Calling a program and the program was not included during link edit. 
+
 Missing DD card followed by attempted I/O to same file.
+
 Recording mode was wrong, or density was incorrect.
+
 Bad load module, possible bad object deck. Executing a program with an unresolved external reference. 
+
 Calling a program and the program was not included during link edit. 
+
 Mixing compile options RES and NORES in different modules.
+
 An uncontrolled loop moved data on top of instructions. 
+
 COBOL – Subroutine prog ID was the same as the entry name tried to call within COBOL sort I/O procedure.
+
 COBOL – Tried to call a subroutine which could not be found.
+
 COBOL – Incomplete DCB for SORTIN file.
+
 COBOL – Using sort verb, DDNAME was not SORTOUT when the”giving” option was used.
+
 COBOL – Executing sort-using after opening SORTIN file.
