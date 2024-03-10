@@ -1,0 +1,23 @@
+000100 //JCLRUN01 JOB (ACCOUNTING),JORGE.CINTRON,                      
+000200 //             CLASS=A,                                         
+000300 //             MSGCLASS=X,                                      
+000400 //             MSGLEVEL=(1,1),                                  
+000500 //             NOTIFY=&SYSUID                                   
+000600 //STEP01   EXEC PGM=IEBGENER                                    
+000700 //SYSUT1   DD *                                                 
+000800   DATA2                                                         
+000900   DATA2                                                         
+001000 /*                                                              
+001100 //SYSUT2   DD DSN=Z38515.TRAIN1,DISP=SHR                        
+001510 //         DD DSN=Z38515.TRAIN2,DISP=SHR                        
+001600 //SYSIN    DD DUMMY                                             
+001700 //SYSPRINT DD SYSOUT=*                                          
+
+To treat two of more data sets as a single data set, you can concatencate them. Then, if the data sets are sequential input files, 
+the OS will read the records in the concatendated data sets in the order in which they're concatenated. 
+
+if you concatenate files, you code the DD statements for the first as usual. Then you code the DD statements for the additional files in the desired
+order, but without ddnames. The program will read the records from the first file and when an end-of-file condition is detected. The OS 
+will automatically switch to the next file in the concatentation.
+
+If you concatenate partitioned data sets , the OS searches them for a specified member in the order in which theyre concatenated.
