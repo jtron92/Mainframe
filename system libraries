@@ -1,0 +1,19 @@
+System libraries
+
+Data set	    Description
+
+SYS1.NUCLEUS -	Contains, among other things, the OS/390 nucleus program. The members of this system library are created during sysgen. When the system is initialized, the members are brought into real main storage and control is given to the nucleus.
+
+SYS1.PARMLIB -	Contains several options OS/390 is to use when the system is initialized, Most of the options included in this library are coded by the systems programmers at your installation.
+
+SYS1.LINKLIB -	Contains executable programs that are either a part of the operating system or are written by users.
+
+SYS1.LPALIB -	  Contains executable programs that are part of the link pack area (LPA). Heavily used portions of the operating system, such as access methods, are usually placed in this library.
+
+SYS1.MACLIB	 - Contains the assembler macro instructions that are used for sysgen as well as other instructions that provide a standard interface for the operating system’s facilities such as access methods.
+
+SYS1.PROCLIB	- Contains standardized JCL statements called procedures that can be used by the jobs that invoke them. 
+
+SYS1.CMDLIB	 -  Contains the program modules that implement the various TSO/E commands enter from a TSO terminal.
+
+SYS1.LOGREC	 - Contains information about hardware problems.
