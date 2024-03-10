@@ -1,3 +1,8 @@
+IEFBR14 is an IBM supplied program that doesnt anything. Instead it performs an assembler language command that causes it to return control to the OS and terminate.
+This forces OS to allocate and deallocate any data sets defined in the job steps DD statement.
+
+IEFBR14 is derived from the return to the program in Assembler called Branch (BR) register 14, which contains the address to return to after a call.
+
 Command ===>                                                  Scroll ===> CSR  
 =COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
 ****** ***************************** Top of Data ******************************
