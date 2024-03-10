@@ -1,4 +1,5 @@
 C ALL                                    <-COPY KEY WORD AND CHANGE TO KEYWORD EXAMPLE C ALL ONE TWO           ALL WORDS ONE IS NOW TWO
+Change Name1 Name2                       <-COPY KEY WORD AND CHANGE TO KEYWORD EXAMPLE C ALL ONE TWO         (just key in the word you wanna replace next to the old one like Change blue black      
 CREATE .ZF .ZL MEMBERNAME                <--- COPYS FIRST LINE AND LAST LINE AND CREATES A MEMBER 
 CREATE .A .B MEMBERNAME                  <---- COPIES FROM LINE A TO B AND CREATES A MEMBER
 NUM ON STD COBOL , NUM ON STD COB        <----- ADDS THE COBOL HILITE AND NUMBERS 
