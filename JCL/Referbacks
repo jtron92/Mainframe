@@ -1,0 +1,24 @@
+Using the JCL facility called backwards reference lets you obtain information from pervious DD statements within the job. 
+So you dont have to code the excat same thing in a job. 
+
+Example: 
+
+001100 //SYSUT2   DD DSN=&SYSUID..TRAIN1,                           
+001200 //            DISP=(NEW,CATLG,DELETE),                       
+001300 //            UNIT=SYSDA,                                    
+001400 //            SPACE=(TRK,(8,10),RLSE),                       
+001500 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)   
+001510 //         DD DSN=&SYSUID..TRAIN2,                           
+001520 //            DISP=(NEW,PASS),                               
+001530 //            UNIT=SYSDA,                                    
+001540 //            SPACE=(TRK,(8,10),RLSE),                       
+001550 //            DCB=*.SYSUT2                                   
+
+In the DCB=*SYSUT2 
+
+its going to use the same DCB values from the first dsn in sysut2
+
+if this was in a different step it would look like this
+
+DCB=*.STEP1.SYSUT2
+
