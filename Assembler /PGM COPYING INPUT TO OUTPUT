@@ -29,7 +29,7 @@
 000029 *--------------------------------------------------------------------- 
 000030          L    R13,SAVEA+4         LOAD BACK REGISTER 13                
 000031          LM   R14,R12,12(R13)      RESTORE USED ADDRESSES              
-000032          LA   R15,0                LOAD ADDRESS 15                     
+000032          LA   R15,0                RETURN STATUS REG 15 CODE 0 SUCCESS                     
 000033          BR   R14                RETURN CALL TO BR 14                  
 000034 *--------------------------------------------------------------------  
 000035 IFILE    DCB  MACRF=GM,DDNAME=IFILE,DSORG=PS,EODAD=EXIT                
