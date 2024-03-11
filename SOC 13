@@ -22,7 +22,7 @@ for example :
 0032          BR   R14                                              
 0033 *--------------------------------------------------------------
 0034 IFILE    DCB  MACRF=PM,DDNAME=IFILE,DSORG=PS,EODAD=EXIT           <-------------------------- this is an input file that the pgm is pulling recs from the target is the output files which is ofile but I have it set to PM which is Put it needs to be GM for GET
-0035 OFILE    DCB  MACRF=GM,DDNAME=OFILE,DSORG=PS                   
+0035 OFILE    DCB  MACRF=GM,DDNAME=OFILE,DSORG=PS                                files which is ofile but I have it set to PM which is Put it needs to be GM for GET             
 0036 *--------------------------------------------------------------
 0037 RECIN    DS   CL80                                             
 0038 RECOUT   DS   CL80                                             
