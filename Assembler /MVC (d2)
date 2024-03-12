@@ -11,3 +11,7 @@ On the right side (the source from where you're copying the data): 2000(R15)
 
 2000 is the displacement from the address in R15. This is where you will start copying the data from.
 R15 is the base register for the source, providing the starting point to which the displacement 2000 is applied.
+
+The opcode D2 is an MVC instruction that moves 1–256 characters from one location in memory to another. 
+
+It is a type SS instruction with six bytes, with the second byte containing the length field. The value of the length field is X'0D', which represents the decimal value 13
