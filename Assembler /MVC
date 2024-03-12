@@ -1,0 +1,13 @@
+destination(displacement,length,BaseReg1), source(displacement,BaseReg2)"
+
+MVC 1000(3,R14),2000(R15)
+
+On the left side (the destination where you're moving the data to): 1000(3,R14)
+
+1000 is the displacement from the address in R14. This is where you will start placing (or "pasting") your data.
+3 is the number of bytes you're going to move. This length specifies how much data from the source will be copied to the destination.
+R14 is the base register for the destination, providing the starting point to which the displacement 1000 is applied.
+On the right side (the source from where you're copying the data): 2000(R15)
+
+2000 is the displacement from the address in R15. This is where you will start copying the data from.
+R15 is the base register for the source, providing the starting point to which the displacement 2000 is applied.
