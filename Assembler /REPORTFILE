@@ -60,17 +60,7 @@
 000058          DC  CL2' '                   
 000059 PDOLLAR  DC  CL1' '                   
 000060 PSALARY  DS  CL5' '                   
-000061 OFILLER  DC  CL94' '                  
-000062 *                                     
-000053 OUTAREA  DC  0CL133' '                           
-000054 EMPTY    DC  CL1' '                              
-000055 PEMPID   DS  CL4' '                              
-000056          DC  CL6' '                              
-000057 PEMPLOYE DS  CL20' '                             
-000058          DC  CL2' '                              
-000059 PDOLLAR  DC  CL1' '                              
-000060 PSALARY  DS  CL5' '                              
-000061 OFILLER  DC  CL94' '                             
+000061 OFILLER  DC  CL94' '                                                                              
 000062 *                                                
 000063 ZSALARY  DC  PL3'0'                              
 000064 ZTOTAL   DC  PL05'0'                             
