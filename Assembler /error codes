@@ -28,6 +28,19 @@ this caused a SOC1
 
 
 
+*------------------------------------------------------------------------------- RETURN CODE 12
+
+
+23.55.49 JOB  145  $HASP373 AMSBLER1 STARTED - INIT  1 - CLASS A - SYS TK4-  
+23.55.49 JOB  145  IEF403I AMSBLER1 - STARTED - TIME=23.55.49                
+23.55.50 JOB  145  IEFACTRT - Stepname  Procstep  Program   Retcode          
+23.55.50 JOB  145  AMSBLER1   STEP01    ASM       IFOX00    RC= 0012         
+23.55.50 JOB  145  AMSBLER1   STEP01    GO        LOADER    *FLUSH*          
+23.55.50 JOB  145  IEF404I AMSBLER1 - ENDED - TIME=23.55.50                  
+23.55.50 JOB  145  $HASP395 AMSBLER1 ENDED                                   
+    1     //AMSBLER1 JOB CLASS=A,                                            
+
+
 ---+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+-
 000118 0000 0000      0000C         147            LM   R14,R12,12,(R13)        
          *** ERROR ***                                                          
