@@ -21,3 +21,47 @@ same with ZTOTSAL should have been ZTOTAL
 with PSALARY I PLACED IT TWICE
 SAME WITH OFILLER
 this caused a SOC1
+
+
+
+
+
+
+
+---+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+-
+000118 0000 0000      0000C         147            LM   R14,R12,12,(R13)        
+         *** ERROR ***                                                          
+00011C 41F0 0000      00000         148            LA   R15,0                   
+000120 07FE                         149            BR   R14                     
+                                    150 *---------------------------------------
+000122                              151 INRECS     DS   CL80                    
+                                                                                
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                      
+000172                              152 OUTRECS    DS   CL80                    
+0001C4                              153 SAVEA      DS   18F                     
+                                    154 *---------------------------------------
+                            00000   155 R0         EQU  0                       
+                            00001   156 R1         EQU  1                       
+                            00002   157 R2         EQU  2                       
+                            00003   158 R3         EQU  3                       
+                            00004   159 R4         EQU  4                       
+                            00005   160 R5         EQU  5                       
+                            00006   161 R6         EQU  6                       
+                            00007   162 R7         EQU  7                       
+
+
+STMT  ERROR CODE   MESSAGE                                  
+  147  IFO211      TOO MANY OPERANDS                        
+NUMBER OF STATEMENTS FLAGGED IN THIS ASSEMBLY =     1       
+HIGHEST SEVERITY WAS   12                                   
+OPTIONS FOR THIS ASSEMBLY                                   
+
+ERROR WAS IN STATEMENT 147 
+
+147            LM   R14,R12,12,(R13) 
+
+I ADDED A COMMA BY MISTAKE ON THE DISPLACEMENT OF 12 
+
+SHOULD LOOK LIKE THIS :
+
+LM R14,R12,12(R13)
