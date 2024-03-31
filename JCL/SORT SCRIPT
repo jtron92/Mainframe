@@ -1,0 +1,18 @@
+000100 //JOBRUN01 JOB (ACCOUNTING),JORGE.CINTRON,                             
+000110 //             MSGCLASS=H,                                             
+000200 //             CLASS=A,                                                
+000201 //             NOTIFY=&SYSUID,                                         
+000202 //             MSGLEVEL=(1,1)                                          
+000210 //MYPROC   PROC                                                        
+000220 //JS03     EXEC PGM=SORT                                               
+000230 //SORTIN   DD DISP=SHR,DSN=&SORTDSN                                    
+000240 //SORTOUT  DD DSN=Z38515.SORT2,DISP=SHR                                
+000250 //SYSOUT   DD SYSOUT=*                                                 
+000260 //         PEND                                                        
+000270 //*-----------------------------------------------                     
+000300 //STEP01   EXEC MYPROC,SORTDSN=Z38515.SORTJOB                          
+000400 //AMSDUMP  DD SYSOUT=*                                                 
+000500 //SYSIN    DD *                                                        
+000600   SORT FIELDS=(1,3,CH,D)                                               
+000700 /*                                                                     
+****** **************************** Bottom of Data ***************************
