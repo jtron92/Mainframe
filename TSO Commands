@@ -1,1 +1,2 @@
 TSO SUBMIT 'DSN.NAME'     -  from the command line you can submit the DSN name and if it has a member include it TSO SUBMIT 'DSN.NAME(member)'
+tso bounds 
