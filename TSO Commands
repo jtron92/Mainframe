@@ -1,2 +1,14 @@
 TSO SUBMIT 'DSN.NAME'     -  from the command line you can submit the DSN name and if it has a member include it TSO SUBMIT 'DSN.NAME(member)'
 tso bounds 
+********************************************
+TSO LISTDS 'Z38515.ALPHA'   -   Use the LISTDS command to have the attributes of specific data sets displayed at your terminal
+
+example : 
+Z38515.ALPHA                 
+--RECFM-LRECL-BLKSIZE-DSORG  
+  FB    80    800     PO     
+--VOLUMES--
+   ZXPL01   
+ ***        
+***                          
+********************************************
