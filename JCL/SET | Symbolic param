@@ -18,13 +18,13 @@ SORTOUT DD DSN=&MNAME,       YOU CAN NAME IT ALMOST ANYTHING YOU WANT JUST ADD T
 
 You dont need it to be in a private lib or a procedure it can be as simple as you want to set the symlobic name on the bottom like this
 
+000401 //         SET  MNAME=&SYSUID..FIGHT7   
 000402 //STEP01   EXEC PGM=IEFBR14                                   
 000403 //DD1      DD DSN=&MNAME,                                     
 000404 //            DISP=(NEW,CATLG,DELETE),                        
 000405 //            UNIT=SYSDA,                                     
 000406 //            SPACE=(TRK,(8,10),RLSE),                        
-000407 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)    
-000408 //         SET  MNAME=&SYSUID..FIGHT7                         
+000407 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)                          
 ****** **************************** Bottom of Data ******************
                                                                      
 
