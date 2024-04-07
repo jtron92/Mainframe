@@ -1,4 +1,5 @@
 TSO SUBMIT 'DSN.NAME'     -  from the command line you can submit the DSN name and if it has a member include it TSO SUBMIT 'DSN.NAME(member)'
+*
 tso bounds 
 ********************************************
 TSO LISTDS 'Z38515.ALPHA'   -   Use the LISTDS command to have the attributes of specific data sets displayed at your terminal
@@ -14,5 +15,25 @@ Z38515.ALPHA
 ********************************************
 
 send ‘Hello Mark, I am finished with all of the lab exercises’, user(TSO12345)  
-tso help listds
+*
 
+tso help listds
+*
+
+ALLOC DA(BUILDS.SERVERS) DSORG(PO) BLOCK(100) LRECL(80) BLKSIZE(300) DIR(2) RECFM(F,B) NEW TRACKS SPACE(2,3)  
+
+correct syntax of the TSO command to allocate a new PDS
+
+User ID: IBM
+
+Data set name: BUILDS.SERVERS
+
+Block length: 100 bytes
+
+Logical record length: 80
+
+Data control block size: 300
+
+2 directory block
+
+Fixed block records     
