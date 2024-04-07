@@ -12,3 +12,7 @@ Z38515.ALPHA
  ***        
 ***                          
 ********************************************
+
+send ‘Hello Mark, I am finished with all of the lab exercises’, user(TSO12345)  
+tso help listds
+
