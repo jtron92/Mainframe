@@ -1,0 +1,123 @@
+TYPE : IS 
+
+------------------------------------------------------------------------------ 
+                           ISPF Primary Option Menu                            
+Option ===> IS                                                                 
+                                           More:     +                         
+0  Settings      Terminal and user parameters            User ID . : Z38515    
+1  View          Display source data or listings         Time. . . : 21:55     
+2  Edit          Create or change source data            Terminal. : 3278      
+3  Utilities     Perform utility functions               Screen. . : 1         
+4  Foreground    Interactive language processing         Language. : ENGLISH   
+5  Batch         Submit job for language processing      Appl ID . : ISR       
+6  Command       Enter TSO or Workstation commands       TSO logon : DBPROCCG  
+7  Dialog Test   Perform dialog testing                  TSO prefix: Z38515    
+8  LM Facility   Library administrator functions         System ID : S0W1      
+9  IBM Products  IBM program development products        MVS acct. : FB3       
+10 SCLM          SW Configuration Library Manager        Release . : ISPF 7.4  
+11 Workplace     ISPF Object/Action Workplace                                  
+                                                                               
+                 ------ Other Install Products ------                          
+                                                                               
+SD SDSF          System Display and Search Facility                            
+------------------------------------------------------------------------------ 
+                           ISPF Primary Option Menu                            
+Option ===>                                                                    
+                                           More:   - +                         
+SD SDSF          System Display and Search Facility      User ID . : Z38515    
+IP IPCS          Inter Problem Control Facility          Time. . . : 21:55     
+IS ISMF          Inter Storage Management Facility       Terminal. : 3278      
+SM SMP/E         SMP/E and CBIPO Dialogs                 Screen. . : 1         
+HC HCD           HW Configuration Definition Dialog      Language. : ENGLISH   
+ R RACF          Resource Access Control Facility        Appl ID . : ISR       
+ S DFSORT        Data Facility Sort                      TSO logon : DBPROCCG  
+OE OEDIT         OpenEdition MVS Edit files              TSO prefix: Z38515    
+OB OBROWSE       OpenEdition MVS Browse files            System ID : S0W1      
+OS OSHELL        OpenEdition MVS ISPF Shell              MVS acct. : FB3       
+BR READ          BookManager READ/MVS                    Release . : ISPF 7.4  
+BB BUILD         BookManager BUILD/MVS                                         
+BI READ INDEX    BookManager Index Utility                                     
+DU MVS/DITTO     MVS/DITTO Utility                                             
+IN INSPECT       INSPECT for C/370 and PL/I                                    
+MQ IBM MQ        MQSseries 9.2.0            
+
+
+TYPE ZERO TO UPDATE YOUR PROFILE TO AN ADMIN
+------------------------------------------------------------------------------ 
+                 ISMF PRIMARY OPTION MENU - z/OS DFSMS V2 R4                   
+Enter Selection or Command ===> 0                                              
+                                                                               
+Select one of the following options and press Enter:                           
+                                                                               
+0  ISMF Profile            - Change ISMF User Profile                          
+1  Data Set                - Perform Functions Against Data Sets               
+2  Volume                  - Perform Functions Against Volumes                 
+3  Management Class        - Specify Data Set Backup and Migration Criteria    
+4  Data Class              - Specify Data Set Allocation Parameters            
+5  Storage Class           - Specify Data Set Performance and Availability     
+9  Aggregate Group         - Specify Data Set Recovery Parameters              
+L  List                    - Perform Functions Against Saved ISMF Lists        
+R  Removable Media Manager - Perform Functions Against Removable Media         
+X  Exit                    - Terminate ISMF                                    
+                                                                               
+--------------------------------------------------------------------------
+                           ISMF PROFILE OPTION MENU                       
+Enter Selection or Command ===> 0                                         
+                                                                          
+Select one of the following options and Press Enter:                      
+                                                                          
+  0  User Mode Selection                                                  
+  1  Logging and Abend Control                                            
+  2  ISMF Job Statement                                                   
+  3  DFSMSdss Execute Statement                                           
+  4  ICKDSF Execute Statement                                             
+  5  Data Set Print Execute Statement                                     
+  6  IDCAMS Execute Statement                                             
+  X  Exit                                                                 
+                                                                          
+
+
+------------------------------------------------------------------------------
+                            USER MODE ENTRY PANEL                             
+Command ===>                                                                  
+                                                                              
+Specify the following:                                                        
+                                                                              
+  User Mode  . . 2      (To specify your choice of session, type in a:        
+                                                                              
+                           1 For an End User (EU)                             
+                           2 For a Storage Administrator (SA)                 
+                                                                              
+                         in the User Mode Field and Press Enter to            
+                         Verify Your Selection.)                              
+                                                                              
+                         Note: You must Exit and Reenter ISMF after           
+                               Changing the User Mode Field in Order          
+                               to View and Use Your Selected Session.         
+                                                                              
+
+
+TYPE 2 AND EXIT OUT THE SCREEN TILL THE MAIN ISPF THEN COME BACK
+
+
+NOW MORE OPTIONS SHOULD BE AVALIABLE
+------------------------------------------------------------------------------ 
+                 ISMF PRIMARY OPTION MENU - z/OS DFSMS V2 R4                   
+Selection or Command ===>                                                      
+                                                                               
+                                                                   More:     + 
+0  ISMF Profile              - Specify ISMF User Profile                       
+1  Data Set                  - Perform Functions Against Data Sets             
+2  Volume                    - Perform Functions Against Volumes               
+3  Management Class          - Specify Data Set Backup and Migration Criteria  
+4  Data Class                - Specify Data Set Allocation Parameters          
+5  Storage Class             - Specify Data Set Performance and Availability   
+6  Storage Group             - Specify Volume Names and Free Space Thresholds  
+7  Automatic Class Selection - Specify ACS Routines and Test Criteria          
+8  Control Data Set          - Specify System Names and Default Criteria       
+9  Aggregate Group           - Specify Data Set Recovery Parameters            
+10 Library Management        - Specify Library and Drive Configurations        
+11 Enhanced ACS Management   - Perform Enhanced Test/Configuration Management  
+C  Data Collection           - Process Data Collection Function                
+G  Report Generation         - Create Storage Management Reports               
+L  List                      - Perform Functions Against Saved ISMF Lists      
