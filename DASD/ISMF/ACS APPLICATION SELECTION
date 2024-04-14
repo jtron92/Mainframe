@@ -1,0 +1,338 @@
+OPTION 5 TO DISPLAY ACS OBJECTS INFO
+------------------------------------------------------------------------------ 
+                          ACS APPLICATION SELECTION                            
+Command ===>                                                                   
+                                                                               
+Select one of the following options:                                           
+5  1. Edit            - Edit ACS Routine source code                           
+   2. Translate       - Translate ACS Routines to ACS Object Form              
+   3. Validate        - Validate ACS Routines Against Storage Constructs       
+   4. Test            - Define/Alter Test Cases and Test ACS Routines          
+   5. Display         - Display ACS Object Information                         
+   6. Delete          - Delete an ACS Object from a Source Control Data Set    
+                                                                               
+                                                                               
+                                                                               
+If Display Option is Chosen, Specify:                                          
+                                                                               
+  CDS Name  . . 'ACTIVE'                                                       
+                               (1 to 44 Character Data Set Name or 'Active')   
+                                                                               
+
+
+
+
+
+------------------------------------------------------------------------------ 
+                              ACS OBJECT DISPLAY                               
+Command ===>                                                                   
+                                                                               
+CDS Name  : ACTIVE                                                             
+                                                                               
+ACS Rtn   Source Data Set ACS      Member    Last Trans  Last Date  Last Time  
+Type      Routine Translated from  Name      Userid      Translated Translated 
+--------  -----------------------  --------  ----------  ---------- ---------- 
+DATACLAS  VENDOR.PARMLIB           AC$STORD  A99993      2024/03/21  07:23     
+                                                                               
+                                                                               
+MGMTCLAS  -----------------------  --------  --------    ----------  -----     
+                                                                               
+                                                                               
+STORCLAS  VENDOR.PARMLIB           AC$STORC  A99993      2024/03/21  07:27     
+                                                                               
+                                                                               
+STORGRP   VENDOR.PARMLIB           AC$STORG  A99993      2024/03/21  07:23     
+
+
+
+
+
+3.4 DSN = VENDOR.PARMLIB
+
+
+------------------------------------------------------------------------------ 
+EDIT              VENDOR.PARMLIB                               Invalid command 
+Command ===> 1                                                Scroll ===> 0036 
+           Name     Prompt       Size   Created          Changed          ID   
+_________ $$$COIBM                  3  2005/12/14  2021/08/03 12:00:12  IBMUSER
+_________ AC$STORC                132  2022/01/08  2024/03/21 07:16:14  A99993 
+_________ AC$STORD                176  2022/01/08  2024/03/21 07:15:15  A99993 
+_________ AC$STORG                 58  2022/01/08  2024/03/21 07:22:42  A99993 
+_________ ALLJ2                    17  1998/08/07  2024/02/13 06:41:44  IBMUSER
+_________ ALLJ3                     7  1998/08/07  1998/08/07 12:36:39  TODD   
+_________ AUTOR00                 813  2023/09/27  2023/09/27 11:48:30  IBMUSER
+_________ BPXPRMDB                 69  2015/10/05  2024/03/07 15:31:04  IBMUSER
+_________ BPXPRMDO                 14  2021/04/06  2021/04/06 15:55:51  IBMUSER
+_________ BPXPRMMS                 16  2003/05/21  2023/05/17 11:08:58  IBMUSER
+_________ BPXPRMSI                 74  2021/03/26  2023/08/29 12:50:38  IBMUSER
+_________ BPXPRMZW                 27  2016/03/08  2023/10/05 14:40:34  A99993 
+_________ CAZCNFG0                                                             
+_________ CEAPRMVN                                                             
+_________ COFVLF00                                                             
+_________ COMMNDJ2                  1  2021/09/05  2021/09/05 11:47:13  IBMUSER
+_________ COMMNDVN                  2  1998/10/09  2017/10/21 09:02:51  IBMUSER
+ F1=Help    F2=Split   F3=Exit    F5=Rfind   F7=Up      F8=Down    F9=Swap     
+
+FILES AC$STORC, AC$STORD, AC$STORG  ARE THE STORAGE FILES
+
+
+FILE BELOW STATES DEPENDING ON THE NAMING CONVENTION OF THE FILE IT WILL APPLY THE DATACLASS TO THE FILE
+
+EDIT       VENDOR.PARMLIB(AC$STORC) - 01.15                Columns 00001 00072 
+Command ===>                                                  Scroll ===> CSR  
+****** ***************************** Top of Data ******************************
+000001 PROC 1 STORCLAS                                                         
+000002 FILTLIST ZID     INCLUDE(Z0*,Z1*,Z2*,Z3*,Z4*,Z5*,Z9*)                   
+000003 IF &DSN(1) = &ZID THEN                                                  
+000004   DO                                                                    
+000005      SELECT                                                             
+000006       WHEN (&DATACLAS = 'DUMPS')   SET &STORCLAS = 'SCDUMP'             
+000007       WHEN (&DATACLAS = 'SPDS')    SET &STORCLAS = 'SCSPDS'             
+000008       WHEN (&DATACLAS = 'SLOAD')   SET &STORCLAS = 'SCSLOAD'            
+000009       WHEN (&DATACLAS = 'SVSAM')   SET &STORCLAS = 'SCSSEQ'             
+000010       WHEN (&DATACLAS = 'SSEQ')    SET &STORCLAS = 'SCSSEQ'             
+000011       WHEN (&DATACLAS = 'ISPF')    SET &STORCLAS = 'ISPF'               
+000012       WHEN (&DATACLAS = 'SMS')     SET &STORCLAS = 'SMS'                
+000013       WHEN (&DATACLAS = 'NONSMS')  SET &STORCLAS = ''                   
+000014       OTHERWISE                                                         
+000015        DO                                                               
+000016         SET &STORCLAS = 'ZXPS'                                          
+000017         IF  &SIZE GT 300KB THEN                                         
+000018         WRITE 'ALLOCATION SIZE REDUCED - ZXP SAYS NO'                 
+000019        END                                                            
+000020      END                                                              
+000021   END                                                                 
+000022                                                                       
+000023 FILTLIST SYSDSET INCLUDE (SYS%.*)                                     
+000024                  EXCLUDE (SYS%.LIST.THAT.CAN.BE.SMS.MANAGED)          
+000025 FILTLIST DB2ARCL INCLUDE (DSNC10.DBCG.ARCLOG1.**,                     
+000026                           DSNB10.DBBG.ARCLOG1.**)                     
+000027                                                                       
+000028  IF &DSN(1) = 'ZCX' THEN                                              
+000029   DO                                                                  
+000030     IF &DSN(2) = 'VS' THEN                                            
+000031       DO                                                              
+000032         SET &STORCLAS='CXROOTSC'                                      
+000033       END                                                             
+000034   END                                                                 
+000035                                                                       
+000036  IF &DSN(1) = 'ZCX' THEN                                         
+000037   DO                                                             
+000038     IF &DSN(2) = 'FS' THEN                                       
+000039       DO                                                         
+000040         SET &STORCLAS='CXROOTSC'                                 
+000041       END                                                        
+000042   END                                                            
+000043                                                                  
+000044  IF &DSN(1) = 'DSNCC10' THEN                                     
+000045   DO                                                             
+000046     IF &DSN(2) = 'DSNDBC' THEN                                   
+000047       DO                                                         
+000048         SET &STORCLAS='DBCGSC'                                   
+000049       END                                                        
+000050     IF &DSN(2) = 'DSNDBD' THEN                                   
+000051       DO                                                         
+000052         SET &STORCLAS='DBCGSC'                                   
+000053       END                                                        
+000054   END                                                                   
+000055                                                                         
+000056  IF &DSN(1) = 'DSNCB10' THEN                                            
+000057   DO                                                                    
+000058     IF &DSN(2) = 'DSNDBC' THEN                                          
+000059       DO                                                                
+000060         SET &STORCLAS='DBBGSC'                                          
+000061       END                                                               
+000062     IF &DSN(2) = 'DSNDBD' THEN                                          
+000063       DO                                                                
+000064         SET &STORCLAS='DBBGSC'                                          
+000065       END                                                               
+000066   END                                                                   
+000067                                                                         
+000068                                                                         
+000069 SELECT                                                                  
+000070                                                                         
+000071 /**********************************************************************/
+ F1=Help      F2=Split     F3=Exit      F4=Expand    F5=Rfind     F6=Rchange   
+
+
+Command ===>                                                  Scroll ===> CSR  
+****** ***************************** Top of Data ******************************
+000001 PROC 1 DATACLAS                                                         
+000002 /*==================================================================*/  
+000003 /*20221022 RDC SPECIFY HANDLING FOR JCL3OUT AND VSAMPRNT */             
+000004 /*==================================================================*/  
+000005 /*                                                           */         
+000006 FILTLIST ZID     INCLUDE(Z0*,Z1*,Z2*,Z3*,Z4*,Z5*,Z9*)                   
+000007 /*               EXCLUDE('ZXP','ZCX','ZOS','ZWE100') */                 
+000008                                                                         
+000009 FILTLIST SPF     INCLUDE(Z*.SPF*.**,Z*.S0W1.**)                         
+000010                                                                         
+000011 FILTLIST CDMPJVM INCLUDE(Z*.JVM.**)                                     
+000012                                                                         
+000013 FILTLIST CINPUT  INCLUDE(Z*.INPUT)                                      
+000014 FILTLIST CSOURCE INCLUDE(Z*.SOURCE)                                     
+000015 FILTLIST CJCL    INCLUDE(Z*.JCL)                                        
+000016 FILTLIST CCBL    INCLUDE(Z*.CBL)                                        
+000017 FILTLIST CKEY    INCLUDE(Z*.KEYS)                                       
+000018 FILTLIST CLOAD   INCLUDE(Z*.LOAD)                                       
+000019 FILTLIST CSOUT   INCLUDE(Z*.OUTPUT)                                     
+000020 FILTLIST CSURPRI INCLUDE(Z*.SURPRISE)                                   
+000021                                                                         
+000022 FILTLIST COMPLT  INCLUDE(Z*.COMPLETE)                                   
+000023 FILTLIST CVSAM   INCLUDE(Z*.VSAM*.**)                                   
+000024 FILTLIST CDBRM   INCLUDE(Z*.DBRMLIB)                                    
+000025 FILTLIST CSSEQ   INCLUDE(Z*.SEQDS,Z*.JCL3OUT,Z*.VSAMPRNT,Z*.DB2OUT,Z*.RE
+000026                                                                         
+000027 FILTLIST CPDS    INCLUDE(Z*.**.PDS,Z*.**.PDSE)                          
+000028                                                                         
+000029 FILTLIST NONSMS  INCLUDE(Z*.NONSMS.**)                                  
+000030 FILTLIST SMS     INCLUDE(Z*.SMS.**)                                     
+000031                                                                         
+000032 IF &DSN(1) = &ZID THEN                                                  
+000033   DO                                                                    
+000034      SELECT                                                             
+000035       WHEN (&DSN = &CDMPJVM) SET &DATACLAS = 'DUMPS'                    
+000036       WHEN (&DSN = &CINPUT)  SET &DATACLAS = 'SPDS'                    
+000037       WHEN (&DSN = &CJCL  )  SET &DATACLAS = 'SPDS'                    
+000038       WHEN (&DSN = &CCBL  )  SET &DATACLAS = 'SPDS'                    
+000039       WHEN (&DSN = &CKEY  )  SET &DATACLAS = 'SPDS'                    
+000040       WHEN (&DSN = &CDBRM )  SET &DATACLAS = 'SPDS'                    
+000041       WHEN (&DSN = &CSOURCE) SET &DATACLAS = 'SPDS'                    
+000042       WHEN (&DSN = &CSOUT)   SET &DATACLAS = 'SPDS'                    
+000043       WHEN (&DSN = &CSURPRI) SET &DATACLAS = 'SPDS'                    
+000044       WHEN (&DSN = &CLOAD )  SET &DATACLAS = 'SLOAD'                   
+000045       WHEN (&DSN = &CVSAM)   SET &DATACLAS = 'SVSAM'                   
+000046       WHEN (&DSN = &CSSEQ)   SET &DATACLAS = 'SSEQ'                    
+000047       WHEN (&DSN = &COMPLT)  SET &DATACLAS = 'SSEQ'                    
+000048       WHEN (&DSN = &SPF)     SET &DATACLAS = 'ISPF'                    
+000049       WHEN (&DSN = &NONSMS)  SET &DATACLAS = 'NONSMS'                  
+000050       WHEN (&DSN = &SMS)     SET &DATACLAS = 'SMS'                     
+000051       OTHERWISE                                                        
+000052        DO                                                              
+000053         SET &DATACLAS = 'ZXPD'                                         
+000054         IF  &SIZE > 300KB THEN                                        
+000055          DO                                                           
+000056           SET &DATACLAS = 'ZXPDX'                                     
+000057           WRITE 'ALLOCATION SIZE LIMIT EXCEEDED'                      
+000058           WRITE 'ALLOCATION SIZE NEEDS TO BE REDUCED - ZXP SAYS NO'   
+000059          END                                                          
+000060        END                                                            
+000061      END                                                              
+000062   END                                                                 
+000063 IF &DSN(1) = 'DSNCC10' THEN                                           
+000064   DO                                                                  
+000065     IF &DSN(2) = 'DSNDBC' THEN                                        
+000066       DO                                                              
+000067         IF &DSN(3) = 'DSNDB01' THEN                                   
+000068           DO                                                          
+000069             SET &DATACLAS='DBCGDC'                                    
+000070           END                                                         
+000071         IF &DSN(3) = 'DSNDB06' THEN                                   
+000072           DO                                                            
+000073             SET &DATACLAS='DBCGDC'                                      
+000074           END                                                           
+000075         IF &DSN(3) = 'DSNDB07' THEN                                     
+000076           DO                                                            
+000077             SET &DATACLAS='DBCGDC'                                      
+000078           END                                                           
+000079       END                                                               
+000080     IF &DSN(2) = 'DSNDBD' THEN                                          
+000081       DO                                                                
+000082         IF &DSN(3) = 'DSNDB01' THEN                                     
+000083           DO                                                            
+000084             SET &DATACLAS='DBCGDC'                                      
+000085           END                                                           
+000086         IF &DSN(3) = 'DSNDB06' THEN                                     
+000087           DO                                                            
+000088             SET &DATACLAS='DBCGDC'                                      
+000089          END                                                            
+000090         IF &DSN(3) = 'DSNDB07' THEN                                 
+000091           DO                                                        
+000092             SET &DATACLAS='DBCGDC'                                  
+000093          END                                                        
+000094      END                                                            
+000095 IF &DSN(1) = 'DSNCC10' THEN                                         
+000096   DO                                                                
+000097     IF &DSN(2) = 'DSNDBC' THEN                                      
+000098       DO                                                            
+000099         IF &DSN(3) = 'DSNDB01' THEN                                 
+000100           DO                                                        
+000101             SET &DATACLAS='DBCGDC'                                  
+000102           END                                                       
+000103         IF &DSN(3) = 'DSNDB06' THEN                                 
+000104           DO                                                        
+000105             SET &DATACLAS='DBCGDC'                                  
+000106           END                                                       
+000107         IF &DSN(3) = 'DSNDB07' THEN                                 
+000108           DO                                                     
+000109             SET &DATACLAS='DBCGDC'                               
+000110           END                                                    
+000111       END                                                        
+000112     IF &DSN(2) = 'DSNDBD' THEN                                   
+000113       DO                                                         
+000114         IF &DSN(3) = 'DSNDB01' THEN                              
+000115           DO                                                     
+000116             SET &DATACLAS='DBCGDC'                               
+000117           END                                                    
+000118         IF &DSN(3) = 'DSNDB06' THEN                              
+000119           DO                                                     
+000120             SET &DATACLAS='DBCGDC'                               
+000121          END                                                     
+000122         IF &DSN(3) = 'DSNDB07' THEN                              
+000123           DO                                                     
+000124             SET &DATACLAS='DBCGDC'                               
+000125          END                                                     
+000126      END                                                   
+000127 IF &DSN(1) = 'DSNCB10' THEN                                
+000128   DO                                                       
+000129     IF &DSN(2) = 'DSNDBC' THEN                             
+000130       DO                                                   
+000131         IF &DSN(3) = 'DSNDB01' THEN                        
+000132           DO                                               
+000133             SET &DATACLAS='DBBGDC'                         
+000134           END                                              
+000135         IF &DSN(3) = 'DSNDB06' THEN                        
+000136           DO                                               
+000137             SET &DATACLAS='DBBGDC'                         
+000138           END                                              
+000139         IF &DSN(3) = 'DSNDB07' THEN                        
+000140           DO                                               
+000141             SET &DATACLAS='DBBGDC'                         
+000142           END                                              
+000143       END                                                  
+000144     IF &DSN(2) = 'DSNDBD' THEN                             
+000145       DO                                                   
+000146         IF &DSN(3) = 'DSNDB01' THEN                        
+000147           DO                                               
+000148             SET &DATACLAS='DBBGDC'                         
+000149           END                                              
+000150         IF &DSN(3) = 'DSNDB06' THEN                        
+000151           DO                                               
+000152             SET &DATACLAS='DBBGDC'                         
+000153          END                                               
+000154         IF &DSN(3) = 'DSNDB07' THEN                        
+000155           DO                                               
+000156             SET &DATACLAS='DBBGDC'                         
+000157          END                                               
+000158      END                                                   
+000159 IF &DSN(1) = 'ZCX' THEN                                    
+000160   DO                                                       
+000161     IF &DSN(2) = 'VS' THEN                                 
+000162       DO                                                              
+000163             SET &DATACLAS='CXDC'                                      
+000164           END                                                         
+000165 IF &DSN(2) = 'ZCX' THEN                                               
+000166           DO                                                          
+000167         IF &DSN(3) = 'FS' THEN                                        
+000168           DO                                                          
+000169             SET &DATACLAS='CXDC'                                      
+000170           END                                                         
+000171       END                                                             
+000172   END                                                                 
+000173 END                                       /* DATACLASS END  */        
+000174 END                                       /* DATACLASS END  */        
+000175 END                                       /* DATACLASS END  */        
+000176 END                                       /* DATACLASS END  */        
+****** **************************** Bottom of Data **************************
+
+
