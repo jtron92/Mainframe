@@ -1,0 +1,4 @@
+IEHINITT - This utility is used for initializing disk volumes. Initialization prepares a volume to receive data by setting up the necessary control structures on the disk. It's commonly used when setting up a new disk or re-initializing an existing one to clear all stored data and prepare it for new use.
+
+IEHPROGM - Used for maintaining catalog and volume information. It can modify catalog entries, delete them, or update volume serial numbers, among other tasks. This utility is key for managing how datasets are cataloged and accessed within the mainframe storage environment.
+
