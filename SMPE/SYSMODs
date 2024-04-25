@@ -14,3 +14,36 @@ Temporary fixes to a problem related to an FMID
 Customer software modification related to an FMID
 
 
+Installing SYSMODS
+The primary purpose of SMP/E is installing SYSMODs.
+There are three steps in installing a SYSMOD:
+
+Sequence Command Overview
+
+1 RECEIVE
+
+allows you to take a SYSMOD that is outside
+of SMP/E and stage it into the SMP/E
+library domain, which begins to construct
+the CSI entries that describe them. This
+staging allows them to be queried for input
+into later processes
+
+2 APPLY
+
+Sequence Command Overview
+specifies which of the received SYSMODs are
+to be selected for installation in the
+target libraries. SMP/E also ensures that
+all other required SYSMODs (prerequisites)
+have been installed or are being installed
+concurrently as well as in the proper sequence
+
+3 ACCEPT
+
+When a SYSMOD is installed into its target
+library, and you have tested it, you then
+accept the change through the ACCEPT
+command. This step takes the selected
+SYSMODs and installs them into the
+associated distribution libraries
