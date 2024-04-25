@@ -384,7 +384,7 @@ Command ===>                                                  Scroll ===> CS
 000365 /*                                                                      
 ****** **************************** Bottom of Data ****************************
 
-CHANGE &HLQ& 'Z38515' ALL changes all keywords &HLQ& to my userid Z38515
+CHANGE &HLQ& 'Z38515.SMP' ALL changes all keywords &HLQ& to my userid Z38515
 CHANGE &VOLUME& 'VPWRKA' ALL 
 Change &UNIT& '3390' ALL 
 
@@ -395,7 +395,7 @@ ALL CLUSTERS IN STEP DEFZONES CYL WAS CHANGE TO TRACKS(2 1)  AS WELL
 //GIMZPOOL DD DSN=SYS1.MACLIB(GIMZPOOL),DISP=SHR    
 //SYSIN    DD *,SYMBOLS=CNVTSYS                     
   DEFINE CLUSTER(                            +      
-           NAME(Z38515.GLOBAL.CSI)           +      
+           NAME(Z38515.SMP.GLOBAL.CSI)           +      
            VOLUMES(VPWRKA)                   +      
            CYLINDERS(100 10)                 +      
            FREESPACE(10 5)                   +      
@@ -404,16 +404,16 @@ ALL CLUSTERS IN STEP DEFZONES CYL WAS CHANGE TO TRACKS(2 1)  AS WELL
            SHAREOPTIONS(2 3)                 +      
                )                             +      
       DATA (                                 +      
-           NAME(Z38515.GLOBAL.CSI.DATA)      +      
+           NAME(Z38515.SMP.GLOBAL.CSI.DATA)      +      
            CONTROLINTERVALSIZE(8192)         +      
            )                                 +      
-     INDEX (NAME(Z38515.GLOBAL.CSI.INDEX)    +      
+     INDEX (NAME(Z38515.SMP.GLOBAL.CSI.INDEX)    +      
            CONTROLINTERVALSIZE(4096)         +        
            )                                          
   REPRO INFILE(GIMZPOOL)                     +        
-           OUTDATASET(Z38515.GLOBAL.CSI)              
+           OUTDATASET(Z38515.SMP.GLOBAL.CSI)              
   DEFINE CLUSTER(                            +        
-           NAME(Z38515.TARGET.CSI)           +        
+           NAME(Z38515.SMP.TARGET.CSI)           +        
            VOLUMES(VPWRKA)                   +        
            CYLINDERS(100 10)                 +        
            FREESPACE(10 5)                   +        
@@ -422,16 +422,16 @@ ALL CLUSTERS IN STEP DEFZONES CYL WAS CHANGE TO TRACKS(2 1)  AS WELL
            SHAREOPTIONS(2 3)                 +        
                )                             +        
       DATA (                                 +        
-           NAME(Z38515.TARGET.CSI.DATA)      +        
+           NAME(Z38515.SMP.TARGET.CSI.DATA)      +        
            CONTROLINTERVALSIZE(8192)         +        
            )                                 +        
-     INDEX (NAME(Z38515.TARGET.CSI.INDEX)    +        
+     INDEX (NAME(Z38515.SMP.TARGET.CSI.INDEX)    +        
             CONTROLINTERVALSIZE(4096)         +       
             )                                         
    REPRO INFILE(GIMZPOOL)                     +       
-            OUTDATASET(Z38515.TARGET.CSI)             
+            OUTDATASET(Z38515.SMP.TARGET.CSI)             
    DEFINE CLUSTER(                            +       
-            NAME(Z38515.DLIB.CSI)             +       
+            NAME(Z38515.SMP.DLIB.CSI)             +       
             VOLUMES(VPWRKA)                   +       
             CYLINDERS(100 10)                 +       
             FREESPACE(10 5)                   +       
@@ -440,14 +440,14 @@ ALL CLUSTERS IN STEP DEFZONES CYL WAS CHANGE TO TRACKS(2 1)  AS WELL
             SHAREOPTIONS(2 3)                 +       
                 )                             +       
        DATA (                                 +       
-            NAME(Z38515.DLIB.CSI.DATA)        +       
+            NAME(Z38515.SMP.DLIB.CSI.DATA)        +       
             CONTROLINTERVALSIZE(8192)         +       
             )                                 +       
-      INDEX (NAME(Z38515.DLIB.CSI.INDEX)      +       
+      INDEX (NAME(Z38515.SMP.DLIB.CSI.INDEX)      +       
             CONTROLINTERVALSIZE(4096)         +   
             )                                     
    REPRO INFILE(GIMZPOOL)                     +   
-            OUTDATASET(Z38515.DLIB.CSI)           
+            OUTDATASET(Z38515.SMP.DLIB.CSI)           
  /*                                               
 
 CHANGE CYL TO TRACKS AND IF ITS A PO CHANGE TO SPACE TO SPACE=(TRK,(1,1,1)) 
