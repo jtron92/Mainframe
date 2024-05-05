@@ -1,0 +1,71 @@
+Command Short-version
+LISTDSD   LD
+LISTUSER  LU
+ADDSD     AD
+ADDUSER   AU
+ALTDSD    ALD
+DELDSD    DD
+DELUSER   DU
+PERMIT    PE
+
+
+listdsd da('YOURZID.**') 
+
+ ld da('YOURZID.secret') all .
+
+AD 'Z38515.MAGIC' GENERIC UACC(UPDATE)    
+AD 'Z38515.MAGIC' GENERIC UACC(READ)    
+
+LD DA ('Z38515.MAGIC') ALL  below: 
+
+
+
+-----  -------- ----------------   -------   -----          
+ 00    Z38515         UPDATE         NO      NO             
+                                                            
+AUDITING                                                    
+--------                                                    
+FAILURES(READ)                                              
+                                                            
+NOTIFY                                                      
+--------                                                    
+NO USER TO BE NOTIFIED                                      
+                                                            
+YOUR ACCESS  CREATION GROUP  DATASET TYPE                   
+-----------  --------------  ------------                   
+   ALTER        STUDENTU       NON-VSAM                     
+                                                            
+NO INSTALLATION DATA                                        
+                                                            
+              SECURITY LEVEL                                
+------------------------------------------                  
+NO SECURITY LEVEL                                           
+                                                            
+CATEGORIES                                                  
+----------                                                  
+***                                                         
+
+NO CATEGORIES                                                                 
+                                                                              
+SECLABEL                                                                      
+--------                                                                      
+NO SECLABEL                                                                   
+                                                                              
+CREATION DATE  LAST REFERENCE DATE  LAST CHANGE DATE                          
+(DAY) (YEAR)        (DAY) (YEAR)      (DAY) (YEAR)                            
+-------------  -------------------  ----------------                          
+ 125    24      NOT APPLICABLE FOR GENERIC PROFILE                            
+                                                                              
+ALTER COUNT  CONTROL COUNT  UPDATE COUNT  READ COUNT                          
+-----------  -------------  ------------  ----------                          
+NOT APPLICABLE FOR GENERIC PROFILE                                            
+                                                                              
+   ID     ACCESS                                                              
+--------  -------                                                             
+NO ENTRIES IN STANDARD ACCESS LIST                                            
+                                                                              
+   ID    ACCESS   CLASS                ENTITY NAME                            
+-------- ------- -------- ----------------------------------------------------
+NO ENTRIES IN CONDITIONAL ACCESS LIST                                         
+***                                                                           
+
