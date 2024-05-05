@@ -18,6 +18,27 @@ AD 'Z38515.MAGIC' GENERIC UACC(READ)
 
 LD DA ('Z38515.MAGIC') ALL  below: 
 
+------------------------------------------------------------------------------ 
+                              ISPF Command Shell                               
+Enter TSO or Workstation commands below:                                       
+                                                                               
+===> LD Da ('Z38515.MAGIC') ALL                                                
+                                                                               
+                                                                               
+                                                                               
+Place cursor on choice and press enter to Retrieve command                     
+                                                                               
+=> LD Da ('Z38515.MAGIC') ALL                                                  
+=> AD 'Z38515.MAGIC' GENERIC UACC(UPDATE)                                      
+=> LD DS ('Z38515.MAGIC') ALL                                                  
+=> PE IBM0001 'Z38515.MAGIC' GENERIC UACC(UPDATE)                              
+=> ALTDSD 'Z38515.SECRET' GENERIC UACC(UPDATE)                                 
+=> LD DS ('Z38515.SECRET') ALL                                                 
+=> AD 'Z38515.SECRET' GENERIC UACC(UPDATE)                                     
+=> LD DA('Z38515.SECRET') ALL                                                  
+=> AD 'Z38515.SECRET' GENERIC UACC(READ)                                       
+=> ADDSD 'Z38515.SECRET' GENERIC UACC(READ)                                    
+
 
 
 -----  -------- ----------------   -------   -----          
