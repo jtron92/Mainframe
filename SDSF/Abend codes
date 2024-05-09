@@ -2,3 +2,30 @@ here will be an abend message code associated with the error. This will begin wi
 
 If the system abend code is unfamiliar to you, consult the IBM System Abend Codes manual, which will explain the problem and suggest the resolution. A user abend code relates to a specific program or component so you would need to access documentation for that item that explains what the specified error means.
 
+
+---***************************
+D37 Abend - indicates that an output data set specified in the JCL used all of its primary space allocation
+but more was required, and no secondary allocation was coded.
+
+This problem could be resolved by specifiying a larger primary quantity or adding a secondary quantity to the SPACE parameter
+
+----***************
+
+
+
+E37 abend - indicates that either ther was an insuffiecent number of volumes specified for a data set
+more data needed to be written to it.
+
+
+______________________
+
+
+B14 abend - indicates that there is a space problem relating to a partitioned data set's directory
+
+________________________
+
+806 abend - occurs if a program specified in your JCL cannot be located.
+
+_________________________
+
+s222 - operator cancelled 
