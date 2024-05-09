@@ -26,6 +26,8 @@ ALLOC DA(Z38515.SERVERS) DSORG(PS) LRECL(80) BLKSIZE(800) UNIT(SYSDA) NEW TRACKS
 
 correct syntax of the TSO command to allocate a new PDS
 
+
+
 User ID: IBM
 
 Data set name: BUILDS.SERVERS
@@ -39,3 +41,15 @@ Data control block size: 300
 2 directory block
 
 Fixed block records     
+
+
+***
+
+H ALL - shows all jobs in the held outout queue 
+ -------------------------------------------------------------------------------
+ SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-1 (1)            
+ COMMAND INPUT ===> H ALL                                      SCROLL ===> CSR  
+ PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=JOBNAME/D  SYSNAME=                   
+ NP   JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status      
+      Z38515   TSU03168 Z38515     15 EXECUTION          S0W1  S0W1             
+                                                                        
