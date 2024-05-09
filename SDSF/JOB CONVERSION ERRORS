@@ -1,0 +1,25 @@
+         IEFC653I SUBSTITUTION JCL - 1,'JORGE.CINTRON',MSGCLASS=H,MSGLEVEL=(1,1),NOTIFY=Z38515,CLASS=A 
+       2 //11       EXEC PGM=IEFBR14                                           
+       3 //DD1      DD DSN=&SYSUID..RAW1,                                      
+         //            DISP=(OLD,CATLG,DELETE),,                               
+         //            UNIT=SYSDA,                                             
+         //            SPACE=(TRK,(8,10),RLSE),                                
+         //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)            
+         IEFC653I SUBSTITUTION JCL - DSN=Z38515.RAW1,DISP=(OLD,CATLG,DELETE),,UNIT=SYSDA,SPACE=(TRK,(8,10),RLSE),
+         DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)                          
+       4 //SYSOUT   DD SYSOUT=*                                                
+STMT NO. MESSAGE                                                               
+       2 IEFC662I INVALID LABEL                                                
+       3 IEFC006I POSITIONAL PARAMETERS MUST BE SPECIFIED BEFORE KEYWORD PARAMEMTERS
+******************************* BOTTOM OF DATA ********************************
+
+IN THE JES SYSTEM MESSAGES , WILL BE THE MESSAGES WHICH INDICATE THE PROBLEM.
+
+THE STATEMENT NUMBERS REFERENCED, IN THIS CASE IS 2 AND 3, RELATED TO THE NUMBER OF THE JCL STATEMENT AS
+IT APPEARS IN THE CONVERSION OUTPUT, NOT THE ACTUAL LINE IN THE JCL. THE MESSAGE THAT FOLLOWS RELATES TO THE 
+ENTIRE STATEMENT, AND NOT JUST A SINGLE LINE. 
+
+YOU CAN SEE HERE THAT THE STATEMENT 3 SPANS SEVERAL LINES SO THAT THE ERROR COULD RELATE TO ANYTHING ON ANY OF THOS LINES
+
+
+                                                                               
