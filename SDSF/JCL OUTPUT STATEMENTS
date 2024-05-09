@@ -1,0 +1,60 @@
+// - This indicates a JCL statement directly from the job submitted
+
+XX - This indicates it is JCL that has been obtained from a procedure or INCLUDE statement
+
+++ - This indicates it is JCL that has been obtained from an in-stream procedure
+
+X/ or +/- These symbols indicate an override has been coded for this statement in the JCL, for an in-stream or catalogued procedure
+
+
+
+1 //MONDAY01 JOB 1,'JORGE.CINTRON',                                     //  <-- This indicates a JCL statement directly from the job submitted
+  //             MSGCLASS=H,                                            
+  //             MSGLEVEL=(1,1),                                        
+  //             NOTIFY=&SYSUID,                                        
+  //             CLASS=A                                                
+  IEFC653I SUBSTITUTION JCL - 1,'JORGE.CINTRON',MSGCLASS=H,MSGLEVEL=(1,1
+2 //STEP01   EXEC PGM=IDCAMS                                            
+3 //SYSIN    DD *                                                       
+4 //SYSPRINT DD SYSOUT=*                                                
+5 //SYSOUT   DD SYSOUT=*                                                
+6 //AMSDUMP  DD SYSOUT=*                                                
+7 //PROC100  PROC                                                       
+  //STEP02   EXEC PGM=IEFBR14                                           
+  //DD1      DD DSN=Z38515.PLATE.GOAT(+1),                    
+  //            DISP=(NEW,CATLG,DELETE),                      
+  //            UNIT=SYSDA,                                   
+  //            SPACE=(TRK,(8,10),RLSE),                      
+  //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)  
+  //SYSOUT   DD SYSOUT=*                                      
+  //PROC100  PEND                                             
+8 //STEP03   EXEC PROC100                                     // - This indicates a JCL statement directly from the job submitted
+9 ++PROC100  PROC                                             
+10 ++STEP02   EXEC PGM=IEFBR14                                 ++ - This indicates it is JCL that has been obtained from an in-stream procedure
+11 ++DD1      DD DSN=Z38515.PLATE.GOAT(+1),                    
+   ++            DISP=(NEW,CATLG,DELETE),                      
+   ++            UNIT=SYSDA,                                   
+   ++            SPACE=(TRK,(8,10),RLSE),                      
+   ++            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)  
+12 ++SYSOUT   DD SYSOUT=*                                      ++ - This indicates it is JCL that has been obtained from an in-stream procedure
+13 //STEP04   EXEC PGM=IEBGENER                                
+
+
+
+
+1 //JCLRUN91 JOB (ACCT),'JORGE.CINTRON',MSGLEVEL=(1,1),CLASS=A,         
+  //             MSGCLASS=H,NOTIFY=&SYSUID                              
+  IEFC653I SUBSTITUTION JCL - (ACCT),'JORGE.CINTRON',MSGLEVEL=(1,1),CLAS
+2 //PROCLOC  JCLLIB ORDER=Z38515.ALPHA                                  
+3 //STEP01   EXEC DRAKE2                                                
+4 XXPROC100 PROC                                                        XX - This indicates it is JCL that has been obtained from a procedure or INCLUDE statement
+5 XXSTEP01  EXEC PGM=IEFBR14                                            
+6 XXDD1     DD DSN=&SYSUID..WALLS,                                      
+  XX           DISP=(OLD,CATLG,DELETE),                                 
+  XX           UNIT=SYSDA,                                              
+  XX           SPACE=(TRK,(8,10),RLSE),                                 
+  XX           DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)             
+  IEFC653I SUBSTITUTION JCL - DSN=Z38515.WALLS,DISP=(OLD,CATLG,DELETE),U
+  DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)                          
+7 //SYSPRINT DD SYSOUT=*                                                
+
