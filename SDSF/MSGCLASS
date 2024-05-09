@@ -1,0 +1,6 @@
+If the SDSF log indicates your job has completed and you cant find the job sysout
+check the msgclass parameter value to ensure it is a valid class. For most companies 
+MSGCLASS=Z is a dummy class and the sysout will be automatically purged
+
+MSGCLASS=H held output 
+
