@@ -1,0 +1,36 @@
+TYPE LOG IN SDSF
+
+This log is useful tool to track your job entering the system, its activity, and completion.
+
+You can see the steps , the return codes 
+
+
+SDSF SYSLOG      8.152 S0W1 S0W1 05/09/2024 0W         5,947   COLUMNS 52- 131 
+ COMMAND INPUT ===>                                            SCROLL ===> CSR  
+0290  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.                   
+0090  ICH70001I Z38515   LAST ACCESS AT 10:54:49 ON THURSDAY, MAY 9, 2024 
+0090  $HASP373 JCLRUN01 STARTED - INIT 1    - CLASS A        - SYS S0W1   
+0290  -                                      -----TIMINGS (MINS.)------   
+                         -----PAGING COUNTS----                           
+0290  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK   
+         SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS                           
+0290  -STEP01               00     47      5       .00       .00     .0   
+            8  BATCH        0     0     0     0                           
+0290  -STEP03   STEP02      00      2      0       .00       .00     .0   
+               BATCH        0     0     0     0                                 
+0290  -STEP04               00     25      3       .00       .00     .0         
+            6  BATCH        0     0     0     0                                 
+0290  -STEP05               00     33      3       .00       .00     .0         
+            9  BATCH        0     0     0     0                                 
+0290  -STEP06               00      5      1       .00       .00     .0         
+               BATCH        0     0     0     0                                 
+0290  -STEP07               00     39      4       .00       .00     .0         
+            5  BATCH        0     0     0     0                                 
+0290  -JCLRUN01 ENDED.  NAME-JORGE.CINTRON        TOTAL TCB CPU TIME=      .00  
+       TOTAL ELAPSED TIME=    .0                                                
+0090  $HASP395 JCLRUN01 ENDED - RC=0000                                         
+0090  $HASP309 INIT 1    INACTIVE ******** C=KAB74                              
+0290  SE '11.16.32 JOB03186 $HASP165 JCLRUN01 ENDED AT SVSCJES2 MAXCC=0000',    
+      LOGON,USER=(Z38515)                                                       
+0290  IEA630I  OPERATOR Z38515$  NOW ACTIVE,   SYSTEM=S0W1    , LU=TCP00548     
+******************************** BOTTOM OF DATA ********************************
