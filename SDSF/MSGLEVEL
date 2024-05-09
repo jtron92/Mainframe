@@ -1,0 +1,91 @@
+This contains the parameters for msglevel=(1,1) which shows all the job sysout 
+
+
+           4 SYSOUT SPOOL KBYTES                                               
+        0.00 MINUTES EXECUTION TIME                                            
+       1 //MONDAY01 JOB 1,'JORGE.CINTRON',                                     
+         //             MSGCLASS=H,                                            
+         //             MSGLEVEL=(1,1),                                        
+         //             NOTIFY=&SYSUID,                                        
+         //             CLASS=A                                                
+         IEFC653I SUBSTITUTION JCL - 1,'JORGE.CINTRON',MSGCLASS=H,MSGLEVEL=(1,1
+       2 //S1       EXEC PGM=IEFBR14                                           
+       3 //DD1      DD DSN=&SYSUID..RAW1,                                      
+         //            DISP=(NEW,CATLG,DELETE),                                
+         //            UNIT=SYSDA,                                             
+         //            SPACE=(TRK,(8,10),RLSE),                                
+         //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)            
+         IEFC653I SUBSTITUTION JCL - DSN=Z38515.RAW1,DISP=(NEW,CATLG,DELETE),UN
+         DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)                          
+
+          STMT NO. MESSAGE                                                         
+-                                                                         
+        3 IGD01007I ALLOCATION SIZE LIMIT EXCEEDED (>300KB)               
+        3 IGD01007I ALLOCATION SIZE NEEDS TO BE REDUCED - ZXP SAYS NO     
+        3 IGD01008I ALLOCATION SIZE REDUCED - ZXP SAYS NO                 
+ICH70001I Z38515   LAST ACCESS AT 11:16:30 ON THURSDAY, MAY 9, 2024       
+IEFA111I MONDAY01 IS USING THE FOLLOWING JOB RELATED SETTINGS:            
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB            
+IEF236I ALLOC. FOR MONDAY01 S1                                            
+IGD101I SMS ALLOCATED TO DDNAME (DD1     )                                
+        DSN (Z38515.RAW1                                 )                
+        STORCLAS (ZXPS) MGMTCLAS (        ) DATACLAS (ZXPDX)              
+        VOL SER NOS= ZXPM07                                               
+IEF237I JES2 ALLOCATED TO SYSOUT                                          
+IEF142I MONDAY01 S1 - STEP WAS EXECUTED - COND CODE 0000                  
+IGD104I Z38515.RAW1                                  RETAINED,  DDNAME=DD1
+IEF285I   Z38515.MONDAY01.JOB03202.D0000101.?          SYSOUT             
+
+IEF237I JES2 ALLOCATED TO SYSOUT                                                
+IEF142I MONDAY01 S1 - STEP WAS EXECUTED - COND CODE 0000                        
+IGD104I Z38515.RAW1                                  RETAINED,  DDNAME=DD1      
+IEF285I   Z38515.MONDAY01.JOB03202.D0000101.?          SYSOUT                   
+IEF373I STEP/S1      /START 2024130.1129                                        
+IEF032I STEP/S1      /STOP  2024130.1129                                        
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:     4K  SYS:   224K  EXT:        0K  SYS:    11300K               
+        ATB- REAL:                  1044K  SLOTS:                     0K        
+             VIRT- ALLOC:      11M SHRD:       0M                               
+IEF375I  JOB/MONDAY01/START 2024130.1129                                        
+IEF033I  JOB/MONDAY01/STOP  2024130.1129                                        
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+******************************** BOTTOM OF DATA ********************************
+
+
+This contains the parameters for msglevel=(2,1) which shows only the jcl statements and jes control statements , procedure statements 
+not shown
+
+           4 SYSOUT SPOOL KBYTES                                         
+        0.00 MINUTES EXECUTION TIME                                      
+       1 //MONDAY01 JOB 1,'JORGE.CINTRON',                               
+         //             MSGCLASS=H,                                      
+         //             MSGLEVEL=(2,1),                                  
+         //             NOTIFY=&SYSUID,                                  
+         //             CLASS=A                                          
+       2 //S1       EXEC PGM=IEFBR14                                     
+       3 //DD1      DD DSN=&SYSUID..RAW1,                                
+         //            DISP=(OLD,CATLG,DELETE),                          
+         //            UNIT=SYSDA,                                       
+         //            SPACE=(TRK,(8,10),RLSE),                          
+         //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)      
+       4 //SYSOUT   DD SYSOUT=*                                          
+CH70001I Z38515   LAST ACCESS AT 11:29:38 ON THURSDAY, MAY 9, 2024       
+EFA111I MONDAY01 IS USING THE FOLLOWING JOB RELATED SETTINGS:            
+
+IEF236I ALLOC. FOR MONDAY01 S1                                                  
+IGD103I SMS ALLOCATED TO DDNAME DD1                                             
+IEF237I JES2 ALLOCATED TO SYSOUT                                                
+IEF142I MONDAY01 S1 - STEP WAS EXECUTED - COND CODE 0000                        
+IGD104I Z38515.RAW1                                  RETAINED,  DDNAME=DD1      
+IEF285I   Z38515.MONDAY01.JOB03203.D0000101.?          SYSOUT                   
+IEF373I STEP/S1      /START 2024130.1130                                        
+IEF032I STEP/S1      /STOP  2024130.1130                                        
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:     4K  SYS:   224K  EXT:        0K  SYS:    11300K               
+        ATB- REAL:                  1044K  SLOTS:                     0K        
+             VIRT- ALLOC:      11M SHRD:       0M                               
+IEF375I  JOB/MONDAY01/START 2024130.1130                                        
+IEF033I  JOB/MONDAY01/STOP  2024130.1130                                        
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+******************************** BOTTOM OF DATA ********************************
+
