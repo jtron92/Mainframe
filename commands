@@ -78,5 +78,8 @@ sort %        to view percentage of usage of a file
 append 'dsn'   adds other dsn with the same values 
 exlude 'dsn'   excludes values from other dsns , only shows what you want to see
 
+*** SDSF
 
 H ALL - in sdsf this shows all held output queue
+SET DISPLAY ON - SHOWS PREFIX = , DEST = , OWNER=* , SYSNAME = 
+
