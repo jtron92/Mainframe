@@ -79,4 +79,4 @@ append 'dsn'   adds other dsn with the same values
 exlude 'dsn'   excludes values from other dsns , only shows what you want to see
 
 
-
+H ALL - in sdsf this shows all held output queue
