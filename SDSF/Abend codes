@@ -29,3 +29,9 @@ ________________________
 _________________________
 
 s222 - operator cancelled 
+
+__________________________
+
+
+System abends will occur if an operator cancels a job, if there is a data exception, or there is a space issue with a data set.
+
