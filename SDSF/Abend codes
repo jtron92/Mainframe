@@ -1,0 +1,4 @@
+here will be an abend message code associated with the error. This will begin with an S - system-related abend, or U - user abend.
+
+If the system abend code is unfamiliar to you, consult the IBM System Abend Codes manual, which will explain the problem and suggest the resolution. A user abend code relates to a specific program or component so you would need to access documentation for that item that explains what the specified error means.
+
