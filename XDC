@@ -1,39 +1,41 @@
 IN CASE NEED TO COPY THE OUTPUT FOR LOGGING AND RESEARCH USE XDC AND MAKE A NEW FILE WITH THE DATA IN IT
- .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  
-   Display  Filter  View  Print  Options  Search  Help                      
- ---------------------------------------------------------------------------
- SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-10 (10)      
- COMMAND INPUT ===>                                            SCROLL ===> P
- NP   JOBNAME  JobID    Owner    Prty Queue      C  Pos  SAff  ASys Status  
-      MATEDK   TSU03823 MATEDK     15 EXECUTION          MATE  MATE         
-      MATEDK01 JOB03809 MATEDK      1 PRINT      A     2                    
-      MATEDK01 JOB03812 MATEDK      1 PRINT      A     5                    
-      MATEDK01 JOB03813 MATEDK      1 PRINT      A     6                    
-      MATEDK01 JOB03814 MATEDK      1 PRINT      A     7                    
-      MATEDK01 JOB03815 MATEDK      1 PRINT      A     8                    
-      MATEDK01 JOB03816 MATEDK      1 PRINT      A     9                    
- XDC  MATEDK01 JOB03818 MATEDK      1 PRINT      A    11                    
-
+------------------------------------------------------------------------------
+SDSF STATUS DISPLAY ALL CLASSES                                               
+COMMAND INPUT ===>                                            SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=JOBNAME/D  SYSNAME=                  
+NP   JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status     
+     Z38515A  JOB06042 Z38515      1 PRINT      A   531                       
+     Z38515A  JOB06044 Z38515      1 PRINT      A   532                       
+     Z38515A  JOB06045 Z38515      1 PRINT      A   533                       
+     Z38515A  JOB06046 Z38515      1 PRINT      A   534                       
+     Z38515A  JOB06048 Z38515      1 PRINT      A   535                       
+     Z38515A  JOB06049 Z38515      1 PRINT      A   536                       
+     Z38515A  JOB06050 Z38515      1 PRINT      A   537                       
+XDC  Z38515A  JOB06051 Z38515      1 PRINT      A   538                       
 COMMAND INPUT ===>                                            SCROLL ===> PA
                                                                             
                                                                             
-Data set name  ===> 'MATEDK.FOLDER59'                                       
-Member to use  ===>  XDC                                                    
-Disposition    ===> NEW        (OLD, NEW, SHR, MOD)                         
-                                                                            
-Management class     ===>           (Blank for default management class)    
-Storage class        ===>           (Blank for default storage class)       
-  Volume serial      ===> DEVHD3    (Blank for authorized default volume)   
-  Device type        ===>           (Generic unit or device address)        
-Data class           ===>           (Blank for default data class)          
-  Space units        ===> TRKS      (BLKS, TRKS, CYLS, BY, KB, or MB)       
-  Primary quantity   ===> 8         (In above units)                        
-  Secondary quantity ===> 10        (In above units)                        
-  Directory blocks   ===>           (Zero for sequential data set)          
-  Record format      ===> FB                                                
-  Record length      ===> 80                                                
-  Block size         ===> 800                                               
-
+Z38515A  JOB06051           SDSF Open Print Data Set                           
+COMMAND INPUT ===>                                            SCROLL ===> CSR  
+                                                                               
+                                                                               
+Data set name  ===> 'Z38515.ALPHA'                                             
+Member to use  ===> REPORT                                                     
+Disposition    ===> SHR        (OLD, NEW, SHR, MOD)                            
+                                                                               
+Management class     ===>           (Blank for default management class)       
+Storage class        ===>           (Blank for default storage class)          
+  Volume serial      ===>           (Blank for authorized default volume)      
+  Device type        ===>           (Generic unit or device address)           
+Data class           ===>           (Blank for default data class)             
+  Space units        ===> BLKS      (BLKS, TRKS, CYLS, BY, KB, or MB)          
+  Primary quantity   ===> 500       (In above units)                           
+  Secondary quantity ===> 500       (In above units)                           
+  Directory blocks   ===>           (Zero for sequential data set)             
+  Record format      ===> VBA                                                  
+  Record length      ===> 240                                                  
+  Block size         ===> 0                                                    
+Data set name type   ===>           (LIBRARY, blank, ... See Help for more)    
 
 
 EDIT       MATEDK.TESTXDC9                                 Columns 00009 00080 
@@ -55,4 +57,45 @@ Command ===>                                                  Scroll ===> CSR
 000012 9 JOB03818  IEF404I MATEDK01 - ENDED - TIME=17.59.49                    
 000013 9 JOB03818  -MATEDK01 ENDED.  NAME-                     TOTAL TCB CPU TI
 000014 9 JOB03818  $HASP395 MATEDK01 ENDED                                     
+
+
+------------------------------------------------------------------------------ 
+EDIT              Z38515.ALPHA                          Row 0000001 of 0000011 
+Command ===>                                                  Scroll ===> 0036 
+           Name     Prompt       Size   Created          Changed          ID   
+_________ CBL0001                  74  2024/04/12  2024/04/12 12:25:44  Z38515 
+_________ COBRUN                   11  2023/10/27  2024/05/07 17:50:26  Z38515 
+_________ COMPILER                  5  2023/10/27  2024/05/07 17:48:15  Z38515 
+_________ COMPL2                    7  2024/04/01  2024/04/01 11:20:16  Z38515 
+_________ DRAKE                     7  2024/05/07  2024/05/10 16:54:06  Z38515 
+_________ DRAKE2                    8  2024/04/13  2024/05/09 17:54:02  Z38515 
+_________ FUTURE                   48  2024/05/11  2024/05/11 14:56:29  Z38515 
+_________ GO                       57  2024/04/21  2024/04/21 21:18:35  Z38515 
+_________ METRO                    13  2024/05/11  2024/05/11 14:49:23  Z38515 
+_S________ REPORT                                                               
+_________ ROSS                      7  2024/05/11  2024/05/11 14:41:38  Z38515 
+          **End**                                                              
+                                                                               
+
+------------------------------------------------------------------------------
+EDIT       Z38515.ALPHA(REPORT) - 01.00                    Columns 00001 00072
+Command ===>                                                  Scroll ===> CSR 
+****** ***************************** Top of Data *****************************
+000001 1                   J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --
+000002 0                                                                      
+000003  14.51.51 JOB06051 ---- SATURDAY,  11 MAY 2024 ----                    
+000004  14.51.51 JOB06051  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.  
+000005  14.51.52 JOB06051  ICH70001I Z38515   LAST ACCESS AT 14:51:32 ON SATUR
+000006  14.51.52 JOB06051  $HASP373 Z38515A  STARTED - INIT 1    - CLASS A    
+000007  14.51.52 JOB06051  -                                      -----TIMINGS
+000008  14.51.52 JOB06051  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB   
+000009  14.51.52 JOB06051  -STEP01               00     48      5       .00   
+000010  14.51.53 JOB06051  -STEP03   STEP02      00      2      0       .00   
+000011  14.51.53 JOB06051  -STEP04               00     29      3       .00   
+000012  14.51.54 JOB06051  -STEP05               00     37      5       .00   
+000013  14.51.55 JOB06051  -STEP06               00      5      1       .00   
+000014  14.51.55 JOB06051  -STEP07               00     39      4       .00   
+000015  14.51.55 JOB06051  -Z38515A  ENDED.  NAME-JORGE.CINTRON        TOTAL T
+000016  14.51.55 JOB06051  $HASP395 Z38515A  ENDED - RC=0000                  
+
 
