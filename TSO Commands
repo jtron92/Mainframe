@@ -64,3 +64,14 @@ LISTCAT LEVEL(USERID) SHOWS ALL DATASETS FOR THIS USER
 LISTCAT ENTRIES('Z38515.ALPHA')
 
 LISTDS ('Z38515.ALPHA') STATUS
+
+The LISTCAT command is used to list data sets, interrogate catalogs, and enable the user to list one or many data sets
+with a particular name or prefix.
+
+The LISTDS command can be used to list data set information
+
+Non-VSAM data sets and partitioned data set members can be renamed using the RENAME command.
+
+The LOGOFF command will terminate the current TSO session and free the data sets previously allocated.
+
+
