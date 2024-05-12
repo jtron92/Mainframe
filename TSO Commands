@@ -59,3 +59,4 @@ H ALL - in sdsf this shows all held output queue
 SET DISPLAY ON - SHOWS PREFIX = , DEST = , OWNER=* , SYSNAME = 
 
 
+LISTCAT LEVEL(USERID) SHOWS ALL DATASETS FOR THIS USER
