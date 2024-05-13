@@ -1,0 +1,108 @@
+****** ***************************** Top of Data ******************************
+000100 //Z38515A  JOB (ACCT),'JORGE CINTRON',                                  
+000200 //             MSGLEVEL=(1,1),                                          
+000300 //             MSGCLASS=H,                                              
+000400 //             CLASS=A,                                                 
+000500 //             NOTIFY=&SYSUID                                           
+000510 //         JCLLIB ORDER=(IGY630.SIGYPROC,Z38515.ALPHA)                  
+000520 //         SET MNAME=&SYSUID                                            
+000530 //*******************************************************************   
+000540 //* STEP01 COMPILE AND LINK EDIT THE PROGRAM                            
+000550 //*******************************************************************   
+000600 //STEP01   EXEC PROC=IGYWCL,LNGPRFX='IGY630'                            
+000700 //COBOL.SYSIN DD DSN=Z38515.ALPHA(COBOLZ),DISP=SHR                      
+000800 //LKED.SYSLMOD DD DSN=Z38515.CBLOADER(COBOLZ),DISP=SHR                  
+000810 //********************************************************************  
+000820 //* STEP02 RUN THE PROGRAM USING THE PHYSICAL FILES CUSTDDI/O           
+000830 //* CUSTDDI COPIES DATASET Z38515.MAST AND CUSTDDO CREATES A NEW COPY   
+000840 //********************************************************************  
+000900 //STEP02   EXEC PGM=COBOLZ                                             
+001000 //STEPLIB  DD DSN=Z38515.CBLOADER(COBOLZ),DISP=SHR                     
+001100 //SYSOUT   DD SYSOUT=*                                                 
+001200 //SYSPRINT DD SYSOUT=*                                                 
+001300 //CUSTDDI  DD DSN=Z38515.MAST3,DISP=SHR                                
+001400 //CUSTDDO  DD DSN=&MNAME..FILE1,                                       
+001410 //            DISP=(MOD,CATLG,DELETE),                                 
+001420 //            UNIT=SYSDA,                                              
+001430 //            SPACE=(TRK,(8,10),RLSE),                                 
+001440 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)             
+001450 //****************************************************************     
+001460 //* STEP03 SORTING THE DATA FROM CUSTDDO WHICH IS THE NEW COPY         
+001470 //* THEN CREATING A NEW COPY WITH THE SORTED DATA FIELDS               
+001480 //*****************************************************************    
+001500 //STEP03   EXEC PGM=SORT                                               
+001600 //SORTIN   DD DSN=Z38515.FILE1,DISP=SHR                                
+001700 //SORTOUT  DD DSN=&MNAME..FILE2,                                       
+001710 //            DISP=(MOD,CATLG,DELETE),                                 
+001720 //            UNIT=SYSDA,                                               
+001730 //            SPACE=(TRK,(8,10),RLSE),                                  
+001740 //            DCB=*.STEP02.CUSTDDO                                      
+001800 //SYSPRINT DD SYSOUT=*                                                  
+001900 //AMSDUMP  DD SYSOUT=*                                                  
+002000 //SYSOUT   DD SYSOUT=*                                                  
+002100 //SYSIN    DD *                                                         
+002200   SORT FIELDS=(1,3,CH,A)                                                
+002300 /*                                                                      
+002301 //**********************************************************************
+002302 //* STEP04 CREATES A COPY FROM THE REFERBACK DATASET FROM STEP03 SORTOUT
+002303 //* THEN CREATES A NEW COPY OF A DATASET                                
+002304 //* ALSO THIS SET ONLY WORKS IF STEP03 RETURN CODE EQUALS ZERO          
+002305 //**********************************************************************
+002310 //         IF (STEP03.RC = 0) THEN                                      
+002400 //STEP04   EXEC PGM=IEBGENER                                            
+002600 //SYSUT1   DD DSN=*.STEP03.SORTOUT,DISP=SHR                             
+002700 //SYSUT2   DD DSN=&MNAME..FILE3,                                        
+002800 //            DISP=(NEW,CATLG,DELETE),                                 
+002900 //            UNIT=SYSDA,                                              
+003000 //            SPACE=(TRK,(8,10),RLSE),                                 
+003100 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)             
+003200 //SYSPRINT DD SYSOUT=*                                                 
+003300 //SYSOUT   DD SYSOUT=*                                                 
+003400 //AMSDUMP  DD SYSOUT=*                                                 
+003500 //SYSIN    DD DUMMY                                                    
+003600 //         ENDIF                                                       
+003610 //******************************************************************** 
+003620 //* STEP05 DEFINING A GDG BASE FILE | LIMIT IS 3 |                     
+003630 //******************************************************************** 
+003700 //STEP05   EXEC PGM=IDCAMS                                             
+003800 //SYSIN    DD *                                                        
+003900   DEFINE GDG (NAME(Z38515.HOST1)-                                      
+004000   LIMIT(3)-                                                            
+004100   NOEMPTY-                                                             
+004200   SCRATCH)                                                             
+004300 /*                                                                   
+004400 //SYSPRINT DD SYSOUT=*                                               
+004500 //SYSOUT   DD SYSOUT=*                                               
+004600 //AMSDUMP  DD SYSOUT=*                                               
+004700 //SYSABEND DD SYSOUT=*                                               
+004701 //*******************************************************************
+004702 //* INSIDE THIS PROCEDURE STEP06 CREATES THE GENERATIONAL FILES +1   
+004703 //*******************************************************************
+004710 //PROC100  PROC                                                      
+004800 //STEP06   EXEC PGM=IEFBR14                                          
+004900 //DD1      DD DSN=Z38515.HOST1(+1),                                  
+005000 //            DISP=(NEW,CATLG,DELETE),                               
+005100 //            UNIT=SYSDA,                                            
+005200 //            SPACE=(TRK,(8,10),RLSE),                               
+005300 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)           
+005400 //PROC100  PEND                                                      
+005500 //STEP07   EXEC PROC100                                              
+005510 //***************************************************************    
+005520 //* STEP08 AND STEP09 FIRST DELETES THE GENERATIONAL FILES              
+005530 //* SINCE YOU FIRST MUST DELETE THE FILES BEFORE DELETING               
+005540 //* THE GDG BASE , THEN THE REST OF THE FILES THAT WERE CREATED         
+005550 //* IN THIS ENTIRE JOB IS DELETED AS WELL                               
+005560 //***************************************************************       
+005600 //STEP08   EXEC PGM=IEFBR14                                             
+005700 //DD1      DD DSN=Z38515.HOST1,DISP=(OLD,DELETE)                        
+005800 //STEP09   EXEC PGM=IDCAMS                                              
+005900 //SYSIN    DD *                                                         
+006000   DELETE (Z38515.HOST1) GDG FORCE                                       
+006010   DELETE Z38515.FILE1                                                   
+006020   DELETE Z38515.FILE2                                                   
+006040   DELETE Z38515.FILE3                                                   
+006100 /*                                                                      
+006200 //SYSPRINT DD SYSOUT=*                                                  
+006300 //SYSABEND DD SYSOUT=*                                                  
+006400 //SYSOUT   DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
