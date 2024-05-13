@@ -106,3 +106,23 @@
 006300 //SYSABEND DD SYSOUT=*                                                  
 006400 //SYSOUT   DD SYSOUT=*                                                  
 ****** **************************** Bottom of Data ****************************
+
+
+17.57.27 JOB08686 ---- MONDAY,    13 MAY 2024 ----                              
+17.57.27 JOB08686  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
+17.57.28 JOB08686  IEF677I WARNING MESSAGE(S) FOR JOB Z38515A  ISSUED           
+17.57.30 JOB08686  ICH70001I Z38515   LAST ACCESS AT 17:29:57 ON MONDAY, MAY 13,
+17.57.30 JOB08686  $HASP373 Z38515A  STARTED - INIT 1    - CLASS A        - SYS 
+17.57.34 JOB08686  -                                      -----TIMINGS (MINS.)--
+17.57.34 JOB08686  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+17.57.34 JOB08686  -STEP01   COBOL       00  13970    173       .00       .00   
+17.57.34 JOB08686  -STEP01   LKED        00    313     32       .00       .00   
+17.57.35 JOB08686  -STEP02               00    289     33       .00       .00   
+17.57.36 JOB08686  -STEP03               00     39      4       .00       .00   
+17.57.36 JOB08686  -STEP04               00     29      3       .00       .00   
+17.57.36 JOB08686  -STEP05               00     31      3       .00       .00   
+17.57.37 JOB08686  -STEP07   STEP06      00      2      0       .00       .00   
+17.57.37 JOB08686  -STEP08               00      5      1       .00       .00   
+17.57.39 JOB08686  -STEP09               00     26      5       .00       .00    
+17.57.39 JOB08686  -Z38515A  ENDED.  NAME-JORGE CINTRON  
+17.57.39 JOB08686  $HASP395 Z38515A  ENDED - RC=0000     
