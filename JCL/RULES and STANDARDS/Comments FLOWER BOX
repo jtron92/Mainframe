@@ -1,0 +1,25 @@
+000100 //Z38515A  JOB (ACCT),'JORGE CINTRON',                                  
+000200 //             MSGLEVEL=(1,1),                                          
+000300 //             MSGCLASS=H,                                              
+000400 //             CLASS=A,                                                 
+000500 //             NOTIFY=&SYSUID                                           
+000510 //         JCLLIB ORDER=(IGY630.SIGYPROC,Z38515.ALPHA)                  
+000520 //         SET MNAME=&SYSUID                                            
+000530 //*******************************************************************   
+000540 //* STEP01 COMPILE AND LINK EDIT THE PROGRAM                            
+000550 //*******************************************************************   
+000600 //STEP01   EXEC PROC=IGYWCL,LNGPRFX='IGY630'                            
+000700 //COBOL.SYSIN DD DSN=Z38515.ALPHA(COBOLZ),DISP=SHR                      
+000800 //LKED.SYSLMOD DD DSN=Z38515.CBLOADER(COBOLZ),DISP=SHR                  
+000810 //********************************************************************  
+000820 //* STEP02 RUN THE PROGRAM USING THE PHYSICAL FILES CUSTDDI/O           
+000830 //* CUSTDDI COPIES DATASET Z38515.MAST AND CUSTDDO CREATES A NEW COPY   
+000840 //********************************************************************  
+
+you can add ** after a statement to let the user or reader know its a comment
+
+but to make an entire like a comment do this
+
+insert //
+
+//* 
