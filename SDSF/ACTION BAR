@@ -90,3 +90,29 @@ NP   JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status
 
 
 
+KEYS
+
+                  PF Key Definitions and Labels - Primary Keys                  
+ Command ===>                                                                   
+                                                                    More:     + 
+ Number of PF Keys . . . 24                         Terminal type  . : 3278     
+                                                                                
+ PF1 . . . HELP                                                                 
+ PF2 . . . SPLIT                                                                
+ PF3 . . . END                                                                  
+ PF4 . . . RETURN                                                               
+ PF5 . . . IFIND                                                                
+ PF6 . . . BOOK                                                                 
+ PF7 . . . UP                                                                   
+ PF8 . . . DOWN                                                                 
+ PF9 . . . SWAP                                                                 
+ PF10  . . LEFT                                                                 
+ PF11  . . RIGHT                                                                
+ PF12  . . RETRIEVE                                                             
+                                                                                
+ PF1  label  . .            PF2  label  . .            PF3  label  . .          
+ PF4  label  . .            PF5  label  . .            PF6  label  . .          
+ PF7  label  . .            PF8  label  . .            PF9  label  . .          
+  F1=Help      F2=Split     F3=Exit      F7=Backward  F8=Forward   F9=Swap      
+
+
