@@ -1,0 +1,17 @@
+SDSF DA SYS1  SYS1   PAG   55  SIO  256    CPU 83/77     LINE 20-38 (44)
+ COMMAND INPUT ===>                                            SCROLL ===> CSR
+ NP   JOBNAME  Workload SrvClass SP ResGroup Server   Quiesce  ECPU-Time  ECPU%
+      JES2MON  SYSTEM   SYSTEM    1          NO                644752.66   0.05
+      GH108P   TSOOTHER TSOHI     1          NO                   130.79  19.26
+      NFSC     SYSTEM   SYSSTC    1          NO                 15456.79   0.01
+
+
+By Default, white text indicates that an item is currently active. 
+
+Any red text within that item can be overtyped with a new value 
+
+RED TEXT is under SrvClass
+
+SYSTEM
+TSOHI
+SYSSTC
