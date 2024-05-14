@@ -1,0 +1,62 @@
+F1               RETRIEVE THE LAST COMMAND ENTERED AND PLACE IT IN THE COMMAND LINE
+F3               EXIT A SDSF PANEL
+?                DISPLAY AN ALTERNATE FIELD LIST FOR A SDSF PANEL
+ENTER            REFRESH A SDSF DISPLAY
+F12              DISPLAY SDSF HELP
+
+***
+
+SEARCH COMMAND   SEARCH HELP , YOU CAN TYPE KEYS WORDS EXAMPLE : HEALTH 
+
+.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+.-----------------------------------------------------------------------------.
+|                                Search Help                                  |
+| Command ===>                                                                |
+|                                                                             |
+| Search for: HEALTH                                            Show titles   |
+|                                                                             |
+|     Select a search result to display the help panel.                       |
+| ***************************** Bottom of data ****************************** |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+
+
+
+
+.----------------------------------------------------------------------------
+|                                Search Help                Row 1 to 15 of 72
+| Command ===>                                                               
+|                                                                            
+| Search for: HEALTH                                            Show titles  
+|                                                                            
+|     Select a search result to display the help panel.                      
+|     IBM Health Checker for z/OS, see IBM Health Checker for                
+|     The Health Checker (CK) panel shows information from IBM Health        
+|     Explanation: Checks could not be displayed because IBM Health          
+|     4 - Messages for IBM Health Checker for z/OS                           
+|     HELP: Messages for IBM Health Checker for z/OS                         
+|     Checker for z/OS is not running. If IBM Health Checker for z/OS        
+|     1 ISF130E UNABLE TO ADD check-name HEALTH CHECK...                     
+|     1 - Health Checker panel                                               
+|     HELP: Health Checker Panel Panel 1 of 1                                
+|     displays information about health checks.                              
+|     HELP: Enhancements to the Health Checker Panel Panel 1 of 1            
+|     IBM Health Checker for z/OS address space.                             
+|     The Health Check History (CKH) panel allows authorized                 
+|     SDSF adds a new Health Check History (CKH) panel.                      
+|     HELP: New Health Check History Panel Panel 1 of 1                      
+|  F1=Help        F3=Cancel      F7=Backward    F8=Forward    F12=Cancel     
+
+
