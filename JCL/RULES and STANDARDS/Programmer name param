@@ -1,0 +1,8 @@
+//MM01A    JOB   36512,RMENEDEDEZ
+//MM01A    JOB   ,R.MENEDEDEZ
+//MM01A    JOB   ,'R MENEDEDEZ'
+//MM01A    JOB   36512,'O''BRIEN'
+//MM01A    JOB   ,DEPT-10
+
+The name can be from one to 20 characters long that immediately follows the account information 
+paramenter.
