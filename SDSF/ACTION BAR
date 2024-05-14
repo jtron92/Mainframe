@@ -1,0 +1,66 @@
+ENTER THE COMMAND
+
+SET SCREEN
+
+------------------------------------------------------------------------------
+SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-1 (1)           
+COMMAND INPUT ===> SET SCREEN                                 SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=JOBNAME/D  SYSNAME=                  
+NP   JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status     
+     Z38515   TSU00445 Z38515     15 EXECUTION          S0W1  S0W1            
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+ THEN TYPE 1                                                                              
+                                                                              
+                                                                              
+
+
+   Display  Filter  View  Print  Options  Search  Help                          
+ -------------------------- .--------------------------------------------------.
+ SDSF STATUS DISPLAY ALL CL |           Set Screen Characteristics             |
+ COMMAND INPUT ===> SET SCR |                                                  |
+ PREFIX=*  DEST=(ALL)  OWNE | Select the elements that you want to customize.  |
+ NP   JOBNAME  JobID    Own |                                                  |
+      Z38515   TSU00445 Z38 | 1   1.  Basic settings and tabular panels        |
+                            |     2.  OPERLOG panel                            |
+                            |                                                  |
+                            |  F1=Help     F2=Split    F3=Cancel   F9=Swap     |
+                            | F12=Cancel                                       |
+                            '--------------------------------------------------'
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+
+                                                                               
+  Display  Filter  View  Print  Options  Search  Help                          
+----------- .-----------------------------------------------------------------.
+SDSF STATUS |  Set Screen Characteristics: Basic Settings and Tabular Panels  |
+COMMAND INP |                                                                 |
+PREFIX=*  D | Display the action bar        1  1. Yes                         |
+NP   JOBNAM |                                  2. No                          |
+     Z38515 |                                                                 |
+            | Type a value or blank a field to restore the default.           |
+            | Press F5/17 to see changes.                                     |
+            |                                                                 |
+            | Panel Element                    Color    Highlight  Intensity  |
+            | Title line                       WHITE    NORMAL     HIGH       |
+            | Command input line               WHITE    NORMAL     HIGH       |
+            | Column headings                  BLUE     NORMAL     LOW        |
+            | Message lines                    TURQ     NORMAL     HIGH       |
+            | Information lines                BLUE     NORMAL     LOW        |
+            | Output fields for active jobs    WHITE    NORMAL     HIGH       |
+            | Input fields for active jobs     RED      NORMAL     HIGH       |
+            | Output fields for inactive jobs  BLUE     NORMAL     LOW        |
+            | Input fields for inactive jobs   GREEN    NORMAL     LOW        |
+            |                                                                 |
+            |  F1=Help     F2=Split    F3=Cancel   F5=Refresh  F9=Swap        |
+ F1=HELP    | F10=Color   F11=Cuaattr F12=Cancel                              |
+ F7=UP      '-----------------------------------------------------------------'
