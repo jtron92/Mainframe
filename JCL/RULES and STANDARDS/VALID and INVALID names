@@ -11,3 +11,8 @@ InValid job names
 //(ABCDE)              Starts with an invalid character
 //PR_001               Contains an invalid character
 //PAYMENTS805          Contains more than 8 characters
+
+
+Two jobs with the same name can not run at the same time. In such situations, one job is held
+until the other job with same job name completes execution.
+
