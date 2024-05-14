@@ -1,0 +1,13 @@
+Valid job names
+
+//MM01A
+//CS0166PR
+//$PSP06B
+
+
+InValid job names
+
+// MM01C               Doesn't start in column3
+//(ABCDE)              Starts with an invalid character
+//PR_001               Contains an invalid character
+//PAYMENTS805          Contains more than 8 characters
