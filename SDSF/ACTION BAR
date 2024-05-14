@@ -64,3 +64,29 @@ NP   JOBNAM |                                  2. No                          |
             |  F1=Help     F2=Split    F3=Cancel   F5=Refresh  F9=Swap        |
  F1=HELP    | F10=Color   F11=Cuaattr F12=Cancel                              |
  F7=UP      '-----------------------------------------------------------------'
+
+
+
+
+
+
+SET ACTION 
+
+SDSF STATUS DISPLAY ALL CLASSES                         DATA SET DISPLAYED     
+COMMAND INPUT ===>                                            SCROLL ===> CSR  
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=JOBNAME/D  SYSNAME=                   
+ACTION=+-Extend,/-Show,//-Block,%-RunExec,?-JDS,=-Repeat,A-Release,C-Cancel,   
+ACTION=CA-CancelARM,CD-CancelDump,CDA-CancelARMDump,D-Display,DL-DisplayLong,  
+ACTION=DP-DisplayDependencies,E-Restart,EC-RestartCancel,ES-RestartStep,       
+ACTION=ESH-RestartStepHold,H-Hold,I-Info,J-Start,JD-JobDevices,JDD-JobDDNames, 
+ACTION=JM-JobMemory,JP-JobDependencies,JS-JobStep,L-List,LL-ListLong,          
+ACTION=O-ReleaseOutput,P-Purge,PO-PurgeOutput,PP-PurgeProtected,Q-OutDesc,     
+ACTION=S-Browse,Sn-BrowseLocDS,SB-ISPFBrowse,SE-ISPFEdit,SJ-JCLEdit,           
+ACTION=SV-ISPFView,W-Spin,X-Print,XC-PrintClose,XD-PrintDS,XDC-PrintDSClose,   
+ACTION=XF-PrintFile,XFC-PrintFileClose,XS-PrintSysout,XSC-PrintSysoutClose     
+NP   JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status      
+     Z38515   TSU00445 Z38515     15 EXECUTION          S0W1  S0W1             
+                                                                               
+
+
+
