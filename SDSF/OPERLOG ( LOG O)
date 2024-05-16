@@ -19,3 +19,13 @@
        4 - Print command (PRINT)                                            
        5 - Options commands (SET SCREEN and others)                         
 
+
+
+
+
+n 10 m - this command will scroll the log forward 10 mintues from its current location
+
+NEXT/PREVIOUS number period, where period is specified as days (D), hours (H), minutes (M), or seconds (S).
+
+NEXT can be abbreviated to N and PREVIOUS to P.
+
