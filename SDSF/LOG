@@ -228,3 +228,26 @@ IN ASCENDING ORDER. THE MINOR COLUMN TO BE SORTED IS TOT-REC AND IT WILL BE SORT
 
 SORT OFF - COMMAND WILL TURN SORTING OFF FOR THE CURRENTLY DISPLAYED SDSF PANEL , BUT WILL RETAIN THE SORT CRITERIA
 
+
+
+
+SYSLOG      8.181 S0W1 S0W1 05/14/2024 0W         0       COLUMNS 02- 81
+
+
+syslog - this indicates the type of log being browsed
+
+8.181 - this indicates the JES job number and the dataset number assicated with this log
+
+SW01 - this is the JES system's ID. The data of this system is currently displayed
+
+SW01 - This is the JES system's ID that the user is currently logged onto
+
+05/14/2024 - This is the date assocaited with SYSLOG data being displayed
+
+0W - this data is used to display the number of outstanding write-to-operator-with-reply (WTOR) messages
+
+0 - this displays the current line number within the log
+
+COLUMNS 02-81 - AS each line of SYSLOG data is a maximum of 131 characters, you will need to scroll left and right in this panel
+to display relevant data. THis field indicates which columns are currently being displayed.
+
