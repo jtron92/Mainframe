@@ -148,3 +148,31 @@ P | ===> D SMS                                                            |
   |  F1=Help       F3=Cancel     F4=Prompt     F5=FullScr    F6=Details   |   
 
 
+
+ARRANGE 
+
+
+ARR ? 
+
+.----------------------------------------------------------------.
+|                            Arrange            Row 1 to 8 of 58 |
+| Command ===>                                                   |
+|                                                                |
+| To move a column, select with / (// for a block), then type A  |
+| (after) or B (before). Special function keys:                  |
+| F5/17=Refresh list  F11/23=Clear input  F6/18=Default order    |
+|                                                                |
+|      NP width                  Current width: 4                |
+|                                                                |
+|      Column             Width   Description                    |
+|      JobID                  8                                  |
+|      Owner                  8                                  |
+|      Prty                   4                                  |
+|      Queue                 10                                  |
+|      C                      1                                  |
+|      Pos                    5                                  |
+|      SAff                   5                                  |
+|      ASys                   4                                  |
+|  F1=Help     F2=Split    F3=Cancel   F5=Refresh  F6=Default    |
+|  F7=Bkwd     F8=Fwd      F9=Swap    F11=Clear   F12=Cancel     |
+'----------------------------------------------------------------'
