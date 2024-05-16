@@ -29,3 +29,32 @@ NEXT/PREVIOUS number period, where period is specified as days (D), hours (H), m
 
 NEXT can be abbreviated to N and PREVIOUS to P.
 
+
+
+set screen 
+
+  Displ .---------------------------------------------------------------------.
+------- |           Set Screen Characteristics: OPERLOG Panel                 |
+SDSF OP |                                                                     |
+COMMAND |                                                   More:     +       |
+******* | Use color and highlighting    1   1. Yes   2. No                    |
+SF036I  |                                                                     |
+******* | Type values to override the original color and highlighting.        |
+        | Press F5/17 to see changes.                                         |
+        |                                                                     |
+        | Descriptor code                  Color    Highlight  Intensity      |
+        |  1 - System failure                                                 |
+        |  2 - Immediate action required                                      |
+        |  3 - Eventual action required                                       |
+        |  4 - System status                                                  |
+        |  5 - Immediate command response                                     |
+        |  6 - Job status                                                     |
+        |  7 - Task-related                                                   |
+        |  8 - Out of line                                                    |
+        |  9 - Operator's request                                             |
+        | 10 - Not defined                                                    |
+        | 11 - Critical eventual action                                       |
+        |  F1=Help      F2=Split     F3=Cancel    F5=Refresh   F6=Default     |
+ F1=HEL |  F7=Backward  F8=Forward   F9=Swap     F10=Color    F11=Cuaattr     |
+
+
