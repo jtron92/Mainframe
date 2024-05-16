@@ -34,3 +34,34 @@ SDSF SYSLOG      8.152 S0W1 S0W1 05/09/2024 0W         5,947   COLUMNS 52- 131
       LOGON,USER=(Z38515)                                                       
 0290  IEA630I  OPERATOR Z38515$  NOW ACTIVE,   SYSTEM=S0W1    , LU=TCP00548     
 ******************************** BOTTOM OF DATA ********************************
+
+
+
+FIND JOB02896 PREV - SHOWS THE PREVIOUS FIND AND YOU CAN F5 UP
+
+ALSO IF YOU START THE FINDING AT THE TOP OF THE LOG
+
+
+
+ -------------------------------------------------------------------------------
+ SDSF SYSLOG      8.181 S0W1 S0W1 05/14/2024 0W              5,000 RECS SEARCHED <----
+ COMMAND INPUT ===> F JOB02896                                 SCROLL ===> CSR  
+********************************* TOP OF DATA **********************************
+N 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF237I JES2 ALL
+X 0000000 S0W1     24135 12:38:41.43 SYSLOG   00000000  IEE042I SYSTEM LOG DATA 
+N 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF285I   +MASTE
+N 4000000 S0W1     24135 12:38:41.43          00000090  IEE043I A SYSTEM LOG DAT
+N FFFF000 S0W1     24135 12:39:25.58 STC00120 00000090  +CSQX500I %CSQ9 CSQXRCTL
+M FFFF000 S0W1     24135 12:39:25.70 STC00120 00000090  +CSQX203E %CSQ9 CSQXRCTL
+D                                         558 00000090   channel CSQ9.TO.CMQM   
+D                                         558 00000090   connection CMQM        
+
+IT WILL HAVE A MAX SEARCH OF 5000 KEEP PRESSING F5 TO CONTUINE THE SEARCH 
+
+ SDSF SYSLOG      8.181 S0W1 S0W1 05/14/2024 0W             10,000 RECS SEARCHED   <----
+ COMMAND INPUT ===>                                            SCROLL ===> CSR  
+********************************* TOP OF DATA **********************************
+N 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF237I JES2 ALL
+X 0000000 S0W1     24135 12:38:41.43 SYSLOG   00000000  IEE042I SYSTEM LOG DATA 
+N 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF285I   +MASTE
+
