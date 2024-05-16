@@ -65,3 +65,33 @@ N 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF237I JES2 ALL
 X 0000000 S0W1     24135 12:38:41.43 SYSLOG   00000000  IEE042I SYSTEM LOG DATA 
 N 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF285I   +MASTE
 
+
+
+YOU CAN ALSO CHANGE THE FIND LIMIT BY USING THIS COMMAND WHICH WILL PROMPT YOU A POPUP 
+If you need to change this default, the FINDLIM amount command can be used. The amount must be between 1000 and 9999999.
+
+The FINDLIM ? command can also be used, and will display a pop-up window containing the current default. This amount can be modified by overtyping it.
+
+
+
+FINDLIM ?
+
+SDSF SYSLOG      8.181 S0W1 S0W1 05/14/2024 0W         0       COLUMNS 02- 81  
+COMMAND INPUT ===> FINDLIM ?                                  SCROLL ===> CSR  
+******************************** TOP OF DATA **********************************
+ 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF237I JES2 ALL
+ 0000000 S0W1     24135 12:38:41.43 SYSLOG   00000000  IEE042I SYSTEM LOG DATA 
+ 0000000 S0W1     24135 12:38:41.43          00000290  IEF196I IEF285I   +MASTE
+
+ .---------------------------------------.
+ |              Find Limit               |
+ |                                       |
+ | Number of lines to search     5000    |
+ |                                       |
+ |  F1=Help     F2=Split    F3=Cancel    |
+ |  F9=Swap    F12=Cancel                |
+ '---------------------------------------'
+9:25.58 STC00120 00000090  +CSQX500I %CSQ9
+
+
+
