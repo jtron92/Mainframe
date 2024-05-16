@@ -1,0 +1,87 @@
+Filter ?
+
+-------------------------------------------------------------------------------
+SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-5 (5)            
+COMMAND INPUT ===> FILTER ?                                   SCROLL ===> CSR  
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=JOBNAME/A  SYSNAME=*  FILTERS=1       
+NP   JOBNAME  Max-RC     SrvClass  WPos Scheduling-Env   Dly Mode Spin PhaseNam
+     COBCOP   CC 0000                 0                                AWAITING
+     COBCOP   CC 0000                 0                                AWAITING
+     COBCOP   CC 0000                 0                                AWAITING
+     Z38515A  CC 0000                 0                                AWAITING
+     Z38515S  CC 0000                 0                                AWAITING
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+
+  Displa .---------------------------------------------------------------.     
+-------- |                            Filter            Row 1 to 7 of 25 | ----
+SDSF STA | Command ===>                                                  |     
+COMMAND  |                                                               | SR  
+PREFIX=* | Type filter criteria. Press F4/16 in the Column or Oper       |     
+NP   JOB | field for values, or in the Value field for system symbols.   | eNam
+     COB | Press F11/23 to clear all filter criteria.                    | TING
+     COB |                                                               | TING
+     COB | Filtering is  ON                                              | TING
+     Z38 |                                                               | TING
+     Z38 | AND/OR between columns   AND  (AND/OR)                        | TING
+         | AND/OR within a column   OR   (AND/OR)                        |     
+         |                                                               |     
+         | Column             Oper  Value (may include * and %           |     
+         | MAX-RC              EQ   'CC 0000'                            |     
+         |                                                               |     
+         |                                                               |     
+         |                                                               |     
+         |                                                               |     
+         |                                                               |     
+         |                                                               |     
+
+
+
+
+in the columns you can press F4 or F16 in the column field will display a pop-up list 
+of column names that can be specified for SDSF. Entering a forward slash (/) character and pressing Enter 
+can also be used to perform the same task
+
+
+
+.------------------------------------------------------.
+|                    Column Select   Row 1 to 13 of 80 |
+| Command ===>                                         |
+|                                                      |
+| Selection:                                           |
+|  1.  JOBNAME                                         |
+|  2.  JobID                                           |
+|  3.  Owner                                           |
+|  4.  Prty                                            |
+|  5.  Queue                                           |
+|  6.  C                                               |
+|  7.  Pos                                             |
+|  8.  SAff                                            |
+|  9.  ASys                                            |
+| 10.  Status                                          |
+| 11.  PrtDest                                         |
+| 12.  SecLabel                                        |
+| 13.  TGNum                                           |
+|  F1=Help      F2=Split     F3=Cancel    F7=Backward  |
+|  F8=Forward   F9=Swap     F12=Cancel                 |
+
+
+
+.----------------------------------------------.    
+|                  Operators                   |    
+|                                              | Ope
+|     1.  EQ or =  (equal)                     | sym
+|     2.  NE or ¬= (not equal)                 |    
+|     3.  LT or <  (less than)                 |    
+|     4.  GT or >  (greater than)              |    
+|     5.  LE or <= (less than or equal)        |    
+|     6.  GE or >= (greater than or equal)     |    
+|                                              |    
+|  F1=Help    F2=Split   F3=Cancel  F9=Swap    |    
+| F12=Cancel                                   |    
+'----------------------------------------------'    
+
+
