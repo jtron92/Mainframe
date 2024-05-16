@@ -190,5 +190,28 @@ START OF THE DISPLAY. FIRST CAN BE REPLACED WITH LAST SO THAT THE SPECIFIED COLU
 ARRANGE CRDATE 19 - IN THIS EXAMPLE , THE WIDTH OF THE COLUMN CRDATE IS CHANGED TO 19 CHARACTERS
 
 ARR DEFAULT - IN THIS EXAMPLE, THE DEFAULT SIGNIFIES THAT COLUMN ORDER AND WIDTHS WILL BE RETUNED TO THEIR ORGINAL DEFAULTS
+************
 
+SORT ?
 
+-------------- .------------------------------------------------------------
+DSF STATUS DIS |                            Sort                            
+OMMAND INPUT = | Command ===>                                               
+REFIX=*  DEST= |                                                            
+P   JOBNAME  J | Type sort criteria.  Type / for Column Title to see a      
+    COBCOP   J | list.  Press F11/23 to clear all sort criteria.            
+    COBCOP   J |                                                            
+    COBCOP   J | Sorting is ON                                              
+    Z38515A  J |                                                            
+    Z38515S  J | Column Title       A or D (Ascending or Descending)        
+               | JOBNAME            A                                       
+               |                                                            
+               |                                                            
+               |                                                            
+               |                                                            
+               |                                                            
+               |                                                            
+               |                                                            
+               |                                                            
+               |                                                            
+               |  F1=Help     F2=Split    F3=Cancel   F9=Swap    F11=Clear  
