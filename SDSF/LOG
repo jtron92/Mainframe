@@ -267,3 +267,34 @@ ACTION ALL - THis will display WTORs for all routing codes
 ACTION off - this not display any WTORs
 
 
+
+RSYS ?
+
+The RSYS command is also used for limiting WTOR messages displayed in the SYSLOG and OPERLOG panels,and can filter these types of messages
+based on the system that produced the WTOR
+
+In the example here, the RSYS ? command has been entered to display a pop-up window. The S0W* reponse will ensure that WTORs orginating 
+from any system whose name begins with S0W will be displayed 
+
+The RSYS system name command can also be used to modify this setting directly
+ -------- .------------------------------------------------------------. -------
+ SDSF SYS |                    Replies on the Log                      | 2- 81  
+ COMMAND  |                                                            | > CSR  
+M 0020000 | Type a system name to limit WTORs on the Log panels.       | G0191B,
+E         | Leave blank for the system you are logged on to.           | KSOUT) 
+N C000000 |                                                            |   INACT
+M 0020000 | S0W*          (string, may include * and %                 | G0191B,
+E         |                                                            | KSOUT) 
+M 0020000 |                                                            | G0191B,
+E         |  F1=Help    F2=Split   F3=Cancel  F9=Swap   F12=Cancel     | KSOUT) 
+M 0020000 '------------------------------------------------------------' G0191B,
+E                                         083 00000090  Z31963.OUTPUT(ROCKSOUT) 
+M 0020000 S0W1     24136 22:16:14.36 TSU02915 00000090  IEC141I 013-18,IGG0191B,
+E                                         084 00000090  Z31963.OUTPUT(ROCKSOUT) 
+N 0200000 S0W1     24136 22:16:26.10 JOB02986 00000281  $HASP100 @ASM1    ON INT
+S                                                       Z491748                 
+N 0000000 S0W1     24136 22:16:26.11 JOB02986 00000290  IRR010I  USERID Z49174  
+N 0020000 S0W1     24136 22:16:26.47 JOB02986 00000090  ICH70001I Z49174   LAST 
+N 4000000 S0W1     24136 22:16:26.50 JOB02986 00000090  $HASP373 @ASM1    STARTE
+N 0004000 S0W1     24136 22:16:37.19 JOB02986 00000290  -                       
+S                                                                          -----
