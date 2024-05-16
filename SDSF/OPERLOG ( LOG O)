@@ -1,0 +1,21 @@
+----------------------------------------------------------------------------
+                        HELP: OPERLOG Panel -- Commands        Panel 1 of 1 
+ COMMAND INPUT ===>                                                         
+                                                                            
+       A few useful commands are shown below.  Some require authorization.  
+       ACTION routing-code-list   - Specify WTORs displayed                 
+       FILTER column oper value   - Filter log records                      
+       FIND string                - Search for a character string           
+       LOCATE hh:mm:ss mm/dd/yyyy - Locate a time and date                  
+       NEXT / PREV number H|D|M|S - Scroll by hours, days, minutes, seconds 
+       PRINT begin-time begin-date end-time end-date  - Print data          
+       RSYS system                - Limit WTORs by system                   
+       SET SCREEN                 - Set colors                              
+                                                                            
+       For complete command help, select a topic by number.                 
+       1 - Search and scroll commands (FIND, LOCATE, NEXT, PREV)            
+       2 - Filter commands (ACTION, FILTER, RSYS)                           
+       3 - View commands (SET HEX and others)                               
+       4 - Print command (PRINT)                                            
+       5 - Options commands (SET SCREEN and others)                         
+
