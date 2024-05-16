@@ -251,3 +251,19 @@ SW01 - This is the JES system's ID that the user is currently logged onto
 COLUMNS 02-81 - AS each line of SYSLOG data is a maximum of 131 characters, you will need to scroll left and right in this panel
 to display relevant data. THis field indicates which columns are currently being displayed.
 
+
+
+
+
+action 
+
+ACTION 1 2 USER - up to four routing codes can be specified on the ACTION command, separated by blanks. In this example, WTORs for 
+routing codes 1 and 2 will be displayed along with any of your organization's own customized routing codes.
+
+ACTION MVS - THis will display WTORs for routing codes 1-12, which are reserved for MVS
+
+ACTION ALL - THis will display WTORs for all routing codes
+
+ACTION off - this not display any WTORs
+
+
