@@ -3,7 +3,7 @@ depending on the type of data set being created. For example, a key-sequenced (K
 data component and an index component. The example at the top of this page shows some JCL code that specified 
 a new KS VSAM data set. The screen below this uses ISPF option 3.4 to display what has been created.
 
-
+KSDS
 0600 //NEWKS    DD DSNAME=IBMUSER.VSAMKS,            
 0700 //         DATACLAS=KSVSAM,                     
 0800 //         DISP=(NEW,KEEP),                     
@@ -21,3 +21,11 @@ With your VSAM data set name and disposition specified, you will look at some of
 
 To assign attributes to your VSAM data set, there are two easy methods available. The first is to use the LIKE parameter. 
 As discussed in an earlier module, this parameter will take the attributes from an existing data set and apply them to the one being created.
+
+
+ENTRY SEQUENCE VSAM
+0600 //NEWKS    DD DSNAME=IBMUSER.VSAMKS,            
+0700 //         DATACLAS=ESVSAM,                     
+0800 //         DISP=(NEW,KEEP),                     
+0900 //         RECORG=KS                            
+**** **************************** Bottom of Data ****
