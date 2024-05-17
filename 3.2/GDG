@@ -1,0 +1,106 @@
+
+OPTION V 
+------------------------------------------------------------------------------ 
+                               Data Set Utility                                
+Option ===> V                                                                  
+                                                                               
+    A Allocate new data set                 C Catalog data set                 
+    R Rename entire data set                U Uncatalog data set               
+    D Delete entire data set                S Short data set information       
+blank Data set information                  V VSAM Utilities                   
+                                                                               
+ISPF Library:                                                                  
+   Project  . .                  Enter "/" to select option                    
+   Group  . . .                  /  Confirm Data Set Delete                    
+   Type . . . .                                                                
+                                                                               
+Other Partitioned, Sequential or VSAM Data Set:                                
+   Name  . . . . . . . 'Z38515.RED.ONE'                                        
+   Volume Serial . . .           (If not cataloged, required for option "C")   
+                                                                               
+Data Set Password  . .           (If password protected)                       
+                                                                               
+                                                                               
+ F1=Help      F2=Split     F3=Exit      F7=Backward  F8=Forward   F9=Swap      
+
+
+1 AND 4
+.------------------------------------------------------------------------
+|   Menu  Utilities  Help                                                
+| ---------------------------------------------------------------------  
+|                            VSAM Utilities                              
+| Command ===>                                                           
+|                                                           More:     +  
+|  Process Request                 Data Type                             
+|  1  1. Define                    4   1.  Alias                         
+|     2. Delete                        2.  Alternate Index               
+|     3. Information (Listcat)         3.  Cluster                       
+|                                      4.  Generation Data Group         
+|                                      5.  Non-VSAM                      
+|                                      6.  Page Space                    
+|                                      7.  Path                          
+|                                      8.  User Catalog                  
+|                                      9.  Data     *                    
+|                                      10. Index    *                    
+|                                      11. NVR      **                   
+|                                      12. Truename **                   
+|                                      13. VVR      **                   
+|                       * Listcat Only                                   
+|  F1=Help       F2=Split      F3=Exit       F7=Backward   F8=Forward    
+|  F9=Swap      F10=Actions   F12=Cancel                                 
+'------------------------------------------------------------------------
+
+
+
+
+
+
+ ------------------------------------------------------------------------------
+                          Define Generation Data Group                         
+ Command ===>                                                                  
+                                                                               
+                                                Enter "/" to select option     
+                                                /  Edit IDCAMS command         
+                                                /  Browse errors only          
+  GDG Name  . . . Z38515.RED.ONE                                               
+                                                                    More:     +
+                    Generation Data Group Level Information:                   
+                                                                               
+  Limit  . . . . . . . . . . 20                                                
+  Owner  . . . . . . . . . . Z38515                                            
+  Days               For . .           or  To                 (YYYY DDD)       
+                                                                               
+                                                                               
+  Enter any of the following keywords:                                         
+                                                                               
+  Noempty or Empty . . . . . NOEMPTY                                           
+  Noscratch or Scratch . . . SCRATCH                                           
+
+
+
+
+
+
+
+EXEC
+
+ --------------------------------------------------------------------------
+                                                            Columns 00001 0
+ Command ===>                                                  Scroll ===> 
+                                                                           
+     Instructions:                                                         
+                                                                           
+       Enter EXECute command to issue request.                             
+                                                                           
+       Enter CANcel, END, or RETURN command to cancel request.             
+ ****** ***************************** Top of Data *************************
+ ==MSG> -Warning- The UNDO command is not available until you change       
+ ==MSG>           your edit profile using the command RECOVERY ON.         
+ 000001  /* IDCAMS COMMAND */                                              
+ 000002     DEFINE GENERATIONDATAGROUP -                                   
+ 000003     (NAME(Z38515.RED.ONE) -                                        
+ 000004      LIMIT(20) -                                                   
+ 000005      OWNER(Z38515) -                                               
+ 000006      NOEMPTY -                                                     
+ 000007      SCRATCH -                                                     
+ 000008     )                                                              
