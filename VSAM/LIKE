@@ -29,3 +29,5 @@ ENTRY SEQUENCE VSAM
 0800 //         DISP=(NEW,KEEP),                     
 0900 //         RECORG=KS                            
 **** **************************** Bottom of Data ****
+
+RECORG=KS,ES,RR,LS
