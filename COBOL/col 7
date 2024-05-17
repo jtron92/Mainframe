@@ -1,6 +1,13 @@
-The 7 column segment of the line is normally left blank, but if an asterisk (*) is entered in this character position, the line will be regarded as a comment character.
+The 7 column segment of the line is normally left blank, but if an asterisk (*) is entered in this character position, 
+the line will be regarded as a comment character.
 
-If a string literal is too long to be contained on a single line, it may be continued on one or more of the following lines. If this is done, a hyphen is placed in character position 7 of the continuation line. The first non-blank character after this must be the same type of quote character used on the line above, in this case double quotes, and the continued line should also end with this quote character.
+If a string literal is too long to be contained on a single line, it may be continued on one or more of the following lines. 
+If this is done, a hyphen is placed in character position 7 of the continuation line. 
+The first non-blank character after this must be the same type of quote character used on the line above, in this case double quotes, 
+and the continued line should also end with this quote character.
+
+
+
 001200 001200 PROCEDURE DIVISION.                                       
 001300 001300 0000-MAIN-LOGIC.                                          
 001400 001400     DISPLAY 'HELLO WORLD'.                                
@@ -10,7 +17,7 @@ If a string literal is too long to be contained on a single line, it may be cont
 001800 001800     STOP RUN.                                             
 001900 001900 100.                                                      
 002000 002000     DISPLAY 'SUBROUTINE 100-PROCESS THIS IS A VERY LONG   
-002010       -    ' SENENTCE I HOPE IT WORKS'.                          
+002010       -    ' SENENTCE I HOPE IT WORKS'.                          <-----------------------
 002100 002100 1000.                                                     
 002200 002200     EXIT.                                                 
 
