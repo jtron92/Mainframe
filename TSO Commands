@@ -74,4 +74,7 @@ Non-VSAM data sets and partitioned data set members can be renamed using the REN
 
 The LOGOFF command will terminate the current TSO session and free the data sets previously allocated.
 
+The FIND macro, which can incorporate the G option to connect to a member generation  
+The STOW macro, which can use the RECOVERG, RG, or DG option to recover, replace, or delete a generation
+The DESERV macro, which can be used to retrieve PDSE directory information, including member generations
 
