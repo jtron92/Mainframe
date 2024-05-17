@@ -1,0 +1,7 @@
+There are two other options available with the TYPRUN parameter.
+
+TYPRUN=COPY can be used if you just need to copy your JCL directly to sysout - output that can be displayed through SDSF. If there are any syntax errors, this option will not pick them up.
+
+TYPRUN=JCLHOLD is similar to TYPRUN=HOLD except that the job is held prior to the JES2 conversion stage. You will see in a later course what happens during this stage and why this option may be useful. When the job is released by the operator, if there are any JCL syntax errors, similar output to that of the TYPRUN=SCAN will be produced, otherwise the job will begin executing if resources are available.
+
+If no TYPRUN parameter is specified, then the job is submitted and will run immediately if all required resources are available.
