@@ -406,3 +406,20 @@ S0e37  out of space make sure to compress the folder where the ps file is locate
 ABENDED S000 U4038 CN(INTER
 
 FORGOT TO ADD STOP RUN LOL
+
+
+
+
+**********************
+
+U4038 
+
+ITS A MISMATCH IN FD AND ITS PROBABLY TOO BIG OR SMALL FOR THE LRECL
+
+
+IGZ0201W A file attribute mismatch was detected. File IFILE in program 
+         specified in the ASSIGN clause had a record length of 80.     
+IGZ0020S A logic error occurred.  Neither FILE STATUS nor a declarative
+         HELLO at relative location X'28E'.  The status code was 48.   
+
+
