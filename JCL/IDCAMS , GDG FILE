@@ -177,4 +177,25 @@ THIS MEANS ITS BEEN DELETED
     Volume serial  . .                                                          
                                                                                 
  Data set list options                                                          
-    Initial View                 Enter "/" to select option                     
+    Initial View                 Enter "/" to select option      
+
+
+
+
+
+
+
+
+*************
+
+YOU CAN ALTER A GDG AS WELL
+
+USING THE IDCAMS ALTER COMMAND 
+
+//SYSIN  DD *
+   ALTER Z3815.BOX-
+   LIMIT(14)-
+   )
+/*
+
+
