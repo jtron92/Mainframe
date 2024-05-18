@@ -16,7 +16,7 @@ If a path name cannot fit entirely on a JCL line, it can be continued using simi
 so, on the initial line the path name continues until column 71. The following line contains // in columns 1 and 2, and the continued information must begin in column 16.
 
 
-PATHOPS=ORDONLY
+PATHOPTS=ORDONLY
 
 Like traditional z/OS data set referencing, you also need to specify the disposition of the data set you are accessing. The PATHOPTS parameter can be used for this purpose.
 
