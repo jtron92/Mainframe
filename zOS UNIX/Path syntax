@@ -45,3 +45,33 @@ PATHDISP=(KEEP,DELETE)
 The PATHDISP parameter is used to specify the action to take with the z/OS UNIX file should the job step end normally or abnormally.  The first sub-parameter when using PATHDISP instructs the system what to do with the file if the step ends normally. In most cases, KEEP will be specified, and indicates that the file will be retained. If you wanted to clean up after a job had completed successfully and remove the file, then DELETE could be coded here.
 
 The second sub-parameter indicates the action to take if the step fails. KEEP and DELETE are valid options.
+
+Owner
+SIRUSR: Permission to read the file.
+SIWUSR: Permission to write to the file.
+SIXUSR: Permission to search - if the path indicates a directory, or execute a program residing in the file.
+SIRWXU: Permission to read, write, and search - if the path indicates a directory, or read, write, and execute for a file.
+File group class
+SIRGRP: Permission for users of the group to read the file.
+SIWGRP: Permission for users of the group to write to the file.
+SIXGRP: Permission for users of the group to search - if the path indicates a directory, or execute a program residing in the file.
+SIRWXG: Permission for users of the group to read, write, and search - if the path indicates a directory, or read, write, and execute for a file.
+Other class
+SIROTH: Permission for all other users to read the file.
+SIWOTH: Permission for all other users to write to the file.
+SIXOTH: Permission for all other users to search - if the path indicates a directory, or execute a program residing in the file.
+SIRWXO: Permission for all other users to read, write, and search - if the path indicates a directory, or read, write, and execute for a file.
+
+
+PATHMODE=(SIRUSR,SIWUSR,SIRGRP,SIROTH),
+
+
+
+When creating a new z/OS UNIX file, the PATHMODE parameter can be used to assign permission attributes to it. This allows you to assign the correct access to the z/OS UNIX file.
+
+Permissions are separated into the three following types, with a mixture of each allowed in the specification:
+
+Tasks that can be performed by the owner of the file
+Tasks that can be performed by users in the same group as the file
+Tasks that can be performed by everyone else
+
