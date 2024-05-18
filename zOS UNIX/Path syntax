@@ -37,3 +37,5 @@ Suppose you want to open an existing z/OS UNIX file and write data to the end of
 Several other lesser used PATHOPTS values are available, and you should consult your IBM JCL Reference manual for more details.
 
 
+DD PATH='u/system/config.dat',
+PATHOPTS=(OWRONLY,OCREAT,OEXCL)          WRITE-ONLY REQUIREMENT (OWRONLY) , THAT THE FILE NEEDS TO BE CREATED (OCREAT), AND IF THE FILE ALREADY EXISTS, TO FAIL THE JOB STEP (OEXCL)
