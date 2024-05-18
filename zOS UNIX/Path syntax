@@ -6,7 +6,7 @@ They can contain symbolic parameters
 Note that the system checks the length after any required symbolic substitution has taken place.
 
 
-//SYSUT1   DD  PATH='tmpp/pfainst.err'
+//SYSUT1   DD  PATH='/tmpp/pfainst.err'
 //SYSPRINT DD  SYSOUT=*
 
 When referecing an existing z/OS UNIX file name and directory, if it contains anything other than uppercase characters, it must be enclosed in single quotes
