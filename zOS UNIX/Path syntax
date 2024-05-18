@@ -21,3 +21,9 @@ PATHOPTS=ORDONLY
 Like traditional z/OS data set referencing, you also need to specify the disposition of the data set you are accessing. The PATHOPTS parameter can be used for this purpose.
 
 In the case of accessing an existing z/OS UNIX file for read-only purposes, the only parameter value used should be ORDONLY, which is the default. Other values for this parameter are discussed when you look at creating z/OS UNIX files.
+
+PATHOPTS=(OWRONLY,OCREAT),
+
+
+OWRONLY will ensure that your program opens the file for writing only purposes, while ORDWR ensures that it is opened for read and write activities.
+a value of OCREAT is also specified, which means that if the z/OS UNIX file name specified in the PATH parameter does not exist, it will be created. However, if the directory path does not exist, the z/OS UNIX file will not be created.
