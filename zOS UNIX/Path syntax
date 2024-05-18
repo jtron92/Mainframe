@@ -39,3 +39,9 @@ Several other lesser used PATHOPTS values are available, and you should consult 
 
 DD PATH='u/system/config.dat',
 PATHOPTS=(OWRONLY,OCREAT,OEXCL)          WRITE-ONLY REQUIREMENT (OWRONLY) , THAT THE FILE NEEDS TO BE CREATED (OCREAT), AND IF THE FILE ALREADY EXISTS, TO FAIL THE JOB STEP (OEXCL)
+
+PATHDISP=(KEEP,DELETE) 
+
+The PATHDISP parameter is used to specify the action to take with the z/OS UNIX file should the job step end normally or abnormally.  The first sub-parameter when using PATHDISP instructs the system what to do with the file if the step ends normally. In most cases, KEEP will be specified, and indicates that the file will be retained. If you wanted to clean up after a job had completed successfully and remove the file, then DELETE could be coded here.
+
+The second sub-parameter indicates the action to take if the step fails. KEEP and DELETE are valid options.
