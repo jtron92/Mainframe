@@ -27,3 +27,13 @@ PATHOPTS=(OWRONLY,OCREAT),
 
 OWRONLY will ensure that your program opens the file for writing only purposes, while ORDWR ensures that it is opened for read and write activities.
 a value of OCREAT is also specified, which means that if the z/OS UNIX file name specified in the PATH parameter does not exist, it will be created. However, if the directory path does not exist, the z/OS UNIX file will not be created.
+
+
+
+PATHOPTS=(ORDWR,OAPPEND)
+
+Suppose you want to open an existing z/OS UNIX file and write data to the end of it, rather than overwriting its content. The OAPPEND value provides this functionality.
+
+Several other lesser used PATHOPTS values are available, and you should consult your IBM JCL Reference manual for more details.
+
+
