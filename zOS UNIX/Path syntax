@@ -11,3 +11,6 @@ Note that the system checks the length after any required symbolic substitution 
 
 When referecing an existing z/OS UNIX file name and directory, if it contains anything other than uppercase characters, it must be enclosed in single quotes
 
+If a path name cannot fit entirely on a JCL line, it can be continued using similar methods discussed for traditional JCL statements and parameters.
+
+so, on the initial line the path name continues until column 71. The following line contains // in columns 1 and 2, and the continued information must begin in column 16.
