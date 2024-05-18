@@ -14,3 +14,10 @@ When referecing an existing z/OS UNIX file name and directory, if it contains an
 If a path name cannot fit entirely on a JCL line, it can be continued using similar methods discussed for traditional JCL statements and parameters.
 
 so, on the initial line the path name continues until column 71. The following line contains // in columns 1 and 2, and the continued information must begin in column 16.
+
+
+PATHOPS=ORDONLY
+
+Like traditional z/OS data set referencing, you also need to specify the disposition of the data set you are accessing. The PATHOPTS parameter can be used for this purpose.
+
+In the case of accessing an existing z/OS UNIX file for read-only purposes, the only parameter value used should be ORDONLY, which is the default. Other values for this parameter are discussed when you look at creating z/OS UNIX files.
