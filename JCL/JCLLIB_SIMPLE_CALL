@@ -67,3 +67,23 @@ IEF237I JES2 ALLOCATED TO SYSOUT
 IEF142I MATEDK01 PROC100 STEP01 - STEP WAS EXECUTED - COND CODE 0000  
 IEF285I   MATEDK.FRI1                                  CATALOGED      
 IEF285I   VOL SER NOS= DEVHD3.                                        
+
+
+
+
+A maximum of 15 libraries can be coded using the ORDER parameter, 
+with the system searching them in the order that they are coded. 
+If you need to expand the library list to the next line, you must do this following a comma, 
+with the continued text beginning anywhere from column 4 through 16.
+
+
+
+000100 //MATEDK01 JOB CLASS=A,                                                
+000200 //             MSGCLASS=H,                                             
+000300 //             MSGLEVEL=(1,1),                                         
+000400 //             NOTIFY=&SYSUID                                          
+000500 //         JCLLIB ORDER=(MATEDK.BIGBOOK,VENDOR.PROCLIB,SVTSC.PROCLIB,  
+000510 //         LVL.PROCLIB)                                                
+000600 //STEP01   EXEC PROC1                                                  
+
+
