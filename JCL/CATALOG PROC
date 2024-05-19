@@ -1,0 +1,35 @@
+The Catlg proc can be used by everyone since its on a pds alone 
+
+location is MATEDK.BIGBOOK(PROC1) , also since its catlog procedure it doesnt need a pend since the system knows when it ends in the JCL
+
+
+
+EDIT       MATEDK.BIGBOOK(PROC1) - 01.00                   Columns 00001 000
+Command ===>                                                  Scroll ===> CS
+****** ***************************** Top of Data ***************************
+000100 //         PROC                                                      
+000200 //STEP01   EXEC PGM=IEFBR14                                          
+000300 //DD1      DD DSN=&SYSUID..TESTOZ,                                   
+000400 //            DISP=(NEW,DELETE),                                     
+000500 //            UNIT=SYSDA,                                            
+000600 //            SPACE=(TRK,(8,10),RLSE),                               
+000700 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)           
+****** **************************** Bottom of Data *************************
+                                                                            
+
+
+EDIT       MATEDK.BIGBOOK(SEE) - 01.00                   
+Command ===>                                             
+****** ***************************** Top of Data ********
+000100 //MATEDK01 JOB CLASS=A,                           
+000200 //             MSGCLASS=H,                        
+000300 //             MSGLEVEL=(1,1),                    
+000400 //             NOTIFY=&SYSUID                     
+000500 //         JCLLIB ORDER=(MATEDK.BIGBOOK)          
+000600 //STEP01   EXEC PROC1                             
+000700 //SYSPRINT DD SYSOUT=*                            
+000800 //SYSOUT   DD SYSOUT=*                            
+****** **************************** Bottom of Data ******
+                                                         
+                                                         
+                                                         
