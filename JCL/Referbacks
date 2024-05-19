@@ -22,3 +22,10 @@ if this was in a different step it would look like this
 
 DCB=*.STEP1.SYSUT2
 
+You may need to instruct a step in your JCL to access the same volume that is associated with a specific data set name, or that was referenced earlier in the job. One method of achieving this is using the VOL=REF parameter, which uses referback syntax similar to that discussed in earlier modules. The syntax for this parameter is:
+
+VOL=REF=dsname
+VOL=REF=*.ddname
+VOL=REF=*.stepname.ddname
+VOL=REF=*.stepname.procstepname.ddname
+
