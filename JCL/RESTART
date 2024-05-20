@@ -63,3 +63,60 @@ ONCE SUBMITTED THE JOB HAS SKIPPED STEP01 STEP02 AND RAN ON STEP03
 17.59.49 JOB03818  IEF404I MATEDK01 - ENDED - TIME=17.59.49                     
 17.59.49 JOB03818  -MATEDK01 ENDED.  NAME-                     TOTAL TCB CPU TIM
 17.59.49 JOB03818  $HASP395 MATEDK01 ENDED                                      
+
+
+
+
+
+
+
+
+
+RESTARTING FROM A PROCEDURE STEP
+
+SO RESTART=STEP01.STEP02  
+
+FIRST SHOULD BE THE STEP THAT IS GOING TO EXEC THE PROC 
+
+THEN 
+
+WHATVER THE STEP IN THE PROC YOU WANT TO RESTART FROM
+
+Command ===>                                                  Scroll ==
+****** ***************************** Top of Data **********************
+000100 //Z38515A  JOB CLASS=A,                                         
+000200 //             MSGLEVEL=(1,1),                                  
+000300 //             MSGCLASS=H,                                      
+000400 //             NOTIFY=&SYSUID,RESTART=STEP01.STEP02             
+000500 //         JCLLIB ORDER=(Z38515.ALPHA)                          
+000600 //STEP01   EXEC PROC=P2                                         
+000700 //STEP01.SYSUT1 DD *                                            
+000800   THIS WAS LINE 1                                               
+000900 /*                                                              
+001000 //          DD * NULLOVRD                                       
+001100 //          DD *                                                
+001200   THIS WAS LINE 2                                               
+001300 /*                                                              
+****** **************************** Bottom of Data ********************
+
+
+Command ===>                                                  Scroll ===> CS
+****** ***************************** Top of Data ***************************
+000100 //PROC100  PROC                                                      
+000200 //STEP01   EXEC PGM=IEBGENER                                         
+000300 //SYSUT1   DD *                                                      
+000400   THIS IS LINE 1                                                     
+000500 /*                                                                   
+000600 //         DD *                                                      
+000700   THIS IS LINE 2                                                     
+000800 /*                                                                   
+000900 //         DD *                                                      
+001000   THIS IS LINE 3                                                     
+001100 /*                                                                   
+001200 //SYSUT2   DD DSN=&SYSUID..MUSIC2,                                   
+001300 //            DISP=(NEW,CATLG,DELETE),                               
+001400 //            UNIT=SYSDA,                                            
+001500 //            SPACE=(TRK,(8,10),RLSE),                               
+001600 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)           
+001700 //SYSPRINT DD SYSOUT=*                                               
+
