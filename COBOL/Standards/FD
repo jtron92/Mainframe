@@ -17,4 +17,11 @@ case , our READ statement will need to be:
 
 READ EMPLOYEE-IN-FILE INTO IN-EMPLOYEE-RECORD
 
+FOR THE INPUT AND OUTPUT SECTION section of the Environment division, we must declare a file name and assign it to an identifier
+whose name corresponds to the DD name of the file in the execution JCL.
 
+example :
+
+IFILE is the logical file and CUSTDDI is the phyical file that the JCL will point towards the DSN
+
+SELECT IFILE ASSIGN TO CUSTDDI  
