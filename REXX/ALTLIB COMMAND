@@ -1,0 +1,9 @@
+TSO ALTLIB ACT APPL(EXEC) DSN('USERID.DSN')
+
+So now with this command you can simply type TSO and the file in the pds that is being refeernce in that library 
+
+This is because you cant add your own Rexx program in sys1 so using this commnad you and only you can call the rexx commands 
+
+To decative it 
+
+TSO ALTLIB DEACT APPL(EXEC) 
