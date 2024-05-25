@@ -18,7 +18,7 @@ SYSTSPRT - used to control the output from teh background job
 
 
 
-
+EXAMPLE 1 EXEC TSO COMMAND/ REXX 
 ****** ***************************** Top of Data ************************
 000100 //MATEDK01 JOB CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,NOTIFY=&SYSUID   
 000200 //STEP01   EXEC PGM=IKJEFT01                                      
@@ -43,7 +43,58 @@ Command ===>                                                  Scroll
 000900 SAY "JOB HAS FAILED"                                         
 001100 EXIT                                                         
 ****** **************************** Bottom of Data *****************
-                                                                    
-                                                                    
+
+
+
+
+example 2 
+deletes files and memebers 
+ ****** ***************************** Top of Data ***********************
+ 000100 //MATEDK01 JOB CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,NOTIFY=&SYSUID  
+ 000200 //STEP01   EXEC PGM=IKJEFT01                                     
+ 000300 //SYSTSPRT DD SYSOUT=*                                           
+ 000400 //SYSTSIN  DD *                                                  
+ 000500   DEL 'MATEDK.FORD'                                              
+ 000600 /*                                                               
+ 000800 //SYSUDUMP DD SYSOUT=*                                           
+ 000900 //SYSPRINT DD SYSOUT=*                                           
+ ****** **************************** Bottom of Data *********************
+                                                                         
+                                                                        
+
+
+ COMMAND INPUT ===>                               
+IDC0550I ENTRY (A) MATEDK.FORD DELETED            
+READY                                             
+END                                               
+******************************** BOTTOM OF DATA **
+
+****** ***************************** Top of Data ***********************
+000100 //MATEDK01 JOB CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,NOTIFY=&SYSUID  
+000200 //STEP01   EXEC PGM=IKJEFT01                                     
+000300 //SYSTSPRT DD SYSOUT=*                                           
+000400 //SYSTSIN  DD *                                                  
+000500   DEL 'MATEDK.BIGBOOK(TROY)'                                     
+000600 /*                                                               
+000800 //SYSUDUMP DD SYSOUT=*                                           
+000900 //SYSPRINT DD SYSOUT=*                                           
+****** **************************** Bottom of Data *********************
+                                                                        
+                                      
+
+ COMMAND INPUT ===>                 
+READY                               
+  DEL 'MATEDK.BIGBOOK(TROY)'        
+IDC0549I MEMBER TROY DELETED        
+READY                               
+END                                 
+******************************** BOT
+                                    
+                                    
+                                    
+                                                  
+
+
+
                                                                     
                                                                     
