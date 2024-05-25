@@ -1,0 +1,49 @@
+IKJEFT01 , performs the below functions
+
+Submit TSO commands
+BIND COBOL + DB2 Program
+RUNS COBOL + DB2 Program
+Unload DB2 Table
+
+***********************************
+
+WHEN USING IKJEFT01 
+
+key things to make sure to add in the JCL 
+
+SYSTSIN - used to specify the executable commands and subcommands
+
+SYSTSPRT - used to control the output from teh background job
+
+
+
+
+
+****** ***************************** Top of Data ************************
+000100 //MATEDK01 JOB CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,NOTIFY=&SYSUID   
+000200 //STEP01   EXEC PGM=IKJEFT01                                      
+000300 //SYSTSPRT DD SYSOUT=*                                            
+000400 //SYSTSIN  DD *                                                   
+000500   EXEC 'MATEDK.BIGBOOK(REX)'                                      
+000600 /*                                                                
+000800 //SYSUDUMP DD SYSOUT=*                                            
+000900 //SYSEXEC  DD DSN=MATEDK.BIGBOOK,DISP=SHR                         
+****** **************************** Bottom of Data **********************
+                                                                         
+
+
+Command ===>                                                  Scroll
+****** ***************************** Top of Data *******************
+000100 /*REXX*/                                                     
+000200 SAY;SAY;SAY;                                                 
+000400 ADDRESS TSO "SUBMIT 'MATEDK.BIGBOOK(COBCOMP)'"               
+000500 IF RC = 0 THEN                                               
+000600 SAY "SUBMIT SUCESSFULLY MAXCC = " RC                         
+000800 ELSE                                                         
+000900 SAY "JOB HAS FAILED"                                         
+001100 EXIT                                                         
+****** **************************** Bottom of Data *****************
+                                                                    
+                                                                    
+                                                                    
+                                                                    
