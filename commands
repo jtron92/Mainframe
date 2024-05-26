@@ -107,5 +107,8 @@ Command ===>                                                  Scroll ===> CSR
 001000          BR     S                                                       
 001100 SAVEAREA DS     9D                  SAVE                                
 ****** **************************** Bottom of Data ****************************
+
+
+/D IPLINFO   SDSF COMMAND TO FIND IPLN INFO 
                                                                                
 
