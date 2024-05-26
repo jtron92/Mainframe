@@ -298,3 +298,26 @@ N 0020000 S0W1     24136 22:16:26.47 JOB02986 00000090  ICH70001I Z49174   LAST
 N 4000000 S0W1     24136 22:16:26.50 JOB02986 00000090  $HASP373 @ASM1    STARTE
 N 0004000 S0W1     24136 22:16:37.19 JOB02986 00000290  -                       
 S                                                                          -----
+
+
+COMMAND FOR IPL INFO ON SDSF
+
+/D IPLINFO
+
+
+SDSF SYSLOG   7460.132 S0W1 S0W1 05/26/2024 0W          COMMAND ISSUED    
+COMMAND INPUT ===> /D IPLINFO                                 SCROLL ===> 
+RESPONSE=S0W1                                                             
+ IEE254I  17.36.59 IPLINFO DISPLAY 880                                    
+  SYSTEM IPLED AT 15.08.44 ON 05/19/2024                                  
+  RELEASE z/OS 02.04.00    LICENSE = z/OS                                 
+  USED LOADW1 IN SYS1.IPLPARM ON 00CE3                                    
+  ARCHLVL = 2   MTLSHARE = N                                              
+  IEASYM LIST = (W1,SV,VN)                                                
+  IEASYS LIST = (00,LV,SV,VN) (OP)                                        
+  IODF DEVICE: ORIGINAL(00CE3) CURRENT(00CE3)                             
+  IPL DEVICE: ORIGINAL(01000) CURRENT(01000) VOLUME(VIMVSB)               
+  VM CPID = z/VM    7.2.0                                                 
+  VM UUID IS NOT PROVIDED                                                 
+  VM NAME = DGBGMEM                                                       
+  VM EXT NAME IS NOT PROVIDED                                             
