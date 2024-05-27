@@ -1,0 +1,22 @@
+------ JES2 JOB STATISTICS ------       
+  27 MAY 2024 JOB EXECUTION DATE        
+            8 CARDS READ                
+           86 SYSOUT PRINT RECORDS      
+            0 SYSOUT PUNCH RECORDS      
+            8 SYSOUT SPOOL KBYTES       
+         0.00 MINUTES EXECUTION TIME    
+
+
+****** ***************************** Top of Data **
+000100 //MATEDKZ  JOB CLASS=A,                     
+000200 //             MSGCLASS=H,                  
+000300 //             MSGLEVEL=(1,1),              
+000400 //             NOTIFY=&SYSUID               
+000510 //JOBLIB   DD DSN=MATEDK.LOAD.LIB,DISP=SHR  
+000600 //STEP01   EXEC PGM=TROY                    
+000700 //SYSOUT   DD SYSOUT=*                      
+000800 //SYSPRINT DD SYSOUT=*                      
+****** **************************** Bottom of Data 
+
+  Historically, the term "card" refers to a single line of JCL, which originated from the era of punched cards. 
+  Each line of JCL corresponds to one card, so when you see "8 CARDS READ," it means that 8 lines of JCL were processed.
