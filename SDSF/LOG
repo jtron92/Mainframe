@@ -320,4 +320,35 @@ RESPONSE=S0W1
   VM CPID = z/VM    7.2.0                                                 
   VM UUID IS NOT PROVIDED                                                 
   VM NAME = DGBGMEM                                                       
-  VM EXT NAME IS NOT PROVIDED                                             
+  VM EXT NAME IS NOT PROVIDED                     
+
+
+
+/D U,IPLVOL 
+
+RESPONSE=S0W1                                          
+ IEE457I 15.28.01 UNIT STATUS 491                      
+ UNIT TYPE STATUS        VOLSER     VOLSTATE      SS   
+ 1000 3390 S             VIMVSB     PRIV/RSDNT     0   
+
+
+
+
+/D DIAG
+RESPONSE=S0W1                                    
+ IGV007I 15.30.09 DIAG DISPLAY 529               
+ VSM TRACK CSA(ON) SQA(ON)                       
+ VSM TRACE GET(OFF) FREE(OFF)                    
+ VSM ALLOWUSERKEYCSA(NO)                         
+ VSM ALLOWEARLYRUCSA(NO)                         
+ VSM BESTFITCSA(NO)                              
+ VSM USEZOSV1R9RULES(YES)                        
+ TRAPS NAME()                                    
+ CBLOC                                           
+   VIRTUAL24()                                   
+   VIRTUAL31()                                   
+   REAL31()                                      
+   REAL64()                                      
+ REUSASID(YES)                                   
+ ALLOWUSERKEYCADS(NO)                            
+ AUTOIPL SADMP(NONE) MVS(NONE)                   
