@@ -1,0 +1,137 @@
+FIRST GO TO SYS1.SECURE.CNTL
+
+--------------------------------  RFE DSLIST  ------------------- Row 85 of 1
+Command ===>                                                    Scroll ===> C
+S DATA-SET-NAME------------------- VOLUME ALTRK USTRK ORG FRMT % XT LRECL BLK
+' SYS1.PAGEL02                     PAGE00             VS  **                 
+' SYS1.PAGES01                     MVSDLB             VS  **                 
+' SYS1.PARMLIB                     MVSRES    38    17 PO  F   44  1    80    
+' SYS1.PL1LIB                      MVSRES   184   124 PO  U   67  1       190
+' SYS1.PPLIB                       MVSRES    17     4 PO  U   23  1       190
+' SYS1.PROCLIB                     MVSRES    23     7 PO  FB  30  1    80 190
+' SYS1.PTF.UZ56759                 MVSDLB     1     1 PS  FB 100  1    80 190
+' SYS1.PTF.UZ61346                 MVSDLB     4     4 PS  FB 100  1    80 190
+' SYS1.SAMPLIB                     MVSRES   368   245 PO  F   66  1    80    
+E SYS1.SECURE.CNTL                EMVSRES     4     1 PO  FB  25  1    80 190
+' SYS1.SECURE.PWUP                 MVSRES     1       PS  F    0  1    18    
+' SYS1.SETUP.ASM                   MVSRES   316   210 PO  FB  66  1    80 190
+' SYS1.SETUP.CNTL                  MVSRES   211   139 PO  FB  65  1    80 190
+' SYS1.SMPACDS                     SMP001  1133   516 PO  FB  45  1    80 190
+' SYS1.SMPACRQ                     SMP004    44    29 PO  FB  65  1    80 190
+' SYS1.SMPCDS                      SMP002  1430   640 PO  FB  44  1    80 190
+' SYS1.SMPCRQ                      SMP004    50    30 PO  FB  60  1    80 190
+' SYS1.SMPMTS                      SMP004   151    45 PO  FB  29  1    80 190
+' SYS1.SMPPTS                      SMP003   679    35 PO  FB   5  1    80 190
+' SYS1.SMPSCDS                     SMP004     7     1 PO  FB  14  1    80  31
+' SYS1.SMPSTS                      SMP004   733   244 PO  FB  33  1    80 190
+
+
+E FOR EDIT
+
+SYS1.SECURE.CNTL on MVSRES ----------------------------------------- Row 1 of 
+Command ===>                                                    Scroll ===> CS
+   NAME       TTR   VV.MM  CREATED      CHANGED       INIT  SIZE   MOD   ID   
+. PROFILES   000007 01.01 13-07-11 13-10-07 13:15:00   146   153     0 *RAKF* 
+E USERS      000009 01.02 13-07-11 24-05-30 01:30:17    23    24     1 HERC01 
+  **END**    00000A     2013-11-10 MVSRES  MOD               177 IBMOSVS2     
+                                                                              
+                                                                              
+                                                                              
+
+000001 ************************************************                  
+000002 *                                              *                  
+000003 * RAKF user definitions for TK4-               *                  
+000004 *                                              *                  
+000005 ************************************************                  
+000006 *                                                                 
+000007 * HERC01 is authorized for everything including RAKF update       
+000008 *                                                                 
+000009 HERC01   ADMIN   *CUL8TR   Y                                      
+000010 HERC01   RAKFADM  CUL8TR   Y                                      
+000011 GP2JXC   ADMIN    JORGEC1  Y                                      
+000012 *                                                                 
+000013 * HERC02 is authorized for everything except RAKF update          
+000014 *                                                                 
+000015 HERC02   ADMIN    CUL8TR   Y                                      
+000016 *                                                                 
+000017 * herc03 and HERC04 are regular users                             
+000018 *                                                                 
+000019 HERC03   USER     PASS4U   N                                      
+000020 HERC04   USER     PASS4U   N                                      
+000021 *                                                                 
+00022 * IBMUSER is authorized for everything except RAKF update  
+00023 *                                                          
+00024 IBMUSER  ADMIN    IBMPASS  Y                               
+***** ****Zap****Autosave********* Bottom of Data ***************
+
+ADD THE USERID UNDER IBMUSER OR HERC01 FOLLOWED BY ADMIN AND PASSWORD WITH Y 
+
+GP2JXC   ADMIN    JORGEC1  Y          USERID GP2JXC   ADMIN   PW JORGEC1  Y  
+
+
+
+THEN NEED TO RUN A JCL JOB FOR IT TO TAKE INTO AFFECT
+
+
+GO TO SYS2.JCLLIB
+
+
+
+ Command ===>                                                    Scroll 
+    NAME       TTR   VV.MM  CREATED      CHANGED       INIT  SIZE   MOD 
+ . $$$INDEX   002E01 01.02 14-11-12 16-09-17 14:55:58   135   138     0 
+ . $HISTORY   000103                                                    
+ . ADDALIAS   000105                                                    
+ . ADDUSER    000B0D 80.03 74-06-28 24-05-30 01:29:11    79    17     0 
+ . ADDUSERP   000B11 80.02 74-06-28 02-07-14 20:20:00    17    17     0 
+ . ALGSAMP1   001303 02.01 14-12-18 14-12-18 12:00:00    84    84     0 
+ . ALGSAMP2   002C05 02.01 14-12-18 14-12-18 12:00:00    57    57     0 
+ . ALGSAMP3   002C03 02.01 14-12-18 14-12-18 12:00:00   100   100     0 
+ . ALGSAMP4   001401 02.01 14-12-18 14-12-18 12:00:00   896   896     0 
+ . ALLALIAS   000D0B                                                    
+ . AMASPZAP   000107                                                    
+ . AMDPRDMP   000109                                                    
+ . BAT#EDIT   000201                                                    
+ . BSPHRCMD   000203 01.06 13-10-02 13-10-06 11:36:03     8    26     0 
+ . BSPOSCMD   000205                                                    
+
+
+ FIND ADDUSER
+
+
+ EDIT 
+
+ ****** ****Zap****Autosave********** Top of Data *****************************
+000001 //ADDUSER JOB  (TSO),                                                  
+000002 //             'Add TSO users',                                        
+000003 //             CLASS=A,                                                
+000004 //             MSGCLASS=H,                                             
+000005 //             COND=(0,NE),                                            
+000006 //             MSGLEVEL=(1,1)                                          
+000007 //*********************************************************************
+000008 //*                                                                    
+000009 //* Name: SYS2.JCLLIB(ADDUSER)                                         
+000010 //*                                                                    
+000011 //* Desc: Add new TSO users                                            
+000012 //*                                                                    
+000013 //* Note: The newly created userids do not have a password set         
+000014 //*                                                                    
+000015 //*********************************************************************
+000016 //*                                                                    
+000017 //ADDUSER EXEC ADDUSER,HLQ=GP2JXC,UTYPE=SYSP or USER                   
+****** ****Zap****Autosave********* Bottom of Data ***************************
+                                                                              
+
+IN THE HIGH LEVEL QUAILFIER HLQ=   REPLACE THE VALUE WITH YOUR USERID THAT YOU INTEND TO CREATED AND ADD IT IN THERE THEN SUBMIT THE JOB
+
+AFTER THAT LOGOFF AND RESTART HERCULES
+
+
+                                                                              
+
+
+
+
+                                                                 
+
+                                                                              
