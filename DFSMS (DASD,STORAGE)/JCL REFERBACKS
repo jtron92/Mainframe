@@ -1,0 +1,28 @@
+//TAPEJOB1 JOB (TAPE),'JORGE CINRTON',                            
+//             MSGCLASS=H,                                        
+//             MSGLEVEL=(1,1),                                    
+//             CLASS=A,                                           
+//             NOTIFY=&SYSUID                                     
+//STEP01   EXEC PGM=SORT                                          
+//SORTIN   DD DSN=IBMUSER.PEN.TRANS.BACKUP,DISP=(OLD),            
+//            VOL=SER=HTK000                                      
+//SORTWK01 DD UNIT=SYSALLDA,SPACE=(CYL,(10,10))                   
+//SORTWK02 DD UNIT=SYSALLDA,SPACE=(CYL,(10,10))                   
+//SORTWK03 DD UNIT=SYSALLDA,SPACE=(CYL,(10,10))                   
+//SYSOUT   DD SYSOUT=*                                            
+//SYSIN    DD *                                                   
+  SORT FIELDS=(20,10,CH,A)                                        
+/*                                                                
+//STEP02   EXEC PGM=ICEGENER                                      
+//SYSUT1   DD DSN=TAXDEPT.EOY.PAYREC.SORTED,DISP=OLD              
+//SYSUT2   DD DSN=TAXDEPT.EOY.PAYREC.SORTED.COPY,DISP=(,CATLG),   
+//            VOL=REF=*.STEP01.SORTIN,LABEL=2,                    
+//            UNIT=TAPE                                           
+
+IN STEP2, THE SYSUT2 DD STATEMENT REFERENCES THE SAME VOLUME THAT WAS USED IN STEP1 BY THE SORTIN DD STATEMENT
+
+VOL=REF=DSNAME
+VOL=REF=*.DDNAME
+VOL=REF=*.STEPNAME.DDNAME
+VOL=REF=*.STEPNAME.PROCSTEPNAME.DDNAME
+
