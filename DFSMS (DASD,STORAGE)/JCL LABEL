@@ -1,0 +1,29 @@
+//TAPEJOB1 JOB (TAPE),'JORGE CINRTON',                  
+//             MSGCLASS=H,                              
+//             MSGLEVEL=(1,1),                          
+//             CLASS=A,                                 
+//             NOTIFY=&SYSUID                           
+//STEP01   EXEC PGM=SORT                                
+//SORTIN   DD DSN=IBMUSER.PEN.TRANS.BACKUP,DISP=(OLD),  
+//            VOL=SER=HTK000,                           
+//            LABEL=4                                   
+
+LABEL=4
+
+HDR4: The system will look for the fourth header label, which provides metadata about the dataset.
+EOF4: The system will look for the fourth end-of-file label, which marks the end of the dataset.
+
+if it was label = 1 then it would look for the first header lable and first end of file label
+
+Dataset 1:
+HDR1: First header label
+EOF1: First end-of-file label
+Dataset 2:
+HDR2: Second header label
+EOF2: Second end-of-file label
+Dataset 3:
+HDR3: Third header label
+EOF3: Third end-of-file label
+Dataset 4:
+HDR4: Fourth header label
+EOF4: Fourth end-of-file label
