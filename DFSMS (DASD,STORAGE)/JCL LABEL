@@ -27,3 +27,14 @@ EOF3: Third end-of-file label
 Dataset 4:
 HDR4: Fourth header label
 EOF4: Fourth end-of-file label
+
+
+
+
+//STEP01   EXEC PGM=SORT                                
+//SORTIN   DD DSN=IBMUSER.PEN.TRANS.BACKUP,DISP=(OLD),  
+//            VOL=SER=HTK000,                           
+//            LABEL=(,NL)
+
+the first subparamter of the LABEL is being bypassed. The second subparamater is the label type, so becuase you
+need to instruct the system that there are no labels on it so you code NL for NO LABEL
