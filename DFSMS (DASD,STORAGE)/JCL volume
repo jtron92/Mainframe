@@ -1,0 +1,35 @@
+//TAPEJOB1 JOB (TAPE),'JORGE CINRTON',                     
+//             MSGCLASS=H,                                 
+//             MSGLEVEL=(1,1),                             
+//             CLASS=A,                                    
+//             NOTIFY=&SYSUID                              
+//STEP01   EXEC PGM=IEBGENER                               
+//SYSUT1   DD DSN=IBMUSER.PEN.TRANS.BACKUP,DISP=(OLD),     
+//            VOLUME=(,,2)                                 
+//SYSUT2   DD SYSOUT=*                                     
+//SYSIN    DD DUMMY                                        
+//SYSPRINT DD SYSOUT=*                                     
+
+Volume parameter can contain serveral subparameters, the majority of which are postional.
+The explain above shown, the first two subparameters are bypassed using a comma, while the third
+subparamater is the volume sequence number. So when this job runs it will initially request the second volume assoicated 
+with this tape data set to be mounted
+
+//TAPEJOB1 JOB (TAPE),'JORGE CINRTON',                     
+//             MSGCLASS=H,                                 
+//             MSGLEVEL=(1,1),                             
+//             CLASS=A,                                    
+//             NOTIFY=&SYSUID                              
+//STEP01   EXEC PGM=IEBGENER                               
+//SYSUT1   DD DSN=IBMUSER.PEN.TRANS.BACKUP,DISP=(OLD),     
+//            VOLUME=(TAPE01,TAPE02,TAPE03,2)                                 
+//SYSUT2   DD SYSOUT=*                                     
+//SYSIN    DD DUMMY                                        
+//SYSPRINT DD SYSOUT=*   
+
+VOLUME=(TAPE01,TAPE02,TAPE03,2)  
+
+TAPE01, TAPE02, TAPE03: These are the serial numbers of the volumes that contain the dataset IBMUSER.PEN.TRANS.BACKUP.
+2: The job will start processing from the second volume, which is TAPE02.
+
+It doesnt skip tape03 it just starts it from tape02 and proceeds onward
