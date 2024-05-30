@@ -101,11 +101,14 @@ GO TO SYS2.JCLLIB
 
  EDIT 
 
- ****** ****Zap****Autosave********** Top of Data *****************************
-000001 //ADDUSER JOB  (TSO),                                                  
-000002 //             'Add TSO users',                                        
-000003 //             CLASS=A,                                                
-000004 //             MSGCLASS=H,                                             
+'''jcl
+//ADDUSER JOB  (TSO),                                                  
+//             'Add TSO users',                                        
+//             CLASS=A,                                                
+//             MSGCLASS=H, 
+'''/
+
+
 000005 //             COND=(0,NE),                                            
 000006 //             MSGLEVEL=(1,1)                                          
 000007 //*********************************************************************
