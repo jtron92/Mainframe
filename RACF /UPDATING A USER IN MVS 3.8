@@ -101,28 +101,26 @@ GO TO SYS2.JCLLIB
 
  EDIT 
 
-''jcl
-//ADDUSER JOB  (TSO),                                                  
-//             'Add TSO users',                                        
-//             CLASS=A,                                                
-//             MSGCLASS=H, 
-''/
-
-
-000005 //             COND=(0,NE),                                            
-000006 //             MSGLEVEL=(1,1)                                          
-000007 //*********************************************************************
-000008 //*                                                                    
-000009 //* Name: SYS2.JCLLIB(ADDUSER)                                         
-000010 //*                                                                    
-000011 //* Desc: Add new TSO users                                            
-000012 //*                                                                    
-000013 //* Note: The newly created userids do not have a password set         
-000014 //*                                                                    
-000015 //*********************************************************************
-000016 //*                                                                    
-000017 //ADDUSER EXEC ADDUSER,HLQ=GP2JXC,UTYPE=SYSP or USER                   
-****** ****Zap****Autosave********* Bottom of Data ***************************
+****** ****Zap****Autosave********** Top of Data ******************************
+000001 //ADDUSER JOB  (TSO),                                                   
+000002 //             'Add TSO users',                                         
+000003 //             CLASS=A,                                                 
+000004 //             MSGCLASS=H,                                              
+000005 //             COND=(0,NE),                                             
+000006 //             MSGLEVEL=(1,1)                                           
+000007 //********************************************************************* 
+000008 //*                                                                     
+000009 //* Name: SYS2.JCLLIB(ADDUSER)                                          
+000010 //*                                                                     
+000011 //* Desc: Add new TSO users                                             
+000012 //*                                                                     
+000013 //* Note: The newly created userids do not have a password set          
+000014 //*                                                                     
+000015 //********************************************************************* 
+000016 //*                                                                     
+000017 //ADDUSER EXEC ADDUSER,HLQ=GP2JXC,UTYPE=SYSP or USER                    
+****** ****Zap****Autosave********* Bottom of Data ****************************
+                                                                               
                                                                               
 
 IN THE HIGH LEVEL QUAILFIER HLQ=   REPLACE THE VALUE WITH YOUR USERID THAT YOU INTEND TO CREATED AND ADD IT IN THERE THEN SUBMIT THE JOB
