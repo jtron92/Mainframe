@@ -1,0 +1,15 @@
+// - This indicates a JCL statement directly from the job submitted
+
+XX - This indicates it is JCL that has been obtained from a procedure or INCLUDE statement
+
+++ - This indicates it is JCL that has been obtained from an in-stream procedure
+
+X/ or +/- These symbols indicate an override has been coded for this statement in the JCL, for an in-stream or catalogued procedure
+
+//*     -  JCL statement that ends up being treated as a comment statement
+
+***     -  Comment, JES2 or JES3 statement from the input stream
+
+XX*     -  Comment from a cataloged procedure 
+
+++*     -  Comment from a in-stream procedure
