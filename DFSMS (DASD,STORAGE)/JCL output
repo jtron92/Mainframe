@@ -1,0 +1,6 @@
+15.50.04 JOB nnn IEF223A M 562,942731,,jobname,stepname
+15.50.13 JOB nnn IEF234E K 562,942731,,jobname,stepname
+
+For Tapes : the M above tells you that the tape 942731 was mounted.
+The K means it was kept-dismunts at 15.50.13.
+
