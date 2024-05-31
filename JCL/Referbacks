@@ -48,3 +48,41 @@ VOL=REF=*.stepname.procstepname.ddname
 001970 //SYSOUT   DD SYSOUT=*                               
 001980 //SYSIN    DD DUMMY                                  
 
+
+
+*********** FROM A PROC 
+
+
+000100 //Z38515A  JOB (ACCT),'JORGE CINTRON',                        
+000200 //             MSGCLASS=H,                                    
+000300 //             MSGLEVEL=(1,1),                                
+000400 //             CLASS=A,                                       
+000500 //             NOTIFY=&SYSUID                                 
+000510 //PROC100  PROC                                               
+000600 //STEP01   EXEC PGM=IEBGENER                                  
+000700 //SYSUT1   DD DSN=Z38515.CHASE,DISP=SHR                       
+000800 //SYSUT2   DD DSN=Z38515.CHAS5,                               
+000900 //            DISP=(,PASS),                                   
+001000 //            UNIT=SYSDA,                                     
+001100 //            SPACE=(TRK,(8,10),RLSE),                        
+001200 //            DCB=*.SYSUT1                                    
+001950 //SYSPRINT DD SYSOUT=*                                        
+001960 //AMSDUMP  DD SYSOUT=*                                        
+001970 //SYSOUT   DD SYSOUT=*                                        
+001980 //SYSIN    DD DUMMY                                           
+Command ===>                                                  Scroll ===>
+001990 //         PEND                                                   
+001991 //STEP011  EXEC PROC100                                           
+002000 //STEP02   EXEC PGM=IEFBR14                                       
+002100 //DD1      DD DSN=&SYSUID..DR,                                    
+002200 //            DISP=(,PASS),                                       
+002300 //            UNIT=SYSDA,                                         
+002400 //            SPACE=(TRK,(8,10),RLSE),                            
+002500 //            DCB=*.STEP011.STEP01.SYSUT2                         
+****** **************************** Bottom of Data **********************
+
+GOTTA POINT IT FIRST TO WHERE THE PROCEDURE IS GOING TO BE EXECUTED FIRST WHICH WOULD BE 
+STEP011 THEN
+FOLLOW THE EXECECUTION OF THE PGM IN THE PROC WHICH IS STEP01 
+FROM HERE YOU CAN EITHER CHOOSE THE DD STATEMENT LIKE SYSUT2
+                                                                         
