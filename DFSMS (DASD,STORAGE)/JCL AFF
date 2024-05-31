@@ -1,0 +1,22 @@
+
+//MATEDK01 JOB (DASD)'JORGE CINTRON',                              
+//             CLASS=A,                                            
+//             MSGLEVEL=(1,1),                                     
+//             MSGCLASS=H,                                         
+//             NOTIFY=&SYSUID                                      
+//STEP3    EXEC PGM=DOVSQZ                                         
+//INDSN1   DD DSN=DOV.DAILY.RAWDATA,DISP=MOD,                      
+//            VOL=SER=(HTK005,HTK006)                              
+//INDSN2   DD DSN=DOV.DAILY.CUSTBAT,DISP=OLD                       
+//INDSN3   DD DSN=DOV.MASTER.DATA,                                 
+//            DISP=OLD,                                            
+//            VOL=SER=(HTK199,HTK338)                              
+//            UNIT=AFF=INDSN1                                      
+//OUTDS    DD DSN=DOV.XREF.DATAREC,DISP=(,CATLG),                  
+//            UNIT=SYSDA,SPACE=(CYL,(100,100),RLSE)                
+//SYSOUT   DD SYSOUT=*                                             
+
+UNIT=AFF=ddname: The AFF (AFFinity) parameter specifies that the dataset should be allocated on the same device or set of devices 
+as the dataset specified by ddname (in this case, INDSN1).
+Purpose: Ensures that datasets are located on the same unit, which can be useful for performance reasons or to ensure that 
+certain datasets are processed together on the same physical device.
