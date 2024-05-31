@@ -20,3 +20,11 @@ UNIT=AFF=ddname: The AFF (AFFinity) parameter specifies that the dataset should 
 as the dataset specified by ddname (in this case, INDSN1).
 Purpose: Ensures that datasets are located on the same unit, which can be useful for performance reasons or to ensure that 
 certain datasets are processed together on the same physical device.
+
+
+VOL=(,RETAIN,,,SER=HTK108):
+First Subparameter (omitted): Volume serial numbers. This is omitted in this example.
+Second Subparameter: RETAIN. This ensures that the tape is not demounted after the job step completes.
+Third Subparameter (omitted): Volume count. This is omitted in this example.
+Fourth Subparameter (omitted): Volume sequence number. This is omitted in this example.
+Fifth Subparameter: SER=HTK108. This specifies the volume serial number (HTK108), identifying the specific tape volume to be used.
