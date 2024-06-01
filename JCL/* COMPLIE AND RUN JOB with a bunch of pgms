@@ -31,17 +31,19 @@
 003100 //AMSDUMP  DD SYSOUT=*                                 
 003200 //SYSUDUMP DD SYSOUT=*                                 
 003300 //SYSOUT   DD SYSOUT=*                                 
-003400 //STEP05   EXEC PGM=IDCAMS                             
-003500 //SYSIN    DD *                                        
-003600   DEFINE GDG(NAME(Z38515.FRIV)-                               
-003700   LIMIT(3)-                                                   
-003800   NOEMPTY-                                                    
-003900   SCRATCH)                                                    
-004000 /*                                                            
-004100 //SYSPRINT DD SYSOUT=*                                        
-004200 //AMSDUMP  DD SYSOUT=*                                        
-004300 //SYSOUT   DD SYSOUT=*                                        
-004400 //SYSUDUMP DD SYSOUT=*                                        
+003310 //         IF (STEP04.RC = 0) THEN    
+003400 //STEP05   EXEC PGM=IDCAMS            
+003500 //SYSIN    DD *                       
+003600   DEFINE GDG(NAME(Z38515.FRIV)-       
+003700   LIMIT(3)-                           
+003800   NOEMPTY-                            
+003900   SCRATCH)                            
+004000 /*                                    
+004100 //SYSPRINT DD SYSOUT=*                
+004200 //AMSDUMP  DD SYSOUT=*                
+004300 //SYSOUT   DD SYSOUT=*                
+004400 //SYSUDUMP DD SYSOUT=*                
+004401 //         ENDIF                                                             
 004410 //PROC100  PROC                                               
 004500 //STEP06   EXEC PGM=IEFBR14                                   
 004600 //DD1      DD DSN=Z38515.FRIV(+1),                            
