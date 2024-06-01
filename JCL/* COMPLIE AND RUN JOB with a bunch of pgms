@@ -114,4 +114,11 @@
 22.25.59 JOB05045  -STEP012              00     73      3       .00       .00   
 22.26.00 JOB05045  -STEP014              00     29      1       .00       .00   
 22.26.00 JOB05045  -Z38515A  ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
-22.26.00 JOB05045  $HASP395 Z38515A  ENDED - RC=0000                            
+22.26.00 JOB05045  $HASP395 Z38515A  ENDED - RC=0000              
+------ JES2 JOB STATISTICS ------         
+  31 MAY 2024 JOB EXECUTION DATE          
+           87 CARDS READ                  
+        1,029 SYSOUT PRINT RECORDS        
+            0 SYSOUT PUNCH RECORDS        
+           64 SYSOUT SPOOL KBYTES         
+         0.21 MINUTES EXECUTION TIME      
