@@ -1,127 +1,115 @@
-Command ===>                                                  Scroll ===> CSR 
-****** ***************************** Top of Data *****************************
-000100 //Z38515A  JOB (CVS),'JORGE.CINTRON',                                  
-000200 //             MSGLEVEL=(1,1),                                         
-000300 //             MSGCLASS=H,                                             
-000400 //             NOTIFY=&SYSUID,                                         
-000500 //             CLASS=A                                                 
-000510 //         JCLLIB ORDER=(Z38515.ALPHA,IGY630.SIGYPROC)                 
-000520 //         SET MNAME='MATRIX'                                          
-000600 //*****************************************************                
-000700 //* STEP01 COMPILE AND LINK THE COBOL PGM                              
-000800 //*****************************************************                
-000900 //STEP01   EXEC PROC=IGYWCL,LNGPRFX='IGY630'                           
-001000 //COBOL.SYSIN DD DSN=Z38515.ALPHA(COBTRAN),DISP=SHR                    
-001100 //LKED.SYSLMOD DD DSN=Z38515.CBLOADER(COBTRAN),DISP=SHR                
-001110 //*******************************************************************  
-001120 //* RUN THE JCL FOR THE COBOL PGM ALSO POINT TOWARDS THE PHYSICAL      
-001130 //* FILES INPUT FILE IS CUSTDDI AND OUTPUT FILE IS CUSTDDO             
-001140 //******************************************************************** 
-001200 //STEP02   EXEC PGM=COBTRAN                                        
-001210 //STEPLIB  DD DSN=Z38515.CBLOADER(COBTRAN),DISP=SHR                
-001300 //SYSPRINT DD SYSOUT=*                                             
-001400 //SYSOUT   DD SYSOUT=*                                             
-001500 //CUSTDDI  DD DSN=Z38515.CHASE,DISP=SHR                            
-001600 //CUSTDDO  DD DSN=Z38515.&MNAME..G1,                               
-001700 //            DISP=(NEW,PASS),                                     
-001800 //            UNIT=SYSDA,                                          
-001900 //            SPACE=(TRK,(8,1),RLSE),                              
-002000 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)         
-002010 //***************************************************************  
-002020 //* STEP03 INCLUDING MEMBER SORTJOB , SORTJOB HAS JCL USING SORT   
-002030 //***************************************************************  
-002100 //STEP03   EXEC PGM=SORT                                           
-002200 //         INCLUDE MEMBER=SORTJOB                                  
-002210 //***************************************************************  
-002220 //* STEP04 USING A REFERBACK FROM STEP03 SORTOUT AND COPYING       
-002230 //* INTO SYSUT2 DATA SET Z38515.MATRIX.G3                          
-002240 //***************************************************************     
-002300 //STEP04   EXEC PGM=IEBGENER                                          
-002400 //SYSUT1   DD DSN=*.STEP03.SORTOUT,DISP=SHR                           
-002500 //SYSUT2   DD DSN=Z38515.&MNAME..G3,                                  
-002510 //            DISP=(NEW,CATLG,DELETE),                                
-002520 //            UNIT=SYSDA,                                             
-002530 //            SPACE=(TRK,(8,1),RLSE),                                 
-002540 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)            
-002600 //AMSDUMP  DD SYSOUT=*                                                
-002700 //SYSOUT   DD SYSOUT=*                                                
-002800 //SYSPRINT DD SYSOUT=*                                                
-002900 //SYSIN    DD DUMMY                                                   
-002910 //***************************************************************     
-002920 //* DEFINING A GDG CLUSTER JUST FOR FUN INCLUDING                     
-002930 //* LIMTS AND DELETIONS                                               
-002940 //***************************************************************     
-003000 //STEP05   EXEC PGM=IDCAMS                                            
-003200   DEFINE GDG (NAME(Z38515.FUTURE)-                                 
-003300   LIMIT(3)-                                                        
-003400   NOEMPTY-                                                         
-003500   SCRATCH)                                                         
-003600 /*                                                                 
-003700 //SYSPRINT DD SYSOUT=*                                             
-003800 //SYSOUT   DD SYSOUT=*                                             
-003900 //AMSDUMP  DD SYSOUT=*                                             
-003901 //**************************************************************   
-003902 //* STEP06 IS AN INSTREAM PROCEDURE FOR CREATING GDGS FILES        
-003903 //* ************************************************************   
-003910 //PROC100  PROC                                                    
-004000 //STEP06   EXEC PGM=IEFBR14                                        
-004100 //DD1      DD DSN=Z38515.FUTURE(+1),                               
-004200 //            DISP=(NEW,CATLG,DELETE),                             
-004300 //            UNIT=SYSDA,                                          
-004400 //            SPACE=(TRK,(8,1),RLSE),                              
-004500 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)         
-004600 //         PEND                                                  
-004610 //*************************************************************  
-004620 //* STEP07 , IF STEP05 ABOVE COMPELETES WITH A RECORD CODE ZERO  
-004630 //* THEN STEP07 WILL EXECUTE WHICH WILL DELETE THE GDG FILES     
-004640 //*************************************************************  
-004700 //STEP07   EXEC PROC100                                          
-004800 //         IF (STEP05.RC = 0) THEN                               
-004900 //STEP08   EXEC PGM=IEFBR14                                      
-005000 //DD1      DD DSN=Z38515.FUTURE,DISP=(OLD,DELETE)                
-005010 //         ENDIF                                                 
-005020 //*************************************************************  
-005030 //* STEP09 CALLS A CATALOGED PROCEDURE ICE WHICH IS LOCATED IN   
-005040 //* MY PDS FOLDER Z38515.ALPHA(ICE) I DECIDED TO OVERRIDE THE    
-005050 //* DATA SET FOR STEP012 SYSUT1 AND POINTED IT TO A DIFFERENT    
-005060 //* DATASET FOR PRACTICE                                         
-005070 //*************************************************************  
-005100 //STEP09   EXEC PROC=ICE                                         
-005200 //STEP012.SYSUT1 DD DSN=Z38515.BOXY,DISP=SHR                     
-005210 //*************************************************************         
-005220 //* THE FINAL STEP JUST DELETES THE GDG CLUSTER                         
-005230 //* **********************************************************          
-005300 //STEP010  EXEC PGM=IDCAMS                                              
-005400 //SYSIN    DD *                                                         
-005500   DELETE (Z38515.FUTURE) GDG FORCE                                      
-005600 /*                                                                      
-005700 //SYSPRINT DD SYSOUT=*                                                  
-005800 //AMSDUMP  DD SYSOUT=*                                                  
-005900 //SYSOUT   DD SYSOUT=*                                                  
-****** **************************** Bottom of Data ****************************
-                                                                               
+000100 //Z38515A  JOB (ACCT),'JORGE CINTRON',                           
+000200 //             MSGLEVEL=(1,1),                                   
+000300 //             MSGCLASS=H,                                       
+000400 //             CLASS=A,                                          
+000500 //             NOTIFY=&SYSUID                                    
+000600 //         JCLLIB ORDER=(Z38515.ALPHA,IGY630.SIGYPROC)           
+000700 //         SET MNAME='TARGET'                                    
+000710 //JOBLIB   DD DSN=Z38515.CBLOADER(FILEC),DISP=SHR                
+000800 //STEP01   EXEC IGYWCL,LNGPRFX='IGY630'                          
+000900 //COBOL.SYSIN DD DSN=Z38515.ALPHA(FILEC),DISP=SHR                
+001000 //LKED.SYSLMOD DD DSN=Z38515.CBLOADER(FILEC),DISP=SHR            
+001100 //STEP02   EXEC PGM=FILEC                                        
+001200 //CUSTDDI  DD DSN=Z38515.CHASE,DISP=SHR                          
+001300 //CUSTDDO  DD DSN=Z38515.&MNAME..ONE,                            
+001400 //            DISP=(,PASS),                                      
+001500 //            UNIT=SYSDA,                                        
+001600 //            SPACE=(TRK,(8,10),RLSE),                           
+001700 //            DCB=*.CUSTDDI                            
+001900 //STEP03   EXEC PGM=SORT                               
+002000 //         INCLUDE MEMBER=FILES                        
+002100 //STEP04   EXEC PGM=IEBGENER                           
+002200 //SYSUT1   DD DSN=*.STEP03.SORTOUT,DISP=SHR            
+002300 //SYSUT2   DD DSN=Z38515.&MNAME..THREE,                
+002400 //            DISP=(,PASS),                            
+002500 //            UNIT=SYSDA,                              
+002600 //            SPACE=(TRK,(8,10),RLSE),                 
+002700 //            DCB=*.STEP02.CUSTDDI,                    
+002800 //            VOL=REF=*.STEP02.CUSTDDI                 
+002900 //SYSPRINT DD SYSOUT=*                                 
+003000 //SYSIN    DD DUMMY                                    
+003100 //AMSDUMP  DD SYSOUT=*                                 
+003200 //SYSUDUMP DD SYSOUT=*                                 
+003300 //SYSOUT   DD SYSOUT=*                                 
+003400 //STEP05   EXEC PGM=IDCAMS                             
+003500 //SYSIN    DD *                                        
+003600   DEFINE GDG(NAME(Z38515.FRIV)-                               
+003700   LIMIT(3)-                                                   
+003800   NOEMPTY-                                                    
+003900   SCRATCH)                                                    
+004000 /*                                                            
+004100 //SYSPRINT DD SYSOUT=*                                        
+004200 //AMSDUMP  DD SYSOUT=*                                        
+004300 //SYSOUT   DD SYSOUT=*                                        
+004400 //SYSUDUMP DD SYSOUT=*                                        
+004410 //PROC100  PROC                                               
+004500 //STEP06   EXEC PGM=IEFBR14                                   
+004600 //DD1      DD DSN=Z38515.FRIV(+1),                            
+004700 //            DISP=(NEW,CATLG,DELETE),                        
+004800 //            UNIT=SYSDA,                                     
+004900 //            SPACE=(TRK,(8,10),RLSE),                        
+005000 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)    
+005100 //         PEND                                               
+005200 //STEP07   EXEC PROC100                                       
+005300 //STEP08   EXEC PGM=IEFBR14                           
+005400 //DD1      DD DSN=&SYSUID..MOVIE1,                    
+005500 //            DISP=(,PASS),                           
+005600 //            UNIT=SYSDA,                             
+005700 //            SPACE=(TRK,(8,10),RLSE),                
+005800 //            DCB=*.STEP07.STEP06.DD1                 
+005900 //STEP09   EXEC PGM=IEFBR14                           
+006000 //DD2      DD DSN=Z38515.FRIV,DISP=(OLD,DELETE)       
+006100 //STEP010  EXEC PROC=FILEP                            
+006200 //STEP0100.SYSUT1 DD DSN=Z38515.BOXY,DISP=SHR         
+006300 //STEP011  EXEC PGM=IKJEFT01                          
+006400 //SYSTSIN  DD *                                       
+006500   EXEC 'Z38515.ALPHA(REXTEX)'                         
+006600 /*                                                    
+006700 //SYSTSPRT DD SYSOUT=*                                
+006800 //SYSOUT   DD SYSOUT=*                                
+006900 //SYSPRINT DD SYSOUT=*                                
+007000 //AMSDUMP  DD SYSOUT=*                                
+007100 //STEP012  EXEC PGM=IKJEFT01,PARM='%FILEX'          
+007200 //SYSEXEC  DD DSN=Z38515.ALPHA,DISP=SHR             
+007300 //SYSTSIN  DD DUMMY                                 
+007400 //SYSTSPRT DD SYSOUT=*                              
+007500 //SYSOUT   DD SYSOUT=*                              
+007600 //AMSDUMP  DD SYSOUT=*                              
+007700 //STEP014  EXEC PGM=IDCAMS                          
+007800 //SYSIN    DD *                                     
+007900   DELETE (Z38515.FRIV) GDG FORCE                    
+008000 /*                                                  
+008100 //SYSPRINT DD SYSOUT=*                              
+008200 //SYSOUT   DD SYSOUT=*                              
+008300 //AMSDUMP  DD SYSOUT=*                              
+008400 //SYSABEND DD SYSOUT=*                              
+****** **************************** Bottom of Data ********
 
 
-********************************* TOP OF DATA **********************************
-                   J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E 
-                                                                                
-12.28.12 JOB01175 ---- WEDNESDAY, 22 MAY 2024 ----                              
-12.28.12 JOB01175  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
-12.28.13 JOB01175  IEF677I WARNING MESSAGE(S) FOR JOB Z38515A  ISSUED           
-12.28.15 JOB01175  ICH70001I Z38515   LAST ACCESS AT 12:27:39 ON WEDNESDAY, MAY 
-12.28.15 JOB01175  $HASP373 Z38515A  STARTED - INIT 1    - CLASS A        - SYS 
-12.28.19 JOB01175  -                                      -----TIMINGS (MINS.)--
-12.28.19 JOB01175  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
-12.28.19 JOB01175  -STEP01   COBOL       00  12765    160       .00       .00   
-12.28.20 JOB01175  -STEP01   LKED        00    310     33       .00       .00   
-12.28.20 JOB01175  -STEP02               00    125     13       .00       .00   
-12.28.21 JOB01175  -STEP03               00     39      6       .00       .00   
-12.28.21 JOB01175  -STEP04               00     30      4       .00       .00   
-12.28.22 JOB01175  -STEP05               00     14      1       .00       .00   
-12.28.22 JOB01175  -STEP07   STEP06      00      2      0       .00       .00   
-12.28.23 JOB01175  -STEP08               00      5      1       .00       .00   
-12.28.23 JOB01175  -STEP09   PROC200     00     34      4       .00       .00   
-12.28.24 JOB01175  -STEP09   STEP012     00     27      3       .00       .00   
-12.28.24 JOB01175  -STEP010              00     14      1       .00       .00   
-12.28.24 JOB01175  -Z38515A  ENDED.  NAME-JORGE.CINTRON        TOTAL TCB CPU TIM
-12.28.24 JOB01175  $HASP395 Z38515A  ENDED - RC=0000                            
+
+
+
+22.25.47 JOB05045 ---- FRIDAY,    31 MAY 2024 ----                              
+22.25.47 JOB05045  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
+22.25.48 JOB05045  IEF677I WARNING MESSAGE(S) FOR JOB Z38515A  ISSUED           
+22.25.50 JOB05045  ICH70001I Z38515   LAST ACCESS AT 22:25:38 ON FRIDAY, MAY 31,
+22.25.50 JOB05045  $HASP373 Z38515A  STARTED - INIT 1    - CLASS A        - SYS 
+22.25.54 JOB05045  -                                      -----TIMINGS (MINS.)--
+22.25.54 JOB05045  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+22.25.54 JOB05045  -STEP01   COBOL       00  13897    173       .00       .00   
+22.25.55 JOB05045  -STEP01   LKED        00    311     33       .00       .00   
+22.25.55 JOB05045  -STEP02               00    296     34       .00       .00   
+22.25.56 JOB05045  -STEP03               00     46      5       .00       .00   
+22.25.57 JOB05045  -STEP04               00     35      4       .00       .00   
+22.25.57 JOB05045  -STEP05               00     41      3       .00       .00   
+22.25.57 JOB05045  -STEP07   STEP06      00      6      0       .00       .00   
+22.25.58 JOB05045  -STEP08               00      6      0       .00       .00   
+22.25.58 JOB05045  -STEP09               00      9      1       .00       .00   
+22.25.59 JOB05045  -STEP010  STEP0100    00     30      2       .00       .00   
+22.25.59 JOB05046  $HASP100 JCLRUN11 ON INTRDR      JORGE CINTRON         FROM J
+22.25.59 JOB05046  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
+22.25.59 JOB05045  -STEP011              00    123      7       .00       .00   
+22.25.59 JOB05045  -STEP012              00     73      3       .00       .00   
+22.26.00 JOB05045  -STEP014              00     29      1       .00       .00   
+22.26.00 JOB05045  -Z38515A  ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
+22.26.00 JOB05045  $HASP395 Z38515A  ENDED - RC=0000                            
