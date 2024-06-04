@@ -1,0 +1,16 @@
+type cemt i prog(progname)
+
+
+CEMT I PROG(MDEPGM1)                                    
+STATUS:  RESULTS - OVERTYPE TO MODIFY                   
+ Prog(MDEPGM1 ) Leng(0000005080)     Pro Ena Pri     Ced
+    Res(000) Use(0000000039) Bel Uex Ful Qua Cic        
+
+
+then tab over and type new as shown
+
+
+STATUS:  RESULTS - OVERTYPE TO MODIFY                     
+ Prog(MDEPGM1 ) Leng(0000005080)     Pro Ena Pri new Ced  
+    Res(000) Use(0000000039) Bel Uex Ful Qua Cic          
+                                                          
