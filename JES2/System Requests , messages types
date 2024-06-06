@@ -42,3 +42,10 @@ SR R - Displays only WTOR messages. The RM and REPLIES parameteres can also be s
 SR M - Will Display only DASD and tape mount messages
 
 SR ALL - command is the default that displays all reply and action messages
+
+
+R action character is issued from the SDSF System Requests panel to respond to a WTOR message 
+
+Just place R in the NP column 
+
+
