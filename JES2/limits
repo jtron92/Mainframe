@@ -1,0 +1,30 @@
+ COMMAND INPUT ===>                                            SCROLL ===> CSR  
+ PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*                                  
+ NP   RESOURCE SysId Status      Limit  InUse InUse% Warn% IntAvg IntHigh IntLow
+      BERT     S0W1               8350    275   3.29    80    279     285    275
+      BSCB     S0W1               2000      0   0.00    80      0       0      0
+      BUFX     S0W1                161      0   0.00    80      0       0      0
+      CKVR     S0W1                 50      0   0.00    80      0       1      0
+      CMBS     S0W1                510      0   0.00    80      0       0      0
+      CMDS     S0W1                500      0   0.00    80      0       0      0
+      ICES     S0W1                  4      0   0.00    80      0       0      0
+      JNUM     S0W1               9999    926   9.26    80    925     926    923
+      JOES     S0W1               5000    876  17.52    75    871     876    865
+      JQES     S0W1               7000    926  13.22    50    925     926    923
+      LBUF     S0W1                 39      0   0.00    80      0       0      0
+      NHBS     S0W1                 35      0   0.00    80      0       0      0
+      SMFB     S0W1                 21      0   0.00    80      0       0      0
+      TBUF     S0W1                104      0   0.00     0      0       0      0
+      TGS      S0W1              14954   2214  14.80    80   2209    2214   2200
+  F1=HELP      F2=SPLIT     F3=END       F4=RETURN    F5=IFIND     F6=BOOK      
+
+for an example :
+
+The following message is displayed on your system console:
+
+*$HASP050 JES2 RESOURCE SHORTAGE OF JQES - 80% UTILIZATION REACHED.
+
+The problem can be a sudden influx of jobs, can either delete those jobs and the ouputs or temporarily 
+increase the JQES resource but it may casue some system degradtion 
+
+if so typeover in the JQES resource and change the limit from 2000 to the number desired
