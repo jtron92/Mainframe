@@ -49,3 +49,7 @@ R action character is issued from the SDSF System Requests panel to respond to a
 Just place R in the NP column 
 
 
+C - is to remove action messages that you want to igorne that appear in the Systems Requests panel
+
+Just type C in the NP column but ask your sys prog first in case
+
