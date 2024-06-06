@@ -31,17 +31,21 @@ EM 1 - this indicates that there is an eventual action message displayed below
 
 
 
-SR A - will display only action messages in the panel
+SR A - will display only action messages in the panel; Displays critical , eventual, and immediate action messages only
+
+SR IM - Displays immediate action messages only
 
 SR CEM - The SR CEM command will display only the critical eventual action messages.
 The SR EM and SR IM commands can be sued to display the eventual and immedidate action messages.
 
 
-SR R - Displays only WTOR messages. The RM and REPLIES parameteres can also be substitued for R
+SR R - Displays only WTOR messages. The RM and REPLIES parameteres can also be substituted; DIsplays WTOR messsages only
 
 SR M - Will Display only DASD and tape mount messages
 
-SR ALL - command is the default that displays all reply and action messages
+SR ALL - command is the default that displays all reply and action messages; Displays all WTOR and action messages
+
+
 
 
 R action character is issued from the SDSF System Requests panel to respond to a WTOR message 
