@@ -152,3 +152,51 @@ In use is 84 the warning is at 80 is it triggered the warning status
 
 same with the limit , inuse is at the limt 161 thefore the percent inuse is 100.00 percent
 
+
+
+
+F11 to scroll to the right 
+
+
+                                                                                
+   Display  Filter  View  Print  Options  Search  Help                          
+ -------------------------------------------------------------------------------
+ SDSF RESOURCE MONITOR DISPLAY  (ALL)                   LINE 1-16 (90)          
+ COMMAND INPUT ===>                                            SCROLL ===> CSR  
+ PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*                                  
+ NP   RESOURCE  OverWarn% Time     Date     SysName  JESN JESLevel Description  
+      BERT           0.00 10:00:00 2024.158 S0W1     JES2 z/OS 2.4 CB extensions
+      BERT           0.00  9:00:00 2024.158 S0W1     JES2 z/OS 2.4 CB extensions
+      BERT           0.00  8:00:00 2024.158 S0W1     JES2 z/OS 2.4 CB extensions
+      BERT           0.00  7:00:00 2024.158 S0W1     JES2 z/OS 2.4 CB extensions
+      BERT           0.00  6:00:00 2024.158 S0W1     JES2 z/OS 2.4 CB extensions
+      BSCB           0.00 10:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffer
+      BSCB           0.00  9:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffer
+      BSCB           0.00  8:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffer
+      BSCB           0.00  7:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffer
+      BSCB           0.00  6:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffer
+      BUFX           0.00 10:00:00 2024.158 S0W1     JES2 z/OS 2.4 Extended CB b
+      BUFX           0.00  9:00:00 2024.158 S0W1     JES2 z/OS 2.4 Extended CB b
+      BUFX           0.00  8:00:00 2024.158 S0W1     JES2 z/OS 2.4 Extended CB b
+      BUFX           0.00  7:00:00 2024.158 S0W1     JES2 z/OS 2.4 Extended CB b
+      BUFX           0.00  6:00:00 2024.158 S0W1     JES2 z/OS 2.4 Extended CB b
+      CKVR           0.00 10:00:00 2024.158 S0W1     JES2 z/OS 2.4 Checkpoint ve
+  F1=HELP      F2=SPLIT     F3=END       F4=RETURN    F5=IFIND     F6=BOOK      
+
+also you can display using the D action character in the NP column
+
+
+------------------------------------------------------------------------------
+SDSF RESOURCE MONITOR DISPLAY  (ALL)                   COMMAND ISSUED         
+COMMAND INPUT ===>                                            SCROLL ===> CSR 
+RESPONSE=S0W1                                                                 
+ $HASP852 CKPTSPACE                                                           
+ $HASP852 CKPTSPACE  BERTNUM=8350,BERTFREE=8022,BERTWARN=80,                  
+ $HASP852            CKPT1=(CAPACITY=3048,UNUSED=2102,TRACKS=255),            
+ $HASP852            CKPT2=(CAPACITY=3048,UNUSED=2102,TRACKS=255),            
+ $HASP852            CDI=(CDINUM=128,CDIFREE=128,CDTSIZE=524264,              
+ $HASP852            CDTFREE=524264)                                          
+     BSCB           0.00 10:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffe
+     BSCB           0.00  9:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffe
+     BSCB           0.00  8:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffe
+     BSCB           0.00  7:00:00 2024.158 S0W1     JES2 z/OS 2.4 BSC TP buffe
