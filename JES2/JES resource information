@@ -1,0 +1,58 @@
+------------------------------------------------------------------------------
+SDSF JESINFO JOB DISPLAY  S0W1     RATE                LINE 17-32 (300)       
+COMMAND INPUT ===>                                            SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*                                 
+NP   JOBNAME  JobID    Resource Usage Usage% UsageRate NPrivMax SampleTime    
+dli  @SDSF1   JOB00966 JOE          1      0     0.000     5000 06/06/2024 10:
+     @VSC1    JOB00862 JOE          1      0     0.000     5000 06/06/2024 10:
+     @VSC1    JOB00955 JOE          1      0     0.000     5000 06/06/2024 10:
+     @VSC1    JOB09437 JOE          1      0     0.000     5000 06/06/2024 10:
+     ASMCOMP3 JOB00259 JOE          1      0     0.000     5000 06/06/2024 10:
+     ASMCOMP3 JOB00267 JOE          2      0     0.000     5000 06/06/2024 10:
+     ASMPGM   JOB00202 JOE          1      0     0.000     5000 06/06/2024 10:
+     ASMPGM   JOB00237 JOE          1      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC00854 JOE          0      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC00864 JOE          0      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC00865 JOE          0      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC00956 JOE          0      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC00957 JOE          0      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC00958 JOE          0      0     0.000     5000 06/06/2024 10:
+     BPXAS    STC06309 JOE          0      0     0.000     5000 06/06/2024 10:
+     CBLJSONJ JOB09433 JOE          1      0     0.000     5000 06/06/2024 10:
+
+
+typing DLI in the NP column to display resource infomation and will list the top 10 consumers of
+the selected resource by both count and rate
+
+COMMAND INPUT ===>                                            SCROLL ===> C
+RESPONSE=S0W1                                                              
+ $HASP1490 LIMITS(JOE)                                                     
+ LIMITS(JOE)                                                               
+ PRIVILEGE SUPPORT IS ON                                                   
+ JOE PRIVILEGE SUPPORT IS OFF                                              
+ JOE UTILIZATION ON 6 JUN 2024 AT 10:25:38                                 
+ ----------  NON-PRIVILEGED  ---------|---  PRIVILEGED  --                 
+     MAXIMUM   WARN%       IN-USE    %|  MAX  AVAILABLE                    
+       5,000      75          854   17|    0          0                    
+ JOE EXHAUST: 9 JUN 2024 AT 14:40                                          
+ ---------------------------------------------------------                 
+ TOP 10 CONSUMERS OF JOE BY COUNT                                          
+                           TOTAL           COUNT  ACTIVE                   
+ JOB NAME    JOB ID        COUNT     %     PER M  ON MBR                   
+ --------    --------     ------   --- ---------  ------                   
+ SYSLOG      STC06248          6     1     0.004   S0W1                    
+ ASMCOMP3    JOB00267          2     0     0.000                           
+ PRIME1      JOB09663          2     0     0.000                           
+
+
+also on the command line you can type JRJ R - List JOEs, JQEs, and Spool resouces
+JRJ C - List BERTs, JOEs, and Spool resources
+
+
+
+***
+
+If you find a job, TSO user, or started task causing resource issues, you can navigate diferclty
+to the status panel (st) by using the ST action character against the offeding job. So type ST in the NP column
+then you can take necessary action against the job, like canceling it or purging it
+
