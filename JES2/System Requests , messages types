@@ -1,0 +1,31 @@
+ Display  Filter  View  Print  Options  Help                                    
+                                                                                
+ SDSF SYSTEM REQUESTS      RM 2      IM 1      CEM 2      EM 1   LINE 1-6 (6)   
+ COMMAND INPUT ===>                                                SCROLL ===> CSR
+ NP   REPLYID     SysName   JobName   Message-Text                             
+      1            S0W1      HZSPROC   *01 HZS0013A SPECIFY THE NAME OF AN EMPTY
+      2            S0W1                *02 IEE094D SPECIFY OPERAND(S) FOR DUMP CO
+      I220106      S0W1      HZSPROC   *HZSO002E CHECK(IBMCNZ, CNZ_SYSCONS_PD_MODE
+      I224I106     S0W1      HZSPROC   *HZS0003E CHECK(IBMXCF, XCF_CDS_SPOF)    
+      I226I106     S0W1      HZSPROC   *HZS0003E CHECK(IBMRACF, RACF_SENSITIVE_RES
+      I227I106     S0W1      JES2      *$HASP050 JES2 RESOURCE SHORTAGE OF TGS - 
+
+
+RM - This indicates that there are two WTOR messages awaiting replies
+ REPLYID     SysName   JobName   Message-Text                             
+      1            S0W1      HZSPROC   *01 HZS0013A SPECIFY THE NAME OF AN EMPTY
+      2            S0W1                *02 IEE094D SPECIFY OPERAND(S) FOR DUMP CO
+
+
+IM 1 - This indicates that there is one immediate action message that needs attention 
+I227I106     S0W1      JES2      *$HASP050 JES2 RESOURCE SHORTAGE OF TGS - 
+
+CEM 2 - This indicates that there are two critcal eventual action messages displayed 
+
+I224I106     S0W1      HZSPROC   *HZS0003E CHECK(IBMXCF, XCF_CDS_SPOF)    
+I226I106     S0W1      HZSPROC   *HZS0003E CHECK(IBMRACF, RACF_SENSITIVE_RES
+
+EM 1 - this indicates that there is an eventual action message displayed below
+
+ I220106      S0W1      HZSPROC   *HZSO002E CHECK(IBMCNZ, CNZ_SYSCONS_PD_MODE
+
