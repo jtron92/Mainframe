@@ -28,3 +28,11 @@ The problem can be a sudden influx of jobs, can either delete those jobs and the
 increase the JQES resource but it may casue some system degradtion 
 
 if so typeover in the JQES resource and change the limit from 2000 to the number desired
+
+
+There is so limit fields that you can not update
+
+The time and date fields indicate the start time for the current interval
+
+Theres always a max or min limit that can be specified for a resource
+
