@@ -11,7 +11,7 @@
       I227I106     S0W1      JES2      *$HASP050 JES2 RESOURCE SHORTAGE OF TGS - 
 
 
-RM - This indicates that there are two WTOR messages awaiting replies
+RM 2 - This indicates that there are two WTOR messages awaiting replies
  REPLYID     SysName   JobName   Message-Text                             
       1            S0W1      HZSPROC   *01 HZS0013A SPECIFY THE NAME OF AN EMPTY
       2            S0W1                *02 IEE094D SPECIFY OPERAND(S) FOR DUMP CO
@@ -29,3 +29,16 @@ EM 1 - this indicates that there is an eventual action message displayed below
 
  I220106      S0W1      HZSPROC   *HZSO002E CHECK(IBMCNZ, CNZ_SYSCONS_PD_MODE
 
+
+
+SR A - will display only action messages in the panel
+
+SR CEM - The SR CEM command will display only the critical eventual action messages.
+The SR EM and SR IM commands can be sued to display the eventual and immedidate action messages.
+
+
+SR R - Displays only WTOR messages. The RM and REPLIES parameteres can also be substitued for R
+
+SR M - Will Display only DASD and tape mount messages
+
+SR ALL - command is the default that displays all reply and action messages
