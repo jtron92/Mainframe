@@ -1,0 +1,41 @@
+ Display  Filter  View  Print  Options  Search  Help                             
+                                                                                
+ SDSF SYSLOG   1090.102 S0W1 S0W1 04/04/2022 2w   885   COLUMNS 52 - 131         
+ COMMAND INPUT ===>                                      SCROLL ===> PAGE        
+ 0290  IRR010I  USERID IBMUSER IS ASSIGNED TO THIS JOB.                          
+ 0290  ICH70001I IBMUSER  LAST ACCESS AT 19:54:48 ON MONDAY, APRIL 4, 2022       
+ 0300  $HASP373 TAXTAPE  STARTED - INIT 1    - CLASS K    SYS S0W1               
+ 0290  IEF233A  M 05B3,PRIVAT,SL,TAXTAPE,STEP1,TAXDEPT.EOY.PAYREC                
+ 0290  IEC705I  TAPE ON 05B3,HTK000,SL,NOCOMP,TAXTAPE,STEP1,TAXDEPT.EOY.PAYREC,  
+       TAPE1                                                           
+ 0290  IEC205I  SYSUT2,TAXTAPE,STEP1,FILESEQ=1, COMPLETE VOLUME LIST, 982       
+ 0090  DSN=TAXDEPT.EOY.PAYREC,VOLS=HTK000,TOTALBLOCKS=1                         
+ 0290  IEF234E  K 05B3,HTK000,PVT,TAXTAPE,STEP1                                 
+ 0290  -------PAGING COUNTS-------       -------TIMINGS (MINS.)-------          
+ 0290  -STEPNAME PROCSTEP RC   EXCP  CONN   TCB     SRB    CLOCK                
+        SERV  WORKLOAD  PAGE  SWAP  VIO  SWAPS                                   
+ 0290  -STEP1              00    56     0     .00     .00     .00                
+        16   BATCH       00     5      4       0       4                         
+ 0290  -TAXTAPE  ENDED.  NAME-                TOTAL TCB CPU TIME=  .00           
+ TOTAL ELAPSED TIME=    .0                                                       
+ 0090  $HASP395 TAXTAPE  ENDED - RC=0000                                         
+ 0090  $HASP309 INIT 1   INACTIVE ********  C=KAB74                              
+
+
+
+
+The system has issued a request for a private tape volume to be mounted on 05B3. 
+This may be an automated or manual process depending on the tape environment 
+
+M 05B3,PRIVAT
+
+
+This message is produced when the first data set is written to the tape, with the information immediately following it, decribing the type of label,
+the job requesting this tape, and the type of media
+
+TAPE ON 05B3,HTK000
+
+Once the tape is no longer required, a message like this is used to indicate that a demount of the tape from the drive is required
+
+K 05B3,HTK000
+
