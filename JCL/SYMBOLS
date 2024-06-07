@@ -22,3 +22,7 @@ the current data &yymmdd
 
 The current time &hhmmss
 
+There are two types of system symbols: static and dynamic
+
+Static system symbols contain values that are fixed for the life of the IPL. DISPLAY SYMBOLS command will display
+their values for the system where the command was entered
