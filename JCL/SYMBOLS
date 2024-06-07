@@ -22,6 +22,40 @@ the current data &yymmdd
 
 The current time &hhmmss
 
+//Z38515A  JOB (ACCT),'JORGE CINTRON',             
+//             MSGLEVEL=(1,1),                     
+//             MSGCLASS=H,                         
+//             CLASS=A,                            
+//             NOTIFY=&SYSUID                      
+//STEP01   EXEC PGM=IEBGENER                       
+//SYSUT1   DD DSN=Z38515.CHASE,DISP=SHR            
+//SYSUT2   DD DSN=Z38515.D&YYMMDD..WORK,           
+//            DISP=(,CATLG),                       
+//            SPACE=(TRK,(1,1),RLSE),              
+//            DCB=*.SYSUT1                         
+//SYSIN    DD DUMMY                                
+//SYSPRINT DD SYSOUT=*                             
+//AMSDUMP  DD SYSOUT=*                             
+//SYSOUT   DD SYSOUT=*                             
+
+key note if you do not add two periods after usuing a sys sybmol like this 
+38515.D&YYMMDD.work    = this will combine the D&YYMMDD.work into one also the name maybe too long and youll get this error IEF642I EXCESSIVE PARAMETER LENGTH IN THE DSNAME FIELD   
+z38515.D&YYMMDD..WORK  = Z38515.D240607.WORK   
+
+000006 //STEP01   EXEC PGM=IEBGENER                   
+000007 //SYSUT1   DD DSN=Z38515.CHASE,DISP=SHR        
+000008 //SYSUT2   DD DSN=Z38515.&SYSNAME.WORK,        
+000009 //            DISP=(,CATLG),                   
+000010 //            SPACE=(TRK,(1,1),RLSE),          
+000011 //            DCB=*.SYSUT1                     
+000012 //SYSIN    DD DUMMY                            
+000013 //SYSPRINT DD SYSOUT=*                         
+000014 //AMSDUMP  DD SYSOUT=*                         
+000015 //SYSOUT   DD SYSOUT=*                         
+
+Z38515.&SYSNAME.WORK = Z38515.S0W1WORK
+  
+
 There are two types of system symbols: static and dynamic
 
 Static system symbols contain values that are fixed for the life of the IPL. DISPLAY SYMBOLS command will display
