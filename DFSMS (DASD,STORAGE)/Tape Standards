@@ -1,0 +1,24 @@
+
+
+Job Class Standards:
+
+Production batch jobs must have the correct job class assigned, otherwise the job may be automatically cancelled.
+The following is a list of the available JCL job classes and their criteria:
+
+Batch Job Classes
+Class A – Tapes allowed with 10 minute time limit
+Class C – Maximum of 2 concurrent tape drives
+Class F – Greater than 2 concurrent tape drives
+Class G – Unlimited tape drives and data requires retention period
+Class H – Tapes created for outside organizations
+Class P – No tapes but a 10 minute time limit
+Class T – No tapes for jobs running longer than 10 minutes
+Class W – No tapes
+
+If the CLASS parameter is omitted from the JOB card, a class will be generated for the job. The default class is defined for: zero tape usage,
+less than one MB region size and no more than ten seconds of CPU time.
+
+Batch jobs running in the Test environment can use the following job classes:
+Class A – No tapes with a maximum of 1 hour
+Class B – Maximum of 2 concurrent tape drives, for a one hour maximum
+Class X – No tapes but a 10 minute time limit
