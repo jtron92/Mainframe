@@ -26,3 +26,27 @@ There are two types of system symbols: static and dynamic
 
 Static system symbols contain values that are fixed for the life of the IPL. DISPLAY SYMBOLS command will display
 their values for the system where the command was entered
+
+
+in sdsf type display symbols
+ Display  Filter  View  Print  Options  Search  Help                             
+                                                                                
+ SDSF SYSLOG   1113.101 S0W1 04/12/2022 0w   808   COLUMNS 52 - 131             
+ COMMAND INPUT ===>                                      SCROLL ===> CSR        
+ 0290  DISPLAY SYMBOLS                                                          
+ 0090  IEA007I STATIC SYSTEM SYMBOL VALUES 098                                  
+ 0090    &SYSVAL.    = "2"                                                      
+ 0090    &SYSCLONE.  = "W1"                                                     
+ 0090    &SYSNAME.   = "S0W1"                                                   
+ 0090    &SYSOSLVL.  = "Z1020500"                                               
+ 0090    &SYSPLEX.   = "SVCSPLEX"                                               
+ 0090    &SYSR1.     = "VMIVSB"                                                 
+ 0090    &JESSSN.    = "J2"                                                     
+ 0090    &J2MLQX.    = ""                                                       
+ 0090    &J3MLQX.    = ""                                                       
+ 0090    &STVSC.     = "SV"                                                     
+ 0090    &UNTVXER.   = "VERYSB"                                                 
+ 0090    &VENDOR.    = "V1"                                                     
+ 0090    &VTAMLIST.  = "W1"                                                     
+ *************************** BOTTOM OF DATA ************************************ 
+
