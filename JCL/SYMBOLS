@@ -1,0 +1,24 @@
+000001 //MATEDK91 JOB CLASS=A,                                        
+000002 //             MSGLEVEL=(1,1),                                 
+000003 //             MSGCLASS=H,                                     
+000004 //             NOTIFY=&SYSUID                                  
+000005 //STEP01   EXEC PGM=IDCAMS                                     
+000006 //INDD     DD DSN=MATEDK.EMIN8,DISP=SHR                        
+000007 //OUTDD   DD DSN=MATEDK.BACKUP.&SYSNAME..D&YYMMDD..T&HHMMSS,   
+000008 //            DISP=(NEW,CATLG,DELETE),                         
+000009 //            UNIT=SYSDA,                                      
+000010 //            SPACE=(TRK,(8,10,10),RLSE),                      
+000011 //            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)     
+000012 //SYSIN    DD *                                                
+000013   REPRO INFILE(INDD)                                           
+000014   OUTFILE(OUTDD)                                               
+000015 /*                                                             
+000016 //SYSABEND DD SYSOUT=*                                         
+
+
+The name of the system that the job is running on &sysname
+
+the current data &yymmdd
+
+The current time &hhmmss
+
