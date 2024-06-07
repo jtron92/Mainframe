@@ -1,0 +1,20 @@
+IEFC653I SUBSTITUTION JCL
+
+this mean jcl was substituted for example
+
+/SYSUT1   DD DSN=Z38515.ALPHA,DISP=SHR             
+/SYSUT2   DD DSN=Z38515.&WDAY&YR4..&SYSNAME,       
+/            DISP=(NEW,CATLG,DELETE),              
+/            UNIT=SYSDA,                           
+/            SPACE=(TRK,(8,10,10),RLSE),           
+/            DCB=*.SYSUT1,                         
+/            VOL=REF=*.SYSUT1                      
+
+
+
+
+
+DSN=Z38515.&WDAY&YR4..&SYSNAME, 
+when submitted into jes2 it will convert to 
+
+DSN=Z38515.FRI2024.S0W1
