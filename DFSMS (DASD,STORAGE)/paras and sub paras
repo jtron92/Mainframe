@@ -1,0 +1,23 @@
+//         VOL=(ABC123,DEF456,RETAIN,EXPDT=20241231,SCR,2,SER=XYZ789),
+
+volser1 (ABC123): The first tape volume serial number.
+volser2 (DEF456): The second tape volume serial number.
+RETAIN: The tape is retained after use.
+EXPDT=20241231: The tape expiration date is December 31, 2024.
+SCR: The tape is scratched after use.
+2: Specifies that two tape drives should be used.
+SER=XYZ789: An additional volume serial number.
+
+Detailed Explanation:
+volser1 and volser2:
+These are specific volume serial numbers for the tapes. They can be any valid alphanumeric string up to six characters.
+RETAIN:
+Ensures the tape is retained and not deleted after the job step completes.
+EXPDT=20241231:
+Sets the expiration date of the tape to December 31, 2024. You can also use special keywords like CATLG for catalog control or PERM for a permanent retention period.
+SCR:
+Indicates the tape should be scratched (available for reuse) after the job completes. If you do not want the tape to be scratched, you can omit this or use NOSCR.
+2:
+Specifies that two tape drives should be used. You can specify any valid number based on your requirements and the available resources.
+SER=XYZ789:
+Specifies an additional volume serial number.
