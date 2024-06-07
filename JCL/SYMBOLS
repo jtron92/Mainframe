@@ -50,3 +50,106 @@ in sdsf type display symbols
  0090    &VTAMLIST.  = "W1"                                                     
  *************************** BOTTOM OF DATA ************************************ 
 
+
+
+in sdsf type sym 
+
+-------------------------------------------------------------------------------
+SDSF SYMBOL DISPLAY  S0W1     (ALL)                    LINE 1-15 (36)          
+COMMAND INPUT ===> sym                                        SCROLL ===> CSR  
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*                                  
+NP   SYMBOL             Value                                        Type     S
+     &DAY.              07                                           DYNAMIC  S
+     &HHMMSS.           004550                                       DYNAMIC  S
+     &HR.               00                                           DYNAMIC  S
+     &JDAY.             159                                          DYNAMIC  S
+     &JESSSN.           J2                                           STATIC   S
+     &JOBNAME.          SDSFAUX                                      DYNAMIC  S
+     &J2MLQX.                                                        STATIC   S
+     &J3MLQX.                                                        STATIC   S
+     &LDAY.             06                                           DYNAMIC  S
+     &LHHMMSS.          194550                                       DYNAMIC  S
+     &LHR.              19                                           DYNAMIC  S
+     &LJDAY.            158                                          DYNAMIC  S
+     &LMIN.             45                                           DYNAMIC  S
+     &LMON.             06                                           DYNAMIC  S
+     &LSEC.             50                                           DYNAMIC  S
+
+The Dynamic system symbols contain values that are constantly changing, such as a time or data value.
+
+
+TYPE JC FOR JOB CLASS
+-----------------------------------------------------------------------
+SDSF MENU V2R4M0    SVSCPLEX  S0W1                     LINE 1-15 (64)  
+COMMAND INPUT ===> JC                                         SCROLL ==
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*                          
+NP   NAME     Description              Group    Status                 
+     DA       Active users             Jobs                            
+     I        Input Queue              Jobs                            
+     O        Output Queue             Output                          
+     H        Held output Queue        Output                          
+     ST       Status of jobs           Jobs                            
+     JG       Job groups               JES                             
+     SYM      System symbols           System                          
+     LOG      System log               Log                             
+     SR       System requests          Log                             
+     MAS      Members in the MAS       JES                             
+     JC       Job classes              JES                             
+     SE       Scheduling environments  WLM                             
+     RES      WLM resources            WLM                             
+     ENC      Enclaves                 WLM                             
+     PS       Processes                OMVS                            
+
+
+TYPE L SYSSYM
+-----------------------------------------------------------------------------
+SDSF JOB CLASS DISPLAY ALL CLASSES                     LINE 1-15 (38)        
+COMMAND INPUT ===> L SYSSYM                                   SCROLL ===> CSR
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*                                
+NP   CLASS    Status   Group    Mode Wait-Cnt  Xeq-Cnt Hold-Cnt ODisp        
+     A        NOTHELD           JES                             ()           
+     B        NOTHELD           JES                             ()           
+     C        NOTHELD           JES                             ()           
+     D        NOTHELD           JES                             ()           
+     E        NOTHELD           JES                             ()           
+     F        NOTHELD           JES                             ()           
+     G        NOTHELD           JES                             ()           
+     H        NOTHELD           JES                             ()           
+     I        NOTHELD           JES                             ()           
+     J        NOTHELD           JES                             ()           
+     K        NOTHELD           JES                             ()           
+     L        NOTHELD           JES                             ()           
+     M        NOTHELD           JES                             ()           
+     N        NOTHELD           JES                             ()           
+     O        NOTHELD           JES                             ()           
+
+
+
+
+ SDSF JOB CLASS DISPLAY ALL CLASSES                
+ COMMAND INPUT ===>                                
+ PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=*     
+ NP   CLASS    SysSym   DSEnqShr PromoRt GDGBias   
+      A        ALLOW    ALLOW          0 JOB       
+      B        ALLOW    ALLOW          0 JOB       
+      C        ALLOW    ALLOW          0 JOB       
+      D        ALLOW    ALLOW          0 JOB       
+      E        ALLOW    ALLOW          0 JOB       
+      F        ALLOW    ALLOW          0 JOB       
+      G        ALLOW    ALLOW          0 JOB       
+      H        ALLOW    ALLOW          0 JOB       
+      I        ALLOW    ALLOW          0 JOB       
+      J        ALLOW    ALLOW          0 JOB       
+      K        ALLOW    ALLOW          0 JOB       
+      L        ALLOW    ALLOW          0 JOB       
+      M        ALLOW    ALLOW          0 JOB       
+      N        DISALLOW ALLOW          0 JOB       
+      O        DISALLOW ALLOW          0 JOB       
+
+
+THE SDSF SCREEN SHOWN HERE DISPLAYS JOB CLASSES AND THEIR ATRRIBUTES. FOR THE A JOB CLASS THERE IS 
+AN ATTRIBUTE CALLED SYSSYSM (SYSTEM SYMBOLS) WHICH IS SET TO ALLOW.
+
+THIS MEANS THAT IF THE JOB YOU SUBMIT IS ASSIGNED THIS CLASS, THEN YOU CAN CODE SYSTEM SYMBOLS IN IT.
+
+DISALLOW MEANS YOU CAN NOT CODE SYS SYMBOLS IN THAT CLASS LIKE CLASS N AND O 
