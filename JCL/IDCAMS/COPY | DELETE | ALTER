@@ -1,0 +1,43 @@
+000001 //MATEDK91 JOB CLASS=A,                                       
+000002 //             MSGLEVEL=(1,1),                                
+000003 //             MSGCLASS=H,                                    
+000004 //             NOTIFY=&SYSUID                                 
+000005 //STEP01   EXEC PGM=IDCAMS                                    
+000006 //AMSDUMP  DD SYSOUT=*                                        
+000007 //SYSOUT   DD SYSOUT=*                                        
+000008 //SYSPRINT DD SYSOUT=*                                        
+000009 //SYSIN    DD *                                               
+000010   REPRO  INFILE(IFILE)-                                       
+000011   OUTFILE(OFILE)                                              
+000012 /*                                                            
+000013 //IFILE    DD DSN=MATEDK.IDZMA,DISP=SHR                       
+000014 //OFILE    DD DSN=&SYSUID..IDZMA2,                            
+000015 //            DISP=(NEW,CATLG,DELETE),                        
+000016 //            UNIT=SYSDA,                                     
+000017 //            SPACE=(TRK,(8,10),RLSE),                        
+000018 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),   
+000019 //            VOL=SER=DEVHD2                             
+000020 //STEP02   EXEC PGM=IDCAMS                               
+000021 //SYSIN    DD *                                          
+000022   DELETE MATEDK.IDZMA                                    
+000023 /*                                                       
+000024 //SYSPRINT DD SYSOUT=*                                   
+000025 //AMSDUMP  DD SYSOUT=*                                   
+000026 //SYSOUT   DD SYSOUT=*                                   
+000027 //STEP03   EXEC PGM=IDCAMS                               
+000028 //SYSIN    DD *                                          
+000029   ALTER MATEDK.IDZMA2 NEWNAME(MATEDK.IDZMA)              
+000030 /*                                                       
+000031 //SYSPRINT DD SYSOUT=*                                   
+000032 //AMSDUMP  DD SYSOUT=*                                   
+000033 //SYSOUT   DD SYSOUT=*                                   
+****** **************************** Bottom of Data *************
+                                                                
+                                                                
+
+
+STEP01 - COPYING THE INFILE WHICH IS IFILE DATASET MATEDK.IDZMA AND POINTING IT INTO A NEW DSN CALLED MATEDK.IDZMA2
+
+STEP02  - DELETING THE OLD DSN 
+
+STEP03  - ALTERING THE NAME MATEDK.IDZMA2 TO THE PERVIOUS DSN'S NAME 
