@@ -1,0 +1,294 @@
+000100 //CREATGDG JOB CLASS=A,                           
+000200 //             MSGCLASS=H,                        
+000300 //             MSGLEVEL=(1,1),                    
+000400 //             NOTIFY=&SYSUID                     
+000500 //*-------------------------                      
+000600 //* END OF JOB CARD                               
+000700 //*-------------------------                      
+000800 //STEP01   EXEC PGM=IDCAMS                        
+000810 //SYSIN    DD *                                   
+000820   DEFINE CLUSTER(NAME(Z38515.EMP.KSDS) -          
+000821   INDEXED -                                       
+000822   KEYS(6 0)-                                      
+000823   RECORDSIZE(80 80) -                             
+000824   CYLINDERS(5 2) -                                
+000825   FREESPACE(10 10) -                
+000826   )                                 
+000827   DATA(NAME(Z38515.EMP.KSDS)-       
+000828   )                                 
+000829   INDEX(NAME(Z38515.EMP.KSDS)-      
+000830   )                                 
+000831 /*                                  
+001500 //SYSPRINT DD SYSOUT=*              
+001600 //SYSOUT   DD SYSOUT=*              
+001700 //AMSDUMP  DD SYSOUT=*              
+ONCE CLUSTER IS DEFINE THIS IS THE RESULTS BELOW:
+
+Z38515.EMP.KSDS                                                *VSAM*
+Z38515.EMP.KSDS.DATA                                           ZXPL01
+Z38515.EMP.KSDS.INDEX                                          ZXPL01
+
+
+IN FILE MANANGER LOOKING UP THE VSAM
+ -----------------------------------------------------------------
+ File Manager                 Primary Option Menu                 
+                                                                  
+ 0  Settings      Set processing options                 User ID .
+ 1  View          View data                              System ID
+ 2  Edit          Edit data                              Appl ID .
+ 3  Utilities     Perform utility functions              Version .
+ 4  Tapes         Tape specific functions                Terminal.
+ 5  Disk/VSAM     Disk track and VSAM CI functions       Screen. .
+ 6  OAM           Work with OAM objects                  Date. . .
+ 7  Templates     Template and copybook utilities        Time. . .
+ 8  HFS           Access Hierarchical File System                 
+ 9  WebSphere MQ  List, view and edit MQ data                     
+ 10 CICS          FM/CICS                                         
+ 11 Remote        Remote System Definition                        
+ X  Exit          Terminate File Manager                          
+                                                                  
+                                                                  
+                                                                  
+ Command ===> 1                                                   
+
+------------------------------------------------------------------------------
+File Manager                   View Entry Panel                               
+                                                                              
+Input Partitioned, Sequential or VSAM Data Set, or HFS file:                  
+   Data set/path name 'Z38515.EMP.KSDS'                               +       
+   Member . . . . . .              (Blank or pattern for member list)         
+   Volume serial  . .              (If not cataloged)                         
+   Start position . .                                 +                       
+   Record limit . . .              Record sampling                            
+                                                                              
+Copybook or Template:                                                         
+   Data set name  . .                                                         
+   Member . . . . . .              (Blank or pattern for member list)         
+Processing Options:                                                           
+ Copybook/template   Start position type   Enter "/" to select option         
+ 3  1. Above         1  1. Key                Edit template    Type (1,2,S)   
+    2. Previous         2. RBA                Include only selected records   
+    3. None             3. Record number      Binary mode, reclen 80          
+    4. Create dynamic   4. Formatted key                                      
+Command ===>                                        
+
+
+---------------------------------------------------------------------------
+Edit             Z38515.EMP.KSDS                                   Top of 3
+                            Type KSDS     RBA                      Format C
+Key                                          Col 1       Insert Length 80  
+       <===+>---10---+----2----+----3----+----4----+----5----+----6----+---
+****** ****  Top of data  ****                                             
+000001 000001 BRAXTON WELLS                                                
+000002 000002 JORGE CINTRON                                                
+000003 000003 TYRONE MORRIS                                                
+****** ****  End of data  ****   
+
+
+
+
+
+
+
+
+
+
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+****** ***************************** Top of Data ******************************
+000001 //CREATGDG JOB CLASS=A,                                                 
+000002 //             MSGLEVEL=(1,1),                                          
+000003 //             MSGCLASS=H,                                              
+000004 //             NOTIFY=&SYSUID                                           
+000005 //STEP01   EXEC PGM=IDCAMS                                              
+000006 //*-----------------------------------------------                      
+000007 //* CREATE A GDG BASE (IDCAMS) STEP01                                   
+000008 //*-----------------------------------------------                      
+000009 //SYSIN    DD *                                                         
+000010   DEFINE GDG(NAME(Z37931.NOV30.GDGBASE)-                                
+000011                   LIMIT(3)             -                                
+000012                   NOEMPTY              -                                
+000013                   SCRATCH)                                              
+000014 /*                                                                      
+000015 //SYSPRINT DD SYSOUT=*                                                  
+000016 //SYSOUT   DD SYSOUT=*                                                  
+000017 //AMSDUMP  DD SYSOUT=*                                                  
+000018 //*----------------------------------------                             
+000019 //* CREATING A GDG FILE USING IEFBR14                                   
+000020 //*----------------------------------------                             
+000021 //STEP02   EXEC PGM=IEFBR14                                             
+000022 //DD1      DD DSN=Z37931.NOV30.GDGBASE(+1),                             
+000023 //            DISP=(NEW,CATLG,DELETE),                                  
+000024 //            UNIT=SYSDA,                                               
+000025 //            SPACE=(TRK,(8,10),RLSE),                                  
+000026 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)              
+000027 //SYSPRINT DD SYSOUT=*                                                  
+000028 //SYSOUT   DD SYSOUT=*                                                  
+****** **************************** Bottom of Data ****************************
+
+TO CREATE A GDG BASE , IDCAMS IS NEEDED FOR THIS
+
+IN SYSIN DD * MUST DEFINE THE GDG 
+
+DEFINE GDG(NAME(Z37931.NOV30.GDGBASE)  <--- DEFINING THE GDG THEN THE NAME 
+AFTER THAT FOR A CONTUINATION ADD A - SIGN 
+WE ARE SETTING THE LIMIT OF FILES BEFORE BEING DELETE AND UNCATLGED TO 3 FILES 
+
+LIMIT(3)
+
+LIMIT - MAXIMUM NUMBER OF GENERATIONS THAT A GDG CAN HOLD. 
+
+EMPTY - UNCATALOGS ALL GENERATION ONCE LIMIT IS REACHED
+
+NOEMPTY - UNCATALOGS ONLY THE OLDEST GENERATION ONCE LIMIT IS REACHED 
+
+SCRATCH DELETES THE GENERATION WHEN UNCATALOGED
+
+NOSCRATCH DOES NOT DELETE THE GENERATION WHEN UNCATALOGED
+IN DATA SET LIST UTILITY     (3.4) 
+ ------------------------------------------------------------------------------ 
+                             Data Set List Utility                              
+                                                                    More:     + 
+    blank Display data set list               P Print data set list             
+        V Display VTOC information           PV Print VTOC information          
+                                                                                
+ Enter one or both of the parameters below:                                     
+    Dsname Level . . . Z37931.NOV30.GDGBASE                                     
+    Volume serial  . .                                                          
+
+
+
+
+------------------------------------------------------------------------------ 
+DSLIST - Data Sets Matching Z37931.NOV30.GDGBASE                    Row 1 of 2 
+                                                                               
+Command - Enter "/" to select action                  Message           Volume 
+-------------------------------------------------------------------------------
+         Z37931.NOV30.GDGBASE                                           ?????? 
+         Z37931.NOV30.GDGBASE.G0001V00                                  ZXPL01 
+***************************** End of Data Set list ****************************
+                                                                               
+                                                                               
+TO ADD MORE GDG FILES, I WOULD DO THE SAME AS BEFORE. I HAVE COMMENTED OUT STEP01 SINCE WE HAVE ALREADY DEFINED THE GDG BASE
+
+000001 //CREATGDG JOB CLASS=A,                                         
+000002 //             MSGLEVEL=(1,1),                                  
+000003 //             MSGCLASS=H,                                      
+000004 //             NOTIFY=&SYSUID                                   
+000005 //*STEP01   EXEC PGM=IDCAMS                                     
+000006 //*-----------------------------------------------              
+000007 //* CREATE A GDG BASE (IDCAMS) STEP01                           
+000008 //*-----------------------------------------------              
+000009 //*SYSIN    DD *                                                
+000010 //*DEFINE GDG(NAME(Z37931.NOV30.GDGBASE)-                       
+000011 //*               LIMIT(3)             -                        
+000012 //*               NOEMPTY              -                        
+000013 //*               SCRATCH)                                      
+000014 //*                                                             
+000015 //*SYSPRINT DD SYSOUT=*                     
+000016 //*SYSOUT   DD SYSOUT=*                                            
+000017 //*AMSDUMP  DD SYSOUT=*                                            
+000018 //*----------------------------------------                        
+000019 //* CREATING A GDG FILE USING IEFBR14                              
+000020 //*----------------------------------------                        
+000021 //STEP02   EXEC PGM=IEFBR14                                        
+000022 //DD1      DD DSN=Z37931.NOV30.GDGBASE(+1),                        
+000023 //            DISP=(NEW,CATLG,DELETE),                             
+000024 //            UNIT=SYSDA,                                          
+000025 //            SPACE=(TRK,(8,10),RLSE),                             
+000026 //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=800,RECFM=FB)         
+000027 //SYSPRINT DD SYSOUT=*                                             
+000028 //SYSOUT   DD SYSOUT=*                                             
+****** **************************** Bottom of Data ***********************
+
+
+                                                                               
+                                                                               
+Command ===>  SUBMIT                                                Scroll ===> PAGE 
+ F1=Help      F2=Split     F3=Exit      F4=Expand    F5=Rfind     F6=Rchange   
+ F7=Up        F8=Down      F9=Swap     F10=Left     F11=Right    F12=Cancel    
+
+
+
+ONCE I SUBMIT THE JOB 2 MORE TIMES, I HAVE THE FOLLOWING: 
+
+THIS IS IN 3.4
+
+Command - Enter "/" to select action                  Message           Volume 
+-------------------------------------------------------------------------------
+         Z37931.NOV30.GDGBASE                                           ?????? 
+         Z37931.NOV30.GDGBASE.G0001V00                                  ZXPL01 
+         Z37931.NOV30.GDGBASE.G0002V00                                  ZXPL01 
+         Z37931.NOV30.GDGBASE.G0003V00                                  ZXPL01 
+***************************** End of Data Set list ****************************
+
+
+
+NOW TO DELETE THE GDG BASE AND FILES 
+
+I USE THE COMMANDS DELETE (DSNNAME) GDG FORCE OR YOU CAN YOU GDG PURGE ALSO 
+
+A KEYNOTE THAT IF YOU GET A RETURN CODE 08 IT IS DUE TO PERMISSION TO DELETE A GDGBASE , TO BY THIS DELETE THE GDG FILES ONE BY ONE
+
+THEN DO A DELETE (DSNNAMEGDG) GDG FORCE AND IT WILL WORK
+
+
+000001 //CREATGDG JOB CLASS=A,                                 
+000002 //             MSGLEVEL=(1,1),                          
+000003 //             MSGCLASS=H,                              
+000004 //             NOTIFY=&SYSUID                           
+000005 //STEP01   EXEC PGM=IDCAMS                              
+000006 //*-----------------------------------------------      
+000007 //* CREATE A GDG BASE (IDCAMS) STEP01                   
+000008 //*-----------------------------------------------      
+000009 //SYSIN    DD *                                         
+000010   DELETE (Z37931.NOV30.GDGBASE) GDG FORCE               
+000011 /*                                                      
+000012 //SYSPRINT DD SYSOUT=*                                  
+000013 //SYSOUT   DD SYSOUT=*                                  
+000014 //AMSDUMP  DD SYSOUT=*                                  
+JOB CREATGDG(JOB04221) SUBMITTED                               
+***                                                            
+
+WE HAVE A SUCCESSFUL RETURN CODE OF 0000 OUR DELETION IS SUCCESSFUL
+
+10.34.26 JOB04221 $HASP165 CREATGDG ENDED AT SVSCJES2 MAXCC=0000 CN(INTERNAL)
+***                                                                          
+
+IF WE TRY TO SEARCH IN 3.4 (DATA SET LIST UTILITY ) THE DSN GDG NAME
+
+YOU WILL SEE THAT No data set names found 
+
+THIS MEANS ITS BEEN DELETED 
+                                                                                
+   Menu  RefList  RefMode  Utilities  Help                                      
+ ------------------------------------------------------------------------------ 
+                             Data Set List Utility      No data set names found 
+                                                                    More:     + 
+    blank Display data set list               P Print data set list             
+        V Display VTOC information           PV Print VTOC information          
+                                                                                
+ Enter one or both of the parameters below:                                     
+    Dsname Level . . . Z37931.NOV30.GDGBASE                                     
+    Volume serial  . .                                                          
+                                                                                
+ Data set list options                                                          
+    Initial View                 Enter "/" to select option      
+
+
+
+
+
+
+
+
+*************
+
+YOU CAN ALTER A GDG AS WELL
+
+USING THE IDCAMS ALTER COMMAND 
+
+//SYSIN  DD *
+   ALTER Z3815.BOX-
+   LIMIT(14)-
+   )
+/*
