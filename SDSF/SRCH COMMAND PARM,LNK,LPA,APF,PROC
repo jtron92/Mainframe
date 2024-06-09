@@ -1,0 +1,52 @@
+IN SDSF YOU CAN TYPE SYSTEMS DSNS LIKE 
+
+LNK 
+LPA
+APF
+PROC
+PARM
+
+TYPE THE SYSTEM DSN
+
+ SDSF SRCH DISPLAY  AC$STORG  ALL                       LINE 1-4 (4)           
+ COMMAND INPUT ===>                                            SCROLL ===> CSR 
+ PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=                                  
+ NP   #### DSNAME         Seq VolSer Status           DSOrg BlkSize Extent SMS 
+         1 VENDOR.PARMLIB   1 VPMVSD FOUND            PO       6160      1 NO  
+         2 SVTSC.PARMLIB    2 VTMVSG NOT FOUND        PO       6160      1 NO  
+         3 LVL0.PARMLIB     3 VTLVL0 NOT FOUND        PO       6160      7 NO  
+         4 SYS1.PARMLIB     4 VIMVSB NOT FOUND        PO      27920      5 NO  
+
+THEN YOU CAN SEARCH IF THERE IS A MEMBER IN THE SYSTEM DSN THAT YOU ARE LOOKING FOR 
+
+TYPE 
+
+SRCH AC$STORC (MEMBERNAME)
+
+SDSF SRCH DISPLAY  AC$STORC  ALL                       LINE 1-4 (4)           
+COMMAND INPUT ===> SRCH AC$STORC                              SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=                                  
+NP   #### DSNAME         Seq VolSer Status           DSOrg BlkSize Extent SMS 
+        1 VENDOR.PARMLIB   1 VPMVSD FOUND            PO       6160      1 NO  
+        2 SVTSC.PARMLIB    2 VTMVSG NOT FOUND        PO       6160      1 NO  
+        3 LVL0.PARMLIB     3 VTLVL0 NOT FOUND        PO       6160      7 NO  
+        4 SYS1.PARMLIB     4 VIMVSB NOT FOUND        PO      27920      5 NO  
+                                                                              
+
+
+SAME FOR PROC 
+
+SDSF SRCH DISPLAY  IGYWCL    ALL                       LINE 1-8 (8)           
+COMMAND INPUT ===> SRCH IGYWCL                                SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=                                  
+NP   #### DSNAME         Seq VolSer Status           DSOrg BlkSize Extent SMS 
+        1 VENDOR.PROCLIB   1 VPMVSD FOUND            PO       6160      1 NO  
+        2 VENDOR.PROCLIB   1 VPMVSD FOUND            PO       6160      1 NO  
+        3 SVTSC.PROCLIB    2 VTMVSG FOUND            PO       6160      1 NO  
+        4 SVTSC.PROCLIB    2 VTMVSG FOUND            PO       6160      1 NO  
+        5 LVL0.PROCLIB     3 VTLVL0 NOT FOUND        PO       6160      1 NO  
+        6 LVL0.PROCLIB     3 VTLVL0 NOT FOUND        PO       6160      1 NO  
+        7 SYS1.PROCLIB     4 VIMVSB NOT FOUND        PO      27920      3 NO  
+        8 SYS1.PROCLIB     4 VIMVSB NOT FOUND        PO      27920      3 NO  
+                                                                              
+                                                                              
