@@ -49,3 +49,33 @@ RESPONSE=S0W1
  REUSASID(YES)                                   
  ALLOWUSERKEYCADS(NO)                            
  AUTOIPL SADMP(NONE) MVS(NONE)                   
+
+
+
+
+tso isrddn
+
+                                                                              
+                          Current Data Set Allocations            Row 1 of 159
+Command ===>                                                  Scroll ===> PAGE
+                                                                              
+ Volume   Disposition Act DDname   Data Set Name   Actions: B E V M F C I Q   
+ VTUTCA   SHR,KEEP   >    ADMCFORM QMFC20.SDSQCHRT                            
+ VTMVSC   SHR,KEEP   >    ADMCGM   GDDM.SADMSAM                               
+ VTMVSC   SHR,KEEP   >    ADMGDF   GDDM.SADMMAP                               
+ VTMVSC   SHR,KEEP   >    ADMGGMAP GDDM.SADMMAP                               
+ VTUTCA   SHR,KEEP   >             QMFC20.SDSQMAPE                            
+ VTMVSC   SHR,KEEP   >    ADMIMG   GDDM.SADMMAP                               
+ VTMVSC   SHR,KEEP   >    ADMPROJ  GDDM.SADMMAP                               
+ VTMVSC   SHR,KEEP   >    ADMSYMBL GDDM.SADMSYM                               
+          MOD,DEL    >    DSQDEBUG ---------- JES2 Subsystem file ------------
+ VPUTCA   SHR,KEEP   >    DSQPNLE  QMFC20.DSQPNLE                             
+          MOD,DEL    >    DSQPRINT ---------- JES2 Subsystem file ------------
+          MOD,DEL    >    DSQUDUMP ---------- JES2 Subsystem file ------------
+ VTUTCA   SHR,KEEP   >    DYQCFG   QMFC20.SDYQCFG                             
+          NEW,DEL    >    FT05F001 ---------- Allocated to the terminal ------
+          NEW,DEL    >    FT06F001 ---------- Allocated to the terminal ------
+ VPMVSD   SHR,KEEP   >    ISPLLIB  VENDOR.ISPLLIB                             
+ VTMVSG   SHR,KEEP   >             SVTSC.ISPLLIB                              
+ VTLVL0   SHR,KEEP   >             LVL0.ISPLLIB                               
+ F1=Help    F2=Split   F3=Exit    F5=Rfind   F7=Up      F8=Down    F9=Swap    
