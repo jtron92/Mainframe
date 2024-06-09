@@ -1,0 +1,18 @@
+SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-9 (9)           
+COMMAND INPUT ===> RGEN                                       SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=Pos/A  SYSNAME=                      
+NP   #### JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status
+        1 Z38515   TSU05336 Z38515     15 EXECUTION          S0W1  S0W1       
+        2 Z38515CX JOB03946 Z38515      1 PRINT      A   116                  
+        3 Z38515CX JOB03947 Z38515      1 PRINT      A   117                  
+        4 Z38515CX JOB03948 Z38515      1 PRINT      A   118                  
+        5 Z38515CX JOB03950 Z38515      1 PRINT      A   119                  
+        6 Z38515CX JOB03951 Z38515      1 PRINT      A   120                  
+        7 Z38515CX JOB03952 Z38515      1 PRINT      A   121                  
+        8 Z38515CX JOB03955 Z38515      1 PRINT      A   123                  
+        9 Z38515CX JOB03957 Z38515      1 PRINT      A   124                  
+                                                                              
+
+
+This will generate a custom Rexx exec based on the current panel
+
