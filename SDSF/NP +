@@ -1,0 +1,17 @@
+TO INCREASE THE SIZE IN THE NP COLUMN 
+
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SYSNAME=  
+NP         #### DSNAME         Seq VolSer Stat
+10+           1 VENDOR.PROCLIB   1 VPMVSD FOUN
+              2 VENDOR.PROCLIB   1 VPMVSD FOUN
+              3 SVTSC.PROCLIB    2 VTMVSG FOUN
+              4 SVTSC.PROCLIB    2 VTMVSG FOUN
+              5 LVL0.PROCLIB     3 VTLVL0 NOT 
+              6 LVL0.PROCLIB     3 VTLVL0 NOT 
+              7 SYS1.PROCLIB     4 VIMVSB NOT 
+              8 SYS1.PROCLIB     4 VIMVSB NOT 
+                                              
+                                              
+
+
+JUST ADD 10 + AND HIT ENTER
