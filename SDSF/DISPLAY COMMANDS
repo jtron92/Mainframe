@@ -1,0 +1,51 @@
+
+/D IPLINFO
+
+
+SDSF SYSLOG   7460.132 S0W1 S0W1 05/26/2024 0W          COMMAND ISSUED    
+COMMAND INPUT ===> /D IPLINFO                                 SCROLL ===> 
+RESPONSE=S0W1                                                             
+ IEE254I  17.36.59 IPLINFO DISPLAY 880                                    
+  SYSTEM IPLED AT 15.08.44 ON 05/19/2024                                  
+  RELEASE z/OS 02.04.00    LICENSE = z/OS                                 
+  USED LOADW1 IN SYS1.IPLPARM ON 00CE3                                    
+  ARCHLVL = 2   MTLSHARE = N                                              
+  IEASYM LIST = (W1,SV,VN)                                                
+  IEASYS LIST = (00,LV,SV,VN) (OP)                                        
+  IODF DEVICE: ORIGINAL(00CE3) CURRENT(00CE3)                             
+  IPL DEVICE: ORIGINAL(01000) CURRENT(01000) VOLUME(VIMVSB)               
+  VM CPID = z/VM    7.2.0                                                 
+  VM UUID IS NOT PROVIDED                                                 
+  VM NAME = DGBGMEM                                                       
+  VM EXT NAME IS NOT PROVIDED                     
+
+
+
+/D U,IPLVOL 
+
+RESPONSE=S0W1                                          
+ IEE457I 15.28.01 UNIT STATUS 491                      
+ UNIT TYPE STATUS        VOLSER     VOLSTATE      SS   
+ 1000 3390 S             VIMVSB     PRIV/RSDNT     0   
+
+
+
+
+/D DIAG
+RESPONSE=S0W1                                    
+ IGV007I 15.30.09 DIAG DISPLAY 529               
+ VSM TRACK CSA(ON) SQA(ON)                       
+ VSM TRACE GET(OFF) FREE(OFF)                    
+ VSM ALLOWUSERKEYCSA(NO)                         
+ VSM ALLOWEARLYRUCSA(NO)                         
+ VSM BESTFITCSA(NO)                              
+ VSM USEZOSV1R9RULES(YES)                        
+ TRAPS NAME()                                    
+ CBLOC                                           
+   VIRTUAL24()                                   
+   VIRTUAL31()                                   
+   REAL31()                                      
+   REAL64()                                      
+ REUSASID(YES)                                   
+ ALLOWUSERKEYCADS(NO)                            
+ AUTOIPL SADMP(NONE) MVS(NONE)                   
