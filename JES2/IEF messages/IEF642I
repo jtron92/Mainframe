@@ -1,0 +1,31 @@
+IEF642I
+
+
+IEF642I EXCESSIVE PARAMETER LENGTH IN THE DSNAME FIELD  
+
+
+//SYSIN    DD *                                                       
+//INDD     DD DSN=Z37931.HACKDAYS.DATA.TEST,DISP=SHR                  
+//OUTDD    DD DSN=&SYSUID.HACKDAYS.DATA,                              
+//            DISP=(NEW,CATLG,DELETE),                                
+//            UNIT=SYSDA,                                             
+//            SPACE=(TRK,(8,10),RLSE),                                
+//            DCB=*.INDD                                              
+IEFC653I SUBSTITUTION JCL - DSN=Z37931HACKDAYS.DATA,DISP=(NEW,CATLG,DE
+RLSE),DCB=*.INDD                                                      
+//SYSPRINT DD SYSOUT=*                                                
+//AMSDUMP  DD SYSOUT=*                                                
+//SYSOUT   DD SYSOUT=*                                                
+
+
+in the outdd dd statement the dsn I forgot to add an extra period
+DSN=&SYSUID.HACKDAYS.DATA,
+
+should look like this 
+
+DSN=&SYSUID..HACKDAYS.DATA,
+
+without the extra period it will combine two HLQ resulting pass the limit of 8 characters in a name 
+
+IEF642I EXCESSIVE PARAMETER LENGTH IN THE DSNAME FIELD  
+
