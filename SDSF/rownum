@@ -1,0 +1,42 @@
+------------------------------------------------------------------------------
+SDSF STATUS DISPLAY ALL CLASSES                         SET COMMAND COMPLETE  
+COMMAND INPUT ===> set rownum on                              SCROLL ===> CSR 
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=Pos/A  SYSNAME=                      
+NP   JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Status     
+     Z38515   TSU05330 Z38515     15 EXECUTION          S0W1  S0W1            
+     Z38515CX JOB03946 Z38515      1 PRINT      A   116                       
+     Z38515CX JOB03947 Z38515      1 PRINT      A   117                       
+     Z38515CX JOB03948 Z38515      1 PRINT      A   118                       
+     Z38515CX JOB03950 Z38515      1 PRINT      A   119                       
+     Z38515CX JOB03951 Z38515      1 PRINT      A   120                       
+     Z38515CX JOB03952 Z38515      1 PRINT      A   121                       
+     Z38515CX JOB03955 Z38515      1 PRINT      A   123                       
+     Z38515CX JOB03957 Z38515      1 PRINT      A   124                       
+     Z38515CX JOB03958 Z38515      1 PRINT      A   125                       
+     Z38515CX JOB03959 Z38515      1 PRINT      A   126                       
+     Z38515CX JOB03971 Z38515      1 PRINT      A   130                       
+     Z38515CX JOB03972 Z38515      1 PRINT      A   131                       
+     Z38515CX JOB03975 Z38515      1 PRINT      A   133                       
+     Z38515CX JOB03976 Z38515      1 PRINT      A   134                       
+     Z38515CX JOB03979 Z38515      1 PRINT      A   135                       
+
+
+COMMAND INPUT ===>                                            SCROLL ===> CSR
+PREFIX=*  DEST=(ALL)  OWNER=Z38515  SORT=Pos/A  SYSNAME=                     
+NP   #### JOBNAME  JobID    Owner    Prty Queue      C   Pos SAff  ASys Statu
+        1 Z38515   TSU05330 Z38515     15 EXECUTION          S0W1  S0W1      
+        2 Z38515CX JOB03946 Z38515      1 PRINT      A   116                 
+        3 Z38515CX JOB03947 Z38515      1 PRINT      A   117                 
+        4 Z38515CX JOB03948 Z38515      1 PRINT      A   118                 
+        5 Z38515CX JOB03950 Z38515      1 PRINT      A   119                 
+        6 Z38515CX JOB03951 Z38515      1 PRINT      A   120                 
+        7 Z38515CX JOB03952 Z38515      1 PRINT      A   121                 
+        8 Z38515CX JOB03955 Z38515      1 PRINT      A   123                 
+        9 Z38515CX JOB03957 Z38515      1 PRINT      A   124                 
+       10 Z38515CX JOB03958 Z38515      1 PRINT      A   125                 
+       11 Z38515CX JOB03959 Z38515      1 PRINT      A   126                 
+       12 Z38515CX JOB03971 Z38515      1 PRINT      A   130                 
+       13 Z38515CX JOB03972 Z38515      1 PRINT      A   131                 
+       14 Z38515CX JOB03975 Z38515      1 PRINT      A   133                 
+       15 Z38515CX JOB03976 Z38515      1 PRINT      A   134                 
+       16 Z38515CX JOB03979 Z38515      1 PRINT      A   135                 
