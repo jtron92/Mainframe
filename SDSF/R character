@@ -1,0 +1,14 @@
+The R action character is used to display the resources associated with the scheduling environment.
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF WLM SCHEDULING ENVIRONMENTS MAS SYSTEMS      LINE 1-5 (5)                  
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ NP  SCHEDULING-ENV  Description                 Systems                        
+     DEFAULT         Default_SE                   SYS1,SYS2,SYS3,SYS4            
+     IMS_PROD        Requires_IMS_System          SYS3                           
+     IMS_TEST        Requires_IMS_Test_Sys        SYS4                           
+ R   QVI_TEST        QVI_Test_Debug               SYS2,SYS4                      
+     SAS_DEVL        SAS Development              SYS2,SYS4                      
+                                                                                  
+ View My Answer                                                                  
