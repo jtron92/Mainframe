@@ -1,0 +1,49 @@
+IN sdsf tpe NO for nodes
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF NODES S0W1   SVSCJES2 N1               LINE 1-15 (15)                      
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ PREFIX=*  DEST=(ALL)  OWNER=*  SYSNAME=*                                       
+ NP  NUMBER  Nodename   Status                 Authority          Trans  Recv  Hold
+     N1      SVSCSYSA OWNNODE  (D=Y,J=Y,N=Y,S=Y)   BOTH  BOTH  NONE         
+     N2      SVSCSYSB VIA LINE2/SVSCSYSB (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE  
+     N3      SVSCSYSC VIA LINE3/SVSCSYSC (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE  
+     N4      SVSCSYSD VIA LINE7/SVSCSYSD (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE  
+     N5      N5       UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N6      N6       UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N7      N7       UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N8      N8       UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N9      N9       UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N10     N10      UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N11     SVSCVM1  VIA LINE8/SVSCVM1 (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE   
+     N12     N12      UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N13     N13      UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N14     N14      UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+     N15     N15      UNCONNECTED (D=Y,J=Y,N=N,S=Y)  BOTH  BOTH  NONE         
+                                                                                  
+ to transmit a job from the input queue type I 
+
+change the execnode from LOCAL to N3
+
+
+Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF INPUT QUEUE DISPLAY ALL CLASSES            LINE 1-1 (1)                       
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ PREFIX=TRN*  DEST=(ALL)  OWNER=*  SYSNAME=*                                       
+ NP  JOBNAME   JobID    Owner    Prty C  Pos  OrigNode  ExecNode  Rmt  Node  Stat  
+     TRNFXIA  JOB00724  SYSADM2   15 C   1   LOCAL      LOCAL       1  BATM               
+                                                                                  
+ Click outside or press Escape to leave the interaction.                         
+
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF INPUT QUEUE DISPLAY ALL CLASSES            LINE 1-1 (1)                       
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ PREFIX=TRN*  DEST=(ALL)  OWNER=*  SYSNAME=*                                       
+ NP  JOBNAME   JobID    Owner    Prty C  Pos  OrigNode  ExecNode  Rmt  Node  Stat  
+     TRNFXIA  JOB00724  SYSADM2   15 C   1   LOCAL      N3          1  BATM        
