@@ -47,3 +47,13 @@ Display  Filter  View  Print  Options  Search  Help
  PREFIX=TRN*  DEST=(ALL)  OWNER=*  SYSNAME=*                                       
  NP  JOBNAME   JobID    Owner    Prty C  Pos  OrigNode  ExecNode  Rmt  Node  Stat  
      TRNFXIA  JOB00724  SYSADM2   15 C   1   LOCAL      N3          1  BATM        
+
+
+Then it will have entered XMITTER queue and the Phase Name field indicates that
+it is waiting to be sent to another node for processing
+-----------------------------------------------------------------------------  
+ SDSF INPUT QUEUE DISPLAY ALL CLASSES            LINE 1-1 (1)                       
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ PREFIX=TRN*  DEST=(ALL)  OWNER=*  SYSNAME=*                                       
+ NP  JOBNAME   JobID    Owner    Prty  Queue                  PhaseName
+     TRNFXIA  JOB00724  SYSADM2   15   XMITTER                AWAITING XMIT
