@@ -1,0 +1,105 @@
+TYPE IN THE NP COLUMN NEXT TO THE JOB EITHER , DE, DJ ,DL DN , DP
+
+Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF JOB GROUPS S0W1                                      COMMAND ISSUED        
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ RESPONSE=S0W1                                                                  
+ $HASP890 JOB(XRGRP)     JOB GROUP JOB IN ERROR LIST                             
+ $HASP890                LIST OF JOBS TO RESUBMIT                                
+ $HASP890                JOB NAME   JOBID    JOB STAT  COMP STAT                 
+ $HASP890                --------   ------   --------  ---------                 
+ $HASP890                TRANAPY    JOB08146 Q=HARDCPY IN ERROR                  
+                                                                                  
+ The DE action characters can be used to display jobs in the group that encountered an error. 
+ In the example shown here, job TRANAPY has completed running and has an error, IN ERROR 
+ in the completion status column, and the job is currently sitting on the hardcopy queue.
+
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF JOB GROUPS S0W1                                      COMMAND ISSUED        
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ RESPONSE=S0W1                                                                  
+ $HASP890 JOB(XRGRP)     JOB GROUP JOB LIST                                       
+ $HASP890                JOB NAME   JOBID    JOB STAT  COMP STAT                 
+ $HASP890                --------   ------   --------  ---------                 
+ $HASP890                XREPORT    JOB08149 PEND DEP  PENDING                   
+ $HASP890                XRSTORE    JOB08148 PEND DEP  PENDING                   
+ $HASP890                XTRCT      JOB08147 PEND DEP  PENDING                   
+ $HASP890                TRANAPY    JOB08146 Q=HARDCPY IN ERROR                  
+                                                                                  
+ The DJ action characters will show a table containing all the jobs 
+ associated with that job group, and their job and completion status.
+
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF JOB GROUPS S0W1                                      COMMAND ISSUED        
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ RESPONSE=S0W1                                                                  
+ $HASP890 JOB(XRGRP)     JOB_GROUP_STATUS=SUSPENDED,ONERROR=STOP,                
+ $HASP890 JOB(XRGRP)     ERROR=ABEND,SYSAFF=(ANY),HOLD(NO),                      
+ $HASP890                CMDAUTH=(LOCAL),SECLEVEL=0,OWNER=IBMUSER,               
+ $HASP890                SPOOL=(VOLUMES=(VPSP00),TGS=1,                          
+ $HASP890                PERCENT=0.0052),CARDS=9,DUBIOUS=NO,                     
+ $HASP890                REBUILD=NO,SCHENV=,SCHENV_AFF=(ANY)                     
+ $HASP890                CC=(),DELAY=(),CRTIME=(2017.254,03:16:50)               
+                                                                                  
+ The DL action characters will produce an extended, LONG,                        
+ display of the attributes associated with the job group.
+
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF JOB GROUPS S0W1                                      11 RESPONSES NOT SHOWN        
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ RESPONSE=S0W1                                                                  
+ $HASP890 JOB(XRGRP)     JOB_GROUP_STATUS=SUSPENDED,ONERROR=STOP,                
+ $HASP890 JOB(XRGRP)     ERROR=ABEND                                             
+ $HASP890                ******************************************              
+ $HASP890                JOB GROUP JOB IN ERROR LIST                             
+ $HASP890                LIST OF JOBS TO RESUBMIT                                
+ $HASP890                JOB NAME   JOBID    JOB STAT  COMP STAT                 
+ $HASP890                --------   ------   --------  ---------                 
+ $HASP890                TRANAPY    JOB08146 Q=HARDCPY IN ERROR                  
+ $HASP890                ******************************************              
+ $HASP890                JOB GROUP JOB LIST                                       
+ $HASP890                JOB NAME   JOBID    JOB STAT  COMP STAT                 
+ $HASP890                --------   ------   --------  ---------                 
+ $HASP890                XREPORT    JOB08149 PEND DEP  PENDING                   
+ $HASP890                XRSTORE    JOB08148 PEND DEP  PENDING                   
+ $HASP890                XTRCT      JOB08147 PEND DEP  PENDING                   
+                                                                                  
+ The DN action characters show the whole network associated with the jobs including information 
+ about any jobs in error, jobs that belong to the job group, concurrent jobs, and job dependencies.
+
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF JOB GROUPS S0W1                                      COMMAND ISSUED        
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ RESPONSE=S0W1                                                                  
+ $HASP890 JOB(XRGRP)     PARENT_JOB=XRSTORE,DEP_JOB=XREPORT,                     
+ $HASP890                DEP_STAT=PENDING,COMP_ACT=SATISFY,                      
+ $HASP890                ENDACTION=SATISFY,OTHERWISE=FLUSH,                      
+ $HASP890 JOB(XRGRP)     PARENT_JOB=XTRCT,DEP_JOB=XREPORT,                       
+ $HASP890                DEP_STAT=PENDING,COMP_ACT=SATISFY,                      
+ $HASP890                ENDACTION=SATISFY,OTHERWISE=FLUSH,                      
+ $HASP890 JOB(XRGRP)     PARENT_JOB=TRANAPY,DEP_JOB=XRSTORE,                     
+ $HASP890                DEP_STAT=PENDING,COMP_ACT=SATISFY,WHEN=                 
+ $HASP890                RC=0008,ENDACTION=SATISFY,                              
+ $HASP890                OTHERWISE=FLUSH,                                        
+ $HASP890 JOB(XRGRP)     PARENT_JOB=TRANAPY,DEP_JOB=XTRCT,                       
+ $HASP890                DEP_STAT=PENDING,COMP_ACT=SATISFY,WHEN=                 
+ $HASP890                RC=0000,ENDACTION=SATISFY,                              
+ $HASP890                OTHERWISE=FLUSH,                                        
+ $HASP890                JOB GROUP CONCURRENT JOB LIST                           
+                                                                                  
+ The DP action characters show dependency-related attributes of jobs within the job group.
+
+
