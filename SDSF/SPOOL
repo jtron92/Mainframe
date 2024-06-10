@@ -41,3 +41,16 @@ Display  Filter  View  Print  Options  Search  Help
 
 
 
+
+
+TYPE D TO DISPLY 
+
+SDSF SPOOL DISPLAY S0W1       9% ACT  14954 FRE  13571 COMMAND ISSUED          
+COMMAND INPUT ===>                                            SCROLL ===> CSR  
+RESPONSE=S0W1      $HASP893 VOLUME(JESSP1)  STATUS=ACTIVE,PERCENT=9            
+RESPONSE=S0W1      $HASP646 9.2483 PERCENT SPOOL UTILIZATION                   
+     JESSP1 ACTIVE       9  7477   678          ANY   00  00000003 000000000000
+     JESSP2 ACTIVE       9  7477   705          ANY   01  00000003 000000000000
+                                                                               
+                                                                               
+                                                                               
