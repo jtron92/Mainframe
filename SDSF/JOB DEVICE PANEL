@@ -1,0 +1,34 @@
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF JOB DEVICES S0W1   S0W1  @01D SORTJR04           LINE 1-10 (10)            
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ NP  NAME      Seq Type Status DataSetName                                             
+     SYSPRINT  1  DD   ALLOC  DDG.SORTJR04.JOB02224.D0000106.?                 
+     SORTIN    1  DD   OPEN   PROD.TRANSLOG.FILE                               
+     SORTOUT   1  DD   ALLOC  DDG.SORTJR04.JOB02224.D0000107.?                 
+     SYSOUT    1  DD   OPEN   DDG.SORTJR04.JOB02224.D0000108.?                 
+     SYSIN     1  DD   OPEN   JRUN04.SORT.SYSIN                                
+     SORTWK05  1  DD   OPEN   SYS22164.T162311.RA000.SORTJR04.SORTWK0          
+     SORTWK01  1  DD   OPEN   SYS22164.T162311.RA000.SORTJR04.SORTWK0          
+     SORTWK02  1  DD   OPEN   SYS22164.T162311.RA000.SORTJR04.SORTWK0          
+                                                                                  
+000001 //SORTJR04 JOB (123,456),'XXX',MSGCLASS=B,CLASS=A,NOTIFY=&SYSUID           
+000002 //*                                                                           
+000003 //SORT01  EXEC PGM=SORT                                                       
+000004 //SYSPRINT DD SYSOUT=*                                                       
+000005 //SORTIN   DD DSN=PROD.TRANSLOG.FILE,DISP=SHR                                
+000006 //SORTOUT  DD SYSOUT=*                                                       
+000007 //SYSOUT   DD SYSOUT=*                                                       
+000008 //SYSIN    DD DSN=JRUN04.SORT.SYSIN,DISP=SHR                                 
+000009 //*                                                                           
+                                                                                  
+In the example here, JD was entered against a sort job, SORTJR04, from the DA panel. 
+This job is sorting data from the SORTIN DD data set. Temporary SORTWORK data sets 
+were allocated and opened by the job, which is now using these data sets to perform the 
+sort. White highlighted data sets indicate that data sets are currently open and in use. Blue 
+data sets indicate they may be allocated or open but are not currently being referenced.
+
+
+A useful method of seeing what devices are currently being used by a job is through the Job Device (JD) panel. This panel can be accessed from either the DA panel, the Address Space Memory (AS) panel, the Input (I) panel, the Initiators (INIT) panel, the Network Services (NS) panel, or the Status of Jobs (ST) panel by using the JD action character in the ND column on a specific job.
+
+This could be useful if you want to see who has connected to a started task via TCP/IP or what data sets a batch job has opened.
