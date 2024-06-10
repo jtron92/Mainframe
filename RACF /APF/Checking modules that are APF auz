@@ -1,0 +1,26 @@
+------------------------------------------------------------------------------ 
+EDIT              SYS1.LINKLIB                          Row 0000001 of 0004291 
+Command ===>                                                  Scroll ===> PAGE 
+           Name     Prompt        Alias-of     Size      TTR     AC   AM   RM  
+_________ ABA                     ARCABA     00004140   00D412   00    31   24 
+_________ ACCOUNT                 IKJEFA00   00001430   016715   00    24   24 
+_________ AD                      IRRENV00   00055CD8   0B8107   01    31   24 
+_________ ADDGROUP                IRRENV00   00055CD8   0B8107   01    31   24 
+_________ ADDSD                   IRRENV00   00055CD8   0B8107   01    31   24 
+_________ ADDUSER                 IRRENV00   00055CD8   0B8107   01    31   24 
+_________ ADFGLUET                ADFMDF01   000003C8   017213   00    31  ANY 
+_________ ADFIDF00                           000136C0   01620A   00    31  ANY 
+_________ ADFMCOPY                           00002CF0   01640E   00    24   24 
+_________ ADFMDFLT                           00001988   017209   00    31  ANY 
+_________ ADFMDF0A                           00003B10   016405   00    31  ANY 
+_________ ADFMDF01                           000003C8   017213   00    31  ANY 
+_________ ADFMDF03                           00001198   016507   01    31  ANY 
+_________ ADFMDOLD                           00001B30   01721C   00    31  ANY 
+_________ ADFMFIND                           00000BE0   016510   00    24   24 
+_________ ADFMPUT                            000007B8   016519   00    24   24 
+ F1=Help    F2=Split   F3=Exit    F5=Rfind   F7=Up      F8=Down    F9=Swap     
+
+
+A module can be checked to see if it has the APF authorization option set using ISPF browse.
+
+The APF option for each module is shown in the AC column. A '01' indicates that the APF option is set.
