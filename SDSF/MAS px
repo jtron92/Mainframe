@@ -1,0 +1,23 @@
+There is a problem with job processing on MAS member SYS2 and you have been instructed to temporarily stop any more jobs from running on it.
+
+Tab to the correct field and type the action characters used to perform this task.
+
+Press Enter when you have finished.
+
+That is incorrect
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF MAS MEMBERS SYS1   SVSCJES2                17%       LINE 1-8 (8)          
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ NP  NAME   Status    SID  PrevcKpt  Hold  ActHold  Dormancy    ActDorm  SyncT   
+ PX  SYS1   ACTIVE     1    21.18      0       6    (10,3000)   3009       1     
+     SYS2   ACTIVE     2    27.77      0       6    (10,3000)   3011       0     
+     SYS3   ACTIVE     3    41.20      0       5    (10,3000)   3010       0     
+     SYS4   DRAINED    4     0.00      0       0     (0,0)         0       0     
+     SYS5   DRAINED    5     0.00      0       0     (0,0)         0       0     
+     SYS6   DRAINED    6     0.00      0       0     (0,0)         0       0     
+     SYS7   DRAINED    7     0.00      0       0     (0,0)         0       0     
+     SYS8   DRAINED    8     0.00      0       0     (0,0)         0       0     
+                                                                                  
+ Click outside or press Escape to leave the interaction.                         
