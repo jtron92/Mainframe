@@ -1,0 +1,14 @@
+To make this scheduling environment available on the SYS2 system, the state needs to be modified so that it is the same as the required state. This means that you would need to overtype the SYS_AVAIL value for SYS2 so that it changed to OFF.
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF WLM RESOURCES MAS SYSTEMS DB2_OFFLINE            LINE 1-2 (2)              
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ NP  RESOURCE    ReqState  SYS1  SYS2  SYS3  SYS4  SchedEnv  Descrip             
+     NSHIFT      ON        ON    ON    ON    ON    DB2_OFFLINE  DB2_Pro          
+     SYS_AVAIL   OFF       ON    ON    ON    ON    DB2_OFFLINE  DB2_Pro          
+                                                                                  
+  ○  On the SYS_AVAIL line, tab to the ON in the SYS2 column                     
+     and overtype it with OFF.                                                    
+                                                                                  
+   
