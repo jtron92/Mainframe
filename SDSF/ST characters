@@ -1,0 +1,22 @@
+ST$    Displays only TSO users in the execution queue             ST#    Displays only started tasks in the execution queue
+
+  Display  Filter  View  Print  Options  Search  Help                             
+  -----------------------------------------------------------------------------  
+  SDSF STATUS DISPLAY ALL CLASSES            LINE 1-17 (84)                       
+  COMMAND INPUT ===>                                           SCROLL ===> CSR    
+  PREFIX=*  DEST=(ALL)  OWNER=*  SYSNAME=*                                       
+  NP  JOBNAME   JOBID    Owner    Prty Queue   C  Pos  SAff  ASys  Statu          
+  TPSASEXT JOB00901 TXSA507      7 EXECUTION   A               HOLD               
+  B#USBD16 JOB00627 DTPRD02      7 EXECUTION   C         S0W1                     
+  DTPRD02  TSU#0619 DTPRD02     15 EXECUTION        S0W1  S0W1                    
+  
+
+ST+    Displays jobs on the output queue             ST?    Displays jobs on the purge queue
+
+ST-    Displays jobs on the input queue              ST*    Displays jobs on the conversion queue
+
+ST!    Displays jobs on the hard-copy queue          ST)    Displays jobs on the receiver queue
+
+ST/    Displays jobs on the setup queue              ST@    Displays jobs waiting to be transmitted to another queue
+
+ST=    Displays jobs on the spin queue
