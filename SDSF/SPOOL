@@ -1,0 +1,43 @@
+TYPE + ON SAFF TO PROMOT THE EXTENSIONS WINDOW
+
+Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF SPOOL VOLUMES S0W1   32%  ACT 167757  FRE 114852    LINE 1-8 (8)           
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ NP  VOLUME   Status  TGPct  TGNum  TGUse  Command  SAff  Ext  Locyl  LoTrk      
+     VPSPL1   ACTIVE    22   16685  3655             +       01   00000001  00000000000 
+     VPSPL2   ACTIVE    41   50962  20894            ANY      00   00000005  00000000000 
+     VPSPL3   ACTIVE    29   16685  4838             ANY      01   00000002  00000000000 
+     VPSPL4   ACTIVE    28   16685  4672             ANY      00   00000014  00000000012 
+     VPSPL5   ACTIVE    28   16685  4679             ANY      00   00000007  00000000000 
+     VPSPL6   ACTIVE    28   16685  4677             ANY      00   00000009  00000000000 
+     VPSPL7   ACTIVE    29   16685  4802             ANY      01   0000000A  00000000000 
+     VPSPL8   ACTIVE    28   16685  4688             ANY      00   0000000C  00000000000 
+                                                                                 
+
+
+ Display  Filter  View  Print  Options  Search  Help                             
+ -----------------------------------------------------------------------------  
+ SDSF SPOOL VOLUMES S0W1   32%  ACT 167757  FRE 114852    LINE 1-8 (8)           
+ COMMAND INPUT ===>                                           SCROLL ===> CSR    
+ NP  NAME          Overtype Extension                                                  
+     VPSPL1        Column SAff                                                                              
+     VPSPL2        Maximum length 5                                                                              
+     VPSPL3        Type values or use blanks to                                                                            
+     VPSPL4        erase values.                                                                             
+     VPSPL5                                                                               
+     VPSPL6      ===> S0W1    S0WA    S0WB                                                              
+     VPSPL7        ------  ------  ------                                                             
+     VPSPL8        ------  ------  ------                                                                             
+                  ------  ------  ------                                                             
+                  ------  ------  ------                                                             
+                  ------  ------  ------                                                             
+                  ------  ------  ------                                                             
+                  ------  ------  ------                                                             
+                  ------  ------  ------                                                             
+                  ------  ------  ------                                                             
+                                                                                  
+     F1=Help       F12=Cancel                                                      
+
+
+
