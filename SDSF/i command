@@ -1,0 +1,6 @@
+
+I@ – Jobs waiting to be transmitted to another node
+I$ – TSO users
+I! – Hardcopy queue
+I* – Jobs on the converter queue
+I# – Started tasks
