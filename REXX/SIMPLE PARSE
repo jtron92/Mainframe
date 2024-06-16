@@ -1,0 +1,5 @@
+SAY ADD(8,8,8,8)     
+EXIT                 
+ADD:                 
+PARSE ARG A,B,C,D    
+RETURN A + B + C + D 
