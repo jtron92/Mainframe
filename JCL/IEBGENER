@@ -48,3 +48,30 @@ ONLY THING IS SYSUT2 DSN IS ALREADY CREATED SO DISP=SHR SHARING AND DATASET IS A
 IF I WOULD HAVE LEFT IT AS BEFORE IN THE FIRST SESSION LIKE DISP(NEW,CATLG,DELETE) AND OTHER PARAMS 
 
 I WOULD HAVE GOTTEN A JCL ABEND BECAUSE ITS A DUPICALTE DSN
+
+
+
+
+
+
+
+
+*******
+
+IF YOU WANT TO ADD A MEMBER TO AN EXISTING PO FILE : 
+
+000100 //Z38515A  JOB (ACCT),'JORGE CINTRON',           
+000200 //             CLASS=A,                          
+000300 //             MSGLEVEL=(1,1),                   
+000400 //             MSGCLASS=H,                       
+000500 //             NOTIFY=&SYSUID                    
+000600 //STEP01   EXEC PGM=IEBGENER                     
+000700 //SYSUT1   DD *                                  
+000730 //SYSUT2   DD DSN=Z38515.ALPHA4(ONE),DISP=SHR    
+001200 //SYSPRINT DD SYSOUT=*                           
+001300 //AMSDUMP  DD SYSOUT=*                           
+001400 //SYSABEND DD SYSOUT=*                           
+001500 //SYSOUT   DD SYSOUT=*                           
+001600 //SYSIN    DD DUMMY                              
+****** **************************** Bottom of Data *****
+                                                        
