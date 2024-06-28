@@ -1,214 +1,133 @@
-000100 //Z37931A  JOB (FIS),'JORGE CINTRON',                                 
-000200 //             CLASS=A,                                               
-000300 //             MSGLEVEL=(1,1),                                        
-000400 //             MSGCLASS=H,                                            
-000500 //             NOTIFY=&SYSUID                                         
-000510 //         JCLLIB ORDER=(Z37931.SOURCE,IGY630.SIGYPROC)               
-000520 //         SET MNAME='SUN'                                            
-000600 //STEP01   EXEC ASMACL,MBR=A1                                         
-000700 //SYSIN    DD *                                                       
-000800 ASMPGM     CSECT                                                      
-000900            STM R14,R12,12(R13)                                        
-001000            BASR R12,0                                                 
-001100            USING *,R12                                                
-001200            ST  R13,SAVEA+4                                            
-001300            LA  R13,SAVEA                                              
-001400 **********************************************************************
-001500 OPENFILE   OPEN (IFILE,INPUT)                                         
-001600            OPEN (OFILE,OUTPUT)                                         
-001700            GET  IFILE,INRECS                                           
-001800 LOOP       MVC  OUTRECS,INRECS                                         
-001900            PUT  OFILE,OUTRECS                                          
-001910            GET  IFILE,INRECS                                           
-002000            B    LOOP                                                   
-002100 ********************************************************************** 
-002200 IFILE      DCB  MACRF=GM,DDNAME=IFILE,EODAD=EXIT,DSORG=PS,LRECL=80     
-002300 OFILE      DCB  MACRF=PM,DDNAME=OFILE,DSORG=PS,LRECL=80                
-002400 ********************************************************************** 
-002500 EXIT       CLOSE (IFILE,,OFILE)                                        
-002600            L    R13,SAVEA+4                                            
-002700            LM   R14,R12,12(R13)                                        
-002800            LA   R15,0                                                  
-002900            BR   R14                                                    
-003000 INRECS     DS   CL80                                                   
-003100 OUTRECS    DS   CL80                                                   
-003200 SAVEA      DS   18F                                                    
-003300 **********************************************************************
-003400 R0         EQU  0                                                     
-003500 R1         EQU  1                                                     
-003600 R2         EQU  2                                                     
-003700 R3         EQU  3                                                     
-003800 R4         EQU  4                                                     
-003900 R5         EQU  5                                                     
-004000 R6         EQU  6                                                     
-004100 R7         EQU  7                                                     
-004200 R8         EQU  8                                                     
-004300 R9         EQU  9                                                     
-004400 R10        EQU  10                                                    
-004500 R11        EQU  11                                                    
-004600 R12        EQU  12                                                    
-004700 R13        EQU  13                                                    
-004800 R14        EQU  14                                                    
-004900 R15        EQU  15                                                    
-005000            END  ASMPGM                                                
-005100 /*                                                              
-005200 //GO       EXEC PGM=A1                                          
-005300 //STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR                        
-005400 //SYSPRINT DD SYSOUT=*                                          
-005500 //IFILE    DD *                                                 
-005600   NIKE                                                          
-005610   NEW BALANCE                                                   
-005620   FUBU                                                          
-005630   JORDAN                                                        
-005640   UNDER ARMOUR                                                  
-005700 /*                                                              
-005800 //OFILE    DD DSN=Z37931.SOURCE(TRAIN),DISP=SHR                 
-005900 //SYSABEND DD SYSOUT=*                                          
-006000 //AMSDUMP  DD SYSOUT=*                                          
-006100 //STEP02   EXEC IGYWCL,LNGPRFX='IGY630'                         
-006200 //COBOL.SYSIN DD DSN=Z37931.SOURCE(A1C),DISP=SHR                
-006300 //LKED.SYSLMOD DD DSN=Z37931.LOAD(A1C),DISP=SHR                 
-006400 //STEP03   EXEC PGM=A1C                                         
-006500 //STEPLIB  DD DSN=Z37931.LOAD(A1C),DISP=SHR            
-006600 //CUSTDDI  DD DSN=Z37931.SOURCE(TRAIN),DISP=SHR        
-006700 //CUSTDDO  DD DSN=Z37931.&MNAME..ONE,                  
-006800 //            DISP=(,PASS),                            
-006900 //            UNIT=SYSDA,                              
-007000 //            SPACE=(TRK,(8,10),RLSE),                 
-007100 //            DCB=*.CUSTDDI                            
-007200 //STEP04   EXEC PGM=SORT                               
-007300 //         INCLUDE MEMBER=A1M                          
-007400 //STEP05   EXEC PGM=IEBGENER                           
-007500 //SYSUT1   DD DSN=*.STEP04.SORTOUT,DISP=SHR            
-007600 //SYSUT2   DD DSN=Z37931.&MNAME..THREE,                
-007700 //            DISP=(MOD,CATLG,DELETE),                 
-007800 //            UNIT=SYSDA,                              
-007900 //            SPACE=(TRK,(8,10),RLSE),                 
-008000 //            DCB=*.STEP03.CUSTDDO,                    
-008100 //            VOL=REF=*.STEP03.CUSTDDO                 
-008200 //SYSPRINT DD SYSOUT=*                                 
-008300 //AMSDUMP  DD SYSOUT=*                           
-008400 //SYSOUT   DD SYSOUT=*                           
-008500 //SYSIN    DD DUMMY                              
-008510 //         IF (STEP05.RC = 0) THEN               
-008600 //STEP06   EXEC PGM=IDCAMS                       
-008700 //SYSIN    DD *                                  
-008800   DEFINE GDG(NAME(Z37931.BOXF1)-                 
-008900   LIMIT(3)-                                      
-009000   NOEMPTY-                                       
-009100   SCRATCH)                                       
-009200 /*                                               
-009300 //SYSPRINT DD SYSOUT=*                           
-009400 //AMSDUMP  DD SYSOUT=*                           
-009500 //SYSOUT   DD SYSOUT=*                           
-009600 //SYSABEND DD SYSOUT=*                           
-009700 //         ENDIF                                 
-009710 //PROC100  PROC                                  
-009800 //STEP07   EXEC PGM=IEFBR14                      
-009900 //DD1      DD DSN=Z37931.BOXF1(+1),                          
-010000 //            DISP=(NEW,CATLG,DELETE),                       
-010100 //            UNIT=SYSDA,                                    
-010200 //            SPACE=(TRK,(8,10),RLSE),                       
-010300 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)   
-010400 //         PEND                                              
-010500 //STEP08   EXEC PROC100                                      
-010600 //STEP09   EXEC A1P                                          
-010700 //STEPZ00.SYSUT2 DD DSN=Z37931.SUN.THREE,DISP=SHR            
-010710 //STEP010  EXEC PGM=IEFBR14                                  
-010720 //DD1      DD DSN=Z37931.BOXF1,DISP=(OLD,DELETE)             
-010800 //STEP011  EXEC PGM=IDCAMS                                   
-010900 //SYSIN    DD *                                              
-011000   DELETE (Z37931.BOXF1) GDG FORCE                            
-011100 /*                                                           
-011200 //SYSPRINT DD SYSOUT=*                                       
-011300 //SYSOUT   DD SYSOUT=*                                       
-011400 //AMSDUMP  DD SYSOUT=*                                       
-011500 //SYSABEND DD SYSOUT=*                                                 
-011600 //STEP012  EXEC PGM=IKJEFT01                                           
-011700 //SYSTSIN  DD *                                                        
-011800   EXEC 'Z37931.SOURCE(REXX)'                                           
-011900 /*                                                                     
-012000 //SYSTSPRT DD SYSOUT=*                                                 
-012100 //SYSOUT   DD SYSOUT=*                                                 
-012200 //AMSDUMP  DD SYSOUT=*                                                 
-012300 //STEP014  EXEC PGM=IKJEFT01,PARM='SOMEREXX'                           
-012400 //SYSEXEC  DD DSN=Z37931.SOURCE,DISP=SHR                               
-012500 //SYSTSIN  DD DUMMY                                                    
-012600 //SYSTSPRT DD SYSOUT=*                                                 
-012700 //SYSOUT   DD SYSOUT=*                                                 
-012800 //SYSPRINT DD SYSOUT=*                                                 
-012900 //SYSUDUMP DD SYSOUT=*                                                 
-****** **************************** Bottom of Data ***************************
-
-
-
-
-
-********************************* TOP OF DATA **********************************
-                   J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E 
-                                                                                
-22.17.59 JOB06421 ---- SUNDAY,    02 JUN 2024 ----                              
-22.17.59 JOB06421  IRR010I  USERID Z37931   IS ASSIGNED TO THIS JOB.            
-22.18.00 JOB06421  IEF677I WARNING MESSAGE(S) FOR JOB Z37931A  ISSUED           
-22.18.02 JOB06421  ICH70001I Z37931   LAST ACCESS AT 22:17:32 ON SUNDAY, JUNE 2,
-22.18.02 JOB06421  $HASP373 Z37931A  STARTED - INIT 7    - CLASS A        - SYS 
-22.18.03 JOB06421  -                                      -----TIMINGS (MINS.)--
-22.18.03 JOB06421  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
-22.18.03 JOB06421  -STEP01   C           00     70     11       .00       .00   
-22.18.03 JOB06421  -STEP01   L           00     81      4       .00       .00   
-22.18.03 JOB06421  -GO                   00     34      1       .00       .00   
-22.18.07 JOB06421  -STEP02   COBOL       00  12828    159       .00       .00   
-22.18.08 JOB06421  -STEP02   LKED        00    290     32       .00       .00   
-22.18.08 JOB06421  -STEP03               00    180     20       .00       .00   
-22.18.09 JOB06421  -STEP04               00     41      5       .00       .00   
-22.18.10 JOB06421  -STEP05               00     30      4       .00       .00   
-22.18.10 JOB06421  -STEP06               00     28      2       .00       .00   
-22.18.10 JOB06421  -STEP08   STEP07      00      2      0       .00       .00   
-22.18.11 JOB06421  -STEP09   STEPZ00     00     19      2       .00       .00   
-22.18.11 JOB06421  -STEP010              00      5      1       .00       .00   
-22.18.12 JOB06421  -STEP011              00     29      2       .00       .00   
-22.18.12 JOB06422  $HASP100 ASMBLR2  ON INTRDR                            FROM J
-22.18.12 JOB06422  IRR010I  USERID Z37931   IS ASSIGNED TO THIS JOB.            
-22.18.12 JOB06421  -STEP012              00     78      6       .00       .00   
-22.18.12 JOB06421  -STEP014              00     29      1       .00       .00   
-22.18.12 JOB06421  -Z37931A  ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
-22.18.12 JOB06421  $HASP395 Z37931A  ENDED - RC=0000                            
------- JES2 JOB STATISTICS ------   
-  02 JUN 2024 JOB EXECUTION DATE    
-          140 CARDS READ            
-        1,491 SYSOUT PRINT RECORDS  
-            0 SYSOUT PUNCH RECORDS  
-   96 SYSOUT SPOOL KBYTES      
- 0.20 MINUTES EXECUTION TIME   
-
-
-
-
-
-IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0      
-READY                                                                  
-  EXEC 'Z37931.SOURCE(REXX)'                                           
-JOB ASMBLR2(JOB06422) SUBMITTED                                        
-GOOD 0                                                                 
-READY                                                                  
-END                                                                    
-   _____ _____  ______ ______ _______ _____ _   _  _____  _____        
-  / ____|  __ \|  ____|  ____|__   __|_   _| \ | |/ ____|/ ____|       
- | |  __| |__) | |__  | |__     | |    | | |  \| | |  __| (___         
- | | |_ |  _  /|  __| |  __|    | |    | | | . ` | | |_ |\___ \                 
- | |__| | | \ \| |____| |____   | |   _| |_| |\  | |__| |____) |                
-  \_____|_|__\_\______|______|  |_|  |_____|_| \_|\_____|_____/                 
- |  ____|  __ \ / __ \|  \/  |                                                  
- | |__  | |__) | |  | | \  / |                                                  
- |  __| |  _  /| |  | | |\/| |                                                  
- | |    | | \ \| |__| | |  | |                                                  
- |_|___ |_|__\_\\____/|_|  |_|                                                  
- |  __ \|  ____\ \ / /\ \ / /                                                   
- | |__) | |__   \ V /  \ V /                                                    
- |  _  /|  __|   > <    > <                                                     
- | | \ \| |____ / . \  / . \                                                    
- |_|  \_\______/_/ \_\/_/ \_\                                                   
-                                                                                
-READY                                                                           
-END                                                                             
-******************************** BOTTOM OF DATA ********************************
+//Z38515A  JOB (ACCT),'JORGE CINTRON',                   
+//             MSGLEVEL=(1,1),                           
+//             MSGCLASS=H,                               
+//             CLASS=A,                                  
+//             NOTIFY=&SYSUID                            
+//         JCLLIB ORDER=(Z38515.ALPHA5,IGY630.SIGYPROC)  
+//         SET MNAME=&LWDAY                              
+//STEP01   EXEC IGYWCL,LNGPRFX='IGY630'                  
+//COBOL.SYSIN   DD DSN=Z38515.ALPHA5(RUBYC),DISP=SHR     
+//LKED.SYSLMOD  DD DSN=Z38515.CBLOADER(RUBYC),DISP=SHR   
+//STEP02   EXEC PGM=RUBYC                                
+//STEPLIB  DD DSN=Z38515.CBLOADER(RUBYC),DISP=SHR        
+//CUSTDDI  DD DSN=&SYSUID..CHASE,DISP=SHR                
+//CUSTDDO  DD DSN=&SYSUID..&MNAME&YR4..ONE,              
+//            DISP=(NEW,CATLG,DELETE),                   
+//            UNIT=SYSDA,                                
+//            SPACE=(TRK,(8,10),RLSE),                   
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),  
+//            VOL=SER=ZXPM06                                 
+//SYSPRINT DD SYSOUT=*                                       
+//SYSOUT   DD SYSOUT=*                                       
+//STEP03   EXEC PGM=SORT                                     
+//         INCLUDE MEMBER=RUBYM                              
+//STEP04   EXEC PGM=IEBGENER                                 
+//SYSUT1   DD DSN=*.STEP03.SORTOUT,DISP=SHR                  
+//SYSUT2   DD DSN=&SYSUID..&MNAME&YR4..THREE,                
+//            DISP=(NEW,CATLG,DELETE),                       
+//            UNIT=SYSDA,                                    
+//            SPACE=(TRK,(8,10),RLSE),                       
+//            DCB=*.STEP02.CUSTDDO,                          
+//            VOL=REF=*.STEP02.CUSTDDO                       
+//SYSIN    DD DUMMY                                          
+//SYSPRINT DD SYSOUT=*                                       
+//AMSDUMP  DD SYSOUT=*                                       
+//SYSABEND DD SYSOUT=*                                       
+//STEP05   EXEC PGM=IDCAMS                                  
+//SYSIN    DD *                                             
+  DEFINE GDG(NAME(Z38515.WORLD)-                            
+  LIMIT(3)-                                                 
+  NOEMPTY-                                                  
+  SCRATCH)                                                  
+/*                                                          
+//SYSPRINT DD SYSOUT=*                                      
+//SYSOUT   DD SYSOUT=*                                      
+//AMSDUMP  DD SYSOUT=*                                      
+//PROC100  PROC                                             
+//STEP06   EXEC PGM=IEFBR14                                 
+//DD1      DD DSN=&SYSUID..WORLD(+1),                       
+//            DISP=(NEW,CATLG,DELETE),                      
+//            UNIT=SYSDA,                                   
+//            SPACE=(TRK,(8,10),RLSE),                      
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)  
+//         PEND                                             
+//STEP07   EXEC PROC100                                         
+//STEP08   EXEC PGM=IEBCOPY                                     
+//SYSUT1   DD DSN=Z38515.ALPHA4,DISP=SHR                        
+//SYSUT2   DD DSN=&SYSUID..ALPHA10,                             
+//            DISP=(NEW,CATLG,DELETE),                          
+//            UNIT=SYSDA,                                       
+//            SPACE=(TRK,(8,10,10),RLSE),                       
+//            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)      
+//SYSIN    DD *                                                 
+  COPY INDD=SYSUT1,OUTDD=SYSUT2                                 
+/*                                                              
+//SYSPRINT DD SYSOUT=*                                          
+//SYSOUT   DD SYSOUT=*                                          
+//AMSDUMP  DD SYSOUT=*                                          
+//SYSABEND DD SYSOUT=*                                          
+//STEP09   EXEC PGM=IDCAMS                                      
+//SYSIN    DD *                                                 
+  REPRO INFILE(IFILE)-                                          
+  OUTFILE(OFILE)                                
+/*                                              
+//IFILE    DD DSN=&SYSUID..APEX,DISP=SHR        
+//OFILE    DD DSN=&SYSUID..APEX5,               
+//            DISP=(NEW,CATLG,DELETE),          
+//            UNIT=SYSDA,                       
+//            SPACE=(TRK,(8,10),RLSE),          
+//            DCB=*.STEP07.STEP06.DD1           
+//AMSDUMP  DD SYSOUT=*                          
+//SYSOUT   DD SYSOUT=*                          
+//SYSPRINT DD SYSOUT=*                          
+//SYSABEND DD SYSOUT=*                          
+//STEP010  EXEC PGM=IDCAMS                      
+//SYSIN    DD *                                 
+  ALTER Z38515.APEX5 NEWNAME(Z38515.APEX8)      
+/*                                              
+//SYSPRINT DD SYSOUT=*                          
+//SYSOUT   DD SYSOUT=*                          
+//AMSDUMP  DD SYSOUT=*                                     
+//SYSABEND DD SYSOUT=*                                     
+//STEP011  EXEC PGM=IEFBR14                                
+//DD1      DD DSN=&SYSUID..WORLD,DISP=(OLD,DELETE)         
+//SYSPRINT DD SYSOUT=*                                     
+//SYSOUT   DD SYSOUT=*                                     
+//STEP012  EXEC PGM=IDCAMS                                 
+//SYSIN    DD *                                            
+  DELETE (Z38515.WORLD) GDG FORCE                          
+/*                                                         
+//SYSPRINT DD SYSOUT=*                                     
+//SYSOUT   DD SYSOUT=*                                     
+//AMSDUMP  DD SYSOUT=*                                     
+//SYSABEND DD SYSOUT=*                                     
+//STEP014  EXEC PROC=RUBYP                                 
+//STEP015.SYSUT2 DD DSN=Z38515.APEX8,DISP=SHR              
+//STEP016  EXEC PGM=IKJEFT01                               
+//SYSTSIN  DD *                                            
+  EXEC 'Z38515.ALPHA5(REX5)'                        
+/*                                                  
+//SYSTSPRT DD SYSOUT=*                              
+//SYSOUT   DD SYSOUT=*                              
+//ASMDUMP  DD SYSOUT=*                              
+//SYSABEND DD SYSOUT=*                              
+//STEP017  EXEC PGM=IKJEFT01,PARM='%REXMEX'         
+//SYSEXEC  DD DSN=Z38515.ALPHA5,DISP=SHR            
+//SYSTSPRT DD SYSOUT=*                              
+//SYSTSIN  DD DUMMY                                 
+//SYSOUT   DD SYSOUT=*                              
+//ASMDUMP  DD SYSOUT=*                              
+//STEP018  EXEC ASMACL,MBR=RUBYA                    
+//SYSIN    DD DSN=Z38515.ALPHA5(RUBYA),DISP=SHR     
+//GO       EXEC PGM=RUBYA                           
+//STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR            
+//IFILE    DD *                                     
+  SHADOW                                            
+/*                                                         
+//OFILE    DD DSN=&SYSUID..BANKS15,                        
+//            DISP=(NEW,CATLG,DELETE),                     
+//            UNIT=SYSDA,                                  
+//            SPACE=(TRK,(8,10),RLSE),                     
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800) 
+**************************** Bottom of Data ****************************
+                                                                        
