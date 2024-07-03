@@ -1,3 +1,30 @@
+***************************** Top of Data ***********
+//Z38515A  JOB (MVS),'JORGE CINTRON',                
+//             CLASS=A,                              
+//             MSGLEVEL=(1,1),                       
+//             MSGCLASS=H,                           
+//             NOTIFY=&SYSUID                        
+//STEP01   EXEC PGM=SORT                             
+//SORTIN   DD DSN=&SYSUID..CHASE,DISP=SHR            
+//SORTOUT  DD DSN=&SYSUID..DARK.MATTER,              
+//            DISP=(MOD,CATLG,DELETE),               
+//            UNIT=SYSDA,                            
+//            SPACE=(TRK,(8,1),RLSE),                
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB)       
+//SORTWK01 DD UNIT=SYSDA,SPACE=(TRK,(1,1))           
+//SORTWK02 DD UNIT=SYSDA,SPACE=(TRK,(1,1))           
+//SORTWK03 DD UNIT=SYSDA,SPACE=(TRK,(1,1))           
+//SYSIN    DD *                                      
+  SORT FIELDS=COPY                                   
+/*                                                                    
+//SYSPRINT DD SYSOUT=*                                                
+//AMSDUMP  DD SYSOUT=*                                                
+//SYSOUT   DD SYSOUT=*                                                
+**************************** Bottom of Data **************************
+
+JUST TO COPY ^ INPUT FILE TO OUTPUT , BELOW IS TO SORT FIELDS
+
+
 Command ===>                                                  Scroll ===> CSR  
 =COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
 000100 //MATEDK91 JOB CLASS=A,                                                 
