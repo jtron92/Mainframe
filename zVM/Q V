@@ -1,0 +1,22 @@
+Q V                                                                    
+STORAGE = 64M                                                          
+XSTORE = ---                                                           
+CPU 00  ID  FF011CC839318000 (BASE) CP   CPUAFF ON                     
+No AP Crypto Domains are available                                     
+CONS 0009 ON LDEV L0004   TERM STOP  HOST TCPIP    FROM 67.149.54.252  
+     0009 CL T NOCONT NOHOLD COPY 001    READY FORM STANDARD           
+     0009 TO Z37931   PRT DIST Z37931    FLASHC 000 DEST OFF           
+     0009 FLASH       CHAR       MDFY       0 FCB       LPP OFF        
+     0009 3215   NOEOF CLOSED    NOKEEP NOMSG NONAME                   
+     0009 SUBCHANNEL = 0000                                            
+RDR  000C CL * NOCONT NOHOLD   EOF       READY                         
+     000C 2540         CLOSED    NOKEEP NORESCAN  SUBCHANNEL = 0001    
+PUN  000D CL A NOCONT NOHOLD COPY 001    READY FORM STANDARD           
+     000D TO Z37931   PUN DIST Z37931    DEST OFF                      
+     000D FLASH      000 CHAR       MDFY       0 FCB                   
+     000D 2540   NOEOF CLOSED    NOKEEP NOMSG NONAME                   
+     000D SUBCHANNEL = 0002                                            
+PRT  000E CL A NOCONT NOHOLD COPY 001    READY FORM STANDARD           
+     000E TO Z37931   PRT DIST Z37931    FLASHC 000 DEST OFF           
+     000E FLASH       CHAR       MDFY       0 FCB       LPP OFF        
+     000E 1403   NOEOF CLOSED    NOKEEP NOMSG NONAME                   
