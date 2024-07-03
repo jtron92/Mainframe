@@ -1,0 +1,259 @@
+Using zPRO Demo System 8/14/17 1
+Basic CMS and z/VM Commands
+Velocity Software provides a cloud architecture for education and demonstration
+purposes. This allows users to create CMS servers and Linux servers using our zPRO
+product, and then use those servers for the duration of their self study education. It also
+allows for demonstration of our zPRO product.
+zPRO is Velocity Software's Cloud Enablement product, allowing end users to define and
+manage their servers without having z/VM knowledge. zPRO supports a private cloud for
+z/VM that includes support for Linux servers, CMS users, and 2nd level z/VM systems
+This paper describes the some of the basic CMS and VM commands as an introduction to
+using the IBM mainframe. The topics covered are:
+• 3270 keyboard
+• CMS help command
+• CMS query command
+• CMS xedit command
+• CMS filelist command
+• CMS profile exec file
+• CMS profile xedit file
+• CMS REXX commands
+More detailed information is available in these documents:
+• IBM Redbook - Introduction to the New Mainframe: z/VM Basics at
+ http://www.redbooks.ibm.com/abstracts/sg247316.html?Open”
+Chapter 1 to 5 can give you an quick overview. The CMS commands you could work
+with, are in chapter 6.
+• IBM Library at
+https://www.ibm.com/support/knowledgecenter/SSB27U_6.4.0/
+com.ibm.zvm.v640.hcpa0/liboper.htm#liboper
+z/VM V6.4 CMS Commands and Utilities Reference, SC24-6166
+z/VM V6.1 CMS Primer, SC24-6172
+z/VM V6.4 CMS User's Guide, SC24-6173
+z/VM: REXX/VM Reference , SC24-6221
+z/VM: REXX/VM User’s Guide , SC24-62
+3270 Keyboard
+This section documents the special keys used by z/VM and CMS, that are set up on x3270
+or TN3270 emulators. It is a repeat of the material in the Connectivity document. You can
+skip this if your understand when to use the CLEAR and RESET keys with z/VM.
+2 8/14/17 Using zPRO Demo System
+x3270
+If you are using x3270 as your emulator, go to the top of the x3270 emulator screen and
+click on Keypad.
+This will bring up the screen shown Figure 1-1.
+Figure 1-1 x3270 special keys
+The Clear key is necessary for clearing CP messages and CMS messages. You will use the
+CLEAR key if the screen fills up and you see HOLDING or MORE at the bottom right.
+Click on the CLEAR key to get to the next page.
+RESET KEY is for solving keyboard problems that WILL arise. If you type in an area of
+the screen that is protected, some form of an "X" will show up at the bottom of the screen
+indicating that the keyboard is locked. The RESET key will clear this.
+Note: There are several things you should be aware when logging on the z/VM:
+• The enter key is used to initiate the CMS commands.
+• You will be prompted to change your password for this first logon.
+• The first screen will have VM read at the bottom right, hit enter and it will say
+READY on the left and at the bottom right it will say RUNNING. You are now
+ready to try CMS commands.
+• If you have successfully logged and get disconnected or enter DISC to disconnect,
+the next time you logon on you will get a screen that says CP Read. To get back to
+CMS just enter B for Begin and you will be taken to the place where you logged
+off.
+• If you lose connectivity and the system thinks you are already logged on you will
+get a message the says User ID DEMOxxxx is already connected to GRAF xxxx.
+In this case, you issue the command,
+ LOGON DEMOxxxx here
+This will then ask for the password, and you will be re-connected. If you are sharing
+this ID, the other person will immediately be logged off. So use carefully.
+Using zPRO Demo System 8/14/17 3
+TN3270 keyboard
+If you are using TN3270 as your emulator, go to the top of the TN3270 emulator screen
+and click on ShowKeypad square on the top of the screen. (7th box from the right)
+This will bring up the screen shown in Figure 1-2.
+Figure 1-2 TN3270 special keys
+The Clear key is necessary for clearing CP messages and CMS messages. You will use the
+CLEAR key if the screen fills up and you see HOLDING or MORE at the bottom right.
+Click on the CLEAR key to get to the next page.
+RESET KEY is for solving keyboard problems that WILL arise. If you type in an area of
+the screen that is protected, some form of an "X" will show up at the bottom of the screen
+indicating that the keyboard is locked. The RESET key will clear this.
+Remember, for zVM or CMS accessed by TN3270 or x3270 you will use the VM user ID
+and password in the email you received or if you cloned it yourself you have specified the
+VM user ID (DEMOxxxx) and password in the request panel. Logon, hit enter to executre
+the profile and you will have a READY prompt.
+CMS Commands
+There are many CMS commands you can use. This document just introduces a couple of
+the more commonly used ones.
+CMS commands are entered at the bottom left of the 3270 screen.
+4 8/14/17 Using zPRO Demo System
+CMS Help
+There is a comprehensive HELP facility in z/VM. Enter HELP CMS first to see the
+information available for CMS Commands
+As an example, position the cursor on QUERY to see the information about QUERY and
+hit ENTER key
+Then hit F3 to return to list
+You can also position the cursor on XEDIT and FILELIST as these are the next commands
+we will introduce.
+Note: Function key 3 is exit, Function key 8 is forward, Function key 7 is backward
+CCMS QUERY Command
+You may query many things. Typing help query will list all the operands.
+Let’s start with Q N. This shows the names of logged on users to VSIVM4.
+Then try Q DISK or Q DASD. This shows the disks you have access to.
+You may try other parameters as described in the Help Query function.
+CMS XEDIT command
+XEDIT is the CMS command that allows you to create and edit CMS files. This is
+described in section 6.7 of the Redbook
+For an exercise, we will first create a HELLO script
+You should know that file, quit and qquit are used to end an xedit command. QQUIT
+caused you to leave without saving.
+Logon with your CMS User ID to the CMS guest you previously created. Hit enter to
+allow the PROFILE EXEC to be processed. You should have a READY prompt.
+"XEDIT HELLO EXEC A". This will put you into an empty file.
+Note: You may need to hit clear on the screen. If there is a "HOLDING" in the bottom
+right corner of your 3270 screen, "CLEAR" will remove the messages that are being
+maintained on the screen.
+First, add some lines to the file. On the command line enter "add 5" to add 5 lines. Please
+review sections 6.79 and 6.8 of the redbook to choose your options
+Using zPRO Demo System 8/14/17 5
+Then we want to type these five lines
+/* HELLO SCRIPT */
+SAY ‘Please type your name:’
+Pull name
+If name <> “” then say ‘Hello’ name ‘Welcome to your CMS guest’
+Else say ‘No input given for name’
+Next, on the command line at the bottom of the screen, enter file to save and exit this file.
+To test this script, after the READY message type HELLO and hit the enter key. This will
+execute the script you have written.
+You should get the message Type your name:xxxx
+Key in your name and hit the enter key
+You should get the message Hello xxxx to your CMS guest.
+If not, go back to xedit hello exec and debug your program. Later we will use the xedit
+command to create CMS and XEDIT profiles.
+CMS Filelist command
+See Sections 6.5 and 6.6 of the Redbook for disk and file information.
+Note that file names have three parts in CMS:
+File name, File extension or type and mode.
+For example Profile exec A
+You have an A disk that will contain all the files you create. To see these files you can
+issue the command FILELIST * * A
+Another variation is FILELIST PRO* * A. This will show all the files that start with PRO
+on your A disk. Note there is no space between PRO and the first *.
+FILELIST * * * will show all the files on all the disks that you have access to but many
+may be in read only mode as they are system disks. This list will be very long. You can
+enter Halt or HX to end the list and return to CMS>
+CMS PROFILE EXEC file
+There is a PROFILE EXEC file for CMS that will be executed every time you logon to
+CMS or enter the command IPL CMS or the command profile to execute the PROFILE
+EXEC file.
+We will start by editing/personalizing them. Remember, file, quit and qquit are used to
+end an xedit command.
+Once you are logged on to your CMS guest, XEDIT the PROFILE EXEC file by issuing
+the command:
+ XEDIT PROFILE EXEC A
+6 8/14/17 Using zPRO Demo System
+This will put you in an empty file unless there is a default one on your system. If you are
+using the cloned CMS system on demo.velocitysoftware.com you will have the default
+profile as shown in Figure 1-3. You can check this by issuing the command:
+type profile exec
+Figure 1-3 Default profile exec
+Note: You may need to hit clear on the screen. If there is a "HOLDING" in the bottom
+right corner of your 3270 screen, "CLEAR" will remove the messages that are being
+maintained on the screen.
+We will now add a line to the file. Type xedit profile exec and hit the enter key.
+To add a line if on the command line enter "add 1". However, it will add 1 line at the top of
+the file. Since we want to add the line in the file . First, type next 1 on the command line to
+move the line position to after the /* PROFILE EXEC */ comment, Then type add 1on
+the command line.
+Type in this line
+SET PF12 RETRIEVE BACKWARD
+On the command line at the bottom of the screen type File and hit the enter key.
+Please review sections 6.79 and 6.8 of the redbook to choose your options
+For new users, the command SET PF12 RETREIVE BACKWARD is particularly useful
+because this removes the need to retype commands you are experimenting with. Setting
+those options enables functionality like the bash shell on Linux systems and using PF12 to
+scroll through previous command history.
+If you make changes to your PROFILE EXEC during your terminal session, the changes
+will not be in effect until you execute your profile again. You can enter the following
+command at any time to run your PROFILE EXEC: profile
+/* PROFILE EXEC */
+
+ 'pipe ',
+ '| CP Q V 191 ',
+ '| specs w5 1',
+ '| var mode'
+
+ If mode = 'R/W' then do
+ Say ' '
+ Say ' '
+ Say '*--------------------------------------------------------------*'
+ Say '* This server was cloned from DEMOR1 and has a single minidisk *'
+ Say '*--------------------------------------------------------------*'
+ End 
+Using zPRO Demo System 8/14/17 7
+Often newer users make a few mistakes when customizing their PROFILE EXECs. To
+suppress the processing of your PROFILE EXEC for any reason, enter the IPL command,
+and then enter command CMS command ACCESS with the NOPROF option specified.
+IPL CMS
+access (noprof
+XEDIT PROFILE file
+You can create a profile xedit file that will be processed every time you execute an xedit
+command. This can be useful to set up PF keys
+To create this file, enter XEDIT PROFILE XEDIT.
+Type the command to add 5 lines, then enter the commands you want, and enter a FILE
+command to save and exit. A sample PROFILE XEDIT file might contain these lines:
+/* Sample PROFILE XEDIT file */
+'SET CASE MIXED'
+'SET AUTOSAVE 20'
+'SET TABS 10 20 30 40'
+'SET PF12 TOP'
+The first line in this file must be a comment. A comment must start with /* and end with*/
+If your SET command contains a special character, it may cause an error, unless you
+enclose the command in (quotation marks). Therefore, we have entered each command
+with surrounding quotation marks to insure proper programming technique and prevent
+future problems.
+Each command must be typed on a separate line. You should be familiar with all the
+commands. You may already know that when you xedit a file, the PF keys have various
+functions. For example, PF3 is set to the QUIT command, PF7 is set to the FORWARD
+command.
+For more information on xedit profile, see the IBM CMS Primer.
+REXX Commands
+The REstructured eXtended eXecutor (REXX) language is particularly suitable for:
+• Command procedures
+• Application front ends
+• User-defined macros (such as editor subcommands)
+• User-defined XEDIT subcommands
+• Prototyping
+• Personal computing.
+8 8/14/17 Using zPRO Demo System
+REXX is a general purpose programming language like PL/I. REXX has the usual
+structured-programming instructions—IF, SELECT, DO WHILE, LEAVE, and so
+on—and a number of useful built-in functions.
+The language imposes no restrictions on program format. There can be more than one
+clause on a line, or a single clause can occupy more than one line. Indentation is allowed.
+You can, therefore, code programs in a format that emphasizes their structure, making
+them easier to read.
+z/VM: REXX/VM Reference , SC24-6221
+z/VM: REXX/VM User’s Guide , SC24-62
+CP Commands
+z/VM is comprised of two primary components: CP and CMS. The Control Program (CP)
+is the operating system that underlies all of z/VM. CP is responsible for virtualizing your
+z/Series machine's real hardware, and allowing many virtual machines to simultaneously
+share the hardware resource.
+CP also handles the creation and management of virtual machines. It can be considered the
+operating system component of z/VM because it is responsible for managing real devices
+and resources and sharing them among various tasks and users that need them. CP is
+analogous to the Linux kernel in a GNU/Linux operating system.
+Without CP you could only be running one operating system on your hardware at any
+given time (logical partitioning aside). CP allows you to have multiple virtual machines
+(also known as “guests”), and each one can be running an instance of an operating system
+simultaneously.
+This section introduces some basic CP commands. See chapter 5 in the redbook for more
+information on CP.
+Basic CP commands
+To get a CP prompt, go to the special keyboard, click on PA1 key. This will put you in
+mode to enter CP commands, with CP READ showing in the right bottom corner.
+Some key CP commands are
+• Logon
+• Logoff
+• I CMS or IPL CMS
+• B or Begin
+• DISC - for disconnect - this causes you to exit but the guest keeps running. When
+you reconnect with a Logon command, you will be in CP mode and should issue B
+to connect to CMS.
