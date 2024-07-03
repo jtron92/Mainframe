@@ -1,0 +1,7 @@
+Q DISK                                                                          
+LABEL  VDEV M  STAT   CYL TYPE BLKSZ   FILES  BLKS USED-(%) BLKS LEFT  BLK TOTAL
+ZXP191 191  A   R/W    50 3390 4096       10         20-01       8980       9000
+MNT190 190  S   R/O   207 3390 4096      683      15622-42      21638      37260
+MNT19E 19E  Y/S R/O   500 3390 4096     1175      74615-83      15385      90000
+Ready; T=0.01/0.01 00:09:26                                                     
+                                                                                
