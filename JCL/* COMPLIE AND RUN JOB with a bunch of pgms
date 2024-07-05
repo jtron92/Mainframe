@@ -1,176 +1,199 @@
-//Z38515F  JOB (ACCT),'JORGE CINTRON',                      
-//             MSGLEVEL=(1,1),                              
-//             MSGCLASS=H,                                  
-//             NOTIFY=&SYSUID,                              
-//             CLASS=A                                      
-//         JCLLIB ORDER=(Z38515.ALPHA5,IGY630.SIGYPROC)     
-//         SET MNAME=&WDAY&YR4                              
-//STEP01   EXEC IGYWCL,LNGPRFX='IGY630'                     
-//COBOL.SYSIN  DD DSN=&SYSUID..ALPHA5(SCRIMCC),DISP=SHR     
-//LKED.SYSLMOD DD DSN=&SYSUID..CBLOADER(SCRIMCC),DISP=SHR   
-//SYSLIB   DD  DSNAME=&LIBPRFX..SCEELKEX,DISP=SHR           
-//         DD  DSNAME=&LIBPRFX..SCEELKED,DISP=SHR           
-//STEP02   EXEC PGM=SCRIMCC                                 
-//STEPLIB  DD DSN=&SYSUID..CBLOADER(SCRIMCC),DISP=SHR       
-//CUSTDDI  DD DSN=&SYSUID..CHASE,DISP=SHR                   
-//CUSTDDO  DD DSN=&SYSUID..&MNAME..ONE,                     
-//            DISP=(MOD,CATLG,DELETE),                      
-//            SPACE=(TRK,(8,10),RLSE),                         
-//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),    
-//            VOL=SER=ZXPL01                                   
-//STEP03   EXEC PGM=SORT                                       
-//         INCLUDE MEMBER=SCRIMS                               
-//STEP04   EXEC PGM=IEBGENER                                   
-//SYSUT1   DD DSN=*.STEP03.SORTOUT,DISP=SHR                    
-//SYSUT2   DD DSN=&SYSUID..&MNAME..THREE,                      
-//            DISP=(MOD,CATLG,DELETE),                         
-//            UNIT=SYSDA,                                      
-//            SPACE=(TRK,(8,10),RLSE),                         
-//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)     
-//SYSIN    DD DUMMY                                            
-//SYSPRINT DD SYSOUT=*                                         
-//SYSOUT   DD SYSOUT=*                                         
-//AMSDUMP  DD SYSOUT=*                                         
-//STEP05   EXEC PGM=IDCAMS                                     
-//SYSIN    DD *                                                
-  DEFINE GDG(NAME(Z38515.BOXIN)-                               
-  LIMIT(3)-                                                     
-  NOEMPTY-                                                      
-  SCRATCH)                                                      
-/*                                                              
-//SYSPRINT DD SYSOUT=*                                          
-//AMSDUMP  DD SYSOUT=*                                          
-//SYSOUT   DD SYSOUT=*                                          
-//SYSABEND DD SYSOUT=*                                          
-//PROC100  PROC                                                 
-//STEP06   EXEC PGM=IEFBR14                                     
-//DD1      DD DSN=Z38515.BOXIN(+1),                             
-//            DISP=(NEW,CATLG,DELETE),                          
+//Z38515AB JOB (MVS),'JORGE CINTRON',                             
+//             MSGLEVEL=(1,1),                                    
+//             MSGCLASS=H,                                        
+//             CLASS=A,                                           
+//             NOTIFY=&SYSUID                                     
+//         JCLLIB ORDER=(Z38515.ALPHA4,IGY640.SIGYPROC)           
+//         SET MNAME=&WDAY                                        
+//STEP01   EXEC IGYWCL,LNGPRFX='IGY640'                           
+//COBOL.SYSIN DD DSN=Z38515.ALPHA4(SOURCE),DISP=SHR               
+//LKED.SYSLMOD DD DSN=Z38515.CBLOADER(SOURCE),DISP=SHR            
+//SYSLIB   DD DSNAME=CEE.SCEELKEX,DISP=SHR                        
+//         DD DSNAME=CEE.SCEELKED,DISP=SHR                        
+//STEP02   EXEC PGM=SOURCE                                        
+//STEPLIB  DD DSN=Z38515.CBLOADER(SOURCE),DISP=SHR                
+//CUSTDDI  DD DSN=&SYSUID..CHASE,DISP=SHR                         
+//CUSTDDO  DD DSN=&SYSUID..&MNAME..ONE,                           
+//            DISP=(MOD,CATLG,DELETE),                            
 //            UNIT=SYSDA,                                       
-//            SPACE=(TRK,(8,10),RLSE),                          
-//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)      
-//         PEND                                                 
-//STEP07   EXEC PROC100                                         
-//STEP08   EXEC PGM=IEBCOPY                                     
-//SYSUT1   DD DSN=Z38515.ALPHA,DISP=SHR                         
-//SYSUT2   DD DSN=&SYSUID..&MNAME..ALPHA,                 
-//            DISP=(MOD,CATLG,DELETE),                    
-//            UNIT=SYSDA,                                 
-//            SPACE=(TRK,(10,10,10),RLSE),                
-//            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)
-//SYSIN    DD *                                           
-  COPY INDD=SYSUT1,OUTDD=SYSUT2                           
-/*                                                        
-//SYSPRINT DD SYSOUT=*                                    
-//SYSOUT   DD SYSOUT=*                                    
-//AMSDUMP  DD SYSOUT=*                                    
-//STEP09   EXEC PGM=IDCAMS                                
-//SYSIN    DD *                                           
-  REPRO INFILE(INDD)-                                     
-  OUTFILE(OUTDD)                                          
-/*                                                        
-//INDD     DD DSN=&SYSUID..CHASE,DISP=SHR                 
-//OUTDD    DD DSN=&SYSUID..DREAMS.DOSE,                   
-//            DISP=(MOD,CATLG,DELETE),                    
-//            UNIT=SYSDA,                                  
-//            SPACE=(TRK,(8,10),RLSE),                     
-//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800) 
-//SYSPRINT DD SYSOUT=*                                     
-//AMSDUMP  DD SYSOUT=*                                     
-//SYSOUT   DD SYSOUT=*                                     
-//STEP010  EXEC PGM=IDCAMS                                 
-//SYSIN    DD *                                            
-  ALTER Z38515.DREAMS.DOSE NEWNAME(Z38515.RUBY.VEEN)       
-/*                                                         
-//SYSPRINT DD SYSOUT=*                                     
-//SYSOUT   DD SYSOUT=*                                     
-//AMSDUMP  DD SYSOUT=*                                     
-//SYSABEND DD SYSOUT=*                                     
-//STEP011  EXEC PGM=IEFBR14                                
-//DD1      DD DSN=&SYSUID..GFRIDA,                         
-//            DISP=(MOD,CATLG,DELETE),                     
-//            UNIT=SYSDA,                                  
-//            SPACE=(TRK,(8,10),RLSE),                     
-//            DCB=*.STEP07.STEP06.DD1                 
-//STEP012  EXEC PGM=IEFBR14                           
-//DD1      DD DSN=Z38515.BOXIN,DISP=(OLD,DELETE)      
-//STEP014  EXEC PGM=IDCAMS                            
+//            SPACE=(TRK,(8,1),RLSE),                           
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),     
+//            VOL=SER=ZXPL01                                    
+//SYSPRINT DD SYSOUT=*                                          
+//SYSOUT   DD SYSOUT=*                                          
+//AMSDUMP  DD SYSOUT=*                                          
+//STEP03   EXEC PGM=SORT                                        
+//SORTIN   DD DSN=*.STEP02.CUSTDDO,DISP=SHR                     
+//SORTOUT  DD DSN=&SYSUID..&MNAME..TWO,                         
+//            DISP=(MOD,CATLG,DELETE),                          
+//            UNIT=SYSDA,                                       
+//            SPACE=(TRK,(8,9),RLSE),                           
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800),     
+//            VOL=SER=ZXPL01                                    
+//SORTWK01 DD UNIT=SYSDA,SPACE=(TRK,(1,1))                      
+//SORTWK02 DD UNIT=SYSDA,SPACE=(TRK,(1,1))                      
+//SORTWK03 DD UNIT=SYSDA,SPACE=(TRK,(1,1))            
 //SYSIN    DD *                                       
-  DELETE (Z38515.BOXIN) GDG FORCE                     
+  SORT FIELDS=COPY                                    
 /*                                                    
 //SYSPRINT DD SYSOUT=*                                
 //SYSOUT   DD SYSOUT=*                                
 //AMSDUMP  DD SYSOUT=*                                
-//STEP015  EXEC PROC=SCRIMP                           
-//STEP016.SYSUT2 DD DSN=Z38515.GFRIDA,DISP=SHR        
-//STEP017  EXEC PGM=IKJEFT01                          
-//SYSTSIN  DD *                                       
-  EXEC 'Z38515.ALPHA5(REXFF)'                         
+//STEP04   EXEC PGM=IEBGENER                          
+//         INCLUDE MEMBER=COPY                        
+//STEP05   EXEC PGM=IDCAMS                            
+//SYSIN    DD *                                       
+  DEFINE GDG(NAME(Z38515.DBZ)-                        
+  LIMIT(3)-                                           
+  NOEMPTY-                                            
+  SCRATCH)                                            
 /*                                                    
-//SYSTSPRT DD SYSOUT=*                                
-//AMSDUMP  DD SYSOUT=*                                
-//SYSOUT   DD SYSOUT=*                                
-//STEP018  EXEC PGM=IKJEFT01,PARM='%REFX'              
-//SYSEXEC  DD DSN=Z38515.ALPHA5,DISP=SHR               
-//SYSTSIN  DD DUMMY                                    
-//SYSTSPRT DD SYSOUT=*                                 
-//AMSDUMP  DD SYSOUT=*                                 
-//SYSABEND DD SYSOUT=*                                 
-//STEP019  EXEC ASMACL,MBR=SCRIMA                      
-//SYSIN    DD DSN=Z38515.ALPHA5(SCRIMA),DISP=SHR       
-//GO       EXEC PGM=SCRIMA                             
-//STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR               
-//IFILE    DD *                                        
-  HELLO WORLD                                          
+//SYSPRINT DD SYSOUT=*                                
+//SYSOUT   DD SYSOUT=*                                       
+//AMSDUMP  DD SYSOUT=*                                       
+//SYSABEND DD SYSOUT=*                                       
+//PROC100  PROC                                              
+//STEP06   EXEC PGM=IEFBR14                                  
+//DD1      DD DSN=Z38515.DBZ(+1),                            
+//            DISP=(NEW,CATLG,DELETE),                       
+//            UNIT=SYSDA,                                    
+//            SPACE=(TRK,(8,10),RLSE),                       
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)   
+//         PEND                                              
+//STEP07   EXEC PROC100                                      
+//STEP08   EXEC PGM=IEBCOPY                                  
+//SYSUT1   DD DSN=Z38515.ALPHA,DISP=SHR                      
+//SYSUT2   DD DSN=&SYSUID..ALPHA24,                          
+//            DISP=(,CATLG),                                 
+//            UNIT=SYSDA,                                    
+//            SPACE=(TRK,(10,10,10),RLSE),                   
+//            DCB=(DSORG=PO,LRECL=80,RECFM=FB,BLKSIZE=800)   
+//SYSIN    DD *                                              
+  COPY INDD=SYSUT1,OUTDD=SYSUT2                              
+/*                                                           
+//SYSPRINT DD SYSOUT=*                                       
+//SYSOUT   DD SYSOUT=*                                       
+//AMSDUMP  DD SYSOUT=*                                       
+//STEP09   EXEC PGM=IDCAMS                                   
+//SYSIN    DD *                                              
+  REPRO INFILE(INDD)-                                        
+  OUTFILE(OUTDD)                                             
+/*                                                           
+//INDD     DD DSN=*.STEP03.SORTOUT,DISP=SHR                  
+//OUTDD    DD DSN=&SYSUID..&MNAME..FIRRR,                    
+//            DISP=(NEW,CATLG,DELETE),                       
+//            UNIT=SYSDA,                                    
+//            SPACE=(TRK,(8,1),RLSE),                       
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)  
+//SYSPRINT DD SYSOUT=*                                      
+//SYSOUT   DD SYSOUT=*                                      
+//AMSDUMP  DD SYSOUT=*                                      
+//SYSABEND DD SYSOUT=*                                      
+//STEP011  EXEC PGM=IEFBR14                                 
+//DDQ      DD DSN=&SYSUID..TWK123,                          
+//            DISP=(MOD,CATLG,DELETE),                      
+//            UNIT=SYSDA,                                   
+//            SPACE=(TRK,(8,1),RLSE),                       
+//            DCB=*.STEP07.STEP06.DD1                       
+//STEP012  EXEC PGM=IEFBR14                                 
+//DD2      DD DSN=Z38515.DBZ,DISP=(OLD,DELETE)              
+//STEP014  EXEC PGM=IDCAMS                                  
+//SYSIN    DD *                                             
+  DELETE (Z38515.DBZ) GDG FORCE                             
 /*                                                     
-//OFILE    DD DSN=&SYSUID..GFRIDA,DISP=SHR             
+//SYSPRINT DD SYSOUT=*                                 
+//SYSOUT   DD SYSOUT=*                                 
 //AMSDUMP  DD SYSOUT=*                                 
+//STEP015  EXEC PROC=COPYP                             
+//STEP016.SYSUT2 DD DSN=Z38515.TWK123,DISP=SHR         
+//STEP017  EXEC PGM=IKJEFT01                           
+//SYSTSIN  DD *                                        
+  EXEC 'Z38515.ALPHA4(REX)'                            
+/*                                                     
+//SYSTSPRT DD SYSOUT=*                                 
 //SYSOUT   DD SYSOUT=*                                 
 //SYSPRINT DD SYSOUT=*                                 
-//SYSUDUMP DD SYSOUT=*                                 
+//AMSDUMP  DD SYSOUT=*                                 
+//STEP018  EXEC PGM=IKJEFT01,PARM='%REX2'              
+//SYSEXEC  DD DSN=Z38515.ALPHA4,DISP=SHR               
+//SYSTSIN  DD DUMMY                                    
+//SYSTSPRT DD SYSOUT=*                                         
+//SYSOUT   DD SYSOUT=*                                         
+//AMSDUMP  DD SYSOUT=*                                         
+//STEP019  EXEC ASMACL,MBR=ASM1                                
+//SYSIN    DD DSN=Z38515.ALPHA4(ASM1),DISP=SHR                 
+//GO       EXEC PGM=ASM1                                       
+//STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR                       
+//IFILE    DD DSN=Z38515.TWK123,DISP=SHR                       
+//OFILE    DD DSN=&SYSUID..FATH2,                              
+//            DISP=(MOD,CATLG,DELETE),                         
+//            UNIT=SYSDA,                                      
+//            SPACE=(TRK,(8,10),RLSE),                         
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)     
+//SYSPRINT DD SYSOUT=*                                         
+//SYSOUT   DD SYSOUT=*                                         
+//AMSDUMP  DD SYSOUT=*                                         
+//SYSABEND DD SYSOUT=*                                         
+//STEP020  EXEC ASMACL,MBR=ASM2                        
+//SYSIN    DD DSN=Z38515.ALPHA4(ASM2),DISP=SHR         
+//GO       EXEC PGM=ASM2                               
+//STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR               
+//IFILE    DD DSN=Z38515.ALPHA4(TT1),DISP=SHR          
+//OFILE    DD SYSOUT=*                                 
 //SYSABEND DD SYSOUT=*                                 
-**************************** Bottom of Data ****************************
+//SYSPRINT DD SYSOUT=*                                 
+//SYSOUT   DD SYSOUT=*                                 
+//SYSUDUMP DD SYSOUT=*                                 
+//STEP021  EXEC PGM=IDCAMS                             
+//SYSIN    DD *                                        
+  ALTER Z38515.TWK123 NEWNAME(Z38515.MAGIC12)          
+/*                                                     
+//SYSPRINT DD SYSOUT=*                                 
+//SYSOUT   DD SYSOUT=*                                 
+//AMSDUMP  DD SYSOUT=*                                 
+**************************** Bottom of Data **************************
 
 
-
-******************************** TOP OF DATA **********************************
+********************************* TOP OF DATA *********************************
                    J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E
                                                                                
-16.10.14 JOB09185 ---- FRIDAY,    28 JUN 2024 ----                             
-16.10.14 JOB09185  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.           
-16.10.15 JOB09185  IEF677I WARNING MESSAGE(S) FOR JOB Z38515F  ISSUED          
-16.10.17 JOB09185  ICH70001I Z38515   LAST ACCESS AT 16:03:51 ON FRIDAY, JUNE 2
-16.10.17 JOB09185  $HASP373 Z38515F  STARTED - INIT 1    - CLASS A        - SYS
-16.10.22 JOB09185  -                                      -----TIMINGS (MINS.)-
-16.10.22 JOB09185  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  
-16.10.22 JOB09185  -STEP01   COBOL       00  12765    160       .00       .00  
-16.10.22 JOB09185  -STEP01   LKED        00    297     31       .00       .00  
-16.10.23 JOB09185  -STEP02               00    287     33       .00       .00  
-16.10.23 JOB09185  -STEP03               00     44      4       .00       .00  
-16.10.24 JOB09185  -STEP04               00     31      3       .00       .00  
-16.10.24 JOB09185  -STEP05               00     33      3       .00       .00  
-16.10.24 JOB09185  -STEP07   STEP06      00      2      0       .00       .00  
-16.10.25 JOB09185  -STEP08               00     64     17       .00       .00  
-16.10.26 JOB09185  -STEP09               00     47      5       .00       .00  
-16.10.27 JOB09185  -STEP010              00     41      4       .00       .00  
-16.10.27 JOB09185  -STEP011              00      3      0       .00       .00  
-16.10.27 JOB09185  -STEP012              00      5      1       .00       .00  
-16.10.28 JOB09185  -STEP014              00     24      2       .00       .00  
-16.10.28 JOB09185  -STEP015  STEP016     00     30      2       .00       .00  
-16.10.28 JOB09186  $HASP100 JCLRUN11 ON INTRDR      JORGE CINTRON         FROM 
-16.10.28 JOB09186  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.           
-16.10.28 JOB09185  -STEP017              00     77      7       .00       .00  
-16.10.29 JOB09185  -STEP018              00     27      4       .00       .00  
-16.10.29 JOB09185  -STEP019  C           00    128     18       .00       .00  
-16.10.29 JOB09185  -STEP019  L           00     78      4       .00       .00  
-16.10.30 JOB09185  -GO                   00     21      1       .00       .00  
-16.10.30 JOB09185  -Z38515F  ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TI
-16.10.30 JOB09185  $HASP395 Z38515F  ENDED - RC=0000                           
-
-
-28 JUN 2024 JOB EXECUTION DATE        
-        132 CARDS READ                
-      1,712 SYSOUT PRINT RECORDS      
-          0 SYSOUT PUNCH RECORDS      
-        111 SYSOUT SPOOL KBYTES       
-       0.24 MINUTES EXECUTION TIME    
+18.55.40 JOB07658 ---- THURSDAY,  04 JUL 2024 ----                             
+18.55.40 JOB07658  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.           
+18.55.40 JOB07658  IEF677I WARNING MESSAGE(S) FOR JOB Z38515AB ISSUED          
+18.55.44 JOB07658  ICH70001I Z38515   LAST ACCESS AT 18:46:42 ON THURSDAY, JULY
+18.55.44 JOB07658  $HASP373 Z38515AB STARTED - INIT 1    - CLASS A        - SYS
+18.55.48 JOB07658  -                                      -----TIMINGS (MINS.)-
+18.55.48 JOB07658  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  
+18.55.48 JOB07658  -STEP01   COBOL       00  15322    182       .00       .00  
+18.55.48 JOB07658  -STEP01   LKED        00    304     31       .00       .00  
+18.55.49 JOB07658  -STEP02               00    259     29       .00       .00  
+18.55.49 JOB07658  -STEP03               00     39      6       .00       .00  
+18.55.50 JOB07658  -STEP04               00    225      9       .00       .00  
+18.55.50 JOB07658  -STEP05               00     15      1       .00       .00  
+18.55.50 JOB07658  -STEP07   STEP06      00      2      0       .00       .00  
+18.55.51 JOB07658  -STEP08               00     45     15       .00       .00  
+18.55.51 JOB07658  -STEP09               00    226     11       .00       .00  
+18.55.51 JOB07658  -STEP011              00      2      0       .00       .00  
+18.55.52 JOB07658  -STEP012              00      5      1       .00       .00  
+18.55.52 JOB07658  -STEP014              00     14      2       .00       .00  
+18.55.53 JOB07658  -STEP015  STEP016     00     26      2       .00       .00  
+18.55.53 JOB07658  -STEP017              00     30      5       .00       .00  
+18.55.54 JOB07659  $HASP100 JCLRUN11 ON INTRDR      JORGE CINTRON         FROM 
+18.55.54 JOB07659  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.           
+18.55.54 JOB07658  -STEP018              00     73      6       .00       .00  
+18.55.54 JOB07658  -STEP019  C           00     84     13       .00       .00  
+18.55.54 JOB07658  -STEP019  L           00     82      4       .00       .00  
+18.55.55 JOB07658  -GO                   00     37      3       .00       .00  
+18.55.55 JOB07658  -STEP020  C           00     85     12       .00       .00  
+18.55.55 JOB07658  -STEP020  L           00     82      4       .00       .00  
+18.55.55 JOB07658  -GO                   00     28      2       .00       .00  
+18.55.56 JOB07658  -STEP021              00     40      4       .00       .00  
+18.55.57 JOB07658  -Z38515AB ENDED.  NAME-JORGE CINTRON   
+18.55.57 JOB07658  $HASP395 Z38515AB ENDED - RC=0000      
+------ JES2 JOB STATISTICS ------                         
+  04 JUL 2024 JOB EXECUTION DATE                          
+          153 CARDS READ                                  
+        2,338 SYSOUT PRINT RECORDS                        
+            0 SYSOUT PUNCH RECORDS                        
+          157 SYSOUT SPOOL KBYTES                         
+         0.26 MINUTES EXECUTION TIME                      
