@@ -12,14 +12,14 @@
          PUT  OFILE,PTITLE                     
          PUT  OFILE,PTITLE2                    
 LOOP     EQU  *                                
-         GET  IFILE,INRECS                            GET RECORDS FROM INRECS WHICH PULLS FROM IFILE
+         GET  IFILE,INRECS                            GET RECORDS FROM INRECS WHICH PULLS FROM IFILE    /// INRECS IS JUST THE INPUT RECORD AREA
          MVC  OUTRECS,=CL80''                         CLEARS OUTPUT CL OF 80 
          MVC  OUTRECS+0(3),IFNUM                      SO THE FIRST LINE STARTS AT ZERO THEN WE ADD FROM IFNUM WHICH IS THE FIRST 3 DIGITS OF THE PHONE NUMBER (3)   706
          MVC  OUTRECS+3(1),=C'-'                      IN POSITION 3 WE ADD 1 VALUE CHARACTER LENGTH OF THE HYPHEN                                                    -
          MVC  OUTRECS+4(3),ISNUM                      NOW WE START IN LINE 4 AND ADD THE VALUE OF 3 DIGITS FROM ISNUM                                               587
          MVC  OUTRECS+7(1),=C'-'                      STARTING AT LINE 7 ADDING 1 VALUE WHICH IS THE HYPHEN                                                          -
          MVC  OUTRECS+8(4),ILNUM                      LASTLY START FROM LINE 8 ADD VALUE OF 4 WHICH IS FROM ILNUM                                                   1030              
-         PUT  OFILE,OUTRECS                           PUT THIS DATA CALLED OUTRECS INTO OFILE WHICH IS THE OUTPUT FILE             
+         PUT  OFILE,OUTRECS                           PUT THIS DATA INTO THE OUTPUT RECORD AREA CALLED OUTRECS INTO OFILE WHICH IS THE OUTPUT FILE             
          B    LOOP                                                 
 IFILE    DCB  MACRF=GM,DDNAME=IFILE,DSORG=PS,LRECL=80,EODAD=EXIT   
 OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSORG=PS,LRECL=80              
