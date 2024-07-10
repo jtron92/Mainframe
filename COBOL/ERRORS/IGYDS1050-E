@@ -1,0 +1,16 @@
+IGYDS1050-E File "OFILE" contained no data record descriptions.
+
+make sure to have teh file decriptions
+
+erorr becasuse 
+
+FD OFILE  
+  RECORING MODE IS F
+  LABEL RECORD IS STANARD
+  BLOCK CONTAINS 0 CHARACTERS
+  RECORD CONTAINS 80 CHARACTERS
+  DATA RECORD IS OFILE-RECS.
+
+did not add 01 OFILE-RECS.
+
+
