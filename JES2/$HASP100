@@ -1,0 +1,25 @@
+
+                            JOBNAME-ON- DEVNAME ----PROGRAMMER NAME---FROM--TEXT-->
+17.53.06 JOB07757  $HASP100 JCLRUN11 ON INTRDR      JORGE CINTRON      FROM JOB07756 Z38515CF
+
+
+A JOB statement has been detected in the input stream from the indicated device, and JES2 has assigned the associated job a JES2 job identifier. The programmer name is displayed if it was specified on the JOB statement. In the message, text is one of the following:
+jobid jobname
+
+userid at nodename
+
+In the message:
+jobname
+The name that appears in the name field of the JOB JCL statement.
+devname
+The name of the device on which this job entered the system. If the device name is INTRDR, this message also displays ijobid and ijobname.
+programmer
+The programmer name that appears in the NAME field of the JOB JCL statement.
+ijobid
+The identifier of the job that is submitting jobname. This information is displayed only if the device name is INTRDR, and the submitter has a job identifier. If the submitter does not have a job identifier, N/A is displayed.
+ijobname
+The name of the job that is submitting this job. This information is displayed only if the device name is INTRDR.
+userid
+The TSO/E user ID that originated this job. JES2 only displays this information if the job enters the system from the network. If JES2 cannot identify the user ID that originated this job, this field displays *UNKNOWN.
+nodename
+The name of the node from which this job originated. JES2 only displays this information if the job enters the system from the network. If JES2 cannot identify the node from which this job originated, this field displays *UNKNOWN.
