@@ -13,3 +13,20 @@
 //SYSPRINT DD SYSOUT=*                                               
 //SYSOUT   DD SYSOUT=*                                               
 //AMSDUMP  DD SYSOUT=*                                               
+
+
+
+AND TO DELETE IT 
+
+//SYSIN    DD *                                                      
+  DELETE (Z38515.CHAPT) CLUSTER                                  
+/*                                
+
+
+  DELETE (Z38515.CHAPT) CLUSTER                            
+IDC0550I ENTRY (D) Z38515.CHAPT.DATA DELETED               
+IDC0550I ENTRY (I) Z38515.CHAPT.INDEX DELETED              
+IDC0550I ENTRY (C) Z38515.CHAPT DELETED                    
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0  
+
+
