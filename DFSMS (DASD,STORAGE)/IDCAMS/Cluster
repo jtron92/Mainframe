@@ -1,0 +1,103 @@
+***************************** Top of Data *********
+//Z38515DD   JOB (MVS),'JORGE CINTRON',            
+//             MSGLEVEL=(1,1),                     
+//             MSGCLASS=H,                         
+//             CLASS=A,                            
+//             NOTIFY=&SYSUID                      
+//STEP01   EXEC PGM=IDCAMS                         
+//SYSIN    DD *                                    
+  DEFINE CLUSTER(NAME(Z38515.GLOBAL.MVS)-          
+  RECORDSIZE(80 80)-                               
+  INDEXED-                                         
+  CYLINDERS(5 2)-                                  
+  KEYS(6 0)-                                       
+  FREESPACE(10 10))-                               
+  DATA(NAME(Z38515.GLOBAL.MVS.DATA))-              
+  INDEX(NAME(Z38515.GLOBAL.MVS.INDEX))             
+/*                                                 
+//SYSPRINT DD SYSOUT=*                                             
+//SYSOUT   DD SYSOUT=*                                             
+//AMSDUMP  DD SYSOUT=*                                             
+//         IF (STEP01.RC NE 0) THEN                                
+//STEP02   EXEC PGM=IDCAMS                                         
+//SYSIN    DD *                                                    
+  DELETE (Z38515.GLOBAL.MVS) CLUSTER                               
+/*                                                                 
+//SYSPRINT DD SYSOUT=*                                             
+//SYSOUT   DD SYSOUT=*                                             
+//AMSDUMP  DD SYSOUT=*                                             
+//         ENDIF                                                   
+**************************** Bottom of Data ***********************
+
+Defining a cluster and if its does not return with a RC = 0 then it gets deleted in step02. Insures that the cluster when defining is not 
+already catlog in the system or errors when defining it. 
+
+********************************* TOP OF DATA *********************************
+                   J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E
+                                                                               
+19.11.23 JOB03148 ---- SATURDAY,  13 JUL 2024 ----                             
+19.11.23 JOB03148  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.           
+19.11.23 JOB03148  ICH70001I Z38515   LAST ACCESS AT 19:07:00 ON SATURDAY, JULY
+19.11.23 JOB03148  $HASP373 Z38515DD STARTED - INIT 1    - CLASS A        - SYS
+19.11.24 JOB03148  -                                      -----TIMINGS (MINS.)-
+19.11.24 JOB03148  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  
+19.11.24 JOB03148  -STEP01               00     31      5       .00       .00  
+19.11.24 JOB03148  -STEP02            FLUSH      0      0       .00       .00  
+19.11.24 JOB03148  -Z38515DD ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TI
+19.11.24 JOB03148  $HASP395 Z38515DD ENDED - RC=0000                           
+------ JES2 JOB STATISTICS ------                                              
+  13 JUL 2024 JOB EXECUTION DATE                                               
+           28 CARDS READ                                                       
+
+   INDEXED-                                                              00100000
+   CYLINDERS(5 2)-                                                       00110003
+   KEYS(6 0)-                                                            00120000
+   FREESPACE(10 10))-                                                    00130000
+   DATA(NAME(Z38515.GLOBAL.MVS.DATA))-                                   00140003
+   INDEX(NAME(Z38515.GLOBAL.MVS.INDEX))                                  00150003
+ IGD01007I ALLOCATION SIZE LIMIT EXCEEDED (>300KB)                               
+ IGD01007I ALLOCATION SIZE NEEDS TO BE REDUCED - ZXP SAYS NO                     
+ IGD01008I ALLOCATION SIZE REDUCED - ZXP SAYS NO                                 
+ IDC0508I DATA ALLOCATION STATUS FOR VOLUME ZXPL01 IS 0                          
+ IDC0509I INDEX ALLOCATION STATUS FOR VOLUME ZXPL01 IS 0                         
+ IDC0181I STORAGECLASS USED IS ZXPS                                              
+ IDC0181I DATACLASS USED IS ZXPDX                                                
+ IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                 
+ IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0               
+ ******************************** BOTTOM OF DATA ********************************
+
+
+now running the same job again deletes it
+
+********************************* TOP OF DATA **********************************
+                   J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E 
+                                                                                
+19.11.34 JOB03149 ---- SATURDAY,  13 JUL 2024 ----                              
+19.11.34 JOB03149  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
+19.11.34 JOB03149  ICH70001I Z38515   LAST ACCESS AT 19:11:23 ON SATURDAY, JULY 
+19.11.34 JOB03149  $HASP373 Z38515DD STARTED - INIT 1    - CLASS A        - SYS 
+19.11.35 JOB03149  -                                      -----TIMINGS (MINS.)--
+19.11.35 JOB03149  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+19.11.35 JOB03149  -STEP01               12     27      2       .00       .00   
+19.11.35 JOB03149  -STEP02               00     25      3       .00       .00   
+19.11.35 JOB03149  -Z38515DD ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
+19.11.35 JOB03149  $HASP395 Z38515DD ENDED - RC=0012                            
+------ JES2 JOB STATISTICS ------                                               
+  13 JUL 2024 JOB EXECUTION DATE                                                
+           28 CARDS READ                                                        
+          111 SYSOUT PRINT RECORDS                                              
+IDCAMS  SYSTEM SERVICES                                           TIME
+                                                                      
+  DELETE (Z38515.GLOBAL.MVS) CLUSTER                                  
+IDC0550I ENTRY (D) Z38515.GLOBAL.MVS.DATA DELETED                     
+IDC0550I ENTRY (I) Z38515.GLOBAL.MVS.INDEX DELETED                    
+IDC0550I ENTRY (C) Z38515.GLOBAL.MVS DELETED                          
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0             
+                                                                      
+IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0     
+******************************** BOTTOM OF DATA **********************
+
+D data is deleted
+I index is deleted
+C cluster is deleted
