@@ -1,0 +1,139 @@
+
+............................................................................
+DITTO/ESA for MVS            Task Selection Menu                            
+                                                                            
+Select the desired task or enter a DITTO function code, then press Enter.   
+Press F2 (Menu) to display the menu panel with DITTO function groups.       
+                                                                            
+7      1. Browse data                                                       
+       2. Edit or update data                                               
+       3. Work with VTOC                                                    
+       4. Work with catalog entries                                         
+       5. Work with OAM objects                                             
+       6. Print data                                                        
+       7. Copy data                                                         
+       8. Locate data                                                       
+       9. Change data                                                       
+      10. Create data                                                       
+      11. Position a tape                                                   
+      12. Tape specific functions                                           
+      13. Set processing options                                            
+
+
+press 7 for the option to copy
+
+
+
+
+
+........... Copy Functions ............ 
+:                                     : 
+: Select the type of input data:      : 
+:                                     : 
+: 2     1. Tape data                  : 
+:       2. VSAM data                  : 
+:       3. QSAM data                  : 
+:       4. OAM object                 : 
+:       5. SYSIN data                 : 
+:       6. Exported Stacked Volume    : 
+:                                     : 
+: F1=Help  F3=Exit  F12=Cancel        : 
+:.....................................: 
+
+press 2 for vsam
+
+
+
+
+........... Copy Functions ............           
+:          ........... Copy VSAM Data ............
+: Select t :                                     :
+:          : Select the desired output:          :
+: 2     1. :                                     :
+:       2. : 2     1. Tape data                  :
+:       3. :       2. VSAM data                  :
+:       4. :       3. QSAM data                  :
+:       5. :       4. OAM object                 :
+:       6. :       5. SYSPUNCH                   :
+:          :                                     :
+: F1=Help  : F1=Help  F3=Exit  F12=Cancel        :
+:......... :.....................................:
+
+
+  press 2 again
+
+
+
+
+
+  ...............................................................................
+ DITTO/ESA for MVS             VV - VSAM to VSAM                               
+                                                                               
+ .. Input .....................................................................
+ :      Data set name 'MATEDK.GLOBAL.TWO'                                     :
+ :          Start key                                key or slot              :
+ :         Skip count              number of records to be skipped            :
+ :         Copy count              number of records to be copied             :
+ :............................................................................:
+                                                                               
+ .. Output ....................................................................
+ :      Data set name 'MATEDK.GLOBAL.ONE'                                     :
+ :              Reuse              YES or NO                                  :
+ :............................................................................:
+                                                                               
+                                                                               
+  ENTER THE INPUT DSN AND OUTPUT DSN 
+
+   you can either leave it blank which by default the copy count will be ALL 
+
+...............................................................................
+ DITTO/ESA for MVS             VV - VSAM to VSAM             3 record(s) copied
+                                                                               
+ .. Input .....................................................................
+ :      Data set name 'MATEDK.GLOBAL.TWO'                                     :
+ :          Start key                                key or slot              :
+ :         Skip count              number of records to be skipped            :
+ :         Copy count ALL          number of records to be copied             :
+ :............................................................................:
+                                                                               
+ .. Output ....................................................................
+ :      Data set name 'MATEDK.GLOBAL.ONE'                                     :
+ :              Reuse NO           YES or NO                                  :
+ :............................................................................:
+
+
+   this is the vsam for MATEDK.GLOBAL.ONE BEFORE COPYYING THE DATA FROM MATEDK.GLOBAL.TWO INTO IT
+
+
+   ................................................................................
+ DITTO/ESA for MVS               VE - VSAM Edit                                 
+                                                                                
+ CATALOG                                                                        
+ DSNAME MATEDK.GLOBAL.ONE                            Col 1          Format CHAR 
+ VOLSER DEVHD4  Type KSDS                            Insert length 80           
+       <===5>..10....5...20....5...30....5...40....5...50....5...60....5...70...
+ 00000 ****  Top of data  ****                                                  
+ 00001 124892     MARCUS                                                       0
+ 00002 434859     DONALD                                                       0
+ 00003 ****  End of data  ****                                                  
+                                                                                
+                                                                                
+ THIS IS AFTER THE COPY UPDATE
+
+   ................................................................................
+ DITTO/ESA for MVS              VB - VSAM Browse                                
+                                                                                
+ CATALOG                                                                        
+ RBA 0            Key 123456                           Col 1        Format CHAR 
+ VOLSER DEVHD4   Type KSDS   DSNAME MATEDK.GLOBAL.ONE                           
+                                                                                
+ RBA        Len     <===5>..10....5...20....5...30....5...40....5...50....5...60
+ 0            80    123456     JORGE CINTRON                                    
+ 80           80    124892     MARCUS                                           
+ 160          80    135435     JAMES MCGEEE                                     
+ 240          80    434859     DONALD                                           
+ 320          80    485023     JEROME HARRIS                                    
+ ****  End of data  ****                                                        
+                                                                                
+                                                                                
+                                                                                
