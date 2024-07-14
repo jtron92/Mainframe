@@ -1,0 +1,31 @@
+IDC0550I ENTRY (x) dsname DELETED
+Last Updated: 2021-06-25
+Explanation
+The specified data set name entry was deleted from the virtual storage access method (VSAM) catalog.
+
+In the message text:
+dsname
+The data set name.
+x
+The type of entry, as follows:
+C--cluster
+D--data
+G--alternate index
+I--index
+R--path
+V--volume
+U--user catalog
+M--master catalog
+A--non-VSAM
+B--GDG base
+X--alias
+
+
+  DELETE (Z38515.GLOBAL.MVS) CLUSTER                                    00230003
+IDC0550I ENTRY (D) Z38515.GLOBAL.MVS.DATA DELETED                               
+IDC0550I ENTRY (I) Z38515.GLOBAL.MVS.INDEX DELETED                              
+IDC0550I ENTRY (C) Z38515.GLOBAL.MVS DELETED                                    
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0               
+******************************** BOTTOM OF DATA ********************************
