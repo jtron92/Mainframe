@@ -33,5 +33,12 @@
   OUTFILE(OUTDD)                                       
 /*                                                     
 //SYSPRINT DD SYSOUT=*                                 
-
-
+//AMSDUMP  DD SYSOUT=*                       
+//SYSOUT   DD SYSOUT=*                       
+//INDD     DD *                              
+123456     JORGE CINTRON                     
+135435     JAMES MCGEEE                      
+485023     JEROME HARRIS                     
+/*                                           
+//OUTDD    DD DSN=MATEDK.GLOBAL.TWO,DISP=SHR 
+//         ENDIF                             
