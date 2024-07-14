@@ -50,3 +50,118 @@ THEN THERE IS AN IF OR ELSE STATEMENT WHICH BASICALLY IF STEP01 DOESNT NOT HAVE 
 THIS IF IN CASE THERE IS A DUP CLUSTER ALREADY OUT THERE IT WOULD RETURN WITH A RC 12
 
 IF THE STEP01 RETURNS WITH A 0 THEN GOES TO STEP03 WHICH DATA GETS UPLOADED INTO THE VSAM FROM INDD
+
+IF YOU DECIDED TO RERUN THIS JOB IT WOULD DELETE IT SELF 
+
+
+EXAMPLE 1 
+
+STEP01 HAS A RC OF 00 SKIPS STEP02 THEN STEP03 LOADS THE DATA
+********************************* TOP OF DATA **********************************
+                       J E S 2  J O B  L O G  --  S Y S T E M  M A T E  --  N O 
+                                                                                
+14.15.36 JOB05754 ---- SUNDAY,    14 JUL 2024 ----                              
+14.15.36 JOB05754  IRR010I  USERID MATEDK   IS ASSIGNED TO THIS JOB.            
+14.15.36 JOB05754  ICH70001I MATEDK   LAST ACCESS AT 14:12:27 ON SUNDAY, JULY 14
+14.15.36 JOB05754  $HASP373 MATEDK91 STARTED - INIT 1    - CLASS A - SYS MATE   
+14.15.36 JOB05754  IEF403I MATEDK91 - STARTED - TIME=14.15.36                   
+14.15.36 JOB05754  -                                      -----TIMINGS (MINS.)--
+14.15.36 JOB05754  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+14.15.36 JOB05754  -STEP01               00     62      0       .00       .00   
+14.15.36 JOB05754  -STEP02            FLUSH      0      0       .00       .00   
+14.15.36 JOB05754  -STEP03               00     75      0       .00       .00   
+14.15.36 JOB05754  IEF404I MATEDK91 - ENDED - TIME=14.15.36                     
+14.15.36 JOB05754  -MATEDK91 ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
+14.15.36 JOB05754  $HASP395 MATEDK91 ENDED                                      
+
+IDCAMS  SYSTEM SERVICES                                           TIME: 14:15:36
+                                                                                
+  DEFINE CLUSTER(NAME(MATEDK.GLOBAL.TWO)-                               00080000
+  INDEXED-                                                              00090000
+  RECORDSIZE(80 80)-                                                    00100000
+  KEYS(6 0)-                                                            00110000
+  VOLUMES(DEVHD4)-                                                      00120000
+  CYLINDERS(5 2)-                                                       00130000
+  FREESPACE(10 10))-                                                    00140000
+  DATA(NAME(MATEDK.GLOBAL.TWO.DATA))-                                   00150000
+  INDEX(NAME(MATEDK.GLOBAL.TWO.INDEX))                                  00160000
+IDC0508I DATA ALLOCATION STATUS FOR VOLUME DEVHD4 IS 0                          
+IDC0509I INDEX ALLOCATION STATUS FOR VOLUME DEVHD4 IS 0                         
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0               
+
+IDCAMS  SYSTEM SERVICES                                           TIME: 14:15:36
+                                                                                
+  REPRO INFILE(INDD)-                                                   00320000
+  OUTFILE(OUTDD)                                                        00330000
+IDC0005I NUMBER OF RECORDS PROCESSED WAS 3                                      
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0                       
+                                                                                
+IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0               
+
+
+
+
+
+EXAMPLE 2
+
+
+RERAN THE JOB STEP01 HAS A RC 12 BECAUSE OF DUPLICATE DATA SET NAME
+
+NOW STEP02 CAN RUN SINCE THERE WAS NOT A RC IN STEP01 OF 0 
+
+STEP02 DELETES THE VSAM CLUSTER
+
+STEP03 GETS FLUSH BECAUSE IT CONDITIONAL EXPRESSION BUT EVEN IF THERE WAS NOT A CONDITION THE VSAM NO LONGER EXISTS SO STEP03 COULDNT LOAD DATA INTO THAT DSN ANYWAYS
+********************************* TOP OF DATA **********************************
+                       J E S 2  J O B  L O G  --  S Y S T E M  M A T E  --  N O 
+                                                                                
+15.38.26 JOB05759 ---- SUNDAY,    14 JUL 2024 ----                              
+15.38.26 JOB05759  IRR010I  USERID MATEDK   IS ASSIGNED TO THIS JOB.            
+15.38.26 JOB05759  ICH70001I MATEDK   LAST ACCESS AT 15:29:42 ON SUNDAY, JULY 14
+15.38.26 JOB05759  $HASP373 MATEDK91 STARTED - INIT 1    - CLASS A - SYS MATE   
+15.38.26 JOB05759  IEF403I MATEDK91 - STARTED - TIME=15.38.26                   
+15.38.26 JOB05759  -                                      -----TIMINGS (MINS.)--
+15.38.26 JOB05759  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  C
+15.38.26 JOB05759  -STEP01               12     41      0       .00       .00   
+15.38.26 JOB05759  -STEP02               00     72      0       .00       .00   
+15.38.26 JOB05759  -STEP03            FLUSH      0      0       .00       .00   
+15.38.26 JOB05759  IEF404I MATEDK91 - ENDED - TIME=15.38.26                     
+15.38.26 JOB05759  -MATEDK91 ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
+15.38.26 JOB05759  $HASP395 MATEDK91 ENDED                
+
+
+IDCAMS  SYSTEM SERVICES                                           TIME
+                                                                      
+  DEFINE CLUSTER(NAME(MATEDK.GLOBAL.TWO)-                             
+  INDEXED-                                                            
+  RECORDSIZE(80 80)-                                                  
+  KEYS(6 0)-                                                          
+  VOLUMES(DEVHD4)-                                                    
+  CYLINDERS(5 2)-                                                     
+  FREESPACE(10 10))-                                                  
+  DATA(NAME(MATEDK.GLOBAL.TWO.DATA))-                                 
+  INDEX(NAME(MATEDK.GLOBAL.TWO.INDEX))                                
+IDC3013I DUPLICATE DATA SET NAME                                      
+IDC3009I ** VSAM CATALOG RETURN CODE IS 8 - REASON CODE IS IGG0CLEH-38
+IDC3003I FUNCTION TERMINATED. CONDITION CODE IS 12                    
+
+
+
+IEF206I MATEDK91 STEP03 - STEP WAS NOT RUN BECAUSE OF CONDITIONAL EXPRESSION ON
+IEF272I MATEDK91 STEP03 - STEP WAS NOT EXECUTED.                               
+
+
+IDCAMS  SYSTEM SERVICES                                       
+                                                              
+  DELETE (MATEDK.GLOBAL.TWO) CLUSTER                          
+IDC0550I ENTRY (D) MATEDK.GLOBAL.TWO.DATA DELETED             
+IDC0550I ENTRY (I) MATEDK.GLOBAL.TWO.INDEX DELETED            
+IDC0550I ENTRY (C) MATEDK.GLOBAL.TWO DELETED                  
+IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0     
+
+
+(D) DATA HAS BEEN DELETED
+(I) INDEX HAS BEEN DELETED
+(C) CLUSTER HAS BEEN DELETED
