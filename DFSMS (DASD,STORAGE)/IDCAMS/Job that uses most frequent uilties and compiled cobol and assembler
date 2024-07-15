@@ -210,3 +210,212 @@ WELCOME TO THE MAINFRAME
         1,799 SYSOUT PRINT RECORDS                                              
             0 SYSOUT PUNCH RECORDS                                              
           119 SYSOUT SPOOL KBYTES                                               
+
+
+
+****cobol pgm used here******
+which is in step01 being complied and ran on step02
+DSN=&SYSUID..ALPHA7(JOBC),DISP=SHR    
+DSN=&SYSUID..CBLOADER(JOBC),DISP=SHR   
+***********************************************
+
+IDENTIFICATION DIVISION.                 
+PROGRAM-ID. HERC01.                      
+ENVIRONMENT DIVISION.                    
+INPUT-OUTPUT SECTION.                    
+FILE-CONTROL.                            
+    SELECT IFILE ASSIGN TO CUSTDDI.      
+    SELECT OFILE ASSIGN TO CUSTDDO.      
+DATA DIVISION.                           
+FILE SECTION.                            
+FD IFILE                                 
+    RECORDING MODE IS F                  
+    LABEL RECORD IS STANDARD             
+    BLOCK CONTAINS 0 CHARACTERS          
+    RECORD CONTAINS 80 CHARACTERS        
+    DATA RECORD IS IFILE-RECS.           
+01 IFILE-RECS.                           
+    05 DATA1 PIC X(80).                  
+FD OFILE                               
+    RECORDING MODE IS F                
+    LABEL RECORD IS STANDARD           
+    BLOCK CONTAINS 0 CHARACTERS        
+    RECORD CONTAINS 80 CHARACTERS      
+    DATA RECORD IS OFILE-RECS.         
+01 OFILE-RECS.                         
+    05 DATA2 PIC X(80).                
+WORKING-STORAGE SECTION.               
+01 SWITCH.                             
+   05 SWITCH1 PIC X(1) VALUE 'N'.      
+      88 EOF VALUE 'Y'.                
+      88 NOF VALUE 'N'.                
+01 EMPLOYEEI.                          
+   05 EMP-IDI  PIC 9(4).               
+   05 FILLER   PIC X(5).               
+   05 EMP-PAYI PIC 99999V99.           
+   05 FILLER   PIC X(2).               
+    05 EMP-BONI PIC 9999V99.                    
+    05 FILLER   PIC X(54).                      
+ 01 EMPLOYEEO.                                  
+    05 EMP-IDO  PIC S9(9) USAGE COMP.           
+    05 FILLER   PIC X(5).                       
+    05 EMP-PAYO PIC S9(6)V9(2) USAGE COMP-3.    
+    05 FILLER   PIC X(2).                       
+    05 EMP-BONO PIC S9(6)V9(2) USAGE COMP-3.    
+    05 FILLER   PIC X(59).                      
+ PROCEDURE DIVISION.                            
+ MAIN-PARA.                                     
+     PERFORM P100.                              
+     PERFORM P200.                              
+     PERFORM P300.                              
+     STOP RUN.                                  
+ P100.                                          
+     OPEN INPUT IFILE.                          
+     OPEN OUTPUT OFILE.                         
+P200.                                  
+    PERFORM UNTIL EOF                  
+    READ IFILE INTO EMPLOYEEI          
+    AT END                             
+    SET EOF TO TRUE                    
+    NOT AT END                         
+    MOVE EMP-IDI TO EMP-IDO            
+    MOVE EMP-PAYI TO EMP-PAYO          
+    MOVE EMP-BONI TO EMP-BONO          
+    WRITE OFILE-RECS FROM EMPLOYEEO    
+    END-READ                           
+    END-PERFORM.                       
+P300.                                  
+    CLOSE IFILE OFILE.                 
+
+
+
+************************
+step03 includes this memeber below:
+
+
+EDIT       Z38515.ALPHA7(JOBS) - 01.01                   
+Command ===>                                             
+****** ***************************** Top of Data ********
+000100 //SORTIN   DD DSN=*.STEP02.CUSTDDO,DISP=SHR       
+000200 //SORTOUT  DD DSN=&SYSUID..&MNAME..TWO,           
+000300 //            DISP=(,CATLG),                      
+000400 //            UNIT=SYSDA,                         
+000500 //            SPACE=(TRK,(8,2),RLSE),             
+000600 //            DCB=*.STEP02.CUSTDDO,               
+000700 //            VOL=REF=*.STEP02.CUSTDDO            
+000710 //SORTWK01 DD UNIT=SYSDA,SPACE=(TRK,(1,1))        
+000720 //SORTWK02 DD UNIT=SYSDA,SPACE=(TRK,(1,1))        
+000730 //SORTWK03 DD UNIT=SYSDA,SPACE=(TRK,(1,1))        
+000800 //SYSIN    DD *                                   
+000900   SORT FIELDS=COPY                                
+001000 /*                                                
+001100 //SYSPRINT DD SYSOUT=*                            
+001200 //SYSOUT   DD SYSOUT=*                            
+001300 //AMSDUMP  DD SYSOUT=*                            
+***************************************************************
+
+
+for step018 here is the catloged procedure being called, i also decided at the end to do a jcl override as show in step019
+STEP018  EXEC PROC=JOBP                                 
+//STEP019.SYSUT2 DD DSN=Z38515.NWO1M,DISP=SHR 
+
+    Z38515.ALPHA7(JOBP) - 01.00         
+ ===>                                   
+***************************** Top of Dat
+//PROC124  PROC                         
+//STEP019  EXEC PGM=IEBGENER            
+//SYSUT1   DD DSN=Z38515.CHASE,DISP=SHR 
+//SYSUT2   DD DSN=Z38515.BOXY,DISP=SHR  
+//SYSIN    DD DUMMY                     
+//SYSPRINT DD SYSOUT=*                  
+//SYSOUT   DD SYSOUT=*                  
+//AMSDUMP  DD SYSOUT=*                  
+**************************** Bottom of D
+
+
+
+step020 is using rexx to trigger out a job since i do not have a scheduler like ca7 
+
+--------------------------------------------
+    Z38515.ALPHA7(REX1) - 01.00             
+ ===>                                       
+***************************** Top of Data **
+/*REXX*/                                    
+ADDRESS TSO "SUBMIT 'Z38515.ALPHA(ASM)'"    
+IF RC = 0 THEN                              
+SAY "GOOD" RC                               
+ELSE                                        
+SAY "FAIL" RC                               
+EXIT                                        
+**************************** Bottom of Data 
+
+
+step021 allocates a new dsn based off a current dsn called chase that i have
+    Z38515.ALPHA7(REX2) - 01.00                     Co
+ ===>                                                 
+***************************** Top of Data ************
+/*REXX*/                                              
+OUTFILE = "YORK2"                                     
+"ALLOC F(INDD) DA("OUTFILE") LIKE (CHASE) NEW REUSE"  
+"EXECIO * DISKW INDD(FINIS STEM REC.0"                
+"FREE F(INDD)"                                        
+EXIT                                                  
+**************************** Bottom of Data **********
+
+
+
+
+step022 is the assembler pgm that copies the input dsn data and outputs it the the system i aslo added a header as well to make it look nice
+--------------------------------------------------------------------
+    Z38515.ALPHA7(ASM1) - 01.00                     Columns 00001 00
+ ===>                                                  Scroll ===> C
+***************************** Top of Data **************************
+         CSECT                                                      
+         YREGS                                                      
+         SAVE (14,12)                                               
+         STM  R14,R12,12(R13)                                       
+         BASR R12,0                                                 
+         USING *,R12                                                
+         ST   R13,SAVEA+4                                           
+         LA   R13,SAVEA                                             
+         OPEN (IFILE,INPUT,OFILE,OUTPUT)                            
+         PUT  OFILE,TITLE1                                          
+LOOP     EQU  *                                                     
+         GET  IFILE,INRECS                                          
+         MVC  OUTRECS,INRECS                                        
+         PUT  OFILE,OUTRECS                                         
+         B    LOOP                                                  
+IFILE    DCB  MACRF=GM,DDNAME=IFILE,DSORG=PS,LRECL=80,EODAD=EXIT    
+OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSORG=PS,LRECL=80               
+EXIT     EQU  *                                   
+         PUT  OFILE,TITLE2                        
+         CLOSE (IFILE,,OFILE)                     
+         L    R13,SAVEA+4                         
+         RETURN (14,12),RC=0                      
+         LM   R14,R12,12(R13)                     
+         LA   R15,0                               
+         BR   R14                                 
+SAVEA    DS   18F                                 
+INRECS   DS   CL80                                
+TITLE1   DC   CL80'HELLO WORLD'                   
+TITLE2   DC   CL80'AT THE BOTTOM OF THE WORLD'    
+OUTRECS  DS   CL80                                
+         END                    
+
+
+********************
+
+at the end in sdsf since i have the output file called ofile pointing towards the sysout here is the output
+
+ -------------------------------------------------------------------------------
+ SDSF OUTPUT DISPLAY Z38515AC JOB04419  DSID   160 LINE 1       COLUMNS 02- 81  
+ COMMAND INPUT ===>                                            SCROLL ===> CSR  
+HELLO WORLD                                                                     
+WELCOME TO THE MAINFRAME                                                01590008
+AT THE BOTTOM OF THE WORLD                                                      
+******************************** BOTTOM OF DATA ********************************
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
