@@ -1,0 +1,92 @@
+AFTER DEFINING THE CLUSTER AND USING REPRO TO LOAD DATA INTO THE FILE , ALSO YOU CAN UPDATE IT WITH COBOL AS WELL
+
+//Z38515A  JOB (MVS),'JORGE CINTRON',             
+//             MSGLEVEL=(1,1),                    
+//             MSGCLASS=H,                        
+//             CLASS=A,                           
+//             NOTIFY=&SYSUID                     
+//STEP01   EXEC PGM=IDCAMS                        
+//SYSIN    DD *                                   
+  DEFINE CLUSTER (NAME(Z38515.GLOBAL.TEN)-        
+  RECORDSIZE(80 80)-                              
+  INDEXED-                                        
+  CYLINDERS(8 8)-                                 
+  KEYS(4 0)-                                      
+  FREESPACE(10 10))-                              
+  DATA(NAME(Z38515.GLOBAL.TEN.DATA))-             
+  INDEX(NAME(Z38515.GLOBAL.TEN.INDEX))            
+/*                                                
+//SYSPRINT DD SYSOUT=*                            
+//AMSDUMP  DD SYSOUT=*               
+//SYSOUT   DD SYSOUT=*               
+//STEP02   EXEC PGM=IDCAMS           
+//SYSIN    DD *                      
+  LISTCAT ENTRIES(Z38515.GLOBAL.TEN) 
+/*                                   
+//SYSPRINT DD SYSOUT=*               
+//SYSOUT   DD SYSOUT=*               
+//AMSDUMP  DD SYSOUT=*               
+//STEP03   EXEC PGM=IDCAMS           
+//SYSIN    DD *                      
+  REPRO INFILE(INDD)-                
+  OUTFILE(OUTDD)                     
+/*                                   
+//SYSPRINT DD SYSOUT=*               
+//SYSOUT   DD SYSOUT=*               
+//AMSDUMP  DD SYSOUT=*               
+//INDD     DD *                      
+0004       JORGE                                     
+/*                                                   
+//OUTDD    DD DSN=Z38515.GLOBAL.TEN,DISP=SHR         
+**************************** Bottom of Data *********
+
+THEN COBOL 
+
+IDENTIFICATION DIVISION.                 
+PROGRAM-ID. HERC01.                      
+ENVIRONMENT DIVISION.                    
+INPUT-OUTPUT SECTION.                    
+FILE-CONTROL.                            
+    SELECT IFILE ASSIGN TO CUSTDDI       
+    ORGANIZATION IS INDEXED              
+    ACCESS MODE IS RANDOM                
+    RECORD KEY IS EMP-ID.                
+DATA DIVISION.                           
+FILE SECTION.                            
+FD IFILE.                                
+01 IFILE-RECS.                           
+   05 EMP-ID PIC 9(4).                   
+   05 FILLER PIC X(6).                   
+   05 EMP-NAME PIC X(11).                
+   05 FILLER   PIC X(59).                
+WORKING-STORAGE SECTION.          
+PROCEDURE DIVISION.               
+MAIN-PARA.                        
+    PERFORM P100.                 
+    PERFORM P200.                 
+    PERFORM P300.                 
+    STOP RUN.                     
+P100.                             
+    OPEN I-O IFILE.               
+P200.                             
+    MOVE  7777  TO EMP-ID         
+    MOVE 'CINTRON' TO EMP-NAME    
+    WRITE IFILE-RECS.             
+P300.                             
+    CLOSE IFILE.                  
+
+
+
+
+
+
+Key                                          Col 1       Insert Length 80  
+       <==>+----10---+----2----+----3----+----4----+----5----+----6----+---
+****** ****  Top of data  ****                                             
+000001 0004  JORGE                                                         
+000002 7777......CINTRON    ...............................................
+****** ****  End of data  ****                                             
+                                                                           
+
+
+
