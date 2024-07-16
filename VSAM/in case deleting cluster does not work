@@ -1,0 +1,26 @@
+if you happen to get this error :
+
+  DELETE (MATEDK.VSM.JUSTICE)  CLUSTER                         
+IKJ56225I DATA SET MATEDK.VSM.JUSTICE ALREADY IN USE, TRY LATER
+IKJ56225I DATA SET IS ALLOCATED TO ANOTHER JOB OR USER         
+IDC0551I ** ENTRY MATEDK.VSM.JUSTICE NOT DELETED               
+
+
+and you try to free up the job but can not and need to delete the cluster just alter the name
+
+
+//STEP02   EXEC PGM=IDCAMS                             
+//SYSIN    DD *                                        
+  ALTER  MATEDK.VSM.JUSTICE NEWNAME(MATEDK.FIVE.SIX)   
+/*                                                     
+//SYSPRINT DD SYSOUT=*                                 
+//SYSOUT   DD SYSOUT=*                                 
+//AMSDUMP  DD SYSOUT=*                                 
+
+
+then do delete it with the altername , the index and data will be deleted as well
+
+02900 //STEP03   EXEC PGM=IDCAMS                  
+03000 //SYSIN    DD *                            
+03100   DELETE (MMATEDK.FIVE.SIX)  CLUSTER      
+03200 /*                                          
