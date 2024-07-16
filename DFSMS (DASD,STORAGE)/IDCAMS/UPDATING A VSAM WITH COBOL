@@ -88,5 +88,39 @@ Key                                          Col 1       Insert Length 80
 ****** ****  End of data  ****                                             
                                                                            
 
+YOU CAN ALSO DELETE IT AS WELL
+
+JUST CHANGE THE COBOL PORTION HERE 
+
+MAIN-PARA.                        
+    PERFORM P100.                 
+    PERFORM P200.                 
+    PERFORM P300.                 
+    STOP RUN.                     
+P100.                             
+    OPEN I-O IFILE.               
+P200.                             
+    MOVE  7777  TO EMP-ID         
+    MOVE 'CINTRON' TO EMP-NAME    
+    DELETE IFILE.                 
+P300.                             
+    CLOSE IFILE.                  
+
+
+Command ===>                                                   
+                            Type KSDS     RBA                  
+Key                                          Col 1       Insert
+       <==>+----10---+----2----+----3----+----4----+----5----+-
+****** ****  Top of data  ****                                 
+000001 0004  JORGE                                             
+****** ****  End of data  ****                                 
+                                                               
+                                                               
+                                                               
+                                                               
+                                                               
+                                                               
+                                                               
+
 
 
