@@ -1,0 +1,17 @@
+//MATEDK01 JOB (MVS),'JORGE CINTRON',                 
+//             MSGLEVEL=(1,1),                        
+//             MSGCLASS=H,                            
+//             CLASS=A,                               
+//             NOTIFY=&SYSUID                         
+//STEP01   EXEC PGM=IDCAMS                            
+//SYSIN    DD *                                       
+  DEFINE CLUSTER (NAME(MATEDK.NON.INDEXED)-           
+  NONINDEXED-                                         
+  RECORDSIZE(80 80)-                                  
+  VOLUMES(DEVHD4)-                                    
+  RECORDS(1000 100))-                                 
+  DATA (NAME(MATEDK.NON.INDEXED.DATA))                
+/*                                                    
+//SYSPRINT DD SYSOUT=*                                
+//SYSOUT   DD SYSOUT=*                                
+//AMSDUMP  DD SYSOUT=* 
