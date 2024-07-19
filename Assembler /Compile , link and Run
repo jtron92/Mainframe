@@ -1,0 +1,45 @@
+Example 1 
+
+//MATEDK91 JOB (MVS),'JORGE CINTRON',                     
+//             MSGLEVEL=(1,1),                            
+//             MSGCLASS=H,                                
+//             CLASS=A,                                   
+//             NOTIFY=&SYSUID                             
+//STEP01   EXEC ASMACL                                    
+//SYSOUT   DD SYSOUT=*                                    
+//SYSPRINT DD SYSOUT=*                                    
+//C.SYSIN    DD DSN=MATEDK.BOOK7(TESTF),DISP=SHR          
+//C.SYSLIB DD DSN=SYS1.MACLIB,DISP=SHR                    
+//         DD DSN=MATEDK.BOOK7,DISP=SHR                   
+//L.SYSLMOD DD DSN=MATEDK.LOADLIB(TESTF),DISP=SHR         
+//SYSPRINT DD SYSOUT=*                                    
+//STEP02   EXEC PGM=TESTF                                 
+//STEPLIB  DD DSN=MATEDK.LOADLIB(TESTF),DISP=SHR          
+//SYSPRINT DD SYSOUT=*                                    
+//SYSOUT   DD SYSOUT=*                                    
+//IFILE    DD DSN=MATEDK.BOOK7(NUM),DISP=SHR               
+//OFILE    DD SYSOUT=*                                     
+**************************** Bottom of Data ***************
+                                                           
+
+
+
+example 2 from IBM training mainframe
+
+//Z38515A  JOB (MVS),'JORGE CINTRON',                         
+//             MSGLEVEL=(1,1),                                
+//             MSGCLASS=H,                                    
+//             CLASS=A,                                       
+//             NOTIFY=&SYSUID                                 
+//STEP01   EXEC ASMACL,MBR=TRX                                
+//C.SYSIN   DD DSN=Z38515.ALL.MIGHT(TRX),DISP=SHR             
+//C.SYSLIB  DD DSN=Z38515.ALL.MIGHT,DISP=SHR                  
+//          DD DSN=SYS1.MACLIB,DISP=SHR                       
+//L.SYSLMOD DD DSN=&SYSUID..LOAD(TRK),DISP=SHR                
+//STEP02   EXEC PGM=TRX                                       
+//STEPLIB  DD DSN=&SYSUID..LOAD(TRK),DISP=SHR                 
+//IFILE    DD DSN=Z38515.ALL.MIGHT(NUM),DISP=SHR              
+//OFILE    DD SYSOUT=*                                        
+//SYSPRINT DD SYSOUT=*                                        
+//SYSOUT   DD SYSOUT=*                                        
+//AMSDUMP  DD SYSOUT=*                                        
