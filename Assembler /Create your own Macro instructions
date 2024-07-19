@@ -83,3 +83,23 @@ Different installations procs can be different this happens to be what IBM train
 
 I believe this JCL below is probably more universal 
 
+//MATEDK91 JOB (MVS),'JORGE CINTRON',                     
+//             MSGLEVEL=(1,1),                            
+//             MSGCLASS=H,                                
+//             CLASS=A,                                   
+//             NOTIFY=&SYSUID                             
+//STEP01   EXEC ASMACL                                    
+//SYSOUT   DD SYSOUT=*                                    
+//SYSPRINT DD SYSOUT=*                                    
+//C.SYSIN    DD DSN=MATEDK.BOOK7(TESTF),DISP=SHR          
+//C.SYSLIB DD DSN=SYS1.MACLIB,DISP=SHR                    
+//         DD DSN=MATEDK.BOOK7,DISP=SHR                   
+//L.SYSLMOD DD DSN=MATEDK.LOADLIB(TESTF),DISP=SHR         
+//SYSPRINT DD SYSOUT=*                                    
+//STEP02   EXEC PGM=TESTF                                 
+//STEPLIB  DD DSN=MATEDK.LOADLIB(TESTF),DISP=SHR          
+//SYSPRINT DD SYSOUT=*                                    
+//SYSOUT   DD SYSOUT=*                                    
+//IFILE    DD DSN=MATEDK.BOOK7(NUM),DISP=SHR               
+//OFILE    DD SYSOUT=*                                     
+**************************** Bottom of Data ***************
