@@ -1,3 +1,114 @@
+IN CASE NEED TO RETART FROM A STEP PROC
+//MATEDK01 JOB (MVS),'JORGE CINTRON',                       
+//             MSGLEVEL=(1,1),                              
+//             MSGCLASS=H,                                  
+//             CLASS=A,                                     
+//             NOTIFY=&SYSUID,RESTART=STEP06.PRCSTEP        
+//PROC100  PROC                                             
+//PRC111   EXEC PGM=IDCAMS                                  
+//SYSIN    DD *                                             
+  LISTCAT ENTRIES(MATEDK.ABOOK1) ALL                        
+  SET LASTCC = 0                                            
+/*                                                          
+//SYSPRINT DD SYSOUT=*                                      
+//SYSOUT   DD SYSOUT=*                                      
+//AMSDUMP  DD SYSOUT=*                                      
+//         PEND                                             
+//STEP02   EXEC PROC100                                     
+//         IF (STEP02.PRC111.RC = 4) THEN                   
+//         ENDIF                                   
+//         IF (STEP02.PRC111.RC = 4) THEN          
+//STEP04   EXEC PGM=IDCAMS                         
+//SYSIN    DD *                                    
+  DEFINE GDG(NAME(MATEDK.GDBASE11)-                
+  LIMIT(3)-                                        
+  NOEMPTY-                                         
+  SCRATCH)                                         
+/*                                                 
+//SYSPRINT DD SYSOUT=*                             
+//SYSOUT   DD SYSOUT=*                             
+//AMSDUMP  DD SYSOUT=*                             
+//         ENDIF                                   
+//PROC100  PROC                                    
+//PRCSTEP  EXEC PGM=IEFBR14                        
+//DD1      DD DSN=MATEDK.GDBASE11(+1),             
+//            DISP=(NEW,CATLG,DELETE),             
+//            UNIT=SYSDA,                          
+//            SPACE=(TRK,(8,8),RLSE),                           
+//            DCB=DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800        
+//         PEND                                                 
+//STEP06   EXEC PROC100                                         
+**************************** Bottom of Data ********************
+
+Go find the step that its execing like step06 exec proc100
+
+then go to the procname which is prco100
+step go to the step in that proc thats execing PRCSTEP  EXEC PGM=IEFBR14 
+
+so you would restart it by By STEP06.PRCSTEP
+
+
+
+ALSO if you needed to restart a job and it start from a step that complies code example :
+
+//Z38515AB JOB (MVS),'JORGE CINTRON',                        
+//             MSGLEVEL=(1,1),                               
+//             MSGCLASS=H,                                   
+//             CLASS=A,                                      
+//             NOTIFY=&SYSUID                                
+//STEP01   EXEC ASMACL,MBR=PGM2                              
+//C.SYSIN  DD DSN=&SYSUID..ALL.MIGHT(PGM2),DISP=SHR          
+//L.SYSLMOD DD DSN=&SYSUID..CBLOADER(PGM2),DISP=SHR          
+//C.SYSLIB  DD DSN=&SYSUID..ALL.MIGHT,DISP=SHR               
+//          DD DSN=SYS1.MACLIB,DISP=SHR                      
+//STEP02    EXEC PGM=PGM2                                    
+//STEPLIB   DD DSN=&SYSUID..CBLOADER(PGM2),DISP=SHR          
+//SYSPRINT  DD SYSOUT=*                                      
+//SYSOUT    DD SYSOUT=*                                      
+//AMSDUMP   DD SYSOUT=*                                      
+//IFILE     DD DSN=Z38515.ALL.MIGHT(NUM),DISP=SHR            
+//OFILE     DD SYSOUT=*                                      
+
+
+so we want to restart it from step01 but if you just did that it would fail with a JCL error that the step is invalid
+
+heres out to figure out whats the name of the step in proc for that ASMACL
+
+either go to the sys1.proclib and find that procedure or you can find it in the logs if you ran the compliation also 
+
+---------------------------------------------------------------------
+     SYS1.PROCLIB(ASMACL) - 01.00                    Columns 00001 00
+d ===>                                                  Scroll ===> C
+ ***************************** Top of Data **************************
+ //ASMACL   PROC                                                     
+ //*                                                                 
+ //***   ASMACL                                                      
+ //*                                                                 
+ //* THIS PROCEDURE RUNS THE HIGH LEVEL ASSEMBLER, LINK-EDITS THE    
+ //* NEWLY ASSEMBLED PROGRAM.                                        
+ //*                                                                 
+ //C        EXEC PGM=ASMA90                                          
+ //SYSLIB   DD  DSN=SYS1.MACLIB,DISP=SHR                             
+ //SYSUT1   DD  DSN=&&SYSUT1,SPACE=(4096,(120,120),,,ROUND),UNIT=VIO,
+ //             DCB=BUFNO=1                                          
+ //SYSPRINT DD  SYSOUT=*                                             
+ //SYSLIN   DD  DSN=&&OBJ,SPACE=(3040,(40,40),,,ROUND),UNIT=VIO,     
+ //             DISP=(MOD,PASS),                                     
+ //             DCB=(BLKSIZE=3040,LRECL=80,RECFM=FBS,BUFNO=1)        
+ //L        EXEC PGM=HEWL,PARM='MAP,LET,LIST,NCAL',COND=(8,LT,C)     
+ //SYSLIN   DD  DSN=&&OBJ,DISP=(OLD,DELETE)                          
+
+so the step that starts the code is in PROC called ASMACL and the step name is C           C        EXEC PGM=ASMA90   
+
+
+so to restart the job we wanted back from step01 it would be RESTART=STEP01.C
+
+
+
+
+
+
+
 ```jcl
 ****** ***************************** Top of Data ******************************
 000100 //MATEDK01 JOB CLASS=A,                                                 
