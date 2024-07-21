@@ -103,5 +103,19 @@ STEP01.PSTEP1
 STEP01.PSTEP2
 STEP01.PSTEP3
 
+ALSO HERE IS HOW YOU WOULD HAVE AN IF ELSE STATEMENT IF NEEDED
 
+***************************** Top of Data ******
+//MATEDK01 JOB (MVS),'JORGE CINTRON',           
+//             MSGLEVEL=(1,1),                  
+//             MSGCLASS=H,                      
+//             CLASS=A,                         
+//             NOTIFY=&SYSUID                   
+//         JCLLIB ORDER=MATEDK.ASM.RUSH2        
+//STEP01   EXEC EIGHT                           
+//         IF (STEP01.PSTEP1.RC = 0 ) THEN      
+//STEP02   EXEC PGM=IEFBR14                     
+//         ENDIF                                
+**************************** Bottom of Data ****
+                                                
 
