@@ -1,0 +1,57 @@
+STMT NO. MESSAGE                                                     
+       2 IEFC001I PROCEDURE HLASMCL WAS EXPANDED USING SYSTEM LIBRARY HLA.SASMSAM1
+
+THE JOB I SUBMITTED IS USING PROCEDURE HLASMCL 
+
+WHICH IS A MEMBER LOCATED IN HLA.SASMSAM1 
+
+
+------------------------------------
+VIEW              HLA.SASMSAM1      
+Command ===>                        
+           Name     Prompt       Siz
+_________ ASMAXFSK                  
+_________ ASMAXINV                  
+_________ ASMAXPRT                  
+_________ ASMWACPT                  
+_________ ASMWALOC                  
+_________ ASMWAPLY                  
+_________ ASMWCOPY                  
+_________ ASMWDDEF                  
+_________ ASMWEDIT                  
+_________ ASMWIVP                   
+_________ ASMWRECV                  
+_________ ASMWSMPE                  
+_________ HLASMC                    
+_________ HLASMCG                   
+_________ HLASMCL                   
+_________ HLASMCLG                  
+
+
+IN ANOTHER MAINFRAME PROCEDURE ASMACL WAS USED BUT THE LOCATION IS DIFFERENT 
+
+PROCEDURE HLASMCL WAS EXPANDED USING SYSTEM   VENDOR.PROCLIB
+
+
+---------------------------------
+VIEW              VENDOR.PROCLIB 
+Command ===>                     
+           Name     Prompt       
+_________ ASMACL   *Viewed       
+_________ ASMHCLG                
+_________ AZUZUDB2               
+_________ AZUZUNIT               
+_________ CAZ0                   
+_________ CSF                    
+_________ CSQ9ANGL               
+_________ CSQ9CHIN               
+_________ CSQ9MSTR               
+_________ CSQ9WEBS               
+_________ DBPROCCG               
+_________ DBPROCRD               
+_________ DB2CBL                 
+_________ DB2CBL@                
+_________ DB2JCL                 
+_________ DROPSOCK               
+_________ DSNHASM                
+
