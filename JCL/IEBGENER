@@ -1,3 +1,28 @@
+//Z38515A  JOB (MVS),'JORGE CINTRON',                              
+//             MSGLEVEL=(1,1),                                     
+//             MSGCLASS=H,                                         
+//             CLASS=A,                                            
+//             NOTIFY=&SYSUID                                      
+//STEP01   EXEC PGM=IEBGENER                                       
+//**************************************************************** 
+//* COPY ONE MEMBER FROM A PDS TO ANOTHER PDS AS A NEW MEMBER      
+//*                                                                
+//*  SYSUT1 DSN PDS MEMBER BALL1 IS GOING TO BE COPIED             
+//*                                                                
+//*  INTO PDS DSN AS THE NAME IMEM                                 
+C/**************************************************************** 
+//SYSUT1   DD DSN=Z38515.ALPHA(BALL1),DISP=SHR                     
+//SYSUT2   DD DSN=Z38515.ALL.MIGHT(IMEM),DISP=SHR                  
+//SYSIN    DD DUMMY                                                
+//SYSPRINT DD SYSOUT=*                                             
+//AMSDUMP  DD SYSOUT=*  
+**************************** Bottom of Data *****************
+
+
+
+
+
+
 Command ===>                                                  Scroll ===> CSR  
 =COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
 ****** ***************************** Top of Data ******************************
