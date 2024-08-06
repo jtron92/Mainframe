@@ -78,3 +78,17 @@ The FIND macro, which can incorporate the G option to connect to a member genera
 The STOW macro, which can use the RECOVERG, RG, or DG option to recover, replace, or delete a generation
 The DESERV macro, which can be used to retrieve PDSE directory information, including member generations
 
+
+TSO LISTBC -  it will list broadcast messages
+
+IKJ56951I NO BROADCAST MESSAGES              
+***                                          
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+
