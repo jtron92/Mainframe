@@ -1,0 +1,70 @@
+Here is what you want to use in unix to complie your pgm
+
+cob2 kbol.cbl -o kbol
+
+change the kbol.bcl    and kbol    to whatever the name of of the file in the directory is 
+
+currently this is under mines
+
+/z/z37931 > ls
+ZXPCAT           challenge2.py    codeathons       go7              mq-dev-patterns  test
+animal1          cobol.html       db2              go9              mynewdir         uss2output
+animal2          cobol2.html      directory1       hackathons       mynewfile        ussout.txt
+animal3          code1.go         dslist.py        j2p              node             
+animals.sh       code1.py         fixfiles.sh      kbol.cbl         odbc             
+ansb2-complete   code2.go         go               marbles.py       program1.py      
+assembler        code2.py         go2              members.py       scramble.sh      
+assembly         code3.go         go22             movie-data.csv   secret.txt  
+
+
+/z/z37931 > cob2 kbol.cbl -o kbol
+
+ PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 in progress ...               
+ End of compilation 1,  program CBL0001,  no statements flagged.         
+
+  once that is completed we need to bind it run this
+
+ld -o kbol kbol.o
+
+
+/z/z37931 > ld -o kbol kbol.o
+
+/z/z37931 > 
+
+
+  if you get nothing thats a good thing binding was fine , now we run the file
+
+
+/z/z37931 > ./kbol
+
+hello jorge
+/z/z37931 > 
+
+
+
+
+this is the code in kbol.cbl
+
+        *-----------------------
+       IDENTIFICATION DIVISION.
+      *-----------------------
+       PROGRAM-ID.    jorgecintron.
+       AUTHOR.        jorge.
+      *--------------------
+       ENVIRONMENT DIVISION.
+      *--------------------
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+      *-------------
+       DATA DIVISION.
+      *-------------
+       FILE SECTION.
+      *
+       WORKING-STORAGE SECTION.
+      *------------------
+       PROCEDURE DIVISION.
+      *------------------
+            DISPLAY 'hello jorge 2'.
+            STOP RUN.
+
+  
