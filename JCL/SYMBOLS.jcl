@@ -22,7 +22,7 @@ the current data &yymmdd
 
 The current time &hhmmss
 
-//Z38515A  JOB (ACCT),'JORGE CINTRON',             
+//Z38515A  JOB (ACCT),'JORGE',             
 //             MSGLEVEL=(1,1),                     
 //             MSGCLASS=H,                         
 //             CLASS=A,                            
