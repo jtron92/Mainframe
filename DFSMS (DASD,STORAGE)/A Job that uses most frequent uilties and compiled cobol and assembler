@@ -2,7 +2,7 @@ Deciding to run a batch job with a few pgms that include cobol, assembler and re
 also utility PGM like IDCAMS, IEFBR14, SORT, IEBCOPY, IKJEFT01, and IEBEGENER
 just for fun
 
-//Z38515AC JOB (MVS),'JORGE CINTRON',                     
+//Z38515AC JOB (MVS),'JORGE',                     
 //             MSGLEVEL=(1,1),                            
 //             MSGCLASS=H,                                
 //             CLASS=A,                                   
@@ -195,14 +195,14 @@ WELCOME TO THE MAINFRAME
 20.19.31 JOB04419  -STEP016              00      5      1       .00       .00   
 20.19.31 JOB04419  -STEP017              00     19      1       .00       .00   
 20.19.32 JOB04419  -STEP018  STEP019     00     29      2       .00       .00   
-20.19.32 JOB04420  $HASP100 JCLRUN11 ON INTRDR      JORGE CINTRON         FROM J
+20.19.32 JOB04420  $HASP100 JCLRUN11 ON INTRDR      JORGE         FROM J
 20.19.32 JOB04420  IRR010I  USERID Z38515   IS ASSIGNED TO THIS JOB.            
 20.19.32 JOB04419  -STEP020              00     79      7       .00       .00   
 20.19.33 JOB04419  -STEP021              00     24      3       .00       .00   
 20.19.33 JOB04419  -STEP022  C           00    134     20       .00       .00   
 20.19.33 JOB04419  -STEP022  L           00     83      5       .00       .00   
 20.19.33 JOB04419  -GO                   00     24      1       .00       .00   
-20.19.33 JOB04419  -Z38515AC ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TIM
+20.19.33 JOB04419  -Z38515AC ENDED.  NAME-JORGE         TOTAL TCB CPU TIM
 20.19.33 JOB04419  $HASP395 Z38515AC ENDED - RC=0000                            
 ------ JES2 JOB STATISTICS ------                                               
   14 JUL 2024 JOB EXECUTION DATE                                                
