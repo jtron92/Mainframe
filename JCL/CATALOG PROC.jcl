@@ -2,7 +2,7 @@ EDIT       MATEDK.ABOOK1(SOLD) - 01.00
 Command ===>                                            
 =COLS> ----+----1----+----2----+----3----+----4----+----
 ****** ***************************** Top of Data *******
-000100 //MATEDK01 JOB (MVS),'JORGE CINTRON',            
+000100 //MATEDK01 JOB (MVS),'JORGE',            
 000200 //             MSGLEVEL=(1,1),                   
 000300 //             MSGCLASS=H,                       
 000400 //             CLASS=A,                          
@@ -106,7 +106,7 @@ STEP01.PSTEP3
 ALSO HERE IS HOW YOU WOULD HAVE AN IF ELSE STATEMENT IF NEEDED
 
 ***************************** Top of Data ******
-//MATEDK01 JOB (MVS),'JORGE CINTRON',           
+//MATEDK01 JOB (MVS),'JORGE',           
 //             MSGLEVEL=(1,1),                  
 //             MSGCLASS=H,                      
 //             CLASS=A,                         
