@@ -1,4 +1,4 @@
-//Z38515A  JOB (MVS),'JORGE CINTRON',                              
+//Z38515A  JOB (MVS),'JORGE',                              
 //             MSGLEVEL=(1,1),                                     
 //             MSGCLASS=H,                                         
 //             CLASS=A,                                            
