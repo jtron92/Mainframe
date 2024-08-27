@@ -1,6 +1,6 @@
 =COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
 ****** ***************************** Top of Data *****************************
-000100 //JOBRUN01 JOB (ACCOUNTING),JORGE.CINTRON,                             
+000100 //JOBRUN01 JOB (ACCOUNTING),JORGE,                             
 000110 //             MSGCLASS=H,                                             
 000200 //             CLASS=A,                                                
 000201 //             NOTIFY=&SYSUID,                                         
