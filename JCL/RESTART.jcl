@@ -1,5 +1,5 @@
 IN CASE NEED TO RETART FROM A STEP PROC
-//MATEDK01 JOB (MVS),'JORGE CINTRON',                       
+//MATEDK01 JOB (MVS),'JORGE',                       
 //             MSGLEVEL=(1,1),                              
 //             MSGCLASS=H,                                  
 //             CLASS=A,                                     
@@ -51,7 +51,7 @@ so you would restart it by By STEP06.PRCSTEP
 
 ALSO if you needed to restart a job and it start from a step that complies code example :
 
-//Z38515AB JOB (MVS),'JORGE CINTRON',                        
+//Z38515AB JOB (MVS),'JORGE',                        
 //             MSGLEVEL=(1,1),                               
 //             MSGCLASS=H,                                   
 //             CLASS=A,                                      
