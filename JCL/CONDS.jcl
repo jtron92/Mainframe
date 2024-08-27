@@ -1,4 +1,4 @@
-000100 //IEFBR14  JOB (DSNJOB),JORGE.CINTRON,                           
+000100 //IEFBR14  JOB (DSNJOB),JORGE,                           
 000200 //             CLASS=A,                                          
 000300 //             MSGCLASS=H,                                       
 000400 //             MSGLEVEL=(1,1),                                   
