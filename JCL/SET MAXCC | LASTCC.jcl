@@ -1,4 +1,4 @@
-000100 //MATEDK01 JOB (MVS),'JORGE CINTRON',        
+000100 //MATEDK01 JOB (MVS),'JORGE',        
 000200 //             MSGLEVEL=(1,1),               
 000300 //             MSGCLASS=H,                   
 000400 //             CLASS=A,                      
@@ -67,7 +67,7 @@ Since step01 has an abend code of 8 it did not satisy the conditon for step02
 
 Command ===>                                                 
 ****** ***************************** Top of Data ************
-000100 //MATEDK01 JOB (MVS),'JORGE CINTRON',                 
+000100 //MATEDK01 JOB (MVS),'JORGE',                 
 000200 //             MSGLEVEL=(1,1),                        
 000300 //             MSGCLASS=H,                            
 000400 //             CLASS=A,                               
