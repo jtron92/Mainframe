@@ -89,6 +89,22 @@ Now the JCL to complie bind and run the asm pgm
 //AMSDUMP  DD SYSOUT=*                                          
 
 
+this is the file that the assembler pgm made with cobol in it 
+
+EDIT       MATEDK.XXA2                          
+Command ===>                                    
+****** ***************************** Top of Data
+000001        IDENTIFICATION DIVISION.          
+000002        PROGRAM-ID. HERC01.               
+000003        ENVIRONMENT DIVISION.             
+000004        DATA DIVISION.                    
+000005        WORKING-STORAGE SECTION.          
+000006        PROCEDURE DIVISION.               
+000007            DISPLAY "HELLO WORLD".        
+000008            STOP RUN.                     
+****** **************************** Bottom of Da
+                                                
+
 Since to compile you need a member i am using IEBGENER to create a member in an exist pds once this is completed in step099
 
 then we can compile and run the cobol pgm in step04
