@@ -87,7 +87,35 @@ IKJ56951I NO BROADCAST MESSAGES
                                              
                                              
                                              
-                                             
+
+SRCHFOR XXXXX
+
+EXAMPLE SRCHFOR JORGE
+
+it will search for the jorge in all the members
+
+   Menu  Functions  Confirm  Utilities  Help                                   
+ ------------------------------------------------------------------------------
+ EDIT              MATEDK.APEX4                                 String(s) found
+ Command ===>                                                  Scroll ===> CSR 
+            Name     Prompt       Size   Created          Changed          ID  
+ _________ A        *Found          19  2024/08/29  2024/08/29 10:08:28  MATEDK
+ _________ ANNA     *Found         103  2024/08/31  2024/08/31 16:39:28  MATEDK
+ _________ ANNAC                    37  2024/08/31  2024/08/31 15:58:48  MATEDK
+ _________ ANNAM                    16  2024/08/31  2024/08/31 16:22:28  MATEDK
+ _________ ASM      *Found          86  2024/08/29  2024/08/30 10:23:57  MATEDK
+ _________ ASMCJL1  *Found          17  2024/08/30  2024/08/30 11:19:08  MATEDK
+ _________ ASMJCL   *Found          19  2024/08/29  2024/08/30 10:25:55  MATEDK
+ _________ ASM1                     35  2024/08/30  2024/08/30 12:04:14  MATEDK
+ _________ ASM2                     50  2024/08/29  2024/08/29 18:44:23  MATEDK
+ _________ COBOI                                                               
+ _________ COBOL                     8  2024/08/29  2024/08/29 19:00:58  MATEDK
+ _________ NUM                       1  2024/08/30  2024/08/30 11:18:05  MATEDK
+ _________ REX                       7  2024/08/29  2024/08/29 18:34:21  MATEDK
+           **End**                                                             
+                                                                               
+
+
                                              
                                              
 
