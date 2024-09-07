@@ -10,15 +10,15 @@ SAY "INVALID CHOICE. PLEASE ENTER 'C' FOR COBOL OR 'A' FOR ASSEMBLER."
 EXIT                                                                  
 END                                                                   
 /* PROMPT FOR THE SOURCE AND LOAD MODULE DSNS */                      
-SAY "ENTER THE SOURCE DATASET NAME (DSN):"                            
+SAY "ENTER THE SOURCE CODE DATASET NAME:"                            
 PULL SOURCEDSN                                                        
-SAY "ENTER THE LOAD MODULE DATASET NAME (DSN):"                       
+SAY "ENTER THE LOAD LIBRARY DATASET NAME:"                       
 PULL LOADDSN                                                          
 /* PROMPT FOR THE MEMBER NAME */                             
 SAY "ENTER THE MEMBER NAME:"                                 
 PULL MEMBERNAME                                              
 /* PROMPT FOR THE DATASET TO STORE THE GENERATED JCL */      
-SAY "ENTER THE DATASET NAME (DSN) TO STORE THE JCL:"         
+SAY "ENTER A DATASET NAME TO COMPILE, LINK AND RUN YOUR CODE."       
 PULL JCLDSN                                                  
 /* CHECK IF THE USER ENTERED VALID INPUT */                  
 IF SOURCEDSN = "" |,                                         
