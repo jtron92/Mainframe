@@ -93,5 +93,5 @@ END
 "FREE DD(ZZZDSN)"                                           
 SAY "SUBMITTING THE JCL FOR EXECUTION"                      
 "SUBMIT '"JCLDSN"'"                                         
-SAY "JCL SUBMITTED SUCCESSFULLY."                           
+SAY "JCL SUBMITTED SUCCESSFULLY."  "MAXCC =" RC                            
 EXIT                                                        
