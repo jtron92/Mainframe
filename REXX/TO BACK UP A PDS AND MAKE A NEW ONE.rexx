@@ -14,23 +14,9 @@ SAY "PLEASE ENTER THE NAME FOR THE BACKUP DATASET:"
 PULL BACKUPDSN  /* PULL INPUT FROM THE USER */                       
 /* CHECK IF THE USER ENTERED SOMETHING */                            
 IF BACKUPDSN = "" THEN DO                                            
-  SAY "NO BACKUP DATASET NAME PROVIDED. EXITING."                    
-/* PROMPT FOR THE DATASET (DSN) TO BACK UP */                          
-SAY "PLEASE ENTER THE DATASET NAME (DSN) YOU WOULD LIKE TO BACK UP:"   
-PULL DSN  /* PULL INPUT FROM THE USER */                               
-/* CHECK IF THE USER ENTERED SOMETHING */                              
-IF DSN = "" THEN DO                                                    
-  SAY "NO DATASET NAME PROVIDED. EXITING."                             
-  EXIT                                                                 
-END                                                                    
-/* PROMPT FOR THE BACKUP DATASET NAME */                               
-SAY "PLEASE ENTER THE NAME FOR THE BACKUP DATASET:"                    
-PULL BACKUPDSN  /* PULL INPUT FROM THE USER */                         
-/* CHECK IF THE USER ENTERED SOMETHING */                              
-IF BACKUPDSN = "" THEN DO                                              
-  SAY "NO BACKUP DATASET NAME PROVIDED. EXITING."                      
-  EXIT                                                                 
-END                                                                    
+  SAY "NO BACKUP DATASET NAME PROVIDED. EXITING."                                                                          
+END
+EXIT
 SAY "GENERATING BACKUP JCL FOR DATASET" DSN "WITH BACKUP DSN" BACKUPDSN
 /* ALLOCATE THE OUTPUT DATASET FOR THE JCL */                          
 "ALLOCATE DD(OUTDSN) DSN('"DSN".BACKUP.JCL')",                   
