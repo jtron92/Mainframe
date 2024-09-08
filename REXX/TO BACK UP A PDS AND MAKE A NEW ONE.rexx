@@ -1,49 +1,59 @@
-/* REXX SCRIPT TO GENERATE BACKUP JCL WITH DSN PROMPTS */            
+/* REXX */                                                           
 SAY;SAY;SAY;                                                         
 ADDRESS TSO                                                          
-/* PROMPT FOR THE DATASET (DSN) TO BACK UP */                        
-SAY "PLEASE ENTER THE DATASET NAME (DSN) YOU WOULD LIKE TO BACK UP:" 
-PULL DSN  /* PULL INPUT FROM THE USER */                             
-/* CHECK IF THE USER ENTERED SOMETHING */                            
+/* PROMPT THE USER TO ASK WHAT DSN THEY WOULD LIKE TO COPY */        
+SAY "WHAT IS THE DATASET YOU NEED TO BACKUP ?"                       
+PULL DSN                                                             
+DSN = STRIP(DSN)                                                     
 IF DSN = "" THEN DO                                                  
-  SAY "NO DATASET NAME PROVIDED. EXITING."                           
-  EXIT                                                               
+   SAY "NO DATASET IN PLACE"                                         
+   EXIT                                                              
 END                                                                  
-/* PROMPT FOR THE BACKUP DATASET NAME */                             
-SAY "PLEASE ENTER THE NAME FOR THE BACKUP DATASET:"                  
-PULL BACKUPDSN  /* PULL INPUT FROM THE USER */                       
-/* CHECK IF THE USER ENTERED SOMETHING */                            
-IF BACKUPDSN = "" THEN DO                                            
-  SAY "NO BACKUP DATASET NAME PROVIDED. EXITING."                                                                          
+SAY "WHAT IS THE NAME OF THE NEW DATASET YOU WANT TO BACKUP ?"       
+PULL BDSN                                                            
+BDSN = STRIP(BDSN)                                                   
+IF BDSN = "" THEN DO                                                 
+   SAY "NO DATASET IN PLACE"                                         
+   EXIT                                                              
 END
-EXIT
-SAY "GENERATING BACKUP JCL FOR DATASET" DSN "WITH BACKUP DSN" BACKUPDSN
-/* ALLOCATE THE OUTPUT DATASET FOR THE JCL */                          
-"ALLOCATE DD(OUTDSN) DSN('"DSN".BACKUP.JCL')",                   
-"NEW SPACE(1,1) LRECL(80) RECFM(F,B) UNIT(SYSDA) TRACKS"         
-/* OPEN OUTPUT FILE */                                           
-"EXECIO * DISKW OUTDSN (STEM JCLLINES."                          
-/* GENERATE JCL FOR THE USER-SPECIFIED DSNS */                   
-JCLLINES.1 = "//MATEDK01 JOB (BACKUP),"                          
-JCLLINES.2 = "//        CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID,"      
-JCLLINES.3 = "//        MSGLEVEL=(1,1)"                          
-JCLLINES.4 = "//STEP01 EXEC PGM=IEBCOPY"                         
-JCLLINES.5 = "//SYSPRINT DD SYSOUT=*"                            
-JCLLINES.6 = "//SYSUT1 DD DSN=" || DSN || ",DISP=SHR"            
-JCLLINES.7 = "//SYSUT2 DD DSN=" || BACKUPDSN || ",DISP=(,CATLG),"
-JCLLINES.8 = "//    UNIT=SYSDA,SPACE=(TRK,(8,8,8),RLSE),"        
-JCLLINES.9 = "//    DCB=(LRECL=80,BLKSIZE=800,RECFM=FB,DSORG=PO)"
-JCLLINES.10 ="//SYSIN DD *"                                      
-JCLLINES.11 =" COPY INDD=SYSUT1,OUTDD=SYSUT2"                    
-JCLLINES.12 ="/*"                                                
-JCLLINES.13 ="//SYSOUT DD SYSOUT=*"                              
-JCLLINES.14 ="//AMSDUMP DD SYSOUT=*"                   
-/* WRITE JCL TO FILE */                                
-"EXECIO 14 DISKW OUTDSN (STEM JCLLINES. FINIS"         
-/* CLOSE THE FILE */                                   
-SAY "JCL GENERATED AND SAVED IN" DSN".BACKUP.JCL"      
-/* SUBMIT THE JCL FOR EXECUTION */                     
-SAY "SUBMITTING THE JCLLINES..."                       
-"SUBMIT '"DSN".BACKUP.JCL'"                            
-SAY "JCL SUBMITTED SUCESSFULLY."                       
-EXIT                                                   
+ADDRESS TSO "LISTCAT ENTRIES('" || DSN || ".BACKUP.JCL')"           
+IF RC = 0 THEN DO                                                   
+SAY "DATASET '" || DSN || ".BACKUP.JCL' ALREADY EXITS."             
+SAY "DO YOU WANT TO DELETE IT AND RECREATE IT? (YES/NO)"            
+PULL ANSWER                                                         
+ANSWER = STRIP(ANSWER)                                              
+IF TRANSLATE(ANSWER) = 'YES' THEN DO                                
+ADDRESS TSO "DELETE '" || DSN || ".BACKUP.JCL'"                     
+SAY "DELETEING EIXITING DATASET."                                   
+END                                                                 
+ELSE DO                                                             
+SAY "NOT DELETING. EXITIING."                                       
+EXIT                                                                
+END                                                                 
+END                                                                 
+SAY "GENERATING BACKUP JCL FOR DATASET" || DSN || ,                 
+    "WITH BACKUP " || BDSN                                          
+ADDRESS TSO "ALLOCATE DD (FALLDSN) DSN('" || DSN ||".BACKUP.JCL')", 
+"NEW SPACE(1,1) LRECL(80) BLKSIZE(800) RECFM(F,B) DSORG(PS)"      
+JCLLINES.1 = "//MATEDK01 JOB (MVS),'JORGE CINTRON',"              
+JCLLINES.2 = "//             MSGLEVEL=(1,1),"                     
+JCLLINES.3 = "//             MSGCLASS=H,"                         
+JCLLINES.4 = "//             CLASS=A,"                            
+JCLLINES.5 = "//             NOTIFY=&SYSUID"                      
+JCLLINES.6 = "//STEP01   EXEC PGM=IEBCOPY"                        
+JCLLINES.7 = "//SYSUT1   DD DSN=" || DSN ||",DISP=SHR"            
+JCLLINES.8 = "//SYSUT2   DD DSN=" || BDSN ||","                   
+JCLLINES.9 = "//            DISP=(NEW,CATLG,DELETE),"             
+JCLLINES.10 ="//            UNIT=SYSDA,"                          
+JCLLINES.11 ="//            SPACE=(TRK,(2,2),RLSE),"              
+JCLLINES.12 ="//  DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)"   
+JCLLINES.13 ="//SYSIN    DD *"                                    
+JCLLINES.14 ="  COPY INDD=SYSUT1,OUTDD=SYSUT2"                    
+JCLLINES.15 ="/*"                                                 
+JCLLINES.16 ="//SYSPRINT DD SYSOUT=*"                             
+JCLLINES.17 ="//AMSDUMP  DD SYSOUT=*"                             
+JCLLINES.18 ="//SYSOUT   DD SYSOUT=*"             
+"EXECIO * DISKW FALLDSN (STEM JCLLINES. FINIS)"   
+"FREE F(FALLDSN)"                                 
+"SUBMIT '"|| DSN ||".BACKUP.JCL'"                 
+EXIT                                              
