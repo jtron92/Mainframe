@@ -55,5 +55,6 @@ JCLLINES.17 ="//AMSDUMP  DD SYSOUT=*"
 JCLLINES.18 ="//SYSOUT   DD SYSOUT=*"             
 "EXECIO * DISKW FALLDSN (STEM JCLLINES. FINIS)"   
 "FREE F(FALLDSN)"                                 
-"SUBMIT '"|| DSN ||".BACKUP.JCL'"                 
+"SUBMIT '"|| DSN ||".BACKUP.JCL'"   
+"DELETE '"|| DSN ||".BACKUP.JCL'"  
 EXIT                                              
