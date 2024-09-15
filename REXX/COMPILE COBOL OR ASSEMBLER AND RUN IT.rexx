@@ -90,7 +90,12 @@ JCLLINES.12 ="//SYSOUT   DD SYSOUT=*"
 JCLLINES.14 ="//AMSDUMP  DD SYSOUT=*"                       
 END                                                         
 "EXECIO * DISKW ZZZDSN (STEM JCLLINES. FINIS)"              
-"FREE DD(ZZZDSN)"                                           
+"FREE DD(ZZZDSN)"      
+SAY "SUBMITTING THE JCL FOR EXECUTION"                      
+"SUBMIT '"JCLDSN"'"                                         
+SAY "JCL SUBMITTED SUCCESSFULLY."  "MAXCC =" RC                            
+EXIT                                                        
+
 
 
 
@@ -175,7 +180,3 @@ END
 "SUBMIT '"|| JCLDSN ||".TEMP.JCL'"                                    
 "DELETE '"|| JCLDSN ||".TEMP.JCL'"                                    
 EXIT                                                                  
-SAY "SUBMITTING THE JCL FOR EXECUTION"                      
-"SUBMIT '"JCLDSN"'"                                         
-SAY "JCL SUBMITTED SUCCESSFULLY."  "MAXCC =" RC                            
-EXIT                                                        
