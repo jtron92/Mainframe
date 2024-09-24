@@ -1,0 +1,35 @@
+Capturing Job Output Using SDSF
+It is relatively straight-forward to capture the job output for a single job in batch. Say that you have a job called MYJOB and you want to put the output into a dataset ABC.LIST.
+
+//BATCH   EXEC PGM=SDSF,DYNAMNBR=32,REGION=1024K,TIME=5
+//ISFOUT   DD  SYSOUT=*
+//REPORT   DD  DISP=(,CATLG),DSN=&SYSUID..ABC.LIST,
+//   SPACE=(CYL,(1,1)),RECFM=FB,LRECL=133,BLKSIZE=0
+//ISFIN    DD  *
+ST MYJOB
+PRINT FILE REPORT
+FIND 'MYJOB'
+++XC
+//
+ST MYJOB displays all the jobs with jobname MYJOB. PRINT FILE REPORT opens DDNAME REPORT for the output from the SDSF PRINT commands. ++XC says to use the XC (print and close) line command. In batch mode, you need to have a successful FIND command to position the following line command. You can use other SDSF filter commands such as OWNER or FILTER control the display. The SELECT command allows you to pick the job by job number.
+But, what if you want to capture several jobs called MYJOB submitted under a specific userid, PRODUSR?
+
+Here is how you might do that, using SDSF block print commands:
+
+
+//BATCH   EXEC PGM=SDSF,DYNAMNBR=32,REGION=1024K,TIME=5
+//ISFOUT   DD  SYSOUT=*
+//REPORT   DD  DISP=(,CATLG),DSN=&SYSUID..ABC.LIST,
+//   SPACE=(CYL,(1,1)),RECFM=FB,LRECL=133,BLKSIZE=0 
+//ISFIN DD *
+OWNER PRODUSR
+ST MYJOB
+PRINT FILE REPORT
+FIND 'MYJOB'
+++//X
+FIND 'MYJOB' LAST
+++//
+PRINT CLOSE
+//
+The first FIND command selects the first job of the block; the second FIND command selects the last job.
+You can use other filtering commands to control the jobs to be displayed, so this technique can be applied to situations where the jobs do not have the same name. You can even use the SDSF SORT command to change the sequence in which the jobs appear. A good way to check out your SDSF filters is to try them from TSO.
