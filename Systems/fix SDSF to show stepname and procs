@@ -148,3 +148,20 @@ SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
 
 SETPROG LPA,REPLACE,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
 load module ^ 
+
+
+
+
+
+
+
+
+
+
+*******poojithas, you are correct. I knew about the SMF parm, just forgot it in my reply.
+My SMF parm from my sandbox follows. I keep all records, just in case.
+SYS(TYPE(0:255),EXITS(IEFU83,IEFU84,IEFACTRT,
+IEFUSI,IEFUJI,IEFU29),NOINTERVAL,NODETAIL)
+I think your problem is that the exit is already defined, you could try
+SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+to use the new module without ip
