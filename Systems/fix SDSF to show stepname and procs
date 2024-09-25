@@ -1,0 +1,150 @@
+Procedure:
+Modify the SMFPRM00 Member:
+
+In SYS1.PARMLIB(SMFPRM00), change the NOACTIVE parameter to ACTIVE.
+Issue Console Command:
+
+In the system console, issue the command:
+
+SET SMF=00
+
+Run the JCL to Assemble and Link-Edit the Exit: Submit the following JCL:
+
+
+//   EXEC ASMACL,
+//        PARM.L='NCAL,MAP,LIST,LET,RENT,REUS,RMODE(ANY),AMODE(31)'
+//C.SYSLIB  DD DISP=SHR,DSN=SYS1.MACLIB
+//          DD DISP=SHR,DSN=SYS1.MODGEN
+//C.SYSIN   DD DISP=SHR,DSN=SYS1.SAMPLIB(IEEACTRT)
+//L.SYSLMOD DD DISP=SHR,DSN=SYS1.LPALIB(IEFACTRT)
+Activate the Exit After Next IPL:
+
+Add the following entry to your PROGxx member in PARMLIB to activate the exit on the next IPL:
+
+
+EXIT ADD EXITNAME(SYS.IEFACTRT) MODNAME(IEFACTRT)
+To activate it without an IPL, use the following command:
+
+
+SETPROG EXIT,ADD,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+Error Handling:
+If you encounter the following error:
+
+
+CSV421I MODULE IEFACTRT WAS NOT ADDED TO EXIT SYS.IEFACTRT. 733
+MODULE ALREADY EXISTS
+
+
+Use this command to replace the existing module:
+
+SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+You should receive this confirmation:
+
+CSV420I MODULE IEFACTRT HAS BEEN REPLACED FOR EXIT SYS.IEFACTRT
+
+Add the Module to the LPA:
+
+To add the module to the LPA dynamically, issue the following command:
+
+SETPROG LPA,ADD,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
+
+Expected output:
+
+CSV551I 01.52.29 LPA ADD 742
+SUCCESSFUL: 1  UNSUCCESSFUL: 0  NOT PROCESSED: 0
+MODULE    RESULT
+IEFACTRT  SUCCESSFUL
+Verify SMF Status:
+
+To verify the status of the SMF datasets, issue the following command:
+
+D SMF
+
+The expected output should be similar to this:
+
+IEE949I 01.52.41 SMF DATA SETS 745
+          NAME      VOLSER SIZE(BLKS) %FULL  STATUS
+        P-SYS1.MAN1 SBSYS1      7200     1  ACTIVE
+        S-SYS1.MAN2 SBSYS1      1800     0  ALTERNATE
+        S-SYS1.MAN3 SBSYS1      1800     0  ALTERNATE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+************************************************************
+
+OG notes :
+
+
+
+CHANGE IN SYS1.PARMLIB(SMFPRM00) CHANEG NOACTIVE TO ACTIVE
+
+SET SMF=00 IN CONSOLE
+
+RUN THE JCL
+
+
+//   EXEC ASMACL,                                                  
+//       PARM.L='NCAL,MAP,LIST,LET,RENT,REUS,RMODE(ANY),AMODE(31)'
+//C.SYSLIB  DD DISP=SHR,DSN=SYS1.MACLIB                            
+//          DD DISP=SHR,DSN=SYS1.MODGEN                            
+//C.SYSIN   DD DISP=SHR,DSN=SYS1.SAMPLIB(IEEACTRT)                
+//L.SYSLMOD DD DISP=SHR,DSN=SYS1.LPALIB(IEFACTRT)
+
+THEN 
+
+
+Activate the exit after next ipl by adding this to your parmlib PROGxx member:
+EXIT ADD EXITNAME(SYS.IEFACTRT) MODNAME(IEFACTRT)
+** SETPROG EXIT,ADD,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+IF THIS ERROR POPS UP 
+
+CSV421I MODULE IEFACTRT WAS NOT ADDED TO EXIT SYS.IEFACTRT. 733
+MODULE ALREADY EXISTS
+
+SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+CSV420I MODULE IEFACTRT HAS BEEN REPLACED FOR EXIT SYS.IEFACTRT
+
+SETPROG LPA,ADD,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
+
+CSV551I 01.52.29 LPA ADD 742                       
+SUCCESSFUL: 1  UNSUCCESSFUL: 0  NOT PROCESSED: 0   
+MODULE    RESULT                                   
+IEFACTRT  SUCCESSFUL                               
+
+D SMF                                                  
+IEE949I 01.52.41 SMF DATA SETS 745                     
+          NAME      VOLSER SIZE(BLKS) %FULL  STATUS    
+        P-SYS1.MAN1 SBSYS1      7200     1  ACTIVE     
+        S-SYS1.MAN2 SBSYS1      1800     0  ALTERNATE  
+        S-SYS1.MAN3 SBSYS1      1800     0  ALTERNATE  
+
+You can activate the exit dynamically to test it....
+
+Issue this command to dynamically load the module:
+SETPROG LPA,ADD,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
+
+Issue this command to dynamically activate the exit:
+SETPROG EXIT,ADD,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+
+
+
+SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+
+SETPROG LPA,REPLACE,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
+load module ^ 
