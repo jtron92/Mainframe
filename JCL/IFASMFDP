@@ -1,0 +1,132 @@
+EDIT       IBMUSER.AJCL1(MAN) - 01.22                      Columns 0
+Command ===>                                                  Scroll
+****** ***************************** Top of Data *******************
+000001 //MATEDK01 JOB (MVS),'JORGE CINTRON',                        
+000002 //             MSGLEVEL=(1,1),                               
+000003 //             MSGCLASS=H,                                   
+000004 //             CLASS=A,                                      
+000005 //             NOTIFY=&SYSUID                                
+000006 //STEP01   EXEC PGM=IFASMFDP                                 
+000007 //INDD1    DD DSN=SYS1.MAN3,DISP=SHR                         
+000008 //OUTDD1   DD DSN=&SYSUID..MAN3,                             
+000009 //            DISP=(NEW,CATLG,DELETE),                       
+000010 //            UNIT=SYSDA,                                    
+000011 //            SPACE=(CYL,(50,10)),                           
+000012 //            DCB=(RECFM=VBS,LRECL=32760,BLKSIZE=32760)      
+000013 //SYSIN    DD *                                              
+000014     INDD(INDD1,OPTIONS(ALL))                                 
+000015   OUTDD(OUTDD1,TYPE(10:255))                                 
+000016 /*                                                           
+000017 //SYSPRINT DD SYSOUT=*                                       
+000018 //AMSDUMP  DD SYSOUT=*                                       
+000019 //SYSOUT   DD SYSOUT=*                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IFASMFDP examples
+Example 1: Figure 2 shows a sample job using the SMF data set dump program to dump and clear an SMF data set (INDD1) and to combine its records with those in an old dumped data set (INDD2) to three data sets.
+Figure 2. Sample Job for Dumping SMF Data Sets
+//IFASMFDP  JOB   accounting information
+//STEP      EXEC  PGM=IFASMFDP
+//INDD1     DD    DSN=SYS1.MANB,DISP=SHR
+//INDD2     DD    DSN=SMFDATA,UNIT=TAPE,DISP=SHR,VOL=SER=SMFTAP
+//OUTDD1    DD    DSN=ALLSMF.TYPE0.TYPE40,DISP=SHR
+//OUTDD2    DD    DSN=ALLSMF.TYPE10.TYPE255,DISP=SHR,DCB=BLKSIZE=32000
+//OUTDD3    DD    DSN=ALLSMF.TYPE10.TYPE255B,DISP=SHR,DCB=LRECL=32760
+//SYSPRINT  DD    SYSOUT=A
+//SYSIN     DD    *
+       INDD(INDD1,OPTIONS(ALL))
+       INDD(INDD2,OPTIONS(DUMP))
+       OUTDD(OUTDD1,TYPE(0,2,10,15:40))
+       OUTDD(OUTDD2,TYPE(10:255))
+       OUTDD(OUTDD3,TYPE(10:255))
+       DATE(92002,92366)
+       SID(308A)
+       SID(308B)
+/*
+
+Figure 2 illustrates the following:
+The DCB= keyword has been coded for the output data set defined by OUTDD2. Any block size 4096 or greater may be specified. Choosing a block size suitable for the device type being used will improve storage resource use. For this job, the data set specified by OUTDD1 will have a system determined block size while the data set specified by OUTDD2 will have a block size of 32000.
+The LRECL= keyword has been coded for an output data set defined as OUTDD3. For this job, the data set specified by OUTDD3 will have an LRECL of 32760. For OUTDD2, the LRECL will default to 32767.
+There can be any number of input (INDD) or output (OUTDD) files in the SMF data set dump program. The input files are dumped in reverse order unless concatenated under one input file. For example, in Figure 2, two input files are specified. After the SMF data set dump program is processed, the output file contains the records from INDD2 first, followed by the records from INDD1.
+
+After the SMF data set dump program job shown in Figure 2 runs, the information shown in Figure 3 is listed in the SYSPRINT data set.
+Figure 3. Example output listed in SYSPRINT data set
+SMF DUMP PARAMETERS
+SID(308A) - SYSIN
+SID(308B) - SYSIN
+END(2400) - DEFAULT
+START(0000) - DEFAULT
+DATE(92002,92366) - SYSIN
+OUTDD(OUTDD3,TYPE(10:255)) - SYSIN
+OUTDD(OUTDD2,TYPE(10:255)) - SYSIN
+OUTDD(OUTDD1,TYPE(0,2,10,15:40)) - SYSIN
+INDD(INDD2,,OPTIONS(DUMP)) - SYSIN
+INDD(INDD1,OPTIONS(ALL)) - SYSIN
+
+Example 2: One method of running the SMF data set dump program is to enter jobs that specify the SMF data set dump program into the system, and hold them on the job queue until a dump is required. Another method is to start a reader to an input stream containing the JCL for the SMF data set dump program. Figure 4 shows two sample procedures (DUMPX and DUMPY) for dumping the SMF data sets to a standard-labeled tape (VOL=SER=SMFTAP) with the operator START command. In both procedures, the default tape specified on the PROC statements is 192. Figure 4 shows sample JCL for adding these procedures to SYS1.PROCLIB.
+Figure 4. Sample procedures for dumping the SMF data sets
+//UPDATE    JOB   MSGLEVEL=1
+//UPDATE    EXEC  PGM=IEBUPDTE,PARM=NEW
+//SYSUT1    DD    DSN=SYS1.PROCLIB,DISP=SHR
+//SYSUT2    DD    DSN=SYS1.PROCLIB,DISP=SHR
+//SYSPRINT  DD    SYSOUT=A
+//SYSIN     DD    DATA
+./          ADD   NAME=DUMPX,LIST=ALL
+//DUMPX     PROC  TAPE=192
+//SMFDMP    EXEC  PGM=IFASMFDP
+//DUMPIN    DD    DSNAME=SMFDATA,UNIT=&TAPE,DISP=(MOD,KEEP),
+//                LABEL=(,SL),VOL=SER=SMFTAP
+//SYSPRINT  DD    SYSOUT=A
+./          ADD   NAME=DUMPY,LIST=ALL
+//DUMPY     PROC  TAPE=192
+//SMFDMP    EXEC  PGM=IFASMFDP
+//DUMPIN    DD    DSNAME=SYS1.MANY,DISP=SHR
+//DUMPOUT   DD    DSNAME=SMFDATA,UNIT=&TAPE,DISP=(MOD,KEEP),
+//                LABEL=(,SL),VOL=SER=SMFTAP
+//SYSPRINT  DD    SYSOUT=A
+./ENDUP
+/*
+
+Example 3: Figure 5 shows an example to get statistics information for type 90 and 101 records with the FLDSTATS parameter. This job will gather statistics individually for type 90 and 101 and also for them combined. Each interval will consist of 1000 records.
+Figure 5. Sample JCL for dumping a SMF log stream with the FLDSTATS option
+//RUNSMFDP JOB  MSGLEVEL=(1,1),NOTIFY=&SYSUID                    
+//SMFDMP   EXEC PGM=IFASMFDP                                 
+//DUMP03   DD DSN=SYS1.MANQ,DISP=SHR,VOL=SER=183PAK,UNIT=3390
+//DUMP04   DD DUMMY                                          
+//SYSPRINT DD SYSOUT=*                                       
+//SYSIN    DD *                                              
+     INDD(DUMP03,OPTIONS(DUMP))                                
+      OUTDD(DUMP04,TYPE(90,101))        
+     FLDSTATS(1000) 
+
+Example 4: Figure 6 shows an example of using the NOSIGSTRIP and SIGVALIDATE parameters to retain and validate the signature records.
+
+Figure 6. Sample job for dumping SMF data sets with digital signature validation
+//IFASMFDP  JOB  MSGLEVEL=(1,1),NOTIFY=&SYSUID   
+//STEP      EXEC  PGM=IFASMFDP
+//INDD1     DD    DSN=SMFDATA,UNIT=TAPE,DISP=SHR,VOL=SER=SMFTAP
+//OUTDD1    DD    DSN=ALLSMF.TYPE10.TYPE255,DISP=SHR
+//SYSPRINT  DD    SYSOUT=A
+//SYSIN     DD    *
+       INDD(INDD1,OPTIONS(DUMP))
+       OUTDD(OUTDD1,TYPE(10:255))
+       DATE(14001,14365)
+       SID(308A)
+       NOSIGSTRIP
+       SIGVALIDATE(HASH(hash),TOKENNAME(tokenname))
+/*
+
