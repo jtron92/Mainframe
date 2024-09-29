@@ -1,0 +1,28 @@
+*01.22.43          *IFB081I LOGREC DATA SET IS FULL,01.22.43,     
+*        DSN=SYS1.LOGREC                                          
+
+
+when getting this error need to submit this jcl below 
+
+
+     ADCD.LIB.JCL(LOGREC) - 01.01                
+d ===>                                           
+ ***************************** Top of Data ******
+ //LOGREC  JOB (),'INIT LOGREC',MSGLEVEL=(1,1),  
+ //   CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID          
+ //**                                            
+ //**  CLEAR LOGREC                              
+ //**                                            
+ //**                                            
+ //EREP    EXEC PGM=IFCEREP1,PARM='CARD'         
+ //SERLOG   DD  DSN=SYS1.LOGREC,DISP=SHR         
+ //DIRECTWK DD  UNIT=3390,SPACE=(CYL,5,,CONTIG)  
+ //EREPPT   DD  SYSOUT=*,DCB=BLKSIZE=133         
+ //ACCDEV   DD  DUMMY                            
+ //TOURIST  DD  SYSOUT=*,DCB=BLKSIZE=133         
+ //SYSIN    DD  *                                
+   SYSUM                                         
+   ACC=Y                                         
+   ZERO=Y                                        
+ /*                                              
+
