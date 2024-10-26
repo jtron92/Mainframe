@@ -65,3 +65,152 @@ IEE949I 09.02.00 SMF DATA SETS 183
         S-SYS1.MAN2 SBSYS1      1800     1  DUMP REQUIRED
         S-SYS1.MAN3 SBSYS1      1800     0  ALTERNATE    
 
+********************************************************************
+
+
+/D R,R                   OR IN CONSOLE              D R,R                        
+IEE112I 09.04.46 PENDING REQUESTS 187                    
+RM=0    IM=0     CEM=0     EM=0     RU=0    IR=0    AMRF 
+NO MESSAGES OUTSTANDING                                  
+
+**********************************************************************
+
+/D R,A                   OR IN CONSOLE             D R,A 
+IEE112I 09.04.59 PENDING REQUESTS 189                      
+RM=0    IM=0     CEM=0     EM=0     RU=0    IR=0    AMRF   
+NO MESSAGES OUTSTANDING                                    
+
+
+
+*******************************************************************
+ 
+/D IPLINFO                OR IN CONSOLE          D IPLINFO
+
+IEE254I  09.07.24 IPLINFO DISPLAY 194                       
+ SYSTEM IPLED AT 08.45.12 ON 10/26/2024                     
+ RELEASE z/OS 01.11.00    LICENSE = z/OS                    
+ USED LOADDC IN SYS1.IPLPARM ON 0A82                        
+ ARCHLVL = 2   MTLSHARE = N                                 
+ IEASYM LIST = 00                                           
+ IEASYS LIST = DC (OP)                                      
+ IODF DEVICE: ORIGINAL(0A82) CURRENT(0A82)                  
+ IPL DEVICE: ORIGINAL(0A80) CURRENT(0A80) VOLUME(SBRES1)    
+
+******************************************************************
+
+/D PROG,LNKLIST              
+
+CSV470I 09.12.28 LNKLST DISPLAY 204       
+LNKLST SET LNKLST00   LNKAUTH=LNKLST      
+ENTRY  APF  VOLUME  DSNAME                
+   1    A   SBRES1  SYS1.LINKLIB          
+   2    A   SBRES1  SYS1.MIGLIB           
+   3    A   SBRES1  SYS1.CSSLIB           
+   4    A   SBRES1  SYS1.SIEALNKE         
+   5    A   SBRES1  SYS1.SIEAMIGE         
+   6    A   SBRES1  SYS1.SHASLNKE         
+   7    A   SBSYS1  USER.LINKLIB          
+   8    A   SBRES1  SYS1.SERBLINK         
+   9        SBRES2  NET530.SCNMLNK1       
+  10    A   SBRES2  IGY420.SIGYCOMP      
+ 11    A   SBRES1  EQAA10.SEQABMOD         
+12        SBRES1  EQAA10.SEQAMOD          
+13        SBRES1  FAN140.SEAGALT          
+14        SBRES1  FAN140.SEAGLMD          
+15        SBRES1  FAN140.SFANLMD          
+16    A   SBRES1  DIT130.SDITMOD1         
+17    A   SBPRD2  CSQ700.SCSQLINK         
+18    A   SBPRD2  CSQ700.SCSQSNLE         
+19        SBRES2  ISF.SISFLOAD            
+20        SBRES2  ISF.SISFLINK            
+21        SBRES2  ISF.SISFMOD1            
+22    A   SBRES1  SYS1.SHASMIG            
+23        SBRES1  SYS1.SCBDHENU           
+24    A   SBRES2  CSF.SCSFMOD0            
+25        SBRES2  EOY.SEOYLOAD            
+26    A   SBRES1  SYS1.SBDTCMD            
+27        SBRES1  SYS1.DGTLLIB            
+28    A   SBRES1  SYS1.SBDTLIB            
+29        SBRES1  SYS1.SBDTLINK           
+30        SBRES1  SYS1.CMDLIB             
+31    A   SBRES1  GIM.SGIMLMD0               
+32    A   SBRES2  CEE.SCEERUN                
+33    A   SBRES2  CEE.SCEERUN2               
+34        SBRES1  CBC.SCCNCMP                
+35        SBRES1  ISP.SISPLOAD               
+36    A   SBRES1  FFST.SEPWMOD2              
+37    A   SBRES1  FFST.SEPWMOD4              
+38    A   SBRES1  TCPIP.SEZALOAD             
+39        SBRES1  HLA.SASMMOD1               
+40        SBRES1  SYS1.SICELINK              
+41        SBRES1  SYS1.SORTLIB               
+42    A   SBRES1  IOE.SIOELMOD               
+43        SBRES1  IOA.SIOALMOD               
+44    A   SBRES1  CBC.SCLBDLL                
+45    A   SBRES1  CBC.SCLBDLL2               
+46    A   SBRES1  SYS1.SCUNIMG               
+47    A   SBDB91  DSN910.SDSNLINK            
+48    A   SBCIC1  DFH410.CICS.SDFHLINK       
+49    A   SBRES1  ADCD.Z111S.LINKLIB         
+
+
+*******************************************************************
+
+/$D SPOOL     
+
+$HASP893 VOLUME(SBSYS1)  STATUS=ACTIVE,PERCENT=1 
+$HASP646 1.6666 PERCENT SPOOL UTILIZATION        
+
+****************************************************************
+
+
+/D SMF,O           
+
+IEE967I 09.18.53 SMF PARAMETERS 241                  
+        MEMBER = SMFPRM00                            
+        SMFDLEXIT(USER3(IRRADU86)) -- DEFAULT        
+        SMFDLEXIT(USER2(IRRADU00)) -- DEFAULT        
+        SMFDPEXIT(USER3(IRRADU86)) -- DEFAULT        
+        SMFDPEXIT(USER2(IRRADU00)) -- DEFAULT        
+        EMPTYEXCPSEC(NOSUPPRESS) -- DEFAULT          
+        MULCFUNC -- DEFAULT                          
+        BUFUSEWARN(25) -- DEFAULT                    
+        BUFSIZMAX(0128M) -- DEFAULT                  
+        MEMLIMIT(00002G) -- DEFAULT                  
+        DDCONS(YES) -- DEFAULT                       
+        LASTDS(MSG) -- DEFAULT                       
+        NOBUFFS(MSG) -- DEFAULT                      
+        SYNCVAL(00) -- DEFAULT                       
+        INTVAL(30) -- DEFAULT                        
+        DUMPABND(RETRY) -- DEFAULT                   
+        SUBSYS(STC,NOTYPE(14:19,62:69)) -- SYS       
+        SUBSYS(STC,NOINTERVAL) -- SYS          
+        SUBSYS(STC,NODETAIL) -- SYS               
+        SUBSYS(STC,EXITS(IEFUSO)) -- PARMLIB      
+        SUBSYS(STC,EXITS(IEFUJP)) -- PARMLIB      
+        SUBSYS(STC,EXITS(IEFU84)) -- PARMLIB      
+        SUBSYS(STC,EXITS(IEFU83)) -- PARMLIB      
+        SUBSYS(STC,EXITS(IEFU29)) -- PARMLIB      
+        SYS(NODETAIL) -- PARMLIB                  
+        SYS(NOINTERVAL) -- PARMLIB                
+        SYS(EXITS(IEFU29)) -- PARMLIB             
+        SYS(EXITS(IEFUJI)) -- PARMLIB             
+        SYS(EXITS(IEFUSI)) -- PARMLIB             
+        SYS(EXITS(IEFACTRT)) -- PARMLIB           
+        SYS(EXITS(IEFU84)) -- PARMLIB             
+        SYS(EXITS(IEFU83)) -- PARMLIB             
+        SYS(NOTYPE(14:19,62:69)) -- PARMLIB       
+        LISTDSN -- PARMLIB                        
+        SID(SYS1) -- PARMLIB                      
+        JWT(0400) -- PARMLIB                      
+        STATUS(010000) -- PARMLIB                 
+        MAXDORM(3000) -- PARMLIB     
+        REC(PERM) -- PARMLIB          
+        NOPROMPT -- PARMLIB           
+        DSNAME(SYS1.MAN3) -- PARMLIB  
+        DSNAME(SYS1.MAN2) -- PARMLIB  
+        DSNAME(SYS1.MAN1) -- PARMLIB  
+        ACTIVE -- PARMLIB         
+
+
+
