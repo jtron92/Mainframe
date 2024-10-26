@@ -1,13 +1,15 @@
 
 
-/D U,VOL=SBSYS1        OR IN CONSOLE         D U,VOL=SBSYS1                      
+/D U,VOL=SBSYS1        OR IN CONSOLE         D U,VOL=SBSYS1         
+
 IEE457I 08.58.50 UNIT STATUS 177                 
 UNIT TYPE STATUS        VOLSER     VOLSTATE      
 0A82 3390 A             SBSYS1     STRG/RSDNT    
 
 *****************************************************************
 
-/D LOGGER             OR IN CONSOLE           D LOGGER                  
+/D LOGGER             OR IN CONSOLE           D LOGGER               
+
 IXG601I   09.00.15  LOGGER DISPLAY 179    
 SYSTEM LOGGER STATUS                      
 SYSTEM   SYSTEM LOGGER STATUS             
@@ -16,7 +18,8 @@ SYSTEM   SYSTEM LOGGER STATUS
 
 ******************************************************************
 
-/D LOGGER,LOGSTREAM              OR IN CONSOLE      D LOGGER,LOGSTREAM                             
+/D LOGGER,LOGSTREAM              OR IN CONSOLE      D LOGGER,LOGSTREAM          
+
 IXG601I   09.00.30  LOGGER DISPLAY 181                       
 INVENTORY INFORMATION BY LOGSTREAM                           
 LOGSTREAM                  STRUCTURE        #CONN  STATUS    
@@ -214,7 +217,8 @@ IEE967I 09.18.53 SMF PARAMETERS 241
 
 **********************************************************************
 
-/D A,L                                                                     
+/D A,L                                                   
+
 IEE114I 09.29.44 2024.300 ACTIVITY 256                                    
  JOBS     M/S    TS USERS    SYSAS    INITS   ACTIVE/MAX VTAM     OAS     
 00003    00020    00001      00031    00013    00001/00040       00013    
@@ -230,4 +234,44 @@ IEE114I 09.29.44 2024.300 ACTIVITY 256
  CSQ7MSTR CSQ7MSTR PROCSTEP NSW  S  INETD4   STEP1    OMVSKERN OWT  AO    
  PORTMAP  PORTMAP  PMAP     OWT  SO FTPD1    STEP1    FTPD     OWT  AO    
  SSHD4    STEP1    START2   OWT  AO                                       
+
+***********************************************************************
+
+/D M=CPU        
+
+IEE174I 09.33.47 DISPLAY M 260           
+PROCESSOR STATUS                         
+ID  CPU                  SERIAL          
+00  +                     0123451090     
+01  +                     1123451090     
+02  +                     2123451090     
+03  +                     3123451090     
+04  -                                    
+05  -                                                                 
+06  -                                                                 
+07  -                                                                 
+                                                                      
+CPC SI = 1090.306.IBM.02.0000000000012345                             
+LP NAME = HERCULES   LP ID = 1                                        
+MIF ID  = 1                                                           
+                                                                      
++ ONLINE    - OFFLINE    . DOES NOT EXIST    W WLM-MANAGED            
+N NOT AVAILABLE                                                       
+                                                                      
+CPC SI  SYSTEM INFORMATION FROM STSI INSTRUCTION                      
+LP NAME  LOGICAL PARTITION NAME                                       
+LP ID    LOGICAL PARTITION IDENTIFIER                                 
+MIF ID   MULTIPLE IMAGE FACILITY IMAGE IDENTIFIER                                   
+
+****************************************************************************
+
+/D PARMLIB                
+
+IEE251I 09.35.57 PARMLIB DISPLAY 268                
+ PARMLIB DATA SETS SPECIFIED                        
+ AT IPL                                             
+ ENTRY  FLAGS  VOLUME  DATA SET                     
+   1      S    SBSYS1  USER.PARMLIB                 
+   2      S    SBRES1  ADCD.Z111S.PARMLIB           
+   3      S    SBRES1  SYS1.PARMLIB                 
 
