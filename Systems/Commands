@@ -212,5 +212,22 @@ IEE967I 09.18.53 SMF PARAMETERS 241
         DSNAME(SYS1.MAN1) -- PARMLIB  
         ACTIVE -- PARMLIB         
 
+**********************************************************************
 
+/D A,L                                                                     
+IEE114I 09.29.44 2024.300 ACTIVITY 256                                    
+ JOBS     M/S    TS USERS    SYSAS    INITS   ACTIVE/MAX VTAM     OAS     
+00003    00020    00001      00031    00013    00001/00040       00013    
+ LLA      LLA      LLA      NSW  S  JES2     JES2     IEFPROC  NSW  S     
+ VLF      VLF      VLF      NSW  S  VTAM     VTAM     VTAM     NSW  S     
+ DLF      DLF      DLF      NSW  S  RACF     RACF     RACF     NSW  S     
+ RRS      RRS      RRS      NSW  S  TSO      TSO      STEP1    OWT  S     
+ SDSF     SDSF     SDSF     NSW  S  TCPIP    TCPIP    TCPIP    NSW  SO    
+ TN3270   TN3270   TN3270   NSW  SO DB9GMSTR DB9GMSTR IEFPROC  NSW  S     
+ DB9GIRLM DB9GIRLM          NSW  S  CICSA    CICSA    CICS     NSW  SO    
+ DB9GDBM1 DB9GDBM1 IEFPROC  NSW  S  DB9GDIST DB9GDIST IEFPROC  NSW  SO    
+ HTTPD1   HTTPD1   WEBSRV1  IN   SO NFSS     NFSS     GFSAMAIN NSW  SO    
+ CSQ7MSTR CSQ7MSTR PROCSTEP NSW  S  INETD4   STEP1    OMVSKERN OWT  AO    
+ PORTMAP  PORTMAP  PMAP     OWT  SO FTPD1    STEP1    FTPD     OWT  AO    
+ SSHD4    STEP1    START2   OWT  AO                                       
 
