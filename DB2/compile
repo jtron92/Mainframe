@@ -1,0 +1,16 @@
+to find your dsn for db2 go a search for 
+
+*.SDSNEXIT
+
+
+DSN910.DB9G.SDSNEXIT
+
+DSN910.PROCLIB
+
+  DSN910.PROCLIB(DSNHICOB)
+
+
+  //STEPLIB  DD  DISP=SHR,DSN=DSN910.DB9G.SDSNEXIT  
+//         DD  DISP=SHR,DSN=DSN910.SDSNLOAD       
+
+  
