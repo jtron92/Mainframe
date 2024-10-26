@@ -1,0 +1,67 @@
+
+
+/D U,VOL=SBSYS1        OR IN CONSOLE         D U,VOL=SBSYS1                      
+IEE457I 08.58.50 UNIT STATUS 177                 
+UNIT TYPE STATUS        VOLSER     VOLSTATE      
+0A82 3390 A             SBSYS1     STRG/RSDNT    
+
+*****************************************************************
+
+/D LOGGER             OR IN CONSOLE           D LOGGER                  
+IXG601I   09.00.15  LOGGER DISPLAY 179    
+SYSTEM LOGGER STATUS                      
+SYSTEM   SYSTEM LOGGER STATUS             
+------   --------------------             
+
+
+******************************************************************
+
+/D LOGGER,LOGSTREAM              OR IN CONSOLE      D LOGGER,LOGSTREAM                             
+IXG601I   09.00.30  LOGGER DISPLAY 181                       
+INVENTORY INFORMATION BY LOGSTREAM                           
+LOGSTREAM                  STRUCTURE        #CONN  STATUS    
+---------                  ---------        ------ ------    
+ATR.ADCDPL.ARCHIVE         *DASDONLY*       000001 IN USE    
+  SYSNAME: ADCD                                              
+    DUPLEXING: STAGING DATA SET                              
+  GROUP: PRODUCTION                                          
+ATR.ADCDPL.DELAYED.UR      *DASDONLY*       000001 IN USE    
+  SYSNAME: ADCD                                              
+    DUPLEXING: STAGING DATA SET                              
+
+  GROUP: PRODUCTION                                        
+ATR.ADCDPL.DELAYED.UR      *DASDONLY*       000001 IN USE  
+  SYSNAME: ADCD                                            
+    DUPLEXING: STAGING DATA SET                            
+  GROUP: PRODUCTION                                        
+ATR.ADCDPL.MAIN.UR         *DASDONLY*       000001 IN USE  
+
+      SYSNAME: ADCD                                                    
+      DUPLEXING: STAGING DATA SET                                    
+    GROUP: PRODUCTION                                                
+  ATR.ADCDPL.RESTART         *DASDONLY*       000001 IN USE          
+    SYSNAME: ADCD                                                    
+      DUPLEXING: STAGING DATA SET                                    
+    GROUP: PRODUCTION                                                
+  ATR.ADCDPL.RM.DATA         *DASDONLY*       000001 IN USE          
+    SYSNAME: ADCD                                                    
+      DUPLEXING: STAGING DATA SET                                    
+    GROUP: PRODUCTION                                                
+  ATR.ADCDPL.RM.METADATA     *DASDONLY*       000001 IN USE          
+    SYSNAME: ADCD                                                    
+      DUPLEXING: STAGING DATA SET                                    
+    GROUP: PRODUCTION                                                
+                                                                     
+  NUMBER OF LOGSTREAMS:  000006                                      
+
+
+
+******************************************************************
+  
+/D SMF                OR IN CONSOLE                 D SMF                       
+IEE949I 09.02.00 SMF DATA SETS 183                       
+          NAME      VOLSER SIZE(BLKS) %FULL  STATUS      
+        P-SYS1.MAN1 SBSYS1      7200    85  ACTIVE       
+        S-SYS1.MAN2 SBSYS1      1800     1  DUMP REQUIRED
+        S-SYS1.MAN3 SBSYS1      1800     0  ALTERNATE    
+
