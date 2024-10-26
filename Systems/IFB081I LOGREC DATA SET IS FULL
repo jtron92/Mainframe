@@ -24,5 +24,43 @@ d ===>
    SYSUM                                         
    ACC=Y                                         
    ZERO=Y                                        
- /*                                              
+ /*                        
+
+
+
+or 
+
+//MATEDK01 JOB (MVS),'JORGE CINTRON',              
+//             MSGLEVEL=(1,1),                     
+//             MSGCLASS=H,                         
+//             NOTIFY=&SYSUID,                     
+//             CLASS=A                             
+//STEP01   EXEC PGM=IFCOFFLD                       
+//SYSPRINT DD SYSOUT=*                             
+//AMSDUMP  DD SYSOUT=*                             
+//SYSOUT   DD SYSOUT=*                             
+//SERLOG   DD DSN=SYS1.LOGREC,DISP=OLD             
+//ACCDEV   DD DSN=&SYSUID..BACKLOG.REC,            
+//            DISP=(NEW,CATLG,DELETE),             
+//            UNIT=SYSDA,                          
+//            SPACE=(CYL,(1,1),RLSE),              
+//            DCB=(BLKSIZE=32760,RECFM=VB)         
+//TOURIST  DD SYSOUT=*                             
+//EREPPT   DD SYSOUT=*                             
+//SYSIN    DD DUMMY                                
+
+
+
+or  
+
+
+//IFCDIP00 JOB CLASS=A,MSGLEVEL=(1,1),MSGCLASS=A                      
+//********************************************************************
+//* CLEAR AND INITIALIZE HARDWARE EVENT RECORDER DATASET             *
+//********************************************************************
+//IFCDIP00 EXEC PGM=IFCDIP00                                          
+//SERERDS  DD  DSN=SYS1.LOGREC,DISP=OLD,
+//             VOL=SER=MVSRES,          <-- CHANGE TO SYSRES VOLSER
+//             UNIT=3350                <-- CHANGE TO SYSRES UNIT
+//                                                                     
 
