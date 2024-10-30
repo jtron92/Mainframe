@@ -14,3 +14,118 @@ DSN910.PROCLIB
 //         DD  DISP=SHR,DSN=DSN910.SDSNLOAD       
 
   
+
+***************************** Top of Data ***************************
+//WECDB21  JOB (1),CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1),REGION=128M,    
+//             NOTIFY=&SYSUID                                        
+//STEP01   EXEC PGM=DSNHPC,                                          
+//         PARM='HOST(IBMCOB),XREF,SOURCE,FLAG(I),APOST'             
+//STEPLIB  DD DSN=DSN910.DB9G.SDSNEXIT,DISP=SHR                      
+//         DD DSN=DSN910.SDSNLOAD,DISP=SHR                           
+//SYSCIN   DD DSN=WEC.SRC.COBOL(SQLSELP),DISP=SHR                    
+//DBRMLIB  DD DSN=WEC.SRC.DBRMLIB(SQLSEL),DISP=SHR                   
+//SYSIN    DD DSN=WEC.SRC.COBOL(SQLSEL),DISP=SHR                     
+//SYSLIB   DD DSN=WEC.SRC.COBOL,DISP=SHR                             
+//SYSPRINT DD SYSOUT=*                                               
+//SYSTERM  DD SYSOUT=*                                               
+//SYSUDUMP DD SYSOUT=*                                               
+//SYSUT1   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA               
+//SYSUT2   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA               
+**************************** Bottom of Data *************************
+
+
+
+
+
+//WECDB22  JOB (DB2),'JORGE CINTRON',                                 
+//             MSGLEVEL=(1,1),                                        
+//             MSGCLASS=H,                                            
+//             CLASS=A,                                               
+//             NOTIFY=&SYSUID,                                        
+//             REGION=128M                                            
+//STEP02   EXEC PGM=IGYCRCTL,                                         
+//         PARM=('SIZE(4000K),BUFSIZE(32760),LIST,LIB,MAP,OBJECT',    
+//         'DATA(31),XREF,RENT')                                      
+//STEPLIB  DD DSN=IGY420.SIGYCOMP,DISP=SHR                            
+//SYSPRINT DD SYSOUT=*                                                
+//SYSTERM  DD SYSOUT=*                                                
+//SYSLIN   DD DSN=WEC.SRC.OBJ(SQLSEL),DISP=SHR                        
+//SYSLIB   DD DSN=WEC.SRC.COBOL,DISP=SHR                              
+//SYSIN    DD DSN=WEC.SRC.COBOL(SQLSELP),DISP=SHR                     
+//SYSUT1   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA                
+//SYSUT2   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA                
+//SYSUT3   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA                
+//SYSUT4   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA                
+//SYSUT5   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA  
+//SYSUT6   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA  
+//SYSUT7   DD SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA  
+
+
+
+
+
+***************************** Top of Data **************
+//WECDB23  JOB (DB2),'JORGE CINTRON',                   
+//             MSGLEVEL=(1,1),                          
+//             CLASS=A,                                 
+//             MSGCLASS=H,                              
+//             NOTIFY=&SYSUID                           
+//STEP01   EXEC PGM=IEWL,PARM='MAP,XREF'                
+//SYSLIB   DD DSN=CEE.SCEELKED,DISP=SHR                 
+//         DD DSN=DSN910.SDSNLOAD,DISP=SHR              
+//SYSLIN   DD DSN=WEC.SRC.OBJ(SQLSEL),DISP=SHR          
+//SYSLMOD  DD DSN=IBMUSER.ALOAD(SQLSEL),DISP=SHR        
+//SYSPRINT DD SYSOUT=*                                  
+//SYSUT1   DD SPACE=(1024,(50,50)),UNIT=SYSDA           
+//SYSIN    DD DUMMY                                     
+
+
+
+//MATEDK01 JOB (MVS),'JORGE CINTRON',                          
+//             MSGLEVEL=(1,1),                                 
+//             MSGCLASS=H,                                     
+//             CLASS=A,                                        
+//             NOTIFY=&SYSUID                                  
+//STEP01   EXEC PGM=IKJEFT01                                   
+//STEPLIB  DD DSN=DSN910.DB9G.SDSNEXIT,DISP=SHR                
+//         DD DSN=DSN910.SDSNLOAD,DISP=SHR                     
+//DBRMLIB  DD DSN=WEC.SRC.DBRMLIB,DISP=SHR                     
+//SYSTSIN  DD *                                                
+  DSN SYSTEM(DB9G )                                            
+  BIND PLAN (SQLTEST)-                                         
+  MEMBER    (SQLSEL)-                                          
+  ACTION    (REP)-                                             
+  ISOLATION (CS)-                                              
+  VALIDATE  (BIND)-                                            
+  RELEASE   (COMMIT)-                                          
+  OWNER     (IBMUSER)-                                         
+  QUALIFIER (IBMUSER)-                                         
+  ENCODING  (01208)         
+  END                       
+/*                          
+//SYSPRINT DD SYSOUT=*      
+//SYSTSPRT DD SYSOUT=*      
+//SYSUDUMP DD SYSOUT=*      
+
+
+
+//MATEDK01 JOB (MVS),'JORGE CINTRON',                       
+//             MSGLEVEL=(1,1),                              
+//             MSGCLASS=H,                                  
+//             CLASS=A,                                     
+//             NOTIFY=&SYSUID                               
+//STEP01   EXEC PGM=IKJEFT01                                
+//STEPLIB  DD DSN=DSN910.DB9G.SDSNEXIT,DISP=SHR             
+//         DD DSN=DSN910.SDSNLOAD,DISP=SHR                  
+//DBRMLIB  DD DSN=WEC.SRC.DBRMLIB,DISP=SHR                  
+//SYSTSIN  DD *                                             
+  DSN SYSTEM(DB9G )                                         
+  RUN PROGRAM(SQLSEL)-                                      
+  PLAN (SQLTEST)-                                           
+  LIBRARY ('IBMUSER.ALOAD')                                 
+  END                                                       
+/*                                                          
+//SYSPRINT DD SYSOUT=*                                      
+//SYSTSPRT DD SYSOUT=*                                      
+//SYSUDUMP DD SYSOUT=*                                      
+
