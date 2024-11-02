@@ -172,8 +172,16 @@ load module ^
 
 
 
+***********************KEY NOTES ***************************************
+
+SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
 
 
+SETPROG LPA,REPLACE,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
+load module ^ 
+
+
+DO THE LPA THEN REPLACE ******** LPA FIRST THEN REPLACE
 
 
 
