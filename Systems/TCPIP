@@ -1,0 +1,9 @@
+SDSF SYSLOG      2.101 SYS1 SYS1 11/03/2024 0W        
+COMMAND INPUT ===> /D U,,,0E20,4                      
+RESPONSE=ADCD                                         
+ IEE457I 15.29.46 UNIT STATUS 348                     
+ UNIT TYPE STATUS        VOLSER     VOLSTATE          
+ 0E20 CTC  OFFLINE                                    
+ 0E21 CTC  OFFLINE                                    
+ 0E22 CTC  OFFLINE                                    
+ 0E23 CTC  OFFLINE                                    
