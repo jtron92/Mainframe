@@ -35,3 +35,23 @@
 //             DISP=OLD                                        
 //SYSUT1   DD  UNIT=SYSALLDA,SPACE=(TRK,(10,10))               
 //SYSIN    DD  DUMMY                  
+
+
+
+
+//MATEDK01 JOB (MVS),'JORGE CINTRON',              
+//             MSGLEVEL=(1,1),                     
+//             MSGCLASS=H,                         
+//             CLASS=A,                            
+//             NOTIFY=&SYSUID                      
+//         JCLLIB ORDER=IBMUSER.ACOBOL.LIB         
+//COMPILE  EXEC COBOLCL,                           
+//          COPYLIB=IBMUSER.ACOBOL.LIB,            
+//          LOADLIB=IBMUSER.ALOAD,                 
+//          SRCLIB=IBMUSER.ACOBOL.LIB,             
+//          MEMBER=COBOL                           
+//RUN      EXEC PGM=COBOL                          
+//STEPLIB  DD DSN=IBMUSER.ALOAD(COBOL),DISP=SHR    
+//SYSPRINT DD SYSOUT=*                             
+//AMSDUMP  DD SYSOUT=*                             
+//SYSOUT   DD SYSOUT=*                             
