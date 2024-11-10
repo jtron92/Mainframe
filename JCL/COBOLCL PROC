@@ -1,0 +1,37 @@
+//COBOLCL PROC COPYLIB='SYS1.CPYLIB',                                  
+//            SRCLIB='ERROR.SRCLIB',                                   
+//            MEMBER='ERROR.MEMBER',                                   
+//            LOADLIB='ERROR.LOADLIB'                                  
+//*********************************************************************
+//*  COMPILE AND LINK EDIT A COBOL PROGRAM                             
+//*********************************************************************
+//COBOL  EXEC PGM=IGYCRCTL,REGION=0M,PARM=('LIB')                      
+//STEPLIB  DD  DSNAME=IGY420.SIGYCOMP,                                 
+//             DISP=SHR                                                
+//SYSIN    DD  DSN=&SRCLIB(&MEMBER),                                   
+//             DISP=SHR                                                
+//SYSLIB   DD  DSN=&COPYLIB,                                           
+//             DISP=SHR                                                
+//SYSPRINT DD  SYSOUT=*                                                
+//SYSLIN   DD  DSNAME=&&LOADSET,UNIT=SYSALLDA,                         
+//             DISP=(MOD,PASS),SPACE=(TRK,(3,3)),                      
+//             DCB=(BLKSIZE=3200)      
+//SYSUT1   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//SYSUT2   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//SYSUT3   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//SYSUT4   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//SYSUT5   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//SYSUT6   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//SYSUT7   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                 
+//*                                                            
+//LKED   EXEC PGM=IEWBLINK,COND=(8,LT,COBOL),REGION=0M         
+//SYSLIB   DD  DSNAME=CEE.SCEELKED,DISP=SHR                    
+//         DD  DSNAME=&LOADLIB,                                
+//             DISP=SHR                                        
+//SYSPRINT DD  SYSOUT=*                                        
+//SYSLIN   DD  DSNAME=&&LOADSET,DISP=(OLD,DELETE)              
+//         DD  DDNAME=SYSIN                                    
+//SYSLMOD  DD  DSNAME=&LOADLIB(&MEMBER),                       
+//             DISP=OLD                                        
+//SYSUT1   DD  UNIT=SYSALLDA,SPACE=(TRK,(10,10))               
+//SYSIN    DD  DUMMY                  
