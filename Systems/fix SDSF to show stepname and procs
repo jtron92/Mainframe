@@ -1,3 +1,52 @@
+*********************************************************************************************************************************************************
+Procedure:
+Modify the SMFPRM00 Member:
+
+In SYS1.PARMLIB(SMFPRM00), change the NOACTIVE parameter to ACTIVE.
+Issue Console Command:
+
+In the system console, issue the command:
+
+SET SMF=00
+F LLA,REFRESH
+
+Run the JCL to Assemble and Link-Edit the Exit: Submit the following JCL:
+
+
+//   EXEC ASMACL,
+//        PARM.L='NCAL,MAP,LIST,LET,RENT,REUS,RMODE(ANY),AMODE(31)'
+//C.SYSLIB  DD DISP=SHR,DSN=SYS1.MACLIB
+//          DD DISP=SHR,DSN=SYS1.MODGEN
+//C.SYSIN   DD DISP=SHR,DSN=SYS1.SAMPLIB(IEEACTRT)
+//L.SYSLMOD DD DISP=SHR,DSN=SYS1.LPALIB(IEFACTRT)
+
+F LLA,REFRESH
+
+NEXT FOLLOW STEPS JUST LIKE THIS 
+
+1. SETPROG EXIT,ADD,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+THIS WILL ERROR OUT BUT IN CASE JUST RUN IT 
+
+2. SETPROG LPA,ADD,MODNAME=IEFACTRT,DSNAME=SYS1.LPALIB
+
+3. SETPROG EXIT,REPLACE,EXITNAME=SYS.IEFACTRT,MODNAME=IEFACTRT
+
+DONE 
+
+******************************************************************************************************************************************
+
+
+
+
+
+
+
+
+OLD NOTES GOING THRU IT DEBUGGING BELOW
+
+
+
 Procedure:
 Modify the SMFPRM00 Member:
 
