@@ -1,0 +1,15 @@
+/d symbols
+
+  D SYMBOLS                                                                 
+0090  IEA007I STATIC SYSTEM SYMBOL VALUES 790                                   
+0090          &SYSALVL.  = "2"                                                  
+0090          &SYSCLONE. = "1A"                                                 
+0090          &SYSNAME.  = "ADCD"                                               
+0090          &SYSPLEX.  = "ADCDPL"                                             
+0090          &SYSR1.    = "SBRES1"                                             
+0090          &SYSP1.    = "SBPRD1"                                             
+0090          &SYSP2.    = "SBPRD2"                                             
+0090          &SYSP3.    = "SBPRD3"                                             
+0090          &SYSR2.    = "SBRES2"                                             
+0090          &SYSS1.    = "SBSYS1"                                             
+0090          &UNIXVER.  = "Z111S"
