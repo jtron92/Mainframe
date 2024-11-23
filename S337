@@ -1,0 +1,20 @@
+IEA995I SYMPTOM DUMP OUTPUT  858                             
+   858             SYSTEM COMPLETION CODE=337  REASON CODE=00000004             
+   858              TIME=15.40.18  SEQ=00029  CPU=0000  ASID=001A               
+   858              PSW AT TIME OF ERROR  075C1000   80E04B56  ILC 2  INTC 0D   
+   858                NO ACTIVE MODULE FOUND                                    
+   858                NAME=UNKNOWN                                              
+   858                DATA AT PSW  00E04B50 - 41003846  0A0DB20A  00509808    
+  END OF SYMPTOM DUMP                                         
+15.40.18 JOB00045  IEF450I ASMJOB11 RUN - ABEND=S337 U0000 REASON=00000004  859 
+   859                     TIME=15.40.18                                        
+15.40.18 JOB00045  -RUN               *S337     41      0       .00       .00   
+15.40.18 JOB00045  IEF404I ASMJOB11 - ENDED - TIME=15.40.18   
+
+
+TO FIX THIS 
+
+ADD A 
+
+EODAD=EXIT AT THE END OF THE DCB STATEMENT IN ASSEMBLER 
+
