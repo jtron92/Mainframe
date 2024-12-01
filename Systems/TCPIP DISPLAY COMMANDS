@@ -16,3 +16,60 @@ D TCPIP,TCPIP,NETSTAT,ROUTE
   192.168.4.150/32   0.0.0.0         H        0000000000 ETH1                   
   4 OF 4 RECORDS DISPLAYED                                                      
   END OF THE REPORT                               
+*************************************
+D TCPIP,TCPIP,NETSTAT,DEVLINKS
+
+ EZZ2500I NETSTAT CS V1R11 TCPIP 827                                       
+0090  DEVNAME: LOOPBACK          DEVTYPE: LOOPBACK                              
+0090    DEVSTATUS: READY                                                        
+0090    LNKNAME: LOOPBACK          LNKTYPE: LOOPBACK    LNKSTATUS: READY        
+0090      ACTMTU: 65535                                                         
+0090    ROUTING PARAMETERS:                                                     
+0090      MTU SIZE: N/A               METRIC: 00                                
+0090      DESTADDR: 0.0.0.0           SUBNETMASK: 0.0.0.0                       
+0090    MULTICAST SPECIFIC:              
+    MULTICAST CAPABILITY: NO                                              
+0090    LINK STATISTICS:                                                        
+0090      BYTESIN                           = 0                                 
+0090      INBOUND PACKETS                   = 0                                 
+0090      INBOUND PACKETS IN ERROR          = 0                                 
+0090      INBOUND PACKETS DISCARDED         = 0                                 
+0090      INBOUND PACKETS WITH NO PROTOCOL  = 0 
+0090      BYTESOUT                          = 0                                 
+0090      OUTBOUND PACKETS                  = 0                                 
+0090      OUTBOUND PACKETS IN ERROR         = 0                                 
+0090      OUTBOUND PACKETS DISCARDED        = 0                                 
+0090  DEVNAME: LCS1              DEVTYPE: LCS       DEVNUM: 0E20                
+0090    DEVSTATUS: READY                                                        
+0090    LNKNAME: ETH1              LNKTYPE: ETH         LNKSTATUS: NOT ACTIVE   
+0090      NETNUM: 0    QUESIZE: 0     
+0090      IPBROADCASTCAPABILITY: YES                                            
+0090      ACTMTU: UNKNOWN                                                       
+0090      SECCLASS: 255                  MONSYSPLEX: NO                         
+0090    ROUTING PARAMETERS:                                                     
+0090      MTU SIZE: N/A               METRIC: 00   
+0090      DESTADDR: 0.0.0.0           SUBNETMASK: 0.0.0.0                       
+0090    MULTICAST SPECIFIC:                                                     
+0090      MULTICAST CAPABILITY: NO                                              
+0090    LINK STATISTICS:                                                        
+0090      BYTESIN                           = 0                                 
+0090      INBOUND PACKETS                   = 0                                 
+0090      INBOUND PACKETS IN ERROR          = 0                                 
+0090      INBOUND PACKETS DISCARDED         = 0                                 
+0090      INBOUND PACKETS WITH NO PROTOCOL  = 0                                 
+0090      BYTESOUT                          = 0                                 
+0090      OUTBOUND PACKETS      
+0090      OUTBOUND PACKETS IN ERROR         = 0                                 
+0090      OUTBOUND PACKETS DISCARDED        = 0                                 
+0090  DEVNAME: LCS1              DEVTYPE: LCS       DEVNUM: 0E20                
+0090    DEVSTATUS: READY                                                        
+0090    LNKNAME: ETH1              LNKTYPE: ETH         LNKSTATUS: NOT ACTIVE   
+0090      NETNUM: 0    QUESIZE: 0 
+0090  IPV4 LAN GROUP SUMMARY                                                    
+0090  NO IPV4 LAN GROUPS                                                        
+0090  OSA-EXPRESS NETWORK TRAFFIC ANALYZER INFORMATION:                         
+0090  NO OSA-EXPRESS NETWORK TRAFFIC ANALYZER INTERFACES ARE DEFINED            
+0090  2 OF 2 RECORDS DISPLAYED                                                  
+0090  END OF THE REPORT                                                         
+*****************************
+
