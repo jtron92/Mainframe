@@ -1,0 +1,18 @@
+D TCPIP 'HOME'
+D TCPIP,HOME
+
+D TCPIP,TCPIP,HOME
+
+
+**********************
+D TCPIP,TCPIP,NETSTAT,ROUTE
+
+ RESPONSE=ADCD                                                                  
+  EZZ2500I NETSTAT CS V1R11 TCPIP 825                                           
+  DESTINATION        GATEWAY         FLAGS    REFCNT     INTERFACE              
+  DEFAULT            192.168.4.1     GS       0000000000 ETH1                   
+  127.0.0.1/32       0.0.0.0         UH       0000000000 LOOPBACK               
+  192.168.4.0/24     0.0.0.0         S        0000000000 ETH1                   
+  192.168.4.150/32   0.0.0.0         H        0000000000 ETH1                   
+  4 OF 4 RECORDS DISPLAYED                                                      
+  END OF THE REPORT                               
