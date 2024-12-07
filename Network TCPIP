@@ -19,11 +19,16 @@ right click the short cut
 
 for the target for example use this 
 
-"C:\Program Files\Hercules\Hercules 3.07 (64 Bit)\hercules.exe" -f "D:\111\111\adcd11_mac.CONF"
+"C:\Program Files\Hercules\Hercules 3.07 (64 Bit)\hercules.exe" -f "D:\111\111\adcd11_mac.CONF" 
+
+"C:\Program Files\Hercules\Hercules 3.07 (64 Bit)\hercules.exe" -f "C:\Users\jorge\Downloads\111\111\adcd11_mac.CONF"
 
 and start in 
 
+
 D:\111\111
+
+C:\Users\jorge\Downloads\111\111\
 
 then click on advanced make sure you click on run admin 
 
