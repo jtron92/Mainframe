@@ -1,0 +1,95 @@
+First download this 
+
+
+hercules-3.07-w64.msi: Windows 64-bit Installer package
+
+
+second down this 
+
+CTCI-WIN_TRIAL_x64_std_setup.exe from software labs 
+
+
+next go to your local C drive 
+
+this pic > local dics(C:) > Program Files > Hercules > Hercules 3.07(64bit)
+
+Find hercules application and right click it and create a short cut 
+
+right click the short cut 
+
+for the target for example use this 
+
+"C:\Program Files\Hercules\Hercules 3.07 (64 Bit)\hercules.exe" -f "D:\111\111\adcd11_mac.CONF"
+
+and start in 
+
+D:\111\111
+
+then click on advanced make sure you click on run admin 
+
+then right click the herucles shortcut and run it as admin
+
+***********************************************************************************************************************************************************************************
+
+
+Mainframe Config 
+
+0E20.2 LCS -n 192.168.4.72 192.168.4.150
+
+
+first ip is your network second is mainframe ip
+
+
+
+go to ADCD.Z111S.TCPPARMS  
+
+
+THEN GO TO 
+
+PROF1 
+
+
+FIND THE LINES BELOW AND CHANGE IT YOUR LIKING 
+
+**********************************************************************
+000176  DEVICE LCS1  LCS  E20 AUTORESTART            
+000177  LINK ETH1    ETHERNET 0  LCS1                
+
+ 000190 HOME                         
+ 000191                              
+ 000192    192.168.4.150   ETH1      
+
+000207 ;                                                                       
+000208 ROUTE 192.168.4.0    255.255.255.0   =         ETH1   MTU DEFAULTSIZE   
+000209 ROUTE DEFAULT        192.168.4.1               ETH1   MTU DEFAULTSIZE   
+000210 ENDRoutes                                                               
+000211                                                                         
+000212 ;                                                                       
+000213 ; ----------------------------------------------------------------------
+
+000277 ; Start all the defined devices.         
+000278 ;                                        
+000279                                          
+000280 START LCS1                               
+****** **************************** Bottom of Da
+
+
+
+
+BOUNCE TCPIP 
+
+P TCPIP
+
+START IT 
+
+S TCPIP
+
+THEN FOR TN3270 
+
+ADD THE MAINFRAME IP WITH NO PORT 
+
+192.168.4.150
+
+
+
+
