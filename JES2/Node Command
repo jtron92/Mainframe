@@ -1,0 +1,9 @@
+$D NODE(*)            - to show all nodes and name , name is N1
+
+
+
+COMMAND INPUT ===>                                           
+RESPONSE=ADCD                                                
+ $HASP826 NODE(1)                                            
+ $HASP826 NODE(1)   NAME=N1,STATUS=(OWNNODE),TRANSMIT=BOTH,  
+ $HASP826           RECEIVE=BOTH,HOLD=NONE                   
