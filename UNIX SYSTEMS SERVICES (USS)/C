@@ -1,3 +1,13 @@
+xlc -qversion    (to check if your mainframe has c/c++ tells you the verison like 
+
+IBMUSER:/u/ibmuser: >xlc -qversion      
+        z/OS V1.11 XL C/C++             
+
+
+
+
+
+
 Create a C Source File
 Open the OMVS shell using the OMVS command in TSO.
 
