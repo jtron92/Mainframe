@@ -3,7 +3,12 @@ xlc -qversion    (to check if your mainframe has c/c++ tells you the verison lik
 IBMUSER:/u/ibmuser: >xlc -qversion      
         z/OS V1.11 XL C/C++             
 
+IBMUSER:/u/ibmuser: >ls -l myprogram.c                              
+-rwx------   1 OMVSKERN SYS1          69 Dec 10 09:29 myprogram.c   
 
+IBMUSER:/u/ibmuser: >xlc myprogram.c                                
+IBMUSER:/u/ibmuser: >./a.out                                        
+helloIBMUSER:/u/ibmuser: >                                          
 
 
 
