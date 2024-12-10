@@ -1,0 +1,10 @@
+IBMUSER:/u/ibmuser: >ls /usr/lpp                                         
+AOR                 cbclib              eim                 osc          
+CB390               cicsia              encina              perl         
+CommerceSuite       cicstg              ezm                 php          
+DistHub             cicsts              fw                  pkcs11       
+EGLRuntime          cim                 gskssl              pkiserv      
+FMN                 cmx                 hcd                 pli          
+HOD                 cobol               hpj                 ported       
+IBM_Payment         cpo                 icli                psf          
+
