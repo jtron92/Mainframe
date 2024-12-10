@@ -1,0 +1,40 @@
+Create a C Source File
+Open the OMVS shell using the OMVS command in TSO.
+
+Use an editor to create your C source file. For example:
+
+
+oedit myprogram.c
+This opens the ISPF editor in OMVS. Alternatively, you can use the vi editor:
+
+
+vi myprogram.c
+Write your C code. Here's a simple "Hello, World!" program:
+
+c
+
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World from z/OS!\n");
+    return 0;
+}
+Save and exit the editor.
+
+2. Compile the Program
+To compile the C program, you'll use the xlc compiler provided in z/OS. Here's how:
+
+Compile the program:
+
+
+xlc myprogram.c -o myprogram
+myprogram.c is your source file.
+-o myprogram specifies the output executable name (you can name it whatever you want).
+If the compile is successful, you’ll see no errors, and an executable file named myprogram will be created.
+
+3. Run the Program
+Execute your program using:
+
+
+
+./myprogram
