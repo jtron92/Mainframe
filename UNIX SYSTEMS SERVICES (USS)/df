@@ -1,0 +1,17 @@
+lternative Commands for df
+Basic df Command: Run df without options to get a list of mounted file systems and their usage:
+
+
+df
+Use the -k Option: The -k option displays file system usage in kilobytes (KB):
+
+
+df -k
+List Specific File Systems: If you want to check a particular file system, specify it:
+
+
+df /u/ibmuser
+Detailed Information with -v: Use the -v option to get more verbose output about the file systems:
+
+
+df -v
