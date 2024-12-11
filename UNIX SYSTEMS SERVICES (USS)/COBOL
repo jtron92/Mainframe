@@ -1,0 +1,14 @@
+IBMUSER:/u/ibmuser: >ls -la /usr/lpp/cobol/bin                          
+total 264                                                               
+drwxr-xr-x   3 OMVSKERN SYS1        8192 Jan 23  2008 .                 
+drwxr-xr-x   6 OMVSKERN SYS1        8192 Jan 23  2008 ..                
+drwxr-xr-x   2 OMVSKERN SYS1        8192 Jan 23  2008 IBM               
+-rwxr-xr-x   2 OMVSKERN SYS1      110592 Jan 23  2008 cob2              
+
+
+
+
+*******************
+
+oedit hello.cbl
+
