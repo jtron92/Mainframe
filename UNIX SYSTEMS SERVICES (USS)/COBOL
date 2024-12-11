@@ -12,3 +12,14 @@ drwxr-xr-x   2 OMVSKERN SYS1        8192 Jan 23  2008 IBM
 
 oedit hello.cbl
 
+
+
+IBMUSER:/u/ibmuser: >oedit hello.cbl          
+
+IBMUSER:/u/ibmuser: >/usr/lpp/cobol/bin/cob2 hello.cbl                 
+ PP 5655-S71 IBM Enterprise COBOL for z/OS  4.1.0 in progress ...      
+ End of compilation 1,  program HERC01,  no statements flagged. 
+
+IBMUSER:/u/ibmuser: >./a.out                                           
+HELLO WORLD                                                            
+IBMUSER:/u/ibmuser: >                                                  
