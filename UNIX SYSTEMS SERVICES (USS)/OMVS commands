@@ -8,3 +8,28 @@ FMN                 cmx                 hcd                 pli
 HOD                 cobol               hpj                 ported       
 IBM_Payment         cpo                 icli                psf          
 
+
+
+
+
+use *******************         ls -la 
+
+
+IBMUSER:/u/ibmuser: >ls -la /usr/lpp/cobol/bin                   
+total 264                                                        
+drwxr-xr-x   3 OMVSKERN SYS1        8192 Jan 23  2008 .          
+drwxr-xr-x   6 OMVSKERN SYS1        8192 Jan 23  2008 ..         
+drwxr-xr-x   2 OMVSKERN SYS1        8192 Jan 23  2008 IBM        
+-rwxr-xr-x   2 OMVSKERN SYS1      110592 Jan 23  2008 cob2       
+
+**************************************
+
+
+id 
+
+IBMUSER:/u/ibmuser: >id     
+uid=0(OMVSKERN) gid=0(SYS1) 
+IBMUSER:/u/ibmuser: >       
+
+
+*************************************************
