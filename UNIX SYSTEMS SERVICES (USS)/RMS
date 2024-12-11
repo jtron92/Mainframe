@@ -1,0 +1,151 @@
+Go to RMS 
+
+
+select 3 for Monitor III
+
+Selection ===> 3                                                               
+                                                                               
+Enter selection number or command on selection line.                           
+                                                                               
+                                                                               
+  1 Postprocessor   Postprocessor reports for Monitor I, II, and III      (PP) 
+  2 Monitor II      Snapshot reporting with Monitor II                    (M2) 
+  3 Monitor III     Interactive performance analysis with Monitor III     (M3) 
+                                                                               
+  U USER            User-written applications (add your own ...)          (US) 
+                                                                               
+  R RMFPP           Performance analysis with the Spreadsheet Reporter         
+  P RMF PM          RMF PM Java Edition                                        
+  N News            What's new in z/OS V1R10 RMF                               
+                                                                               
+                              T TUTORIAL    X EXIT                             
+                                                                               
+  RMF Home Page:    http://www.ibm.com/servers/eserver/zseries/rmf/            
+                                                                               
+         5694-A01 Copyright IBM Corp. 1994, 2008. All Rights Reserved          
+
+********************************************************************************************************
+
+type 1 
+
+
+Selection ===> 1                                                               
+                                                                               
+Enter selection number or command on selection line.                           
+                                                                               
+                                                                               
+  S SYSPLEX         Sysplex reports and Data Index                         (SP)
+  1 OVERVIEW        WFEX, SYSINFO, and Detail reports                      (OV)
+  2 JOBS            All information about job delays                       (JS)
+  3 RESOURCE        Processor, Device, Enqueue, and Storage                (RS)
+  4 SUBS            Subsystem information for HSM, JES, and XCF           (SUB)
+                                                                               
+  U USER            User-written reports (add your own ...)                (US)
+                                                                               
+                                                                               
+                    O OPTIONS    T TUTORIAL    X EXIT                          
+                                                                               
+       5694-A01 Copyright IBM Corp. 1986, 2008. All Rights Reserved            
+                     Licensed Materials - Property of IBM                      
+
+
+
+************************************************************************************************************
+
+type 8 
+
+
+                    RMF Overview Report Selection Menu                
+Selection ===> 8                                                      
+                                                                      
+Enter selection number or command for desired report.                 
+                                                                      
+ Basic Reports                                                        
+         1 WFEX     Workflow/Exceptions                          (WE) 
+         2 SYSINFO  System information                           (SI) 
+         3 CPC      CPC capacity                                      
+                                                                      
+ Detail Reports                                                       
+         4 DELAY    Delays                                      (DLY) 
+         5 GROUP    Group response time breakdown                (RT) 
+         6 ENCLAVE  Enclave resource consumption and delays    (ENCL) 
+         7 OPD      OMVS process data                                 
+         8 ZFSSUM   zFS summary                                (ZFSS) 
+         9 ZFSACT   zFS activity                               (ZFSA) 
+        10 SPACEG   Storage space                               (SPG) 
+        11 SPACED   Disk space                                  (SPD) 
+        12 LOCKSP   Spin locks                                  (LSP) 
+        13 LOCKSU   Suspend locks                               (LSU) 
+
+******************************************************************************************************
+pick a filesystem
+
+
+                         RMF V1R10  zFS Summary Report             Line 1 of 11 
+ Command ===>                                                  Scroll ===> CSR  
+                                                                                
+ Samples: 100     System: DUZA  Date: 12/11/24  Time: 12.35.00  Range: 100   Sec
+                                                                                
+ ---- Response Time ---- ---------------- Cache Activity ---------------------- 
+       ----- Wait% ----- --------- User ------  -- Vnode -- - Metadata - -Trx - 
+   Avg   I/O  Lock Sleep  Rate Hit% Read% Dly%    Rate Hit%    Rate Hit%   Rate 
+  0.29   0.0   0.0  77.4   0.1  100   100  0.0   <0.01  100     0.1  100    0.1 
+                                                                                
+ ------------Aggregate Name------------------ Size Use% --Mode-  FS  Read Write 
+                                                                      (B/Sec)   
+                                                                                
+ ZFS.Z110S.VERSION.ZFS                       2180M 99.3  R/W CP   1     0   369 
+ ZFS.DUZA.DEV                                4320K  3.8  R/W CP   1     0   287 
+ ZFS.DUZA.VAR                                1440K 28.3  R/W CP   1     0   123 
+ ZFS.DUZA.VARWBEM                              70M 23.3  R/W CP   1     0   123 
+ DSN910.SDSNAZFS                               35M 24.2  R/W CP   1     0   123 
+ DSN910.SDSNJCC                                35M 28.4  R/W CP   1     0   123 
+ DSN910.SDSNMQLS                               35M  5.5  R/W CP   1     0   123 
+ DSN910.SDSNWORF                               35M  4.5  R/W CP   1     0   123 
+ DAH910.ADAHZFS1                               64M 82.3  R/W CP   1     0   123 
+ DSN910.SJVAZFS                              7200K  2.5  R/W CP   1     0   123 
+ ACD211.SACDZFS1                             7200K 51.8  R/W CP   1     0   123 
+
+****************************************************************************************************************8
+
+go to USS
+
+type 
+
+zfsadm aggrinfo 'filesystem' or un quotes doesnt matter 
+
+IBMUSER:/u/ibmuser: >zfsadm aggrinfo ZFS.Z110S.VERSION.ZFS          
+ZFS.Z110S.VERSION.ZFS (R/W COMP): 15263 K free out of total 2232000 
+
+                                        
+
+
+
+
+
+
+
+
+IBMUSER:/u/ibmuser: >zfsadm aggrinfo ZFS.Z110S.VERSION.ZFS          
+ZFS.Z110S.VERSION.ZFS (R/W COMP): 15263 K free out of total 2232000 
+
+
+
+
+IBMUSER:/u/ibmuser: >zfsadm lsaggr                                  
+IOEZ00106I A total of 11 aggregates are attached                    
+DSN910.SDSNWORF                                 DUZA      R/W       
+DSN910.SDSNMQLS                                 DUZA      R/W       
+ZFS.DUZA.VAR                                    DUZA      R/W       
+ZFS.DUZA.DEV                                    DUZA      R/W       
+ZFS.Z110S.VERSION.ZFS                           DUZA      R/W       
+ACD211.SACDZFS1                                 DUZA      R/W       
+DSN910.SJVAZFS                                  DUZA      R/W       
+DAH910.ADAHZFS1                                 DUZA      R/W       
+DSN910.SDSNJCC                                  DUZA      R/W       
+DSN910.SDSNAZFS                                 DUZA      R/W       
+ZFS.DUZA.VARWBEM                                DUZA      R/W       
+IBMUSER:/u/ibmuser: >                                               
+ ===>                                                               
+
+
