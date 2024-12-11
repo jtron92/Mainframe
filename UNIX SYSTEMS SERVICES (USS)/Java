@@ -1,0 +1,83 @@
+/Z110S/usr/lpp/java/J6.0: >cd bin
+
+/Z110S/usr/lpp/java/J6.0/bin: >ls
+
+appletviewer               jdfsort                    launcher_ru.properties    
+apt                        jdmpview                   launcher_sk.properties    
+classic                    jextract                   launcher_sl.properties    
+extcheck                   jrunscript                 launcher_tr.properties    
+hwkeytool                  keytool                    launcher_zh.properties    
+idlj                       kinit                      launcher_zh_TW.properties 
+ikeycmd                    klist                      libjsig.x                 
+ikeyman                    ktab                       native2ascii              
+j9vm                       launcher.properties        pack200                   
+jar                        launcher_ca.properties     policytool                
+jarsigner                  launcher_cs.properties     rmic                      
+java                       launcher_de.properties     rmid                      
+java-rmi.cgi               launcher_es.properties     rmiregistry               
+javac                      launcher_fr.properties     schemagen                 
+javadoc                    launcher_hu.properties     serialver                 
+javah                      launcher_it.properties     tnameserv                 
+javap                      launcher_ja.properties     unpack200                 
+
+
+
+./java -version
+
+java version "1.6.0"                                                            
+Java(TM) SE Runtime Environment (build pmz3160sr4-20090219_01(SR4))             
+IBM J9 VM (build 2.4, J2RE 1.6.0 IBM J9 2.4 z/OS s390-31 jvmmz3160-20090215_2988
+3 (JIT enabled, AOT enabled)                                                    
+J9VM - 20090215_029883_bHdSMr                                                   
+JIT  - r9_20090213_2028                                                         
+GC   - 20090213_AA)                                                             
+JCL  - 20090218_01                                                              
+
+
+
+IBMUSER:/Z110S/usr/lpp/java/J6.0/bin: >oedit Hello.java      
+
+
+IBMUSER:/Z110S/usr/lpp/java/J6.0/bin: >ls                                       
+Hello.java                 jdfsort                    launcher_sk.properties    
+appletviewer               jdmpview                   launcher_sl.properties    
+apt                        jextract                   launcher_tr.properties    
+classic                    jrunscript                 launcher_zh.properties    
+extcheck                   keytool                    launcher_zh_TW.properties 
+hwkeytool                  kinit                      libjsig.x                 
+idlj                       klist                      native2ascii              
+ikeycmd                    ktab                       pack200                   
+ikeyman                    launcher.properties        policytool                
+j9vm                       launcher_ca.properties     rmic                      
+jar                        launcher_cs.properties     rmid                      
+jarsigner                  launcher_de.properties     rmiregistry               
+java                       launcher_es.properties     schemagen                 
+java-rmi.cgi               launcher_fr.properties     serialver                 
+javac                      launcher_hu.properties     tnameserv                 
+javadoc                    launcher_it.properties     unpack200                 
+javah                      launcher_ja.properties     wsgen                     
+javap                      launcher_ko.properties     wsimport                  
+
+
+IBMUSER:/Z110S/usr/lpp/java/J6.0/bin: >javac Hello.java
+
+IBMUSER:/Z110S/usr/lpp/java/J6.0/bin: >IBMUSER:/Z110S/usr/lpp/java/J6.0/bin: >java Hello                                                                        
+hello, Java on z/OS !                                                           
+
+code :
+
+
+EDIT       /Z110S/usr/lpp/java/J6.0/bin/Hello.java         Columns 00001 00072
+Command ===>                                                  Scroll ===> PAGE
+****** ***************************** Top of Data *****************************
+000001 public class Hello {                                                   
+000002 public static void main(String[] args) {                               
+000003 System.out.println("hello, Java on z/OS ! ");                          
+000004 }                                                                      
+000005 }                                                                      
+****** **************************** Bottom of Data ***************************
+                                                                              
+
+
+
+
