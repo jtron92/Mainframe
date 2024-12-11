@@ -23,3 +23,11 @@ IBMUSER:/u/ibmuser: >/usr/lpp/cobol/bin/cob2 hello.cbl
 IBMUSER:/u/ibmuser: >./a.out                                           
 HELLO WORLD                                                            
 IBMUSER:/u/ibmuser: >                                                  
+
+
+*******************************use ths 
+IBMUSER:/u/ibmuser: >/usr/lpp/cobol/bin/cob2 hello.cbl -o hello  
+ PP 5655-S71 IBM Enterprise COBOL for z/OS  4.1.0 in progress ...
+ End of compilation 1,  program HERC01,  no statements flagged.  
+IBMUSER:/u/ibmuser: >./hello                                     
+HELLO WORLD                                                      
