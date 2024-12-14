@@ -1,0 +1,10 @@
+jorgecintron@Jorges-MacBook-Air ~ % lftp 192.168.4.148
+lftp 192.168.4.148:~> 
+lftp 192.168.4.148:~> user ibmuser
+Password: 
+lftp ibmuser@192.168.4.148:~> ls
+`ls' at 0 [Connecting...]
+
+
+
+
