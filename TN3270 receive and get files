@@ -23,3 +23,10 @@ to send is the same thing but from the mainframe have the name of the pds and me
 
 from the mainframe name and text format should be 
 
+************************************************************
+
+
+here is the command for the ISPF Command Shell option 6
+
+IND$FILE GET 'IBMUSER.COBOL.LIB(word)' ASCII CRLF
+
