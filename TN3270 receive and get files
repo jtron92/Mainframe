@@ -29,4 +29,22 @@ from the mainframe name and text format should be
 here is the command for the ISPF Command Shell option 6
 
 IND$FILE GET 'IBMUSER.COBOL.LIB(word)' ASCII CRLF
+IND$FILE PUT IBMUSER.MASTER.JCL(COPY) ASCII CRLF
+
+
+
+*****************************FOR LINUX****************************************************
+
+FOR LOCAL FILE NAME ADD THE PATH TO YOUR FILE , THE ENTIRE PATH TOO NO NEED TO ADD QUOTES
+
+EX: Local File Name : /home/jtron/Documents/New Document.txt
+EX: Host File Name : IBMUSER.MASTER.JCL(COPY)
+
+FOR HOST FILE NAME ADD THE DATASET QUOTES OR NOT DOESNT MATTER
+
+***IF YOU WANNA SEND THE MAINFRAME FILE TO PC CLICK ON SEND TO HOST 
+
+***TO SEND A FILE INTO THE MAINFRAME CLICK ON RECIEVE FROM HOST
+
+
 
