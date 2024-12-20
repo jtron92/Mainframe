@@ -101,5 +101,138 @@ ADD THE MAINFRAME IP WITH NO PORT
 192.168.4.150
 
 
+*************************************************************************
+
+DUZA
+
+
+
+
+ARPAGE 5
+
+DATASETPREFIX TCPIP
+
+AUTOLOG 5
+    FTPD JOBNAME FTPD1   ; FTP Server
+;   LPSERVE              ; LPD Server
+;   NAMESRV              ; Domain Name Server
+;   NCPROUT              ; NCPROUTE Server
+    PORTMAP              ; Portmap Server
+;   OROUTED              ; RouteD Server
+;   RXSERVE              ; Remote Execution Server
+;   SMTP                 ; SMTP Server
+;   OSNMPD               ; SNMP Agent Server
+;   SNMPQE               ; SNMP Client
+;   TCPIPX25             ; X25 Server
+ENDAUTOLOG
+
+PORT
+     7 UDP MISCSERV            ; Miscellaneous Server
+     7 TCP MISCSERV
+     9 UDP MISCSERV
+     9 TCP MISCSERV
+    19 UDP MISCSERV
+    19 TCP MISCSERV
+    20 TCP OMVS      NOAUTOLOG ; FTP Server
+    21 TCP OMVS                ; FTP Server
+    23 TCP TN3270              ; Telnet Server
+    25 TCP SMTP                ; SMTP Server
+    53 TCP NAMESRV             ; Domain Name Server
+    53 UDP NAMESRV             ; Domain Name Server
+    69 UDP OMVS                ; OE TFTP SERVER
+    80 TCP OMVS                ; OE WEB SERVER
+   111 TCP PORTMAP             ; Portmap Server
+   111 UDP PORTMAP             ; Portmap Server
+   135 UDP LLBD                ; NCS Location Broker
+   161 UDP OSNMPD              ; SNMP Agent
+   162 UDP SNMPQE              ; SNMP Query Engine
+   433 TCP OMVS                ; OE WEB Server
+   443 TCP OMVS                ; Secure Server
+   512 TCP RXSERVE             ; Remote Execution Server
+   513 UDP OMVS                ; OE RLOGIN SERVER
+   514 UDP OMVS                ; OE syslog server
+   514 TCP RXSERVE             ; Remote Execution Server
+   515 TCP LPSERVE             ; LPD Server
+   520 UDP OROUTED             ; RouteD Server
+   580 UDP NCPROUT             ; NCPROUTE Server
+   750 TCP MVSKERB             ; Kerberos
+   750 UDP MVSKERB             ; Kerberos
+   751 TCP ADM@SRV             ; Kerberos Admin Server
+   751 UDP ADM@SRV             ; Kerberos Admin Server
+;  1021 TCP OMVS                ; OE FTP SERVER
+   1023 TCP OMVS                ; OE TELNET SERVER
+   1023 UDP OMVS                ; OE TELNET SERVER
+   1024 TCP OMVS                ; OE SERVICES
+   1415 TCP CSQ1CHIN            ; CSQ1 MQ TCP Listener
+   3000 TCP CICSTCP             ; CICS Socket
+   8879 TCP BBODMGR             ; SOAP JMX Connector port
+   7277 TCP BBODMGR             ; Cell Discovery port
+   9809 TCP BBODMGR             ; ORB port
+   9090 TCP BBODMGR             ; HTTP port
+   9043 TCP BBODMGR             ; HTTPS port
+   5755 TCP BBODMNC             ; Daemon port
+   5756 TCP BBODMNC             ; Daemon SSL port
+
+; WAS Base Node entries
+  8880 TCP BBOS001             ; SOAP JMX Connector port
+ ;2809 TCP BBOS001             ; ORB port (COMMENT THIS ONE OUT)
+  9080 TCP BBOS001             ; HTTP port
+  9443 TCP BBOS001             ; HTTPS port
+  5655 TCP BBODMNB             ; Daemon port
+  5656 TCP BBODMNB             ; Daemon SSL port
+; WAS ND Node entries
+  8879 TCP BBODMGR             ; SOAP JMX Connector port
+  7277 TCP BBODMGR             ; Cell Discovery port
+  9809 TCP BBODMGR             ; ORB port
+  9090 TCP BBODMGR             ; HTTP port
+  9043 TCP BBODMGR             ; HTTPS port
+  5755 TCP BBODMNC             ; Daemon port
+  5756 TCP BBODMNC             ; Daemon SSL port
+; WAS Federation entries
+  8878 TCP BBON001             ; SOAP JMX Connector port
+  7272 TCP BBON001             ; Node Discovery port
+  2809 TCP BBON001             ; Node Agent's ORB port
+  9810 TCP BBOS001             ; Base Server's ORB port
+
+SACONFIG DISABLED
+
+DEVICE LCS1   LCS           E20
+LINK ETH1  ETHERNET  0  LCS1
+
+HOME
+  192.168.4.140 ETH1
+
+GATEWAY
+  192.168.4.1 = ETH1 1500 HOST
+
+DEFAULTNET 192.168.4.1 ETH1 1500 0
+
+ITRACE OFF
+
+IPCONFIG NODATAGRAMFWD
+
+UDPCONFIG RESTRICTLOWPORTS
+
+TCPCONFIG RESTRICTLOWPORTS
+
+START LCS1
+
+
+
+******************************************************************************
+
+config page loading dasds
+
+#********************************************************************
+# CTCI COMMUNICATION DEVICES                                        *
+#********************************************************************
+0E20.2   LCS  192.168.4.75
+
+#********************************************************************
+# HOST OS TIPS/TRICKS                                               *
+#********************************************************************
+#sudo /sbin/sysctl -w net.ipv4.conf.eth0.proxy_arp=1
+#sudo /sbin/sysctl -w net.ipv4.conf.eth0.proxy_arp=1
+
 
 
