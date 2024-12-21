@@ -1,0 +1,38 @@
+
+D OMVS,PFS
+
+RESPONSE=DUZA                                                                  
+  BPXO046I 15.39.34 DISPLAY OMVS 869                                            
+  OMVS     000E ACTIVE             OMVS=(00)                                    
+  PFS CONFIGURATION INFORMATION                                                 
+   PFS TYPE  DESCRIPTION          ENTRY      MAXSOCK  OPNSOCK  HIGHUSED         
+    INET      SOCKETS AF_INET      EZBPFINI    30000        0         0         
+    NFS       REMOTE FILE SYSTEM   GFSCINIT                                     
+    ZFS       LOCAL FILE SYSTEM    IOEFSCM                                      
+    AUTOMNT   LOCAL FILE SYSTEM    BPXTAMD                                      
+    UDS       SOCKETS AF_UNIX      BPXTUINT     2000        2         2         
+    HFS       LOCAL FILE SYSTEM    GFUAINIT                                     
+    BPXTXPFS  CROSS SYSTEM PFS     BPXTXPFS                                     
+    BPXFTCLN  CLEANUP DAEMON       BPXFTCLN                                     
+    BPXFTSYN  SYNC DAEMON          BPXFTSYN                                     
+    BPXFPINT  PIPES                BPXFPINT                                     
+    BPXFCSIN  CHARACTER SPECIAL    BPXFCSIN                                     
+                                                                                
+   PFS TYPE     PARAMETER INFORMATION                                           
+    HFS          CURRENT VALUES: FIXED(0) VIRTUAL(907)      
+
+                                                                           
+0090   PFS TYPE     PARAMETER INFORMATION                                       
+0090    HFS          CURRENT VALUES: FIXED(0) VIRTUAL(907)                      
+0090  BPXF024I (OMVSKERN) Dec 21 14:39:53 inetd 65544 : FOMN0090 870            
+0090  *:login/tcp: socket: EDC5112I Resource temporarily unavailable.,          
+0090  rsn=112B00B6                                                              
+0090  BPXF024I (OMVSKERN) Dec 21 14:39:53 inetd 65544 : FOMN0090 871            
+0090  *:otelnet/tcp: socket: EDC5112I Resource temporarily unavailable.,        
+0090  rsn=112B00B6                                                              
+0090  BPXF024I (OMVSKERN) Dec 21 14:42:53 inetd 65544 : FOMN0090 872            
+0090  *:login/tcp: socket: EDC5112I Resource temporarily unavailable.,          
+0090  rsn=112B00B6                                                              
+0090  BPXF024I (OMVSKERN) Dec 21 14:42:53 inetd 65544 : FOMN0090 873            
+0090  *:otelnet/tcp: socket: EDC5112I Resource temporarily unavailable.,        
+0090  rsn=112B00B6                                        
