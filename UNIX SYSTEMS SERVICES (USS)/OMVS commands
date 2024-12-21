@@ -41,8 +41,17 @@ zfsadm attach -aggregate 'filename'
 zfsadm detach -aggregate 'MYXFS'
 
 This command detaches MYXFS from the system.
+***************************************************************************************************************
 
+*****    zfsadm format -aggregate MY.XFS.FILE3 -compat -overwrite 
+IOEZ00077I HFS-compatibility aggregate MY.XFS.FILE3 has been successfully created
 
+****     zfsadm attach -aggregate MY.XFS.FILE3 
+IOEZ00552I Multi-file system aggregates are restricted and support will be remov
+ed; plan to migrate.                                                            
+IOEZ00117I Aggregate MY.XFS.FILE3 attached successfully 
+
+*****    zfsadm lsaggr to check if its aggreatated
 
 mount FILESYSTEM('MY.XFS.FILE2') MOUNTPOINT('/mnt/yourhfs') TYPE(HFS)
 
