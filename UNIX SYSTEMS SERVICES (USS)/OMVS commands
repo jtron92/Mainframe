@@ -43,6 +43,24 @@ zfsadm detach -aggregate 'MYXFS'
 This command detaches MYXFS from the system.
 ***************************************************************************************************************
 
+
+//MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP01   EXEC PGM=IDCAMS                                              
+ 000007 //SYSIN    DD *                                                         
+ 000008   DEFINE CLUSTER(NAME(MY.XFS.FILE3)-                                    
+ 000009   VOLUMES(USS001)-                                                      
+ 000010   SHAREOPTIONS(3,3)-                                                    
+ 000011   TRACKS(10,5)-                                                         
+ 000012   LINEAR)                                                               
+ 000013 /*                                                                      
+ 000014 //SYSPRINT DD SYSOUT=*                                                  
+ 000015 //AMSDUMP  DD SYSOUT=*                                                  
+ 000016 //SYSOUT   DD SYSOUT=*                            
+
 *****    zfsadm format -aggregate MY.XFS.FILE3 -compat -overwrite 
 IOEZ00077I HFS-compatibility aggregate MY.XFS.FILE3 has been successfully created
 
@@ -53,7 +71,13 @@ IOEZ00117I Aggregate MY.XFS.FILE3 attached successfully
 
 *****    zfsadm lsaggr to check if its aggreatated
 
-mount FILESYSTEM('MY.XFS.FILE2') MOUNTPOINT('/mnt/yourhfs') TYPE(HFS)
+*****    mkdir -p /mnt/minehfs
+
+
+mount FILESYSTEM('MY.XFS.FILE3') MOUNTPOINT('/mnt/minehfs') TYPE(HFS)
+
+
+you can add a file using oedit then to read it use cat
 
 
 
