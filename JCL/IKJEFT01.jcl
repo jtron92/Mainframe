@@ -152,7 +152,45 @@ The options specified in PATHOPTS control how the file is opened. Here’s a bre
 
                                                   
 
+**********************************************************************************************************************************************
 
+COPY FROM A DSN INTO A FILE IN SERVER
+
+****** ***************************** Top of Data ******************************
+ 000001 //READFILE JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP10   EXEC PGM=IKJEFT01                                            
+ 000007 //SYSTSIN  DD *                                                         
+ 000008  OCOPY INDD(INFILE)-                                                    
+ 000009   OUTDD(OUTFILE)                                                        
+ 000010 /*                                                                      
+ 000011 //INFILE   DD DSN=IBMUSER.COBOL.LIB(COB),DISP=SHR                       
+ 000012 //OUTFILE  DD PATH='/Z110S/usr/lpp/cobol/bin/newfile.cbl',              
+ 000013 //            PATHOPTS=(OWRONLY,OCREAT,OTRUNC),                         
+ 000014 //            PATHMODE=(SIRUSR,SIWUSR,SIRGRP)                           
+ 000015 //SYSTSPRT DD SYSOUT=*                                                  
+ 000016 //SYSPRINT DD SYSOUT=*                                                  
+ 000017 //AMSDUMP  DD SYSOUT=*                                                  
+ 000018 //SYSOUT   DD SYSOUT=*                                                  
+ ****** **************************** Bottom of Data ****************************
+
+
+PATHOPTS:
+
+    Controls how the file is opened:
+        OWRONLY: Open the file for write-only access.
+        OCREAT: Create the file if it doesn't already exist.
+        OTRUNC: Truncate (empty) the file if it already exists.
+
+PATHMODE:
+
+    Sets the permissions for the new file:
+        SIRUSR: User has read permission.
+        SIWUSR: User has write permission.
+        SIRGRP: Group has read permission.
 
                                                                     
                                                                     
