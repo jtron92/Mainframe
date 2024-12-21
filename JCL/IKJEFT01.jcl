@@ -91,7 +91,65 @@ END
 ******************************** BOT
                                     
                                     
-                                    
+
+**********************************************************************************************************************************************************************************************************************
+
+
+
+FOR USS
+
+
+
+COPYING A FILE FROM THE SERVER INTO A NEW DSN 
+
+
+
+ //READFILE JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP10   EXEC PGM=IKJEFT01                                            
+ 000007 //SYSTSIN  DD *                                                         
+ 000008  OCOPY INDD(INFILE)-                                                    
+ 000009   OUTDD(OUTFILE)                                                        
+ 000010 /*                                                                      
+ 000011 //INFILE   DD PATH='/Z110S/usr/lpp/cobol/bin/test.cbl',                 
+ 000012 //            PATHOPTS=(ORDWR)                                          
+ 000013 //OUTFILE  DD DSN=IBMUSER.TRUMP,DISP=(NEW,CATLG,DELETE),                
+ 000014 //            SPACE=(TRK,(4,4),RLSE),                                   
+ 000015 //            UNIT=SYSDA,                                               
+ 000016 //            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=800)              
+ 000017 //SYSTSPRT DD SYSOUT=*                                                  
+ 000018 //SYSPRINT DD SYSOUT=*                                                  
+ 000019 //AMSDUMP  DD SYSOUT=*                                                  
+ 000020 //SYSOUT   DD SYSOUT=*                                 
+
+
+The options specified in PATHOPTS control how the file is opened. Here’s a breakdown of the most common values:
+
+    ORDONLY:
+        Stands for Open for Read Only.
+        Specifies that the file is opened in a mode where it can only be read, not modified.
+
+    OWRONLY:
+        Stands for Open for Write Only.
+        Specifies that the file is opened in a mode where data can only be written to it, not read.
+
+    ORDWR:
+        Stands for Open for Read and Write.
+        Specifies that the file is opened in a mode where it can be both read and written.
+
+    OCREAT:
+        Stands for Open with Create.
+        Specifies that a new file should be created if it doesn’t already exist.
+
+    OTRUNC:
+        Stands for Open and Truncate.
+        Specifies that if the file already exists, its content should be truncated (emptied) when it is opened.
+
+
+
                                                   
 
 
