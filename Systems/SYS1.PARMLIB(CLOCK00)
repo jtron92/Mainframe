@@ -1,0 +1,20 @@
+ EDIT       SYS1.PARMLIB(CLOCK00) - 01.05                   Columns 00001 00072 
+ Command ===>                                                  Scroll ===> PAGE 
+ ****** ***************************** Top of Data ******************************
+ 000001 OPERATOR NOPROMPT                                                       
+ 000002 TIMEZONE W.05.00.00                                                     
+ 000003 ETRMODE  NO                                                             
+ 000004 ETRZONE  NO                                                             
+ 000005 ETRDELTA 10                                                             
+ 000006 STPMODE  NO                                                             
+ 000007 STPZONE  NO                                                             
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+
+
+
+THIS W MEANS WESTERN
+
+
+Eastern Standard Time (EST): UTC-5 → W.05.00.00
+Eastern Daylight Time (EDT): UTC-4 → W.04.00.00
