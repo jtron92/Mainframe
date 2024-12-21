@@ -33,3 +33,9 @@ IBMUSER:/u/ibmuser: >
 
 
 *************************************************
+zfsadm lsaggr                     to list all attached aggregates
+
+zfsadm attach -aggregate 'filename'
+
+
+
