@@ -38,4 +38,9 @@ zfsadm lsaggr                     to list all attached aggregates
 zfsadm attach -aggregate 'filename'
 
 
+zfsadm detach -aggregate 'MYXFS'
+
+This command detaches MYXFS from the system.
+
+
 
