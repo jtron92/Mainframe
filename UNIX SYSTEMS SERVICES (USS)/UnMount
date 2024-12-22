@@ -37,3 +37,22 @@ Remove the Directory:
 **ls /mnt   verify that /mnt/yourhfs no longer exists by running:
 
 zfsadm lsaggr
+
+*********************************************************************************************************************
+
+to check whether its ZFS or HFS
+
+zfsadm aggrinfo
+
+or 
+
+zfsadm aggrinfo filesystem name
+
+MY.XFS.FILE6 (R/W MULT): 326 K free out of total 480                            
+MY.XFS.FILE5 (R/W MULT): 326 K free out of total 480                            
+DSN910.SDSNWORF (R/W COMP): 34384 K free out of total 36000                     
+DSN910.SDSNMQLS (R/W COMP): 34013 K free out of total 36000   
+
+
+MULT indicates a multi-file system aggregate (ZFS).
+COMP indicates a compatibility aggregate (HFS).
