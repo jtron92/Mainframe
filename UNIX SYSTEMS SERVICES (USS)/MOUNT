@@ -52,4 +52,31 @@ rmdir /mnt/minehf5
 
 
 
+********************************debugging
+
+fuser -u /mnt/*                 to check if there is any processes using this
+
+***ls -la /mnt/yourhfs             to check contents in your dir
+
+If there are files, use:
+
+***rm -rf /mnt/yourhfs/*
+
+If there are subdirectories or hidden files:
+
+***rm -rf /mnt/yourhfs/.* /mnt/yourhfs/*
+
+Remove the Directory:
+
+    Once empty, remove the directory:
+
+******rmdir /mnt/yourhfs
+
+**ls /mnt   verify that /mnt/yourhfs no longer exists by running:
+
+zfsadm lsaggr
+
+
+
+
 
