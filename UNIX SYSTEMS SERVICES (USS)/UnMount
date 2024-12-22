@@ -1,0 +1,39 @@
+
+*************************************************TO UNMOUNT************************************************************************************
+
+
+UNMOUNT FILESYSTEM('MY.XFS.FILE4')
+
+IBMUSER:/u/ibmuser: >zfsadm detach -aggregate MY.XFS.FILE4                      
+IOEZ00122I Aggregate MY.XFS.FILE4 detached successfully                         
+IBMUSER:/u/ibmuser: > 
+
+rmdir /mnt/minehf5
+
+
+
+********************************debugging
+
+fuser -u /mnt/*                 to check if there is any processes using this
+
+***ls -la /mnt/yourhfs             to check contents in your dir
+
+If there are files, use:
+
+***rm -rf /mnt/yourhfs/*
+
+If there are subdirectories or hidden files:
+
+***rm -rf /mnt/yourhfs/.* /mnt/yourhfs/*
+
+Remove the Directory:   
+
+(also make sure you are not in the direcotry when trying to remove it)
+
+    Once empty, remove the directory:
+
+******rmdir /mnt/yourhfs
+
+**ls /mnt   verify that /mnt/yourhfs no longer exists by running:
+
+zfsadm lsaggr
