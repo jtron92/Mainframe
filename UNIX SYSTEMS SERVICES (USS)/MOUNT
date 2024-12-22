@@ -66,7 +66,9 @@ If there are subdirectories or hidden files:
 
 ***rm -rf /mnt/yourhfs/.* /mnt/yourhfs/*
 
-Remove the Directory:
+Remove the Directory:   
+
+(also make sure you are not in the direcotry when trying to remove it)
 
     Once empty, remove the directory:
 
