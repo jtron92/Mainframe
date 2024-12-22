@@ -32,7 +32,7 @@ IOEZ00117I Aggregate MY.XFS.FILE3 attached successfully
 *****    mkdir -p /mnt/minehfs
 
 
-mount FILESYSTEM('MY.XFS.FILE3') MOUNTPOINT('/mnt/minehfs') TYPE(HFS)
+mount FILESYSTEM('MY.XFS.FILE3') MOUNTPOINT('/mnt/minehfs') TYPE(HFS)        or TYPE(ZFS)
 
 
 you can add a file using oedit then to read it use cat
