@@ -1,0 +1,6 @@
+IBMUSER:/mnt/minehfs: >touch /mnt/minehfs/test.txt             --   creates the file               
+IBMUSER:/mnt/minehfs: >echo "This is a test file" > /mnt/minehfs/test.txt  -- adds the content in the file
+
+
+or you can use OEDIT too
+
