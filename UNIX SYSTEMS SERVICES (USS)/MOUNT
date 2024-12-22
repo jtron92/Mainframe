@@ -38,3 +38,18 @@ mount FILESYSTEM('MY.XFS.FILE3') MOUNTPOINT('/mnt/minehfs') TYPE(HFS)
 you can add a file using oedit then to read it use cat
 
 
+
+*************************************************TO UNMOUNT************************************************************************************
+
+
+UNMOUNT FILESYSTEM('MY.XFS.FILE4')
+
+IBMUSER:/u/ibmuser: >zfsadm detach -aggregate MY.XFS.FILE4                      
+IOEZ00122I Aggregate MY.XFS.FILE4 detached successfully                         
+IBMUSER:/u/ibmuser: > 
+
+rmdir /mnt/minehf5
+
+
+
+
