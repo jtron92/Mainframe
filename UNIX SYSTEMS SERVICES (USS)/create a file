@@ -10,3 +10,40 @@ rename a file (move)
 
 IBMUSER:/mnt/minehfs: >mv /mnt/minehfs/test.txt /mnt/minehfs/test2.txt
 
+
+changing a txt file that has cobol code to foramt .cbl     example : 
+
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >ls                            
+CEEDUMP.20241221.114058.67174416  no.txt                         
+IBM                               test.cbl                       
+a.out                             test.lst                       
+cob2                              test.o                         
+newfile.cbl                       twofile.cbl                    
+newfile.lst                       twofile.lst                    
+newfile.o                         twofile.o                      
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >cat no.txt                    
+        IDENTIFICATION DIVISION.                                 
+        PROGRAM-ID. HERC01.                                      
+        ENVIRONMENT DIVISION.                                    
+        DATA DIVISION.                                           
+        WORKING-STORAGE SECTION.                                 
+        PROCEDURE DIVISION.                                      
+        MAIN-PARA.                                                              
+            DISPLAY 'Welcome to the Mainframe!'.                                
+            STOP RUN.                                                           
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >mv /Z110S/usr/lpp/cobol/bin/no.txt /Z110S/usr
+/lpp/cobol/bin/no.cbl                                                           
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >ls                                           
+CEEDUMP.20241221.114058.67174416  no.cbl                                        
+IBM                               test.cbl                                      
+a.out                             test.lst                                      
+cob2                              test.o                                        
+newfile.cbl                       twofile.cbl                                   
+newfile.lst                       twofile.lst                                   
+newfile.o                         twofile.o                                     
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >cob2 no.cbl                                  
+ PP 5655-S71 IBM Enterprise COBOL for z/OS  4.1.0 in progress ...               
+ End of compilation 1,  program HERC01,  no statements flagged.                 
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >./a.out                                      
+Welcome to the Mainframe!                                                       
+IBMUSER:/Z110S/usr/lpp/cobol/bin: >                                             
