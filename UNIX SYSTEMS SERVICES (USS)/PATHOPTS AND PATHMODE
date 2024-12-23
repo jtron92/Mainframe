@@ -98,5 +98,9 @@ PATHMODE:
         SIWUSR: User has write permission.
         SIRGRP: Group has read permission.
 
+S_ stands for "Set".
+IRUSR = "Integer Read for User".
+IWUSR = "Integer Write for User".
+IRGRP = "Integer Read for Group".
                                                                     
                                                                     
