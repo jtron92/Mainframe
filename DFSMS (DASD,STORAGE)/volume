@@ -1,0 +1,100 @@
+
+option2 for volume
+
+¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢ 
+                  ISMF PRIMARY OPTION MENU - z/OS DFSMS V1 R10                  
+ Selection or Command ===> 2                                                    
+                                                                                
+ 0  ISMF Profile              - Specify ISMF User Profile                       
+ 1  Data Set                  - Perform Functions Against Data Sets             
+ 2  Volume                    - Perform Functions Against Volumes               
+ 3  Management Class          - Specify Data Set Backup and Migration Criteria  
+ 4  Data Class                - Specify Data Set Allocation Parameters          
+ 5  Storage Class             - Specify Data Set Performance and Availability   
+ 6  Storage Group             - Specify Volume Names and Free Space Thresholds  
+ 7  Automatic Class Selection - Specify ACS Routines and Test Criteria          
+ 8  Control Data Set          - Specify System Names and Default Criteria       
+ 9  Aggregate Group           - Specify Data Set Recovery Parameters            
+ 10 Library Management        - Specify Library and Drive Configurations        
+ 11 Enhanced ACS Management   - Perform Enhanced Test/Configuration Management  
+ C  Data Collection           - Process Data Collection Function                
+ G  Report Generation         - Create Storage Management Reports               
+ L  List                      - Perform Functions Against Saved ISMF Lists      
+ P  Copy Pool                 - Specify Pool Storage Groups for Copies          
+ R  Removable Media Manager   - Perform Functions Against Removable Media       
+ X  Exit                      - Terminate ISMF                                  
+ Use HELP Command for Help; Use END Command or X to Exit.                 
+
+
+
+
+option 1 for DASD
+   ¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢ 
+                           VOLUME LIST SELECTION MENU                           
+ Enter Selection or Command ===> 1                                              
+                                                                                
+ 1  DASD                      - Generate a List of DASD Volumes                 
+ 2  Mountable Optical         - Generate a List of Mountable Optical Volumes    
+ 3  Mountable Tape            - Generate a List of Mountable Tape Volumes       
+                                                                                
+
+
+
+
+  
+                                                                                
+    Panel  Defaults  Utilities  Scroll  Help                                     
+ ¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢ 
+                          VOLUME SELECTION ENTRY PANEL              Page 1 of 3 
+ Command ===>                                                                   
+                                                                                
+ Select Source to Generate Volume List  . . 2  (1 - Saved list, 2 - New list)   
+   1  Generate from a Saved List         Query Name To                          
+        List Name  . .                   Save or Retrieve                       
+   2  Generate a New List from Criteria Below                                   
+        Specify Source of the New List  . . 1  (1 - Physical, 2 - SMS)          
+        Optionally Specify One or More:                                         
+        Enter "/" to select option      Generate Exclusive list                 
+          Type of Volume List . . . 1          (1-Online,2-Not Online,3-Either) 
+          Volume Serial Number  . . *          (fully or partially specified)   
+          Device Type . . . . . . .            (fully or partially specified)   
+          Device Number . . . . . .            (fully specified)                
+            To Device Number  . . .            (for range of devices)           
+          Acquire Physical Data . . N          (Y or N)                         
+          Acquire Space Data  . . . N          (Y or N)                         
+          Storage Group Name  . . .            (fully or partially specified)   
+          CDS Name . . . . . . .                                                
+                                               (fully specified or 'Active')    
+ Use ENTER to Perform Selection; Use DOWN Command to View next Selection Panel; 
+ Use HELP Command for Help; Use END Command to Exit.                                                                                     
+                                                                                
+                                                                                
+
+  
+
+
+
+  Command ===>                                                  Scroll ===> HALF 
+                                                         Entries 1-14 of 42     
+ Enter Line Operators below:                             Data Columns 3-8 of 43 
+                                                                                
+      LINE       VOLUME FREE       %     ALLOC      FRAG   LARGEST    FREE      
+      OPERATOR   SERIAL SPACE      FREE  SPACE      INDEX  EXTENT     EXTENTS   
+     ---(1)----  -(2)-- ---(3)---  (4)-  ---(5)---  -(6)-  ---(7)---  --(8)--   
+                 AUT001 ---------   ---  ---------    ---  ---------  -------   
+                 AZZSAD ---------   ---  ---------    ---  ---------  -------   
+                 CKP001 ---------   ---  ---------    ---  ---------  -------   
+                 CKP002 ---------   ---  ---------    ---  ---------  -------   
+                 DMP001 ---------   ---  ---------    ---  ---------  -------   
+                 EQQ001 ---------   ---  ---------    ---  ---------  -------   
+                 JACIC1 ---------   ---  ---------    ---  ---------  -------   
+                 JADB91 ---------   ---  ---------    ---  ---------  -------   
+                 JADB92 ---------   ---  ---------    ---  ---------  -------   
+                 JADB93 ---------   ---  ---------    ---  ---------  -------   
+                 JADIS1 ---------   ---  ---------    ---  ---------  -------   
+                 JADIS2 ---------   ---  ---------    ---  ---------  -------   
+                 JADIS3 ---------   ---  ---------    ---  ---------  -------   
+                 JADIS4 ---------   ---  ---------    ---  ---------  ------- 
+                                                                                
+  
+
