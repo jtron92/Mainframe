@@ -42,7 +42,7 @@ To compile the C program, you'll use the xlc compiler provided in z/OS. Here's h
 Compile the program:
 
 
-xlc myprogram.c -o myprogram
+xlc -o myprogram myprogram.c 
 myprogram.c is your source file.
 -o myprogram specifies the output executable name (you can name it whatever you want).
 If the compile is successful, you’ll see no errors, and an executable file named myprogram will be created.
@@ -53,3 +53,13 @@ Execute your program using:
 
 
 ./myprogram
+
+
+
+example :
+
+xlc -o fileout filex.c
+
+./fileout
+
+
