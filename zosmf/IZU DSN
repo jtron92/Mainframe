@@ -1,0 +1,6 @@
+IZU                                                            *ALIAS 
+          IZU.AIZUFS                                                     SBBBN2 
+          IZU.AIZUJCL                                                    SBBBN2 
+          IZU.SIZUJCL                                                    SBBBN1 
+          IZU.SIZUZFS                                                    *VSAM* 
+          IZU.SIZUZFS.DATA        
