@@ -1,0 +1,9 @@
+Use the following command to stop VTAM gracefully:
+
+Z NET,QUICK
+
+
+to start vtam back up
+
+
+S VTAM
