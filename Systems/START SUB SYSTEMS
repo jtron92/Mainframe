@@ -1,7 +1,7 @@
 To fire up DB2, go to the main console and type: ‘-DB9G START DB2’
 For CICS: START CICSTS32
 
-
+STOPING - -STOP DB2 MODE(FORCE)
 
 PAUSE 10      /* WAIT FOR SYS TO GET UP FIRST  */ 
 /*S RRS,SUB=MSTR 
