@@ -7,3 +7,8 @@ to start vtam back up
 
 
 S VTAM
+
+
+F vtam_proc_name,TABLE,OPTION=LOAD,NEWTAB=table_name
+Based on the JCL above it would be:
+F VTAM,TABLE,OPTION=LOAD,NEWTAB=USSN
