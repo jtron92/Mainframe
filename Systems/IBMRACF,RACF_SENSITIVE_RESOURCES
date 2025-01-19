@@ -1,0 +1,50 @@
+To address the specific alerts you are seeing, including JES2_CKPT_CONFIG_N1, XCF_CDS_SPOF, and RACF_SENSITIVE_RESOURCES, you can use the DEACTIVATE command on each individual check ID, similar to the command you used for the RACF check. However, you'll need to ensure you correctly specify the check name and related parameters.
+
+Here’s how you can handle these alerts:
+General Command Structure
+
+f hzsproc,deactivate,check=(IBMRACF,RACF_SENSITIVE_RESOURCES),exitrtn=IRRHCA00 
+
+F HZSPROC,DEACTIVATE,CHECK=(CHECK_NAME),EXITRTN=EXIT_ROUTINE
+
+Where:
+
+    CHECK_NAME is the specific check name you want to deactivate.
+    EXIT_ROUTINE is the exit routine associated with the check (optional in some cases).
+
+For Each Alert
+
+    JES2_CKPT_CONFIG_N1
+
+F HZSPROC,DEACTIVATE,CHECK=(IBMJES2,JES2_CKPT_CONFIG_N1)
+
+XCF_CDS_SPOF
+
+F HZSPROC,DEACTIVATE,CHECK=(IBMXCF,XCF_CDS_SPOF)
+
+RACF_SENSITIVE_RESOURCES You already used:
+
+    F HZSPROC,DEACTIVATE,CHECK=(IBMRACF,RACF_SENSITIVE_RESOURCES),EXITRTN=IRRHCA00
+
+Notes
+
+    Verify the Impact: Before deactivating any checks, ensure that you understand their purpose. Some checks are critical to system health and security.
+    Temporary or Permanent Deactivation: If you only want to deactivate a check temporarily, this command works. To prevent it from being reactivated after a restart, update the HZSPRMxx parmlib member.
+
+To Permanently Deactivate
+
+    Edit the HZSPRMxx member in your SYS1.PARMLIB.
+    Add a DEACTIVATE statement for each check:
+
+    DEACTIVATE CHECK=(IBMJES2,JES2_CKPT_CONFIG_N1)
+    DEACTIVATE CHECK=(IBMXCF,XCF_CDS_SPOF)
+    DEACTIVATE CHECK=(IBMRACF,RACF_SENSITIVE_RESOURCES)
+
+    Restart the HZSPROC to apply changes.
+
+Would you like detailed help on editing the parmlib or testing these changes?
+You said:
+ANY WAY WE CAN DEAVIATE OR BRING DOWN THIS
+
+ 06.37.17 VS01 STC00039  +DFHMN0115I CICSTS61 CICS Server z/OS WLM Health  
+    -  percentage is now 100. 
