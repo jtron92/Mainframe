@@ -48,3 +48,73 @@ ANY WAY WE CAN DEAVIATE OR BRING DOWN THIS
 
  06.37.17 VS01 STC00039  +DFHMN0115I CICSTS61 CICS Server z/OS WLM Health  
     -  percentage is now 100. 
+
+
+
+
+
+
+
+
+
+
+
+In z/OS 3.1, JES2 initialization parameters are often stored in a PARMLIB member, but the naming convention and location of this member might vary based on your system's configuration. The HASJES2 member name I provided was an example and may not exist in your environment. Here's how you can find and update the correct initialization parameter member for JES2:
+1. Find the Active JES2 Initialization Parmlib Member
+
+You need to locate the member where your JES2 initialization parameters are defined.
+Check the JES2 Initialization
+
+Run the following JES2 command:
+
+$D INITPARM
+
+This will display the name of the active JES2 initialization member and the parmlib it is sourced from. Look for an output similar to:
+
+$HASP842 INITPARM MEMBER=JES2PARM,LIBRARY=SYS1.PARMLIB
+
+    MEMBER: This is the active JES2 parameter member (e.g., JES2PARM).
+    LIBRARY: This is the parmlib dataset where the member resides (e.g., SYS1.PARMLIB).
+
+2. Edit the Active Initialization Member
+
+Once you know the active member and library:
+
+    Open the member in the parmlib dataset using an editor, for example:
+
+EDIT 'SYS1.PARMLIB(JES2PARM)'
+
+Locate the CKPTDEF statement. It should look similar to this:
+
+CKPTDEF CKPT1=(DSNAME=VSPROV.VS01.HASCKPT1,VOLSER=JCKVS1)
+
+Update or add the CKPT2 definition and enable duplex mode:
+
+    CKPTDEF CKPT1=(DSNAME=VSPROV.VS01.HASCKPT1,VOLSER=JCKVS1),
+            CKPT2=(DSNAME=VSPROV.VS01.HASCKPT2,VOLSER=JCKVS2),
+            MODE=DUPLEX
+
+    Save the changes.
+
+3. Apply the Changes
+
+The changes will take effect during the next JES2 restart or IPL. To apply them immediately:
+Dynamically Update JES2 Parameters:
+
+Use JES2 commands to dynamically activate the new checkpoint:
+
+    Activate CKPT2:
+
+$T CKPTDEF,CKPT2=(DSNAME=VSPROV.VS01.HASCKPT2,VOLSER=JCKVS2)
+
+Enable duplex mode:
+
+    $T CKPTDEF,DUPLEX=ON
+
+Verify:
+
+Check the active configuration:
+
+$D CKPTDEF
+
+You should see both CKPT1 and CKPT2 in use, with DUPLEX=ON.
