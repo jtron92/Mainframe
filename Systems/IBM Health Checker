@@ -1,0 +1,12 @@
+The Health Checker MODIFY Command (F HZSPROC) is useful for
+making dynamic, temporary changes to checks
+ Run checks – Run all checks that have an owner beginning with IBM
+– F HZSPROC,RUN,CHECK=(IBM???,*)
+ Activate checks
+– F HZSPROC,ACTIVATE,CHECK=(*,*)
+ Deactivate checks
+– F HZSPROC,DEACTIVATE,CHECK=( )
+ Update a check – Change a check’s attributes
+– F HZSPROC,UPDATE,CHECK=(xxxxx,xxxxxxx),SEVERITY=HIGH
+ Activate a Policy
+– F HZSPROC,ACTIVATE,POLICY=policyname
