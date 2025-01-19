@@ -10,3 +10,22 @@ making dynamic, temporary changes to checks
 – F HZSPROC,UPDATE,CHECK=(xxxxx,xxxxxxx),SEVERITY=HIGH
  Activate a Policy
 – F HZSPROC,ACTIVATE,POLICY=policyname
+
+
+
+
+LSU Oct 2007
+© 2007 IBM Corporation33
+ To make permanent changes how checks behave in your installation, you will create a
+policy in HZSPRMxx PARMLIB member
+ All control statements for policy definitions are documented
+ An Example: VSM_CSA_THRESHOLD check:
+CHECK(IBMVSM,VSM_CSA_THRESHOLD)
+CHECK SEVERITY: HIGH
+CHECK PARM: CSA(80%),ECSA(80%)
+You want to change the check values for CSA and CSA to 70% and MEDIUM severity
+F hzsproc,UPDATE,CHECK=(IBMVSM,VSM_CSA_THRESHOLD),PARM=(70,70),SEVERITY=MEDIUM
+To make permanent change in your environment, Update HZSPRMxx member
+ADDREPLACE POLICY STMT(WSC2) UPDATE CHECK(IBMVSM,VSM_CSA_THRESHOLD)
+PARM(70,70) SEVERITY(MEDIUM)
+DATE(20060902) REASON(‘This is my shop
