@@ -1,0 +1,27 @@
+HERE IS TO FIND WHAT PROC OPTIONS TO LOG IN 
+
+¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢ 
+ EDIT              ADCD.Z22A.PROCLIB                     Row 0000051 of 0000177 
+ Command ===> SRCHFOR ISPLLIB                                  Scroll ===> CSR  
+            Name     Prompt       Size   Created          Changed          ID   
+ _________ DBSPROCA *Found         166  2015/10/24  2017/07/20 20:29:41  IBMUSER
+ _________ DBSPROCB *Found         167  2015/10/24  2017/07/20 20:29:49  IBMUSER
+ _________ DFS                      22  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DFSKERN                  24  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHASM                  53  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHC                   104  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHCPP                  89  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHCPPS                  5  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHCPP2                143  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHCS                    3  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHFOR                  52  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHICOB                 74  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHPLI                  87  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNHSQL                 140  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DSNUPROC                 70  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ DYNISPF  *Found          68  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ EAGL                     73  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ EZAZSSI                   2  2015/10/24  2015/10/24 01:07:22  IBMUSER
+ _________ FTPD                     14  2015/10/24  2015/10/24 01:07:22  IBMUSER
+
+
