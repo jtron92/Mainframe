@@ -1,5 +1,9 @@
 HERE IS TO FIND WHAT PROC OPTIONS TO LOG IN 
 
+DATASETS WOULD BE VENDOR.PROCLIB OR SYS1.PROCLIB JUST USE *.*.PROCLIB
+
+SRCHFOR SYSPROC
+
 ¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢ 
  EDIT              ADCD.Z22A.PROCLIB                     Row 0000051 of 0000177 
  Command ===> SRCHFOR ISPLLIB                                  Scroll ===> CSR  
