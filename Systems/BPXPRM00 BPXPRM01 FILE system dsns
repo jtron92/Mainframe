@@ -1,0 +1,32 @@
+example you can change the ownership permission read to rdwr 
+
+/********************************************************************/ 
+/* System File Systems                                              */ 
+/********************************************************************/ 
+                                                                        
+   ROOT  FILESYSTEM('OMVS.VS01.ROOT.ZFS') 
+         TYPE(ZFS) 
+         MODE(READ) 
+                                                                        
+   MOUNT FILESYSTEM('OMVS.VS01.FONTS.ZFS') 
+         TYPE(ZFS) 
+         MODE(READ) 
+         MOUNTPOINT('/usr/lpp/fonts') 
+                                                                        
+   MOUNT FILESYSTEM('OMVS.VS01.ETC.ZFS') 
+         TYPE(ZFS) 
+         MODE(RDWR) 
+         MOUNTPOINT('/etc') 
+         UNMOUNT 
+                                                                        
+   MOUNT FILESYSTEM('OMVS.VS01.VAR.ZFS') 
+         TYPE(ZFS) 
+         MODE(RDWR) 
+         MOUNTPOINT('/var') 
+         UNMOUNT 
+                                                                        
+   MOUNT FILESYSTEM('OMVS.VS01.VARWBEM.ZFS') 
+         TYPE(ZFS) 
+         MODE(RDWR) 
+         MOUNTPOINT('/var/wbem') 
+         UNMOUNT 
