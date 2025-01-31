@@ -31,4 +31,11 @@ PAUSE 30
 PAUSE 10 
 D T                          /* DISPLAY ENDING TIME 
 * COMMENT LINES MAY ALSO START WITH A SINGLE ASTERISK. 
-* REMEMBER - BLANK LINES ARE A BIG NO-NO. 
+* REMEMBER - BLANK LINES ARE A BIG NO-NO. *************
+
+
+*****************************
+
+10.59.42 VS01          *BPXI032E FORK SERVICE HAS BEEN SHUTDOWN    
+ SUCCESSFULLY.                                                     
+ISSUE F BPXOINIT,RESTART=FORKS TO RESTART FORK SERVICE.            
