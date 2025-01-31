@@ -1,0 +1,26 @@
+
+D OMVS,L  <--- TRY THIS 
+
+
+$HASP608 ASID     JOBNAME  JOBID                                        
+$HASP608 -------- -------- --------                                     
+$HASP608 0022     MVSNFSC  STC00006                                     
+$HASP608 0039     BPXAS    STC00026                                     
+$HASP608 003D     BPXAS    STC00030                                     
+$HASP608 0045     BPXAS    STC00049
+
+
+FOR JOBS ABOVE 
+
+C BPXAS
+C MVSNFSC
+
+
+MAKE SURE YOU BRING DOWN OMVS 
+
+P OMVS 
+
+
+THEN JES2
+
+$PJES2 
