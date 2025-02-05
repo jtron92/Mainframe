@@ -27,9 +27,8 @@ ERROR 4 SINCE I COMMENTED OUT THE PARMS LIKE PGMLIB IT WONT WORK BUT I JUST LEFT
 
 
 
-//IGYWCL PROC                                                           
- 000200 //*            LIBPRFX='CEE',                                           
- 000300 //*            PGMLIB='&&GOSET',GOPGM=GO                                
+//IGYWCL PROC          PGMLIB='&&GOSET',GOPGM=GO        <<<<<<<-------------------------- YOU CAN COMMENT THIS BUT YOU NEED TO COMMENT THE SYSLMOD BELOW IF YOU DO JUST LEAVE IT UNCOMMENT                                                  
+ 000200 //*            LIBPRFX='CEE',                                                                 
  000400 //*                  LNGPRFX='IGY.V5R2M0',                              
  000500 //********************************************************************* 
  000600 //*                                                                   * 
@@ -92,9 +91,9 @@ ERROR 4 SINCE I COMMENTED OUT THE PARMS LIKE PGMLIB IT WONT WORK BUT I JUST LEFT
  006000 //SYSPRINT DD  SYSOUT=*                                                 
  006100 //SYSLIN   DD  DSNAME=&&LOADSET,DISP=(OLD,DELETE)                       
  006200 //         DD  DDNAME=SYSIN                                             
- 006300 //*SYSLMOD  DD  DSNAME=&PGMLIB(&GOPGM),                                 
- 006400 //*            SPACE=(CYL,(1,1,1)),                                     
- 006500 //*            UNIT=SYSALLDA,DISP=(MOD,PASS),DSNTYPE=LIBRARY            
+ 006300 //SYSLMOD  DD  DSNAME=&PGMLIB(&GOPGM),                                 
+ 006400 //            SPACE=(CYL,(1,1,1)),                                     
+ 006500 //            UNIT=SYSALLDA,DISP=(MOD,PASS),DSNTYPE=LIBRARY            
  006600 //SYSUT1   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
  ****** **************************** Bottom of Data ******
 
