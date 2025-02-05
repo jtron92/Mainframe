@@ -1,0 +1,134 @@
+FIRST I WAS HAVING JCL ERROR THAT IT COULD NOT FIND THE DSN THAT WAS IN THIS PROC BELOW 
+
+ERROR 1 - *STEPLIB  DD  DSNAME=&LNGPRFX..SIGYCOMP,DISP=SHR        FOR LNGPRFX=IGY.V5R2M0
+
+DSN IGY.V5R2M0.SIGYCOMP DOESNT EXIST SAME FOR THESE DSNS 
+
+ //*        DD  DSNAME=&LIBPRFX..SCEERUN,DISP=SHR                        
+ 003700 //*        DD  DSNAME=&LIBPRFX..SCEERUN2,DISP=SHR    
+
+SO I COMMENTED IT OUT AND FONUD THE SYSTEMS DSN WHICH I ADDED BELOW IN THE PROC
+
+ERROR 2 IS THAT WHEN I TRIED TO RUN THE JCL , IT SUPPOSE TO USE A LNGPRFX= NEXT TO THE PROCEDURE LIKE STEP01 EXEC IGYWCL,LNGPRFX='IGY520' BUT IT DID NOT WORK SO I COMMENTED OUT THE LNGPRFX
+
+ERROR 3  AGAIN JUST LIKE THE SCEERUN DSNS SINCE I COMMENTED OUT THE PARMS ABOVE THESE WONT WORK AS WELL AND DO NO EXIST BUT I FOUND THE CORRECT DSNS
+
+*SYSLIB   DD  DSNAME=&LIBPRFX..SCEELKED,DISP=SHR                      
+ 005900 //*        DD  DSNAME=&LIBPRFX..SCEELKEX,DISP=SHR      
+
+ERROR 4 SINCE I COMMENTED OUT THE PARMS LIKE PGMLIB IT WONT WORK BUT I JUST LEFT IT OUT AND WITH THE JCL I AM USING I AM OVERRDIING THE BELOW 
+
+//*SYSLMOD  DD  DSNAME=&PGMLIB(&GOPGM),                                 
+ 006400 //*            SPACE=(CYL,(1,1,1)),                                     
+ 006500 //*            UNIT=SYSALLDA,DISP=(MOD,PASS),DSNTYPE=LIBRARY            
+ 006600 //SYSUT1   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                         
+
+
+
+
+
+//IGYWCL PROC          PGMLIB='&&GOSET',GOPGM=GO        <<<<<<<-------------------------- YOU CAN COMMENT THIS BUT YOU NEED TO COMMENT THE SYSLMOD BELOW IF YOU DO JUST LEAVE IT UNCOMMENT                                                  
+ 000200 //*            LIBPRFX='CEE',                                                                 
+ 000400 //*                  LNGPRFX='IGY.V5R2M0',                              
+ 000500 //********************************************************************* 
+ 000600 //*                                                                   * 
+ 000700 //*  Enterprise COBOL for z/OS                                        * 
+ 000800 //*               Version 5 Release 2 Modification 0                  * 
+ 000900 //*                                                                   * 
+ 001000 //*  LICENSED MATERIALS - PROPERTY OF IBM.                            * 
+ 001100 //*                                                                   * 
+ 001200 //*  5655-W32 COPYRIGHT IBM CORP. 1983, 2015                          * 
+ 001300 //*  ALL RIGHTS RESERVED                                              * 
+ 001400 //*                                                                   * 
+ 001500 //*  US GOVERNMENT USERS RESTRICTED RIGHTS - USE,                     * 
+ 001600 //*  DUPLICATION OR DISCLOSURE RESTRICTED BY GSA                      * 
+ 001700 //*  ADP SCHEDULE CONTRACT WITH IBM CORP.                             * 
+ 001800 //*                                                                   * 
+ 001900 //*********************************************************************                                                                    
+ 002100 //*  COMPILE AND LINK EDIT A COBOL PROGRAM                              
+ 002200 //*                                                                     
+ 002300 //*  PARAMETER  DEFAULT VALUE    USAGE                                  
+ 002400 //*   LNGPRFX   IGY.V5R2M0       PREFIX FOR LANGUAGE DATA SET NAMES     
+ 002600 //*   LIBPRFX   CEE              PREFIX FOR LIBRARY DATA SET NAMES      
+ 002700 //*   PGMLIB    &&GOSET          DATA SET NAME FOR LOAD MODULE          
+ 002800 //*   GOPGM     GO               MEMBER NAME FOR LOAD MODULE            
+ 002900 //*                                                                     
+ 003000 //*  CALLER MUST SUPPLY //COBOL.SYSIN DD ...                            
+ 003100 //*                                                                     
+ 003200 //*  CALLER MUST ALSO SUPPLY //COBOL.SYSLIB DD ... for COPY statements  
+ 003300 //*                                                                     
+ 003400 //COBOL  EXEC PGM=IGYCRCTL,REGION=0M                                    
+ 003410 //STEPLIB  DD  DSNAME=IGY520.SIGYCOMP,DISP=SHR                          
+ 003500 //*STEPLIB  DD  DSNAME=&LNGPRFX..SIGYCOMP,DISP=SHR                      
+ 003600 //*        DD  DSNAME=&LIBPRFX..SCEERUN,DISP=SHR                        
+ 003700 //*        DD  DSNAME=&LIBPRFX..SCEERUN2,DISP=SHR                       
+ 003710 //         DD  DSNAME=CEE.SCEERUN,DISP=SHR                              
+ 003720 //         DD  DSNAME=CEE.SCEERUN2,DISP=SHR                
+ 003800 //SYSPRINT DD  SYSOUT=*                                                 
+ 003900 //SYSLIN   DD  DSNAME=&&LOADSET,UNIT=SYSALLDA,                          
+ 004000 //             DISP=(MOD,PASS),SPACE=(CYL,(1,1))                        
+ 004200 //SYSUT1   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004300 //SYSUT2   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004400 //SYSUT3   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004500 //SYSUT4   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004600 //SYSUT5   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004700 //SYSUT6   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004800 //SYSUT7   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 004900 //SYSUT8   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005000 //SYSUT9   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005100 //SYSUT10  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005200 //SYSUT11  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005300 //SYSUT12  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005400 //SYSUT13  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005500 //SYSUT14  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005600 //SYSUT15  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005650 //SYSMDECK DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ 005700 //LKED   EXEC PGM=IEWBLINK,COND=(8,LT,COBOL),REGION=0M        
+ 005800 //*SYSLIB   DD  DSNAME=&LIBPRFX..SCEELKED,DISP=SHR                      
+ 005900 //*        DD  DSNAME=&LIBPRFX..SCEELKEX,DISP=SHR                       
+ 005910 //SYSLIB   DD  DSNAME=CEE.SCEELKED,DISP=SHR                             
+ 005920 //         DD  DSNAME=CEE.SCEELKEX,DISP=SHR                             
+ 006000 //SYSPRINT DD  SYSOUT=*                                                 
+ 006100 //SYSLIN   DD  DSNAME=&&LOADSET,DISP=(OLD,DELETE)                       
+ 006200 //         DD  DDNAME=SYSIN                                             
+ 006300 //SYSLMOD  DD  DSNAME=&PGMLIB(&GOPGM),                                 
+ 006400 //            SPACE=(CYL,(1,1,1)),                                     
+ 006500 //            UNIT=SYSALLDA,DISP=(MOD,PASS),DSNTYPE=LIBRARY            
+ 006600 //SYSUT1   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1))                          
+ ****** **************************** Bottom of Data ******
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****** ***************************** Top of Data ******************************
+ 000001 //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //         JCLLIB ORDER=IGY520.SIGYPROC                                 
+ 000007 //STEP01   EXEC IGYWCL                                                  
+ 000008 //COBOL.SYSIN DD DSN=IBMUSER.MASTER.JCL(HELLO),DISP=SHR                 
+ 000009 //LKED.SYSLMOD DD DSN=IBMUSER.ALOAD(HELLO),DISP=SHR                     
+ 000010 //SYSOUT    DD SYSOUT=*                                                 
+ 000011 //AMSDUMP   DD SYSOUT=*                                                 
+ 000012 //SYSPRINT DD SYSOUT=*                                                  
+ 000013 //STEP02   EXEC PGM=HELLO                                               
+ 000014 //STEPLIB  DD DSN=IBMUSER.ALOAD(HELLO),DISP=SHR                         
+ 000015 //SYSPRINT DD SYSOUT=*                                                  
+ 000016 //AMSDUMP  DD SYSOUT=*                                                  
+ 000017 //SYSOUT   DD SYSOUT=*                                        
