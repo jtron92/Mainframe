@@ -23,3 +23,15 @@ slip del,id=TESI
 SLIP SET,COMP=0C4,JOBNAME=HLASMJOB,A=SVCD,END
 
 ONLY FOR THAT JOB AND SOC4
+
+
+SLIP SET,JOBNAME=HLASMJO,A=SVCD,END   (CATCHES ALL ABEND FOR THIS JOB)
+
+SLIP SET,PVTMOD=(R),JOBNAME=MYJOB,A=SVCD,END
+
+    PVTMOD=(R) → Watches private storage modifications.
+    JOBNAME=MYJOB → Filters only for MYJOB.
+    A=SVCD → Captures a dump for analysis.
+
+
+
