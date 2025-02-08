@@ -1,8 +1,8 @@
-IBM Utilities (IEBGENER, IEBCOPY, IDCAMS, SORT)	SYS1.LINKLIB
-CICS Programs (DFHEAP1, DFHCOMM, etc.)	CICS.SDFHLOAD
-Assembler Macros & Utilities	SYS1.MACLIB, SYS1.MODGEN
-JES2/JES3 Utilities	SYS1.SBBOLOAD
-TSO Utilities (IKJEFT01, IEBCOMPR, etc.)	SYS1.LINKLIB
-DB2 Utilities	DSN.SDSNLOAD
-ISPF Utilities	ISP.SISPLIB, ISP.SISPLOAD
-Networking (SMTP, FTP)	SYS1.TCPIP.LINKLIB
+IBM Utilities (IEBGENER, IEBCOPY, IDCAMS, SORT)	                SYS1.LINKLIB
+CICS Programs (DFHEAP1, DFHCOMM, etc.)	                        CICS.SDFHLOAD
+Assembler Macros & Utilities	                                  SYS1.MACLIB, SYS1.MODGEN
+JES2/JES3 Utilities	                                            SYS1.SBBOLOAD
+TSO Utilities (IKJEFT01, IEBCOMPR, etc.)	                      SYS1.LINKLIB
+DB2 Utilities	                                                  DSN.SDSNLOAD
+ISPF Utilities	                                                ISP.SISPLIB, ISP.SISPLOAD
+Networking (SMTP, FTP)	                                        SYS1.TCPIP.LINKLIB
