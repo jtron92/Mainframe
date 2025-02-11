@@ -1,4 +1,4 @@
-here we have a s0c4 abend due to OUTPUT file DCB being missed place so 
+here we have a s0c1 abend due to OUTPUT file DCB being missed place so 
 
 you can either copy 103105EF in two parts 1031 or 05EF either way if you do a F with each part the both will come together so do a f on one of them
 
