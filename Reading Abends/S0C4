@@ -1,0 +1,526 @@
+here we have a s0c4 abend due to OUTPUT file DCB being missed place so 
+
+you can either copy 103105EF in two parts 1031 or 05EF either way if you do a F with each part the both will come together so do a f on one of them
+
+
+1                         J E S 2  J O B  L O G  --  S Y S T E M  S Y S 1  --  N
+0
+ 19.42.42 JOB00052 ---- MONDAY,    10 FEB 2025 ----
+ 19.42.42 JOB00052  IRR010I  USERID IBMUSER  IS ASSIGNED TO THIS JOB.
+ 19.42.43 JOB00052  ICH70001I IBMUSER  LAST ACCESS AT 19:32:36 ON MONDAY, FEBRUA
+ 19.42.43 JOB00052  $HASP373 HLASMJOB STARTED - INIT 1    - CLASS A - SYS SYS1
+ 19.42.43 JOB00052  IEF403I HLASMJOB - STARTED - TIME=19.42.43
+ 19.42.44 JOB00052  -                                      -----TIMINGS (MINS.)-
+ 19.42.44 JOB00052  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB
+ 19.42.44 JOB00052  -COMPILE              00    129      0       .00       .00
+ 19.42.44 JOB00052  -LKED                 00     45      0       .00       .00
+ 19.42.45 JOB00052  IEA995I SYMPTOM DUMP OUTPUT  067
+    067             SYSTEM COMPLETION CODE=0C1  REASON CODE=00000001
+    067              TIME=19.42.45  SEQ=00058  CPU=0000  ASID=001A
+    067              PSW AT TIME OF ERROR  078D3000   00007EE0  ILC 2  INTC 01
+    067                ACTIVE LOAD MODULE           ADDRESS=00007EB0  OFFSET=000
+    067                NAME=PHONE
+    067                DATA AT PSW  00007EDA - 103105EF  00000000  00000000
+    067                AR/GR 0: 915E8284/00000001_00007FAC   1: 00000000/0000000
+    067                      2: 00000000/00000000_00000040   3: 00000000/0000000
+    067                      4: 00000000/00000000_008D79B0   5: 00000000/0000000
+    067                      6: 00000000/00000000_008C4FE0   7: 00000000/0000000
+    067                      8: 00000000/00000000_008FC030   9: 00000000/0000000
+    067                      A: 00000000/00000000_00000000   B: 00000000/0000000
+    067                      C: 00000000/00000000_00007EBA   D: 00000000/0000000
+    067                      E: 00000000/00000000_50007EDE   F: 01000002/0000000
+    067              END OF SYMPTOM DUMP
+ 19.42.45 JOB00052  IEF450I HLASMJOB RUN - ABEND=S0C1 U0000 REASON=00000001  068
+    068                     TIME=19.42.45
+ 19.42.45 JOB00052  -RUN               *S0C1     30      0       .00       .00
+ 19.42.45 JOB00052  IEF404I HLASMJOB - ENDED - TIME=19.42.45
+ 19.42.45 JOB00052  -HLASMJOB ENDED.  NAME-JORGE CINTRON        TOTAL TCB CPU TI
+ 19.42.45 JOB00052  $HASP395 HLASMJOB ENDED
+0------ JES2 JOB STATISTICS ------
+-  10 FEB 2025 JOB EXECUTION DATE
+-           40 CARDS READ
+-          518 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-           30 SYSOUT SPOOL KBYTES
+-         0.04 MINUTES EXECUTION TIME
+         1 //HLASMJOB JOB (MVS),'JORGE CINTRON',
+           //             MSGLEVEL=(1,1),
+           //             MSGCLASS=H,
+           //             CLASS=A,
+           //             NOTIFY=&SYSUID
+           //************************************************************
+           //* JORGE CINTRON ||========||------------||===========||
+           //************************************************************
+           IEFC653I SUBSTITUTION JCL - (MVS),'JORGE CINTRON',MSGLEVEL=(1,1),MSGC
+         2 //COMPILE  EXEC PGM=ASMA90
+         3 //SYSIN    DD DSN=&SYSUID..HLASM.LIB(PHONE),
+           //            DISP=SHR
+           IEFC653I SUBSTITUTION JCL - DSN=IBMUSER.HLASM.LIB(PHONE),DISP=SHR
+         4 //SYSLIN   DD DSN=&&OBJ,DISP=(MOD,PASS),
+           //            UNIT=VIO,
+           //            SPACE=(3096,(40,40),,,ROUND),
+           //            DCB=(LRECL=80,BLKSIZE=3200,BUFNO=1,RECFM=FBS)
+         5 //SYSUT1   DD DSN=&&SYSUT1,SPACE=(4096,(120,120),,,ROUND),
+           //            UNIT=VIO,
+           //            DCB=BUFNO=1
+         6 //SYSLIB   DD DSN=SYS1.MACLIB,DISP=SHR
+         7 //SYSPRINT DD SYSOUT=*
+         8 //AMSDUMP  DD SYSOUT=*
+         9 //SYSOUT   DD SYSOUT=*
+        10 //LKED     EXEC PGM=HEWL
+        11 //SYSLMOD  DD DSN=&SYSUID..ALOAD(PHONE),DISP=SHR
+           IEFC653I SUBSTITUTION JCL - DSN=IBMUSER.ALOAD(PHONE),DISP=SHR
+        12 //SYSLIN   DD DSN=&&OBJ,DISP=(OLD,DELETE)
+        13 //SYSUT1   DD DSN=&&SYSUT1,SPACE=(4096,(120,120),,,ROUND),
+           //            UNIT=VIO,
+           //            DCB=BUFNO=1
+        14 //SYSPRINT DD SYSOUT=*
+        15 //AMSDUMP  DD SYSOUT=*
+        16 //SYSOUT   DD SYSOUT=*
+        17 //RUN      EXEC PGM=*.LKED.SYSLMOD
+        18 //OFILE    DD DSN=&SYSUID..RUBY,
+           //            DISP=(NEW,CATLG,DELETE),
+           //            UNIT=SYSDA,
+           //            SPACE=(TRK,(2,2),RLSE),
+           //            DCB=(DSORG=PS,LRECL=80,BLKSIZE=3200,RECFM=FB)
+           IEFC653I SUBSTITUTION JCL - DSN=IBMUSER.RUBY,DISP=(NEW,CATLG,DELETE),
+           DCB=(DSORG=PS,LRECL=80,BLKSIZE=3200,RECFM=FB)
+        19 //SYSPRINT DD SYSOUT=*
+        20 //AMSDUMP  DD SYSOUT=*
+        21 //SYSOUT   DD SYSOUT=*
+ ICH70001I IBMUSER  LAST ACCESS AT 19:32:36 ON MONDAY, FEBRUARY 10, 2025
+ IEF236I ALLOC. FOR HLASMJOB COMPILE
+ IEF237I 0A82 ALLOCATED TO SYSIN
+ IGD100I VIO ALLOCATED TO DDNAME SYSLIN   DATACLAS (        )
+ IGD100I VIO ALLOCATED TO DDNAME SYSUT1   DATACLAS (        )
+ IEF237I 0A80 ALLOCATED TO SYSLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO AMSDUMP
+ IEF237I JES2 ALLOCATED TO SYSOUT
+ IEF142I HLASMJOB COMPILE - STEP WAS EXECUTED - COND CODE 0000
+ IEF285I   IBMUSER.HLASM.LIB                            KEPT
+ IEF285I   VOL SER NOS= SBSYS1.
+ IEF285I   SYS25041.T194243.RA000.HLASMJOB.OBJ.H01      PASSED
+ IEF285I   SYS25041.T194243.RA000.HLASMJOB.SYSUT1.H01   DELETED
+ IEF285I   SYS1.MACLIB                                  KEPT
+ IEF285I   VOL SER NOS= SBRES1.
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000101.?         SYSOUT
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000102.?         SYSOUT
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000103.?         SYSOUT
+ IEF373I STEP/COMPILE /START 2025041.1942
+ IEF374I STEP/COMPILE /STOP  2025041.1942 CPU    0MIN 00.47SEC SRB    0MIN 00.02
+ IEF236I ALLOC. FOR HLASMJOB LKED
+ IEF237I 0A82 ALLOCATED TO SYSLMOD
+ IEF237I VIO  ALLOCATED TO SYSLIN
+ IGD100I VIO ALLOCATED TO DDNAME SYSUT1   DATACLAS (        )
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO AMSDUMP
+ IEF237I JES2 ALLOCATED TO SYSOUT
+ IEF142I HLASMJOB LKED - STEP WAS EXECUTED - COND CODE 0000
+ IEF285I   IBMUSER.ALOAD                                KEPT
+ IEF285I   VOL SER NOS= SBSYS1.
+ IEF285I   SYS25041.T194243.RA000.HLASMJOB.OBJ.H01      DELETED
+ IEF285I   SYS25041.T194243.RA000.HLASMJOB.SYSUT1.H01   DELETED
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000104.?         SYSOUT
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000105.?         SYSOUT
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000106.?         SYSOUT
+ IEF373I STEP/LKED    /START 2025041.1942
+ IEF374I STEP/LKED    /STOP  2025041.1942 CPU    0MIN 00.22SEC SRB    0MIN 00.01
+ IEF236I ALLOC. FOR HLASMJOB RUN
+ IEF237I 0A82 ALLOCATED TO PGM=*.DD
+ IGD100I 0A82 ALLOCATED TO DDNAME OFILE    DATACLAS (        )
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO AMSDUMP
+ IEF237I JES2 ALLOCATED TO SYSOUT
+ IEA995I SYMPTOM DUMP OUTPUT
+ SYSTEM COMPLETION CODE=0C1  REASON CODE=00000001
+  TIME=19.42.45  SEQ=00058  CPU=0000  ASID=001A
+  PSW AT TIME OF ERROR  078D3000   00007EE0  ILC 2  INTC 01
+    ACTIVE LOAD MODULE           ADDRESS=00007EB0  OFFSET=00000030
+    NAME=PHONE
+    DATA AT PSW  00007EDA - 103105EF  00000000  00000000
+    AR/GR 0: 915E8284/00000001_00007FAC   1: 00000000/00000000_00007FAC
+          2: 00000000/00000000_00000040   3: 00000000/00000000_008D79D4
+          4: 00000000/00000000_008D79B0   5: 00000000/00000000_008E6E88
+          6: 00000000/00000000_008C4FE0   7: 00000000/00000000_FD000000
+          8: 00000000/00000000_008FC030   9: 00000000/00000000_008E6B30
+          A: 00000000/00000000_00000000   B: 00000000/00000000_008E6E88
+          C: 00000000/00000000_00007EBA   D: 00000000/00000000_00007F64
+          E: 00000000/00000000_50007EDE   F: 01000002/00000000_00CDB028
+  END OF SYMPTOM DUMP
+ IEF472I HLASMJOB RUN - COMPLETION CODE - SYSTEM=0C1 USER=0000 REASON=00000001
+ IEF285I   IBMUSER.ALOAD                                KEPT
+ IEF285I   VOL SER NOS= SBSYS1.
+ IEF285I   IBMUSER.RUBY                                 DELETED
+ IEF285I   VOL SER NOS= SBSYS1.
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000107.?         SYSOUT
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000108.?         SYSOUT
+ IEF285I   IBMUSER.HLASMJOB.JOB00052.D0000109.?         SYSOUT
+ IEF373I STEP/RUN     /START 2025041.1942
+ IEF374I STEP/RUN     /STOP  2025041.1942 CPU    0MIN 00.22SEC SRB    0MIN 00.00
+ IEF375I  JOB/HLASMJOB/START 2025041.1942
+ IEF376I  JOB/HLASMJOB/STOP  2025041.1942 CPU    0MIN 00.91SEC SRB    0MIN 00.03
+1                                         High Level Assembler Option Summary
+-
+0  No Overriding ASMAOPT Parameters
+   No Overriding Parameters
+   No Process Statements
+
+
+   Options for this Assembly
+0  NOADATA
+     ALIGN
+   NOASA
+     BATCH
+     CODEPAGE(047C)
+   NOCOMPAT
+   NODBCS
+   NODECK
+     DXREF
+     ESD
+   NOEXIT
+     FLAG(0,ALIGN,CONT,EXLITW,NOIMPLEN,NOPAGE0,PUSH,RECORD,NOSUBSTR,USING0)
+   NOFOLD
+   NOGOFF
+   NOINFO
+     LANGUAGE(EN)
+   NOLIBMAC
+     LINECOUNT(60)
+     LIST(121)
+     MACHINE(,NOLIST)
+     MXREF(SOURCE)
+     OBJECT
+     OPTABLE(UNI,NOLIST)
+   NOPCONTROL
+   NOPESTOP
+   NOPROFILE
+   NORA2
+   NORENT
+     RLD
+     RXREF
+     SECTALGN(8)
+     SIZE(MAX)
+   NOSUPRWARN
+     SYSPARM()
+   NOTERM
+   NOTEST
+     THREAD
+   NOTRANSLATE
+     TYPECHECK(MAGNITUDE,REGISTER)
+     USING(NOLIMIT,MAP,WARN(15))
+   NOWORKFILE
+     XREF(SHORT,UNREFS)
+
+   No Overriding DD Names
+1                                              External Symbol Dictionary
+-Symbol   Type   Id     Address  Length   Owner Id Flags Alias-of
+0          PC 00000001 00000000 0000014C             00
+1
+   Active Usings: None
+0  Loc  Object Code    Addr1 Addr2  Stmt   Source Statement
+0000000                00000 0014C     1          CSECT
+                                       2          YREGS
+0                      00000           4+R0       EQU   0
+                       00001           5+R1       EQU   1
+                       00002           6+R2       EQU   2
+                       00003           7+R3       EQU   3
+                       00004           8+R4       EQU   4
+                       00005           9+R5       EQU   5
+                       00006          10+R6       EQU   6
+                       00007          11+R7       EQU   7
+                       00008          12+R8       EQU   8
+                       00009          13+R9       EQU   9
+                       0000A          14+R10      EQU   10
+                       0000B          15+R11      EQU   11
+                       0000C          16+R12      EQU   12
+                       0000D          17+R13      EQU   13
+                       0000E          18+R14      EQU   14
+                       0000F          19+R15      EQU   15
+0                                     21          SAVE (14,12)
+ 000000                               23+         DS    0H
+ 000000 90EC D00C            0000C    24+         STM   14,12,12(13)
+ 000004 90EC D00C            0000C    25          STM  14,12,12(13)
+ 000008 0DC0                          26          BASR 12,0
+                  R:C  0000A          27          USING *,12
+ 00000A 50D0 C0AE            000B8    28          ST   13,SAVEA+4
+ 00000E 41D0 C0AA            000B4    29          LA   13,SAVEA
+                                      30          OPEN (OFILE,OUTPUT)
+ 000012 0700                          31+         CNOP  0,4
+ 000014 4510 C012            0001C    32+         BAL   1,*+8
+ 000018 8F                            33+         DC    AL1(143)
+ 000019 000030                        34+         DC    AL3(OFILE)
+ 00001C 0A13                          35+         SVC   19
+                                      36          PUT  OFILE,TITLE0
+ 00001E 4110 C026            00030    38+         LA    1,OFILE
+ 000022 4100 C0F2            000FC    39+         LA    0,TITLE0
+ 000026 1FFF                          40+         SLR   15,15
+ 000028 BFF7 1031            00031    41+         ICM   15,7,49(1)
+ 00002C 05EF                          42+         BALR  14,15
+                                      43 OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSO
+0                                     46+*                       DATA CONTROL BL
+                                      47+*
+ 00002E 0000
+ 000030                               48+OFILE    DC    0F'0'          ORIGIN ON
+                                      49+*                       DIRECT ACCESS D
+ 000030 0000000000000000              50+         DC    BL16'0'        FDAD, DVT
+ 000040 00000000                      51+         DC    A(0)           KEYLEN, D
+                                      52+*                       COMMON ACCESS M
+ 000044 00                            53+         DC    AL1(0)         BUFNO, NU
+ 000045 000001                        54+         DC    AL3(1)         BUFCB, BU
+ 000048 0000                          55+         DC    AL2(0)         BUFL, BUF
+ 00004A 4000                          56+         DC    BL2'0100000000000000' DS
+ 00004C 00000001                      57+         DC    A(1)           IOBAD FOR
+1
+   Active Usings: (PC)+X'A',R12
+0  Loc  Object Code    Addr1 Addr2  Stmt   Source Statement
+0                                     58+*                       FOUNDATION EXTE
+ 000050 00                            59+         DC    BL1'00000000'  BFTEK, BF
+ 000051 000090                        60+         DC    AL3(EXIT)      EODAD (EN
+ 000054 00                            61+         DC    BL1'00000000'  RECFM (RE
+ 000055 000000                        62+         DC    AL3(0)         EXLST (EX
+                                      63+*                       FOUNDATION BLOC
+ 000058 D6C6C9D3C5404040              64+         DC    CL8'OFILE'     DDNAME
+ 000060 02                            65+         DC    BL1'00000010'  OFLGS (OP
+ 000061 00                            66+         DC    BL1'00000000'  IFLGS (IO
+ 000062 0050                          67+         DC    BL2'0000000001010000' MA
+                                      68+*                       BSAM-BPAM-QSAM
+ 000064 00                            69+         DC    BL1'00000000'  OPTCD, OP
+ 000065 000001                        70+         DC    AL3(1)         CHECK OR
+ 000068 00000001                      71+         DC    A(1)           SYNAD, SY
+ 00006C 0000                          72+         DC    H'0'           INTERNAL
+ 00006E 0000                          73+         DC    AL2(0)         BLKSIZE,
+ 000070 00000000                      74+         DC    F'0'           INTERNAL
+ 000074 00000001                      75+         DC    A(1)           INTERNAL
+                                      76+*                            QSAM INTER
+ 000078 00000001                      77+         DC    A(1)           EOBAD
+ 00007C 00000001                      78+         DC    A(1)           RECAD
+ 000080 0000                          79+         DC    H'0'           QSWS (FLA
+ 000082 0050                          80+         DC    AL2(80)        LRECL
+ 000084 00                            81+         DC    BL1'00000000'  EROPT, ER
+ 000085 000001                        82+         DC    AL3(1)         CNTRL
+ 000088 00000000                      83+         DC    H'0,0'         RESERVED
+ 00008C 00000001                      84+         DC    A(1)           EOB, INTE
+ 000090                               85 EXIT     DS   0H
+                                      86          CLOSE (OFILE)
+ 000090                               87+         CNOP  0,4
+ 000090 4510 C08E            00098    88+         BAL   1,*+8
+ 000094 80                            89+         DC    AL1(128)
+ 000095 000030                        90+         DC    AL3(OFILE)
+ 000098 0A14                          91+         SVC   20
+ 00009A 58D0 C0AE            000B8    92          L    13,SAVEA+4
+ 00009E 98EC D00C            0000C    93          LM   14,12,12(13)
+                                      94          RETURN (14,12),RC=0
+ 0000A2 98EC D00C            0000C    96+         LM    14,12,12(13)
+ 0000A6 41F0 0000            00000    97+         LA    15,0(0,0)
+ 0000AA 07FE                          98+         BR    14
+ 0000AC 41F0 0000            00000    99          LA   15,0
+ 0000B0 07FE                         100          BR   14
+ 0000B4                              101 SAVEA    DS   18F
+ 0000FC 6060C8C5D3D3D660             102 TITLE0   DC   CL80'--HELLO-------'
+                                     103          END
+1                                                 Relocation Dictionary
+-   Pos.Id   Rel.Id   Address  Type  Action
+0  00000001 00000001 00000019   A 3     +
+   00000001 00000001 00000051   A 3     +
+   00000001 00000001 00000095   A 3     +
+1                               Ordinary Symbol and Literal Cross Reference
+-Symbol   Length   Value     Id    R Type Asm  Program   Defn References
+0EXIT          2 00000090 00000001     H  H                85   60
+ OFILE         4 00000030 00000001     F  F                48   34    38    90
+ SAVEA         4 000000B4 00000001     F  F               101   28M   29    92
+ TITLE0       80 000000FC 00000001     C  C               102   39
+1                                  Unreferenced Symbols Defined in CSECTs
+-  Defn  Symbol
+0     4  R0
+      5  R1
+     14  R10
+     15  R11
+     16  R12
+     17  R13
+     18  R14
+     19  R15
+      6  R2
+      7  R3
+      8  R4
+      9  R5
+     10  R6
+     11  R7
+     12  R8
+     13  R9
+1                                          Macro and Copy Code Source Summary
+- Con Source                                        Volume    Members
+0  L1 SYS1.MACLIB                                   SBRES1    CLOSE    DCB
+                                                              RETURN   SAVE
+1                                                      Using Map
+-
+   Stmt  -----Location----- Action ----------------Using----------------- Reg Ma
+           Count      Id           Type          Value    Range     Id        Di
+0    27  0000000A  00000001 USING  ORDINARY    0000000A 00001000 00000001  12 00
+1                                   General Purpose Register Cross Reference
+- Register  References (M=modified, B=branch, U=USING, D=DROP, N=index)
+0    0(0)      24    25    39M   93M   96M
+     1(1)      24    25    32M   38M   41    88M   93M   96M
+     2(2)      24    25    93M   96M
+     3(3)      24    25    93M   96M
+     4(4)      24    25    93M   96M
+     5(5)      24    25    93M   96M
+     6(6)      24    25    93M   96M
+     7(7)      24    25    93M   96M
+     8(8)      24    25    93M   96M
+     9(9)      24    25    93M   96M
+    10(A)      24    25    93M   96M
+    11(B)      24    25    93M   96M
+    12(C)      24    25    26M   27U   93M   96M
+    13(D)      24    25    28    29M   92M   93    96
+    14(E)      24    25    42M   93M   96M   98B  100B
+    15(F)      24    25    40M   40    41M   42B   93M   96M   97M   99M
+1                                  Diagnostic Cross Reference and Assembler Summ
+-
+0     No Statements Flagged in this Assembly
+ HIGH LEVEL ASSEMBLER, 5696-234, RELEASE 6.0, PTF UK56234
+0SYSTEM: z/OS 01.11.00              JOBNAME: HLASMJOB    STEPNAME: COMPILE    PR
+0Data Sets Allocated for this Assembly
+  Con DDname   Data Set Name                                Volume  Member
+   P1 SYSIN    IBMUSER.HLASM.LIB                            SBSYS1  PHONE
+   L1 SYSLIB   SYS1.MACLIB                                  SBRES1
+      SYSLIN   SYS25041.T194243.RA000.HLASMJOB.OBJ.H01
+      SYSPRINT IBMUSER.HLASMJOB.JOB00052.D0000101.?
+
+   32124K allocated to Buffer Pool       Storage required     352K
+      21 Primary Input Records Read         3465 Library Records Read
+       0 ASMAOPT Records Read                242 Primary Print Records Written
+       9 Object Records Written                0 ADATA Records Written
+0Assembly Start Time: 19.42.43 Stop Time: 19.42.44 Processor Time: 00.00.00.3304
+ Return Code 000
+
+1z/OS V1 R11 BINDER     19:42:43 MONDAY FEBRUARY 10, 2025
+ BATCH EMULATOR  JOB(HLASMJOB) STEP(LKED    ) PGM= HEWL
+ IEW2650I 5102 MODULE ENTRY NOT PROVIDED.  ENTRY DEFAULTS TO SECTION $PRIV000010
+
+
+
+                                 *** O P E R A T I O N   S U M M A R Y   R E P O
+
+1PROCESSING OPTIONS:
+
+    ALIASES             NO
+    ALIGN2              NO
+    AMODE               UNSPECIFIED
+    CALL                YES
+    CASE                UPPER
+    COMPAT              UNSPECIFIED
+    COMPRESS            AUTO
+    DCBS                NO
+    DYNAM               NO
+    EXTATTR             UNSPECIFIED
+    EXITS:              NONE
+    FILL                NONE
+    GID                 UNSPECIFIED
+    HOBSET              NO
+    INFO                NO
+    LET                 04
+    LINECT              060
+    LIST                SUMMARY
+    LISTPRIV            NO
+    MAP                 NO
+    MAXBLK              032760
+    MODMAP              NO
+    MSGLEVEL            00
+    OVLY                NO
+    PRINT               YES
+    RES                 NO
+    REUSABILITY         UNSPECIFIED
+    RMODE               UNSPECIFIED
+    SIGN                NO
+    STORENX             NOREPLACE
+    STRIPCL             NO
+    STRIPSEC            NO
+    TERM                NO
+    TRAP                ON
+    UID                 UNSPECIFIED
+    UPCASE              NO
+    WKSPACE             000000K,000000K
+    XCAL                NO
+    XREF                NO
+    ***END OF OPTIONS***
+
+
+
+
+1SAVE OPERATION SUMMARY:
+
+    MEMBER NAME         PHONE
+    LOAD LIBRARY        IBMUSER.ALOAD
+    PROGRAM TYPE        PROGRAM OBJECT(FORMAT 2)
+    VOLUME SERIAL       SBSYS1
+    DISPOSITION         REPLACED
+    TIME OF SAVE        19.42.44  FEB 10, 2025
+
+
+1SAVE MODULE ATTRIBUTES:
+
+    AC                  000
+    AMODE                24
+    COMPRESSION         NONE
+    DC                  NO
+    EDITABLE            YES
+    EXCEEDS 16MB        NO
+    EXECUTABLE          YES
+    MIGRATABLE          YES
+    OL                  NO
+    OVLY                NO
+    PACK,PRIME          NO,NO
+    PAGE ALIGN          NO
+    REFR                NO
+    RENT                NO
+    REUS                NO
+    RMODE                24
+    SCTR                NO
+    SIGN                NO
+    SSI
+    SYM GENERATED       NO
+    TEST                NO
+    XPLINK              NO
+    MODULE SIZE (HEX)   00000150
+    DASD SIZE (HEX)     00001000
+
+
+
+
+1 ENTRY POINT AND ALIAS SUMMARY:
+
+  NAME:            ENTRY TYPE AMODE C_OFFSET CLASS NAME        STATUS
+
+  $PRIVATE          MAIN_EP      24 00000000 B_TEXT
+
+                          *** E N D   O F   O P E R A T I O N   S U M M A R Y
+
+
+
+
+1z/OS V1 R11 BINDER     19:42:43 MONDAY FEBRUARY 10, 2025
+ BATCH EMULATOR  JOB(HLASMJOB) STEP(LKED    ) PGM= HEWL
+ IEW2008I 0F03 PROCESSING COMPLETED.  RETURN CODE =  0.
+
+
+
+1----------------------
+ MESSAGE SUMMARY REPORT
+ ----------------------
+  TERMINAL MESSAGES      (SEVERITY = 16)
+  NONE
+
+  SEVERE MESSAGES        (SEVERITY = 12)
+  NONE
+
+  ERROR MESSAGES         (SEVERITY = 08)
+  NONE
+
+  WARNING MESSAGES       (SEVERITY = 04)
+  NONE
+
+  INFORMATIONAL MESSAGES (SEVERITY = 00)
+  2008  2650
+
+
+  **** END OF MESSAGE SUMMARY REPORT ****
