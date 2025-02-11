@@ -298,7 +298,8 @@ SO LIKE THIS =*.STEP02.RUN.OFILE,DISP=SHR
  001200 //            SPACE=(3096,(40,40),,,ROUND),                             
  001300 //            DCB=(LRECL=80,RECFM=FBS,BLKSIZE=3200,BUFNO=1)             
  001400 //SYSPRINT DD SYSOUT=*                                                  
- 001500 //AMSDUMP  DD SYSOUT=*            001600 //SYSOUT   DD SYSOUT=*                                                  
+ 001500 //AMSDUMP  DD SYSOUT=*            
+ 001600 //SYSOUT   DD SYSOUT=*                                                  
  001700 //LKED     EXEC PGM=HEWL                                                
  001800 //SYSLMOD  DD DSN=&LOADLIB(&MEMBER),DISP=SHR                            
  001900 //SYSLIN   DD DSN=&&OBJ,DISP=(OLD,DELETE)                               
