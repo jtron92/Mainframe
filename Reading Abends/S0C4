@@ -253,9 +253,9 @@ you can either copy 103105EF in two parts 1031 or 05EF either way if you do a F 
                                       36          PUT  OFILE,TITLE0
  00001E 4110 C026            00030    38+         LA    1,OFILE
  000022 4100 C0F2            000FC    39+         LA    0,TITLE0
- 000026 1FFF                          40+         SLR   15,15
- 000028 BFF7 1031            00031    41+         ICM   15,7,49(1)
- 00002C 05EF                          42+         BALR  14,15
+ 000026 1FFF                          40+         SLR   15,15 
+ 000028 BFF7 1031            00031    41+         ICM   15,7,49(1)             <<<<<============================================================================================= 1031
+ 00002C 05EF                          42+         BALR  14,15                  <<<<<============================================================================================= 05EF  after these addresses the error occurs at line 43 OFILE  
                                       43 OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSO
 0                                     46+*                       DATA CONTROL BL
                                       47+*
