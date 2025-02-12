@@ -77,3 +77,16 @@ IF I do not add the PEND back I will get this error
  005300 //*MSDUMP  DD SYSOUT=*                                                  
  005400 //*YSOUT   DD SYSOUT=*                                                  
  ****** ***********************
+
+
+Lets say that the entire thing is back to a job now you want to also make sure the steps executing this proc is below the pend
+
+if you put it above the system will not recoginzie this and will not be able to find the step saying to exec this proc
+
+the error will look like this 
+
+       2 IEFC612I PROCEDURE HLASMJOB WAS NOT FOUND                             
+        4 IEFC001I PROCEDURE HLASMJOB WAS EXPANDED USING INSTREAM PROCEDURE DEFI
+
+this is because it needs to read the entire proc then exec it the system will think we are calling a proc from somewhere else
+
