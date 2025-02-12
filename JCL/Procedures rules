@@ -99,3 +99,13 @@ this is because it needs to read the entire proc then exec it the system will th
 2 IEFC612I PROCEDURE TEST WAS NOT FOUND    
 
 
+--------------------------------
+
+
+make sure your job has a step that executes the procedure , like step01 or step02 becuase if you do not then you will have a JCL error of 
+
+ 2 IEFC607I JOB HAS NO STEPS
+
+
+this is because the job has no steps even tho the proc has compile , link and run that is only in the proc till the pend section you need something to trigger it off out of the proc
+
