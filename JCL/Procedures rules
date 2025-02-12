@@ -21,6 +21,11 @@ This is because this entire JCL is PROC now and is being called from out side me
 
 if I wanted this to work again I would uncomment everything out and add back the PEND 
 
+IF I do not add the PEND back I will get this error 
+
+2 IEFC005I PROC STATEMENT WITHOUT MATCHING PEND STATEMENT
+
+
  000010 //*LASMJO  JOB (MVS),'JORGE CINTRON',                                   
  000020 //*            MSGLEVEL=(1,1),                                          
  000030 //*            MSGCLASS=H,                                              
