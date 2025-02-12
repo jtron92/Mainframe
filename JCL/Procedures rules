@@ -1,0 +1,74 @@
+for example this was a job but i decided to make it entirely a proc that I will call from a different job so now its a cataloged procedure
+
+
+ lets say that I have left the PEND around line 002700 then I call the proc from a different job I would get this error 
+
+26 IEFC008I PEND STATEMENT FOUND BEFORE END OF PROCEDURE    
+
+ This is because this entire JCL is not a PROCEDURE we can not have it have a pend. It is not a JOB anymore thats only for JOBS with steps 
+
+so also the STEP01 and STEP02 exec HLASMJOB would not work as well because this entire thing is a procedure now if we decided to call this procedure without commenting the lines 
+where step01 and step02 and below we would get this error 
+
+25 IEFC612I PROCEDURE HLASMJOB WAS NOT FOUND                             
+       26 IEFC612I PROCEDURE HLASMJOB WAS NOT FOUND                             
+       26 IEFC657I THE SYMBOL LOADLIB WAS NOT USED                              
+       26 IEFC657I THE SYMBOL SRCLIB WAS NOT USED                               
+       26 IEFC657I THE SYMBOL MEMBER WAS NOT USED                               
+       26 IEFC657I THE SYMBOL ODSN WAS NOT USED     
+
+This is because this entire JCL is PROC now and is being called from out side member that has this JCLLIB and the entire process is cataloged proc
+
+if I wanted this to work again I would uncomment everything out and add back the PEND 
+
+ 000010 //*LASMJO  JOB (MVS),'JORGE CINTRON',                                   
+ 000020 //*            MSGLEVEL=(1,1),                                          
+ 000030 //*            MSGCLASS=H,                                              
+ 000040 //*            CLASS=A,                                                 
+ 000050 //*            NOTIFY=&SYSUID                                           
+ 000100 //HLASMJOB PROC LOADLIB='IBMUSER.ALOAD',                                
+ 000200 //             SRCLIB='IBMUSER.HLASM.LIB',                              
+ 000300 //             MEMBER='TUES',                                           
+ 000400 //             ODSN='IBMUSER.APOD'                                      
+ 000600 //COMPILE  EXEC PGM=ASMA90                                              
+ 000700 //SYSLIB   DD DSN=SYS1.MACLIB,DISP=SHR                                  
+ 000800 //SYSIN    DD DSN=&SRCLIB(&MEMBER),DISP=SHR                             
+ 000900 //SYSUT1   DD DSN=&&SYSUT1,SPACE=(4096,(120,120),,,ROUND),UNIT=VIO,     
+ 001000 //            DCB=BUFNO=1                                               
+ 001100 //SYSLIN   DD DSN=&&OBJ,DISP=(MOD,PASS),UNIT=VIO,                       
+ 001200 //            SPACE=(3096,(40,40),,,ROUND),                             
+ 001300 //            DCB=(LRECL=80,RECFM=FBS,BLKSIZE=3200,BUFNO=1)             
+ 001400 //SYSPRINT DD SYSOUT=*                                                  
+ 001500 //AMSDUMP  DD SYSOUT=*                           
+ 001600 //SYSOUT   DD SYSOUT=*                                                  
+ 001700 //LKED     EXEC PGM=HEWL                                                
+ 001800 //SYSLMOD  DD DSN=&LOADLIB(&MEMBER),DISP=SHR                            
+ 001900 //SYSLIN   DD DSN=&&OBJ,DISP=(OLD,DELETE)                               
+ 002000 //SYSUT1   DD DSN=&&SYSUT1,SPACE=(4096,(120,120),,,ROUND),UNIT=VIO,     
+ 002100 //            DCB=BUFNO=1                                               
+ 002200 //SYSPRINT DD SYSOUT=*                                                  
+ 002300 //AMSDUMP  DD SYSOUT=*                                                  
+ 002400 //SYSOUT   DD SYSOUT=*                                                  
+ 002500 //RUN      EXEC PGM=*.LKED.SYSLMOD                                      
+ 002600 //OFILE    DD DSN=&ODSN,DISP=SHR                                        
+ 002610 //SYSPRINT DD SYSOUT=*                                                  
+ 002620 //AMSDUMP  DD SYSOUT=*                                                  
+ 002630 //SYSOUT   DD SYSOUT=*                                                  
+ 003800 //*TEP01   EXEC HLASMJOB                                                
+ 003900 //*TEP02   EXEC HLASMJOB,                                               
+ 004000 //*            LOADLIB=IBMUSER.ALOAD,                                   
+ 004100 //*            SRCLIB=IBMUSER.HLASM.LIB,                                
+ 004200 //*            MEMBER=ONE,                                              
+ 004300 //*            ODSN=IBMUSER.AVALON       
+ 004400 //*TEP03   EXEC PGM=IEBGENER                                            
+ 004500 //*YSUT1   DD DSN=*.STEP01.RUN.OFILE,DISP=SHR                           
+ 004600 //*YSUT2   DD DSN=&SYSUID..ADRAKE,                                      
+ 004700 //*           DISP=(OLD,CATLG,DELETE),                                  
+ 004800 //*           UNIT=SYSDA,                                               
+ 004900 //*           SPACE=(TRK,(2,2),RLSE),                                   
+ 005000 //*           DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=3200)             
+ 005100 //*YSIN    DD DUMMY                                                     
+ 005200 //*YSPRINT DD SYSOUT=*                                                  
+ 005300 //*MSDUMP  DD SYSOUT=*                                                  
+ 005400 //*YSOUT   DD SYSOUT=*                                                  
+ ****** ***********************
