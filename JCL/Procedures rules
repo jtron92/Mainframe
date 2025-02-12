@@ -1,13 +1,13 @@
 for example this was a job but i decided to make it entirely a proc that I will call from a different job so now its a cataloged procedure
 
 
- lets say that I have left the PEND around line 002700 then I call the proc from a different job I would get this error 
+** lets say that I have left the PEND around line 002700 then I call the proc from a different job I would get this error 
 
 26 IEFC008I PEND STATEMENT FOUND BEFORE END OF PROCEDURE    
 
  This is because this entire JCL is not a PROCEDURE we can not have it have a pend. It is not a JOB anymore thats only for JOBS with steps 
 
-so also the STEP01 and STEP02 exec HLASMJOB would not work as well because this entire thing is a procedure now if we decided to call this procedure without commenting the lines 
+** so also the STEP01 and STEP02 exec HLASMJOB would not work as well because this entire thing is a procedure now if we decided to call this procedure without commenting the lines 
 where step01 and step02 and below we would get this error 
 
 25 IEFC612I PROCEDURE HLASMJOB WAS NOT FOUND                             
@@ -21,7 +21,9 @@ This is because this entire JCL is PROC now and is being called from out side me
 
 if I wanted this to work again I would uncomment everything out and add back the PEND 
 
-IF I do not add the PEND back I will get this error 
+
+--------------------------------------------------------------------------------------------------------------------
+** IF I do not add the PEND back I will get this error 
 
 2 IEFC005I PROC STATEMENT WITHOUT MATCHING PEND STATEMENT
 
@@ -79,7 +81,7 @@ IF I do not add the PEND back I will get this error
  ****** ***********************
 
 
-Lets say that the entire thing is back to a job now you want to also make sure the steps executing this proc is below the pend
+***** Lets say that the entire thing is back to a job now you want to also make sure the steps executing this proc is below the pend
 
 if you put it above the system will not recoginzie this and will not be able to find the step saying to exec this proc
 
@@ -89,4 +91,11 @@ the error will look like this
         4 IEFC001I PROCEDURE HLASMJOB WAS EXPANDED USING INSTREAM PROCEDURE DEFI
 
 this is because it needs to read the entire proc then exec it the system will think we are calling a proc from somewhere else
+
+
+----------------------------
+**** Remember for cataloged procs when calling them to add the JCLLIB ORDER= location because the system will not know where to find it unless its a system proc so you will get this end 
+
+2 IEFC612I PROCEDURE TEST WAS NOT FOUND    
+
 
