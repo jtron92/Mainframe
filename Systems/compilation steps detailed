@@ -1,0 +1,13 @@
+Source Code (.COB / .ASM)  
+      ↓  
+Compilation / Assembly → Object Module (.OBJ)  
+      ↓  
+Link-Edit (IEWL Binder) → Load Module (.LOAD in LOADLIB)  
+      ↓  
+Execution (EXEC PGM=program-name in JCL)  
+      ↓  
+z/OS loads the module into memory  
+      ↓  
+CPU executes machine code from memory  
+      ↓  
+Program finishes → Memory is released  
