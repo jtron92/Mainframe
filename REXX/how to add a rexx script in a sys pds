@@ -1,0 +1,69 @@
+first i did a srchfor rexx in the sys1.proclib or vendorproclib
+
+i found this member called rexxl
+
+
+
+
+EDIT              ADCD.Z22A.PROCLIB                     Row 0000124 of 0000177 
+ Command ===> srchfor rexx                                     Scroll ===> CSR  
+            Name     Prompt       Size   Created          Changed          ID   
+ _________ OMVSPROC                117  2015/10/24  2017/07/20 20:30:06  IBMUSER
+ _________ PORTMAP                  38  2015/10/24  2015/10/24 01:07:23  IBMUSER
+ _________ RACF                     19  2015/10/24  2015/10/24 01:07:23  IBMUSER
+ _________ RESOLVER                  9  2015/10/24  2015/10/24 01:07:23  IBMUSER
+ _________ REXXL    *Found          73  2015/10/24  2015/10/24 01:07:23  IBMUSER
+ _________ RMF                      60  2015/10/24  2015/10/24 01:07:23  IBMUSER
+ _________ RRS                      61  2015/10/24  2015/10/24 01:07:23  IBMUSER
+
+
+
+inside this member i fonud this 
+
+
+ 000038 //*                                                                     
+ 000039 //* Modifications:                                                      
+ 000040 //*   Change FAN140 to the appropriate high-level qualifier of          
+ 000041 //*   your installation.                                                
+ 000042 //*                                                                     
+ 000043 //******************************************************************    
+ 000044 //*                                                                     
+ 000045 //REXXL   PROC STUB=EFPL,                     Type of stub              
+ 000046 //             LIBDSN='FAN140.SEAGLMD',       REXX Library stub load    
+ 000047 //             LIBXDSN='FAN140.SEAGCMD'       REXX Library exec lib     
+ 000048 //*                                                                     
+ 000049 //*-----------------------------------------------------------------    
+ 000050 //* Prepare SYSLIN data set for subsequent link step.                   
+ 000051 //*-----------------------------------------------------------------    
+ 000052 //*                                                                     
+ 000053 //PLKED   EXEC PGM=IRXJCL,PARM='REXXL &STUB'                            
+ 000054 //*                                                                     
+ 000055 //SYSEXEC   DD DSN=&LIBXDSN,DISP=SHR                      
+
+
+
+i looked at both dsn FAN140.SEA* DSN AND THE FAN140.SEAGCMD I FOUND COMMANDS IN THERE
+
+  THEN I SIMLPY CREATED A MEMBER AND PASTED THE CODE
+
+ ¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢ 
+ EDIT              FAN140.SEAGCMD                        Row 0000001 of 0000009 
+ Command ===>                                                  Scroll ===> CSR  
+            Name     Prompt       Size   Created          Changed          ID   
+ _________ EAGCMF                                                               
+ _________ EAGCML                                                               
+ _________ EAGQRLIB                                                             
+ _________ EAGV                                                                 
+ _________ REXXF                                                                
+ _________ REXXL                                                                
+ _________ REXXQ                                                                
+ _________ REXXV                                                                
+ __ s______ RUNIT                   120  2025/02/15  2025/02/15 16:58:18  IBMUSER
+           **End**                                                              
+                                                                                
+
+
+  SO NOW ALL YOU DO IS TSO RUNIT AND IT WORKS
+
+
+   
