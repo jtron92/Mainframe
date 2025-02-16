@@ -7,3 +7,83 @@ This is because you cant add your own Rexx program in sys1 so using this commnad
 To decative it 
 
 TSO ALTLIB DEACT APPL(EXEC) 
+
+
+
+
+
+
+
+
+
+
+********************************************************
+
+
+ALTLIB Command--Specify Command Procedure Libraries
+Last Updated February 1, 2023
+The ALTLIB command is a TSO/E feature available in OS/390 and MVS/ESA environments. This command provides users with greater speed and flexibility in specifying command procedure libraries from which REXX execs and TSO CLISTs can be implicitly executed.
+REXX execs and TSO CLISTs may be invoked implicitly, simply by specifying the command procedure name. (When invoked implicitly, the fully qualified data set name of the library containing the target EXEC or CLIST is omitted.) Implicit execution is simpler to code and easier to read. If the REXX exec or CLIST is invoked by the ISPF SELECT service or the
+S command frontend, the implicit execution is also required.
+In order for REXX execs and TSO CLISTs to be invoked implicitly, they must reside in a library that is preallocated to file SYSEXEC (for REXX execs) or file SYSPROC (for either execs or TSO CLISTs).
+Pre-allocating files SYSPROC or SYSEXEC can be problematic if, for example:
+
+    your TSO logon procedure cannot be modified,
+    the SYSEXEC and SYSPROC datasets are protected, or
+    you must mix exec or CLIST libraries with different data set attributes. 
+
+The ALTLIB command solves such problems because it lets you:
+
+    Easily activate and deactivate additional REXX exec and CLIST libraries for an implicit execution without disturbing the list of data sets concatenated to files SYSEXEC and/or SYSPROC. Furthermore, you can issue the ALTLIB command from within the ISPF environment. There is no need to return to the TSO READY prompt.
+    You can continue to access installation-wide REXX execs and CLISTs, since the SYSEXEC and SYSPROC file allocations remain undisturbed.
+    Search time for the EXEC and CLISTs are reduced since the system searches the ALTLIB libraries first, using the Virtual Lookaside Facility (VLF).
+
+The ALTLIB command lets you specify EXEC and CLIST libraries whose data set characteristics (record format, record size, and so on) are different from those of the libraries that are already allocated to files SYSEXEC and SYSPROC.
+ALTLIB Functions
+The ALTLIB command uses the following operands:
+
+    ACTIVATE
+    Allows implicit execution of REXX execs and CLISTs.
+    DEACTIVATE
+    Removes libraries from the search order.
+    DISPLAY
+    Displays the current search order
+    RESET
+    Resets the search order to just the SYSEXEC and SYSPROC data sets.
+
+The ACTIVATE and DEACTIVATE functions permit you to divide execution libraries into the following groups (or levels): USER, APPLICATION, and SYSTEM. The system conducts the search for an implicitly named EXEC in that order:
+
+    The USER level permits searching of datasets that are previously allocated to SYSUEXEC and SYSUPROC while the SYSTEM level affects the search of libraries allocated to files SYSEXEC and SYSPROC.
+    Since SYSEXEC and SYSPROC libraries are already available for an implicit execution, the primary advantage is increased library search speed for the EXECs and CLISTs.
+    The APPLICATION level lets you dynamically specify a list of command procedure libraries or a DDNAME of your choice, which should be searched for an implicitly named procedure. For this reason, the APPLICATION level is (arguably) the most useful and most-often used ALTLIB group.
+
+Additional parameters on the ALTLIB command allow you to activate or deactivate REXX EXECs, TSO CLISTs, or both EXECs and CLISTs at once.
+The following requirements apply:
+
+    Data sets referenced in an ALTLIB command must be both cataloged and partitioned.
+    Up to 15 application-level data sets may be listed in one ACTIVATE command. For all three levels, data sets concatenated within the same level must have the same logical record length (LRECL) and record format. Physical block sizes (BLKSIZE) may differ, but the dataset with the largest block size must be listed first.
+    Data sets activated with the CLIST parameter may contain both CLISTs and REXX EXECs, but those activated with the EXEC parameter may contain only REXX execs.
+    'ALTLIB DEACTIVATE ALL' and 'ALTLIB RESET' are not
+    equivalent. 'DEACTIVATE ALL' deactivates all three levels while 'RESET' deactivates the user and application levels and activates the system level (SYSEXEC and SYSPROC). RESET restores the library search order in effect before any ALTLIB commands were issued.
+
+Stacking ISPF Applications
+The NEWAPPL parameter of the ISPF SELECT command creates an ISPF "application" environment with its own variable pools. Such ISPF applications may be nested. In order to pass ALTLIB definitions from one ISPF application to another, you must specify the PASSLIB parameter on the SELECT service request. For example:
+
+ISPEXEC SELECT CMD(xyzexec) NEWAPPL(xyz) PASSLIB
+
+After the new ISPF application completes and returns control to the invoking application, ISPF restores the original ALTLIB definitions, regardless of any ALTLIB changes made by the lower-level application.
+Stacking ALTLIB Requests
+Within an ISPF application, you can stack up to 8 ACTIVATE requests on a "Last-In-First-Out" (LIFO) basis. Only the top, or last request is active.
+Conditional Requests
+A COND parameter may also be specified when activating application-level libraries. This prevents the activation of any application-level definitions should they already exist for the same type (CLIST or EXEC).
+Examples
+
+    The following ALTLIB command implicitly executes REXX execs which reside within library 'MY.REXX.EXEC':
+
+    ALTLIB ACTIVATE APPLICATION(EXEC) DATASET('MY.REXX.EXEC')
+
+    The following ALTLIB command implicitly executes REXX execs and CLISTs within libraries MYDATA.EXEC and YOURDATA.CLIST.
+
+    ALTLIB ACTIVATE APPLICATION(CLIST) DATASET('mydata.exec' 'yourdata.clist') COND
+
+    The ALTLIB activation should take place only if no previous application-level CLIST requests exist. If previous definitions do exist, a return code of 8 is returned.
