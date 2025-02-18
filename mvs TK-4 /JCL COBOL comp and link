@@ -1,0 +1,32 @@
+//COBUCL JOB (MVS),'JORGE CINTRON',                           
+//            MSGLEVEL=(1,1),                                 
+//            CLASS=A,                                        
+//            NOTIFY=HERC01,                                  
+//            MSGCLASS=H                                      
+//COB    EXEC PGM=IKFCBL00,                                   
+//           PARM='LOAD,SUPMAP,SIZE=2048K,BUF=1024K'          
+//SYSOUT DD SYSOUT=*                                          
+//SYSPRINT DD SYSOUT=*                                        
+//SYSPUNCH DD SYSOUT=*                                        
+//SYSUT1 DD UNIT=SYSDA,SPACE=(460,(700,100))                  
+//SYSUT2 DD UNIT=SYSDA,SPACE=(460,(700,100))                  
+//SYSUT3 DD UNIT=SYSDA,SPACE=(460,(700,100))                  
+//SYSUT4 DD UNIT=SYSDA,SPACE=(460,(700,100))                  
+//SYSLIN DD DSNAME=&LOADSET,DISP=(MOD,PASS),UNIT=SYSDA,       
+//             SPACE=(80,(500,100))                           
+//SYSIN  DD DSN=HERC01.TEST.ASM(HELLO),DISP=SHR               
+//LKED   EXEC PGM=IEWL,PARM='LIST,XREF,LET',COND=(5,LT,COB)   
+//SYSLIN DD DSNAME=&LOADSET,DISP=(OLD,DELETE)                 
+//       DD  DDNAME=SYSIN                                     
+000021 //SYSLIB DD DSNAME=SYS1.COBLIB,DISP=SHR                                 
+000022 //SYSLMOD DD DSNAME=HERC01.ALOAD(HELLO),DISP=SHR                        
+000023 //SYSUT1 DD UNIT=(SYSDA,SEP=(SYSLIN,SYSLMOD)),SPACE=(1024,(50,20))      
+000024 //SYSPRINT DD SYSOUT=*                                                  
+000025 //SYSPUNCH DD SYSOUT=*                                                  
+000026 //RUN    EXEC PGM=*.LKED.SYSLMOD                                        
+000027 //SYSPUNCH DD SYSOUT=*                                                  
+000028 //AMSDUMP  DD SYSOUT=*                                                  
+000029 //SYSOUT   DD SYSOUT=*                                                  
+000030 //SYSPRINT DD SYSOUT=*                                                  
+****** ****ZAP****AUTOSAVE********* BOTTOM OF DATA ****************************
+                                                                               
