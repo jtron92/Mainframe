@@ -1,0 +1,23 @@
+
+
+allocate file(sysexec) da('IBMUSER.REXX.LIB') SHR REUSE
+
+
+1️⃣ ALLOCATE FILE(SYSEXEC)
+
+    This tells TSO that you want to allocate a dataset to the SYSEXEC DDNAME.
+    SYSEXEC is where the system looks for REXX execs.
+
+2️⃣ DA('IBMUSER.REXX.LIB')
+
+    This is the dataset that will be allocated.
+    It must be a Partitioned Dataset (PDS or PDS/E) where your REXX programs are stored.
+
+3️⃣ SHR (Shareable Access Mode)
+
+    This allows other users and jobs to read from this dataset while it is allocated.
+    If you used OLD instead, it would lock the dataset for exclusive use.
+
+4️⃣ REUSE
+
+    Ensures that if SYSEXEC is already allocated, it will be reused instead of failing.
