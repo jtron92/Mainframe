@@ -1,0 +1,90 @@
+Enabling certain TSO/E commands to z/OS UNIX users
+Last Updated: 2021-06-25
+To make certain TSO/E commands (such as OEDIT, OBROWSE, OPUTX, OGETX, and ISHELL) and some REXX execs available to users, concatenate the following target libraries to the appropriate ISPF data definition names. The following data sets are for the English panels, messages, and tables:
+
+    SYS1.SBPXPENU concatenated to ISPPLIB.
+    SYS1.SBPXMENU concatenated to ISPMLIB.
+    SYS1.SBPXTENU concatenated to ISPTLIB.
+    SYS1.SBPXEXEC concatenated to SYSEXEC or SYSPROC.
+
+To use the Japanese translation of the panels, messages, and tables, you must concatenate the following target libraries to the appropriate ISPF data definition names.
+
+    SYS1.SBPXPJPN concatenated to ISPPLIB.
+    SYS1.SBPXMJPN concatenated to ISPMLIB.
+    SYS1.SBPXTJPN concatenated to ISPTLIB.
+    SYS1.KHELP concatenated to SYSHELP.
+
+For more information about translation into Japanese, see Customizing for your national code page in the shell.
+Although the user can invoke these TSO/E commands from a TSO/E command line, most users invoke TSO/E commands or programs from an ISPF menu. For that reason, you should add these TSO/E commands to an ISPF selection panel. In the following example, the ISR@PRIM (ISPF Primary Option Menu) was modified to include these commands.
+
+ %-----------------------  ISPF PRIMARY OPTION MENU ---------
+ %OPTION  ===>_ZCMD
+ %
+ %   0 +ISPF PARMS  - Specify terminal and user parameters
+ %   1 +BROWSE      - Display source data or output listings
+ %   2 +EDIT        - Create or change source data
+ %   3 +UTILITIES   - Perform utility functions
+ %   4 +FOREGROUND  - Invoke language processors in foreground
+ %   5 +BATCH       - Submit job for language processing
+ %   6 +COMMAND     - Enter TSO Command, CLIST, or REXX exec
+ %   7 +DIALOG TEST - Perform dialog testing
+ %   8 +LM UTILITIES- Perform library administrator utility functions
+ %   9 +IBM PRODUCTS- Additional IBM program development products
+ %   X +EXIT        - Terminate ISPF using log and list defaults
+  
+ %  1F - Browse files
+ %  2F - Edit files
+ % ISH - ISPF Shell
+ 
+ )INIT
+   HELP = ISR00003
+ )PROC
+   IF (&ZCMD ¬= ' ')
+     &ZQ = TRUNC(&ZCMD,'.')
+     IF (&ZQ = ' ')
+       .MSG = ISRU000
+   &ZSEL = TRANS( TRUNC (&ZCMD,'.')
+                 0, 'PANEL(ISPOPTA)'
+                1F,'CMD(OBROWSE)'
+                2F,'CMD(OEDIT)'
+               ISH,'CMD(ISHELL)'
+               ' ',' '
+                 *,'?' )
+ )END
+ 
+
+You must make the following changes to an ISPF selection panel:
+
+    Add a statement to the list of options for Browse files. Be sure to include a selection number with the statement. In this example, the statement is:
+
+    %  1F - Browse files
+
+Add a statement to the )PROC section of the panel to invoke OBROWSE. In this example, the statement is:
+
+1F,'CMD(OBROWSE)'
+
+Be sure that the symbol at the start of this statement (1F in this example)) matches the number that is specified in the list of options.
+Add a statement to the list of options for edit files. Include a selection number with the statement. In this example, the statement is:
+
+%  2F - Edit files
+
+Add a statement to the )PROC section of the panel to invoke OEDIT. In this example, the statement is:
+
+2F,'CMD(OEDIT)'
+
+Be sure that the symbol at the start of this statement (2F in this example) matches the number that is specified in the list of options.
+Add a statement to the list of options for the ISPF shell. Include a selection number with the statement. In this example, the statement is:
+
+% ISH - ISPF shell
+
+Add a statement to the )PROC section of the panel to invoke the ISPF shell environment. In this example, the statement is:
+
+ISH,'CMD(ISHELL)'
+
+    Be sure that the symbol at the start of this statement (ISH in this example) matches the number that is specified in the list of options.
+
+Tip: If you customize your ISPF TSO Command Table (ISPTCM) to make your default flag differ from the ISPF default of 61, you might have to create new entries in your ISPTCM for some of the TSO/E commands that specify FLAG=61. The OEDIT and OBROWSE commands do not run with some flag values. You can correct this situation by adding ISPTCM entries for BPXWBRWS and BPXWEDIT, restoring the ISPF defaults. If you changed the defaults and do not experience problems with those commands, you should not have to add ISPTCM entries to restore defaults for those commands.
+
+For information about modifying ISPF selection panels, see z/OS ISPF Planning and Customizing.
+Parent topic:
+Customizing z/OS UNIX
