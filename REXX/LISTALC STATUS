@@ -1,0 +1,24 @@
+1️⃣ Show All Allocated Datasets (Equivalent to LISTALC STATUS)
+
+LISTALC
+
+    This will display all currently allocated datasets in your session.
+
+2️⃣ Find If SYSEXEC is Allocated
+
+LISTALC STATUS
+
+    Check if SYSEXEC is listed in the output. Look for your REXX dataset.
+
+3️⃣ Find If Any Global SYSEXEC is Allocated
+
+LISTA
+
+    This gives a shorter version of LISTALC and may show global allocations.
+
+4️⃣ Check Active TSO Datasets (SYSEXEC and SYSPROC)
+
+TSO ISRDDN
+
+    Inside the ISRDDN interface, scroll through the list and look for SYSEXEC or SYSPROC.
+    This shows all datasets dynamically allocated to your session.
