@@ -20,18 +20,18 @@
 //LKED   EXEC PGM=IEWL,PARM='LIST,XREF,LET',COND=(5,LT,COB)   
 //SYSLIN DD DSNAME=&LOADSET,DISP=(OLD,DELETE)                 
 //       DD  DDNAME=SYSIN                                     
-000021 //SYSLIB DD DSNAME=SYS1.COBLIB,DISP=SHR                                 
-000022 //SYSLMOD DD DSNAME=HERC01.ALOAD(HELLO),DISP=SHR                        
-000023 //SYSUT1 DD UNIT=(SYSDA,SEP=(SYSLIN,SYSLMOD)),SPACE=(1024,(50,20))      
-000024 //SYSPRINT DD SYSOUT=*                                                  
-000025 //SYSPUNCH DD SYSOUT=*                                                  
-000026 //RUN    EXEC PGM=*.LKED.SYSLMOD                                        
-000027 //SYSPUNCH DD SYSOUT=*                                                  
-000028 //AMSDUMP  DD SYSOUT=*                                                  
-000029 //SYSOUT   DD SYSOUT=*                                                  
-000030 //SYSPRINT DD SYSOUT=*                                    
-000031 //SYSLIB DD DSNAME=SYS1.COBLIB,DISP=SHR      
-****** ****ZAP****AUTOSAVE********* BOTTOM OF DATA ****************************
+//SYSLIB DD DSNAME=SYS1.COBLIB,DISP=SHR                                 
+//SYSLMOD DD DSNAME=HERC01.ALOAD(HELLO),DISP=SHR                        
+//SYSUT1 DD UNIT=(SYSDA,SEP=(SYSLIN,SYSLMOD)),SPACE=(1024,(50,20))      
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSPUNCH DD SYSOUT=*                                                  
+//RUN    EXEC PGM=*.LKED.SYSLMOD                                        
+//SYSPUNCH DD SYSOUT=*                                                  
+//AMSDUMP  DD SYSOUT=*                                                  
+//SYSOUT   DD SYSOUT=*                                                  
+//SYSPRINT DD SYSOUT=*                                    
+//SYSLIB DD DSNAME=SYS1.COBLIB,DISP=SHR      
+****ZAP****AUTOSAVE********* BOTTOM OF DATA ****************************
 
 
 DATE FEB 19,2025
