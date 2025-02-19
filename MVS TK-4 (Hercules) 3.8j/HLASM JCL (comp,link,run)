@@ -1,0 +1,26 @@
+//ASMFCL   JOB (MVS),'JORGE CINTRON',                            
+//             MSGLEVEL=(1,1),CLASS=A,                           
+//             MSGCLASS=H,NOTIFY=HERC01                          
+//ASM      EXEC PGM=IFOX00,PARM=OBJ                              
+//SYSLIB   DD DSN=SYS1.MACLIB,DISP=SHR                           
+//SYSUT1   DD DSN=&&SYSUT1,UNIT=SYSSQ,SPACE=(1700,(600,100)),    
+//            SEP=(SYSLIB)                                       
+//SYSUT2   DD DSN=&&SYSUT2,UNIT=SYSSQ,SPACE=(1700,(300,50)),     
+//            SEP=(SYSLIB,SYSUT1)                                
+//SYSUT3   DD DSN=&&SYSUT3,UNIT=SYSSQ,SPACE=(1700,(300,50))      
+//SYSPRINT DD SYSOUT=*                                           
+//SYSPUNCH DD SYSOUT=*                                           
+//SYSGO    DD DSN=&&OBJSET,UNIT=SYSSQ,SPACE=(80,(200,50)),       
+//            DISP=(MOD,PASS)                                    
+//SYSIN    DD DSN=HERC01.TEST.ASM(HEL),DISP=SHR                  
+//LKED     EXEC PGM=IEWL                                         
+//SYSLMOD  DD DSN=HERC01.ALOAD(HEL),DISP=SHR                     
+//SYSLIN   DD DSN=&&OBJSET,DISP=(OLD,DELETE)                     
+//         DD DDNAME=SYSIN                                       
+//SYSUT1   DD DSN=&&SYSUT1,UNIT=SYSSQ,SPACE=(1700,(600,100)),    
+//            SEP=(SYSLIB) 
+//SYSPRINT DD SYSOUT=*            
+//RUN      EXEC PGM=*.LKED.SYSLMOD
+//SYSPRINT DD SYSOUT=*            
+//AMSDUMP  DD SYSOUT=*            
+//SYSOUT   DD SYSOUT=*            
