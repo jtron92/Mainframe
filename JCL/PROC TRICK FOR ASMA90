@@ -1,0 +1,40 @@
+for the proc you dont need need to have the parms next to the proc in the begining
+
+you can just have it at the bottom with step01 executing the proc and have the parms pass thru there
+
+kinda the same thing but just somewhere else
+
+        //HLASMJOB JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //BULLET   PROC                                                         
+ 000007 //COMPILE  EXEC PGM=ASMA90                                              
+ 000008 //SYSLIB   DD DSN=SYS1.MACLIB,DISP=SHR                                  
+ 000009 //SYSIN    DD DSN=&SRCLIB(&MEMBER),DISP=SHR                             
+ 000010 //SYSUT1   DD DSN=&&SYSUT1,SPACE=(4080,(120,120),,,ROUND),UNIT=VIO,     
+ 000011 //            DCB=BUFNO=1                                               
+ 000012 //SYSLIN   DD DSN=&&OBJ,DISP=(MOD,PASS),UNIT=VIO,                       
+ 000013 //            SPACE=(3080,(40,40),,,ROUND),                             
+ 000014 //            DCB=(LRECL=80,RECFM=FBS,BLKSIZE=3200,BUFNO=1)             
+ 000015 //SYSPRINT DD SYSOUT=*                                                  
+ 000016 //SYSOUT   DD SYSOUT=*                                                  
+ 000017 //AMSDUMP  DD SYSOUT=*                                                  
+ 000018 //LKED     EXEC PGM=HEWL                                                
+ 000019 //SYSLMOD  DD DSN=&LOADLIB(&MEMBER),DISP=SHR                            
+ 000020 //SYSUT1   DD DSN=&&SYSUT1,SPACE=(3080,(120,120),,,ROUND),              
+ 000021 //            UNIT=VIO,                                    
+ 000022 //            DCB=BUFNO=1                                               
+ 000023 //SYSLIN   DD DSN=&&OBJ,DISP=(OLD,DELETE)                               
+ 000024 //SYSPRINT DD SYSOUT=*                                                  
+ 000025 //AMSDUMP  DD SYSOUT=*                                                  
+ 000026 //SYSOUT   DD SYSOUT=*                                                  
+ 000027 //RUN      EXEC PGM=*.LKED.SYSLMOD                                      
+ 000028 //SYSPRINT DD SYSOUT=*                                                  
+ 000029 //AMSDUMP  DD SYSOUT=*                                                  
+ 000030 //SYSOUT   DD SYSOUT=*                                                  
+ 000031 //         PEND                                                         
+ 000032 //STEP01   EXEC BULLET,LOADLIB=IBMUSER.ALOAD,SRCLIB=IBMUSER.HLASM.LIB,  
+ 000033 //            MEMBER=MATH                                               
+ ****** **************************** Bottom of Data ************
