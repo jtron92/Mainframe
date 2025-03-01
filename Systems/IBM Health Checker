@@ -11,8 +11,23 @@ making dynamic, temporary changes to checks
  Activate a Policy
 – F HZSPROC,ACTIVATE,POLICY=policyname
 
+*************************************************************************************************************************
+ALERT CODE : HZS000E3
 
+Check(IBMJES2,JES_CKPT_CONFIG_N1) : IAZH123E ONE OR MORE CHECKPOINTS OR NEW CHECKPOINTS ARE NOT DEFINED
 
+CHECK (IBMJES_CKPT_CONFIG_N1): IAZH124E ONLY ONE CHECKPOINT IS CURRENTLY IN USE
+
+CHECK (IBMXCF,XCF_CDS_SPOF): STC00005 : ONE ORE MORE COUPLE DATASETS HAVE A SINGLE POINT OF FAILURE
+
+********************************************************************************************************************************
+
+JUST PURGE THE HEALTH JOB (BRING IT DOWN) 
+REMOVE THE PROCEDURE IN SYS1.PROCLIB
+HZSPROC MEMBER
+IPL THE SYSTEM AND YOU WONT HAVE ERRORS
+
+*******************************************************************************************************************************
 
 LSU Oct 2007
 © 2007 IBM Corporation33
