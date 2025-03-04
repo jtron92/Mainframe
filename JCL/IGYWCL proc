@@ -1,0 +1,31 @@
+SO YOU CAN HAVE THE JCL IN TWO WAYS BUT YOU MUST HAVE IT POINTED TO IGY420 IN STEPLIB OR NEXT THE PROCEDURE AS A PARM OR IT WILL NOT WORK
+
+
+1. STEPLIB 
+
+        //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP01   EXEC IGYWCL                                                  
+ 000007 //STEPLIB  DD DSN=IGY420.SIGYCOMP,DISP=SHR                              
+ 000008 //COBOL.SYSIN DD DSN=IBMUSER.MASTER.JCL(ELLO1),DISP=SHR                 
+ 000009 //SYSLMOD DD DSN=IBMUSER.ALOAD(ELLO1),DISP=SHR                          
+ 000010 //RUN      EXEC PGM=*.STEP01.LKED.SYSLMOD        
+
+THIS ONE POINTS IT TO IGY420.SIGYCOMP BECUASSE THE PROCEDURE IGYWCL NEEDS OR IS JUST A BABY FORM OF THE MAIN PROGRAM OF IGYCRCTL WHICH IS LOACATED AND COMPILED IN SIGYCOMP
+SO WHEN YOU RUN THE PROC IT EXECUTES IT THEN TIES BACK TO SIGYPROC FOR THE PARMS AND SINCE THE MEMBER IS ALREADY THERE
+
+
+/MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP01   EXEC IGYWCL,LNGPRFX='IGY420'                                                                              
+ 000008 //COBOL.SYSIN DD DSN=IBMUSER.MASTER.JCL(ELLO1),DISP=SHR                 
+ 000009 //SYSLMOD DD DSN=IBMUSER.ALOAD(ELLO1),DISP=SHR                          
+ 000010 //RUN      EXEC PGM=*.STEP01.LKED.SYSLMOD   
+
+THIS JUST FUFILS THE PARM REQUIREMENT FOR THE LANGAGUGE PREFIX AND SINCE ITS HAS THE PREFIX YOU DO NOT NEED THE STEPLIB DD STATEMENT 
