@@ -13,7 +13,7 @@ Command ===>                                                  Scroll ===> CSR
  000011          OPEN (OFILE,OUTPUT)                                            
  000012 LOOP     GET  INPUT1,RECORD1                                            
  000013          GET  INPUT2,RECORD2                                            
- 000014          C    RECORD1,RECORD2                                           
+ 000014          CLC  RECORD1,RECORD2                                           
  000015          BE   MATCH                                                     
  000016          B    NOMATCH                                                   
  000017 MATCH    DS   0H                                                        
