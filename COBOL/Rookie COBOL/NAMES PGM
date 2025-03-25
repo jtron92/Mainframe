@@ -1,0 +1,19 @@
+********************** Top of Data *********
+IDENTIFICATION DIVISION.                    
+PROGRAM-ID. HREC01.                         
+ENVIRONMENT DIVISION.                       
+DATA DIVISION.                              
+WORKING-STORAGE SECTION.                    
+01 NAMES.                                   
+   05 MALE PIC X(10) VALUE 'BRAXTON'.       
+   05 FEMALE PIC X(10) VALUE 'ANNA'.        
+01 SELECT-NAMES PIC X(10).                  
+PROCEDURE DIVISION.                         
+MAIN-PARA.                                  
+    MOVE FEMALE TO SELECT-NAMES             
+    IF SELECT-NAMES = FEMALE                
+    DISPLAY FEMALE                          
+    ELSE                                    
+    DISPLAY MALE                            
+    END-IF.                                 
+
