@@ -1,0 +1,27 @@
+IGZ0020S A logic error occurred.  Neither FILE STATUS nor a declarative was spec
+         HERC01 at relative location X'0510'.  The status code was 48.          
+         From compile unit HERC01 at entry point HERC01 at compile unit offset +
+
+
+
+ 001200     STOP RUN.                                           
+  000028         001300 P100.                                                   
+  000029                    OPEN I-O IFILE.                                     
+  000030         001400     COMPUTE RESULTS = NUM1 + NUM2.                      
+  000031                    DISPLAY 'RESULTS ARE : ' RESULTS.                   
+  000032                P200.                                                   
+  000033                    MOVE RESULTS TO DATA1.                              
+  000034                    WRITE IFILE-RECS.                                   
+  000035                P300.                                                   
+  000036                    CLOSE IFILE.        
+
+
+
+YOU GOTTA CHANGE THE OPEN I-O IFILE TO 
+
+OPEN OUTPUT IFILE
+
+
+You're opening the file in I-O mode (read and write), but your dataset (CUSTDDI) probably doesn't exist yet — or it's not opened with DISP=OLD/SHR in JCL.
+
+When you use OPEN I-O, the file must already exist physically. Otherwise, COBOL raises that logic error with no FILE STATUS to catch it, unless you define error handling explicitly.
