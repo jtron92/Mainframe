@@ -1,0 +1,36 @@
+IDENTIFICATION DIVISION.               
+PROGRAM-ID. HERC01.                    
+ENVIRONMENT DIVISION.                  
+INPUT-OUTPUT SECTION.                  
+FILE-CONTROL.                          
+    SELECT IFILE ASSIGN TO CUSTDDI.    
+DATA DIVISION.                         
+FILE SECTION.                          
+FD IFILE                               
+    RECORDING MODE IS F                
+    LABEL RECORD IS STANDARD           
+    BLOCK CONTAINS 0 CHARACTERS        
+    RECORD CONTAINS 80 CHARACTERS      
+    DATA RECORD IS IFILE-RECS.         
+01 IFILE-RECS.                         
+   05 DOOM   PIC X(80).                
+WORKING-STORAGE SECTION.               
+01 NUM.  
+    05 MALE   PIC X(10) VALUE 'JOHN'.        
+    05 FEMALE PIC X(10) VALUE 'TANNER'.      
+ 01 GENDER    PIC X(10).                     
+ PROCEDURE DIVISION.                         
+ MAIN-PARA.                                  
+     PERFORM P100.                           
+     PERFORM P200.                           
+     PERFORM P300.                           
+     STOP RUN.                               
+ P100.                                       
+     OPEN OUTPUT IFILE.                      
+     MOVE MALE TO GENDER.                    
+ P200.                                       
+     IF GENDER = FEMALE                      
+     DISPLAY FEMALE                          
+     ELSE                                    
+     DISPLAY MALE                            
+     END-IF.                                 
