@@ -110,5 +110,8 @@ Command ===>                                                  Scroll ===> CSR
 
 
 /D IPLINFO   SDSF COMMAND TO FIND IPLN INFO 
+
+
+TSO SUBMIT 'ZXP.PUBLIC.JCL(MEMBER)'
                                                                                
 
