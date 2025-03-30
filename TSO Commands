@@ -157,7 +157,7 @@ RESPONSE=DUZA
 0090  rsn=112B00B6                                        
 
 
-
+TSO SUBMIT 'ZXP.PUBLIC.JCL(MEMBER)'
 
                                              
                                              
