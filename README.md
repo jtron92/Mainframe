@@ -21,6 +21,6 @@ These projects reflect my journey and continued learning in the world of IBM Z.
 
 ## Other Notes
 
-- Systems experience: IPL, ZFS mounting, subsystem bring-up (TCP/IP, DB2)  
+- Systems experience: IPL, ZFS mounting, subsystem bring-up , USS
 - IBM Z Xplore: Top 5 globally  
-- IBM Z Certs: [Credly Profile](your-link-here)
+- IBM Z Certs: [Credly Profile](https://www.credly.com/users/jxcsys001)
