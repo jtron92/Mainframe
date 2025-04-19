@@ -1,0 +1,17 @@
+dirm for tcpip get lock                                             
+DVHXMT1181R Enter the current logon password of MAINT at P/390 for  
+DVHXMT1181R authentication.  It will not be displayed on the        
+DVHXMT1181R terminal.  To exit without processing the command, just 
+DVHXMT1181R press ENTER.                                            
+                                                                    
+DVHXMT1182I Since you did not provide your password, your GET       
+DVHXMT1182I transaction for MAINT at P/390 has not been sent for    
+DVHXMT1182I processing.                                             
+
+
+As an example of a service machine definition, you might take a look at the directory entry for TCIP by
+typing the Dirmaint command: dirm for tcpip get lock .
+
+This command asks Dirmaint to send TCPIP DIRECT and then locks it so it cannot be changed.
+
+Try this for yourself by typing dirm for tcpip get lock and see the response:
