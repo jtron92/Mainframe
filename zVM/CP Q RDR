@@ -1,0 +1,10 @@
+CP Q RDR                                                                      
+OWNERID  FILE CLASS RECORDS  CPY HOLD USERFORM OPERFORM DEST     KEEP MSG     
+MAINT    0001 D SYS 00000000 001 NONE                            OFF  OFF     
+Ready; T=0.01/0.01 12:14:54         
+
+query reader                                                                  
+OWNERID  FILE CLASS RECORDS  CPY HOLD USERFORM OPERFORM DEST     KEEP MSG     
+MAINT    0001 D SYS 00000000 001 NONE                            OFF  OFF     
+Ready; T=0.01/0.01 12:15:02                                                   
+                                                                              
