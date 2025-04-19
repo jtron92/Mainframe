@@ -1,0 +1,22 @@
+set num on 
+
+adds the nums like this on the side
+
+                   
+00000 * * * Top of 
+      |...+....1...
+00001 APPLES       
+00002 WATER        
+00003 * * * End of 
+                   
+
+
+without set num on like if it was off it would look like this
+
+
+===== * * * Top of Fil
+      |...+....1....+.
+===== APPLES          
+===== WATER           
+===== * * * End of Fil
+                      
