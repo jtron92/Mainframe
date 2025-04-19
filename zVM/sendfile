@@ -26,4 +26,29 @@ Type over 1 for YES or 0 for NO to change the options:
 ====>                                                                           
                                                             Macro-read 1 File   
 
+
+
+
+Specify the filename, filetype and filemode of the file to send. Assuming you have saved your VM direct
+file to disk, you would enter your userid (Zxxxxx) as the filename, DIRECT as the filetype and A as
+the filemode.
+Where it says Send files to: , type ZXP at IBMZ as the network destination.
+Now press the PF5 key to process and send the file. You should see output similar to:
+
+
+What just happened?
+sendfile saves the current settings of your punch device (from CP QUERY PUNCH)
+sendfile application determines the network gateway machine for sending files/messages to other
+systems, using the CMS IDENTIFY command - in your case this is “RSCS”
+sendfile “spools” your PUNCH device to the reader queue for RSCS, using the CP SPOOL command - it
+usually will set the punch device to “hold” outgoing files/messages until told to release them
+once all the local work is done
+
+sendfile “punches” a copy of the file you requested using the CMS PUNCH command
+sendfile releases the files into the spool, again using CP SPOOL
+sendfile restores the original punch device settings (again using CP SPOOL)
+Some time later, RSCS ( Remote Spooling Communications Subsystem ) can read in the file and use whatever
+protocol is needed to arrange the file transfer to the destination user and/or system.
+In the next section, you’ll learn a bit about service machines, and get a peek at what some of those
+VMs look like under the hood.
                                                             
