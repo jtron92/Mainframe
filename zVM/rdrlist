@@ -1,0 +1,15 @@
+rdrlist or rl
+
+
+ MAINT    RDRLIST  A0  V 164  Trunc=164 Size=3 Line=1 Col=1 Alt=3               
+Cmd   Filename Filetype Class User  at Node     Hold  Records  Date      Time   
+      HCPDUMP  (none)   SYS D SYSTEM   P/390    NONE        0   /      SYS      
+      (none)   (none)   PUN 0 MAINT    P/390    NONE        4 04/19    12:21:23 
+      (none)   (none)   PUN 0 MAINT    P/390    NONE        4 04/19    12:22:42 
+
+
+
+To look at this copy of your VM directory in your reader, you simply type rl , which is short for
+rdrlist .
+In the reader list view, find the recent copy of your VM directory and save it to disk (“receive” it)
+by putting your cursor next to it in the command field and pressing your PF9 key.
