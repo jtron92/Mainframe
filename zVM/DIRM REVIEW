@@ -1,0 +1,25 @@
+The Directory Maintenance facility (DIRMAINT) manages the system’s user directory; you must utilize
+DIRMAINT commands to request a copy of your virtual machine’s directory entry.
+
+DIRM REVIEW                                                         
+DVHXMT1181R Enter the current logon password of MAINT at P/390 for  
+DVHXMT1181R authentication.  It will not be displayed on the        
+DVHXMT1181R terminal.  To exit without processing the command, just 
+DVHXMT1181R press ENTER.                                            
+                                                                    
+DVHXMT1191I Your REVIEW request has been sent for processing.       
+Ready; T=0.58/0.61 12:21:23                                         
+
+
+
+DIRM REV                                                             
+DVHXMT1181R Enter the current logon password of MAINT at P/390 for   
+DVHXMT1181R authentication.  It will not be displayed on the         
+DVHXMT1181R terminal.  To exit without processing the command, just  
+DVHXMT1181R press ENTER.                                             
+                                                                     
+DVHXMT1191I Your REVIEW request has been sent for processing.        
+Ready; T=0.24/0.26 12:22:42                                          
+
+
+
