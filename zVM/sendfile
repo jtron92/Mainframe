@@ -1,0 +1,29 @@
+sendfile
+
+
+                  ----------------  SENDFILE  ---------------                   
+                                                                                
+File(s) to be sent    (use * for Filename, Filetype and/or Filemode             
+                            to select from a list of files)                     
+Enter filename :                                                                
+      filetype :                                                                
+      filemode :                                                                
+                                                                                
+Send files to  :                                                                
+                                                                                
+Type over 1 for YES or 0 for NO to change the options:                          
+                                                                                
+   0    Request acknowledgement when the file has been received?                
+   1    Make a log entry when the file has been sent?                           
+   1    Display the file name when the file has been sent?                      
+   0    This file is actually a list of files to be sent?                       
+   0    TCP/IP destinations to be transmitted  by Unsolicited File Transfer?    
+                                                                                
+ A    Spool class to use when sending the file(s)                               
+                                                                                
+   1= Help            3= Quit             5= Send               12= Cursor      
+                                                                                
+====>                                                                           
+                                                            Macro-read 1 File   
+
+                                                            
