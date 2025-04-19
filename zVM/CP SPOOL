@@ -1,3 +1,20 @@
 CP SPOOL
 HCPCSP035E Device type missing or invalid  
 Ready(00035); T=0.01/0.01 12:26:11         
+
+
+The DIRM REV command makes use of the CP SPOOL command, a powerful feature that enable redirection of
+output from one virtual machine’s virtual punch to another’s virtual reader queue.
+In this scenario, the output from DIRMAINT is not really a file retrieval action. It demonstrates how
+the CP spool facilitates file transfer between virtual machines.
+
+DIRM REV results in your request message being “punched” to the DIRMAINT machine.
+This “punched” output is spooled into DIRMAINT’s reader queue. DIRMAINT reads in messages from its
+reader, and deterimenes what processing is required.
+
+DIRMAINT then sends the required response back to your virtual machine, by “spooling” its punch device
+to direct output to your reader spool queue.
+
+This method illustrates the spool’s versatility beyond handling real unit record devices. It plays a
+crucial role in the virtual environment, enabling the seamless transfer of files between virtual
+machines through the manipulation of spool queues.
