@@ -1,0 +1,3 @@
+An alternative way to view virtual reader files is to use the Rdrlist PEEK command – in Rdrlist, move
+the cursor to the row of the file you want to look at, and press PF11 . PEEK leaves the file in the
+reader, rather than transferring it to disk
