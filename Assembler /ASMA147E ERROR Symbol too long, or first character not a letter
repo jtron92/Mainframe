@@ -1,0 +1,31 @@
+
+
+
+** ASMA147E Symbol too long, or first character not a letter - 1TYPE            
+** ASMA435I Record 64 in IBMUSER.JCL.CNTL(RAUL) on volume: SBSYS1               
+0002AD                              250 1MSG     DS   CL4                       
+** ASMA147E Symbol too long, or first character not a letter - 1MSG             
+** ASMA435I Record 65 in IBMUSER.JCL.CNTL(RAUL) on volume: SBSYS1               
+0002B1                              251 2TYPE    DS   CL1                       
+** ASMA147E Symbol too long, or first character not a letter - 2TYPE            
+** ASMA435I Record 66 in IBMUSER.JCL.CNTL(RAUL) on volume: SBSYS1               
+0002B2                              252 2MSG     DS   CL4                       
+** ASMA147E Symbol too long, or first character not a letter - 2MSG             
+** ASMA435I Record 67 in IBMUSER.JCL.CNTL(RAUL) on volume: SBSYS1               
+0002B6                              253 3TYPE    DS   CL1                       
+** ASMA147E Symbol too long, or first character not a letter - 3TYPE            
+** ASMA435I Record 68 in IBMUSER.JCL.CNTL(RAUL) on volume: SBSYS1               
+0002B7                              254 3MSG     DS   CL4           
+
+
+I HAD IT LOOKING LIKE THIS
+
+
+1MSG    DS   CL4
+2TYPE   DS   CL1
+2MSG    DS   CL4
+3TYPE   DS   CL1
+3MSG    DS   CL4
+
+
+YOU CANT HAVE YOUR LABELS STARTING WITH A NUMBER
