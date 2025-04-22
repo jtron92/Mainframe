@@ -1,0 +1,67 @@
+RECDSECT DSECT                                                      
+F1TYPE   DS   CL1                                                       
+F1MSG    DS   CL4                                                       
+F2TYPE   DS   CL1                                                       
+F2MSG    DS   CL4                                                       
+F3TYPE   DS   CL1                                                       
+F3MSG    DS   CL4                                                       
+F4TYPE   DS   CL1                                                       
+F4MSG    DS   CL4                                                       
+         DS   CL2                                                       
+         CSECT                                                          
+         YREGS                                                          
+         SAVE (14,12)                                                   
+         STM  14,12,12(13)                                              
+         BASR 12,0                                                      
+         USING *,12                                                     
+         ST   13,SAVEA+4                                                
+         LA   13,SAVEA                                                  
+         OPEN (OFILE,OUTPUT)        
+         OPEN (IFILE1,INPUT)                                            
+         OPEN (IFILE2,INPUT)                                            
+         GET  IFILE1,RECORD1                                            
+         GET  IFILE2,RECORD2                                            
+         LA   R1,RECORD1                                                
+         LA   R2,RECORD2                                                
+         USING RECDSECT,R1                                              
+         CLC  F1TYPE,0(R2)                                              
+         BNE  NOMATCH                                                   
+         CLC  F1MSG,1(R2)                                               
+         BNE  NOMATCH                                                   
+         CLC  F2TYPE,5(R2)                                              
+         BNE  NOMATCH                                                   
+         CLC  F2MSG,6(R2)                                               
+         BNE  NOMATCH                                                   
+         CLC  F3TYPE,10(R2)                                             
+         BNE  NOMATCH                                                   
+         CLC  F3MSG,11(R2)                                              
+         BNE  NOMATCH     
+         CLC  F4TYPE,15(R2)  
+         BNE  NOMATCH                                                   
+         CLC  F4MSG,16(R2)                                              
+         BNE  NOMATCH                                                   
+ MATCH   DS   0H                                                        
+         MVC  MESSAGE,=CL80'MATCH FOUND'                                
+         PUT  OFILE                                                     
+         B    EXIT                                                      
+ NOMATCH DS   0H                                                        
+         MVC  MESSAGE,=CL80'NO MATCH'                                   
+         PUT  OFILE                                                     
+         B    EXIT                                                      
+ EXIT    DS   0H                                                        
+         L    13,SAVEA+4    
+         RETURN (14,12),RC=0                                            
+         LM   14,12,12(13)                                              
+         LA   15,0                                                      
+         BR   14                                                        
+SAVEA    DS   18F                                                       
+OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSORG=PS,LRECL=80,EODAD=EXIT        
+IFILE1   DCB  MACRF=GM,DDNAME=IFILE1,DSORG=PS,LRECL=80,EODAD=EXIT       
+IFILE2   DCB  MACRF=GM,DDNAME=IFILE2,DSORG=PS,LRECL=80,EODAD=EXIT       
+RECORD1  DS   CL20                                                      
+RECORD2  DS   CL20                                                      
+MESSAGE  DS   CL80                                                      
+         END                
+
+
+SAME JCL AS THE COMPARING DSNS
