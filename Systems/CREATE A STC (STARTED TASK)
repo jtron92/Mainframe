@@ -1,3 +1,7 @@
+****************
+BTW ITS BEST TO REMOVE NOTIFY AND TO USE THE FULL NAME DO NOT USER &SYSUID , THE SYSTEM DOES NOT KNOW WHAT THAT IS 
+SINCE ITS OWNER IS START2 AND NOT IBMUSER
+*********************************************************************************
 FOR EXAMPLE SINCE WE ALWAYS HAVE TO DUMP THE SYS1.MAN1 DATA ITS BEST TO DO THIS
 
 SO HAVE THE JCL TO DUMP IT , IT CAN BE ANYWHERE
@@ -6,11 +10,10 @@ SO HAVE THE JCL TO DUMP IT , IT CAN BE ANYWHERE
  000001 //SMFJOB01 JOB (MVS),'JORGE CINTRON',                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
- 000004 //             CLASS=A,                                                 
- 000005 //             NOTIFY=&SYSUID                                           
+ 000004 //             CLASS=A                                                                                        
  000006 //STEP01   EXEC PGM=IFASMFDP                                            
  000007 //INDD1    DD DSN=SYS1.MAN1,DISP=SHR                                    
- 000008 //OUTDD1   DD DSN=&SYSUID..MAN1,                                        
+ 000008 //OUTDD1   DD DSN=IBMUSER.MAN1,                                        
  000009 //            DISP=(OLD,CATLG,DELETE),                                  
  000010 //            UNIT=SYSDA,                                               
  000011 //            SPACE=(CYL,(50,10)),                                      
