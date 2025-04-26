@@ -5,6 +5,7 @@ IT HAD A STEP01 EXEC DFHZITCL <=== FROM HERE I HAD TO FIND OUT WITH THIS PROCEDU
 ********************************************************************************************************************
 DFH410.CICS.ADFHPROC(DFHZITCL)  <- DSN THAT HAD THE JCL FOR IT
 DFH410.CICS.SDFHPROC
+DFH410.SVSC.SAMPLES
 
 FIRST DO A SEARCH IN 3.4 
 
