@@ -1,0 +1,120 @@
+DFH410.CICS.ADFHPROC(DFHZITCL)  <- DSN THAT HAD THE JCL FOR IT
+
+FIRST DO A SEARCH IN 3.4 
+
+DFH*
+
+THEN DO A SRCHFOR DFHZITCL
+
+IT SHOWED THIS DSN DFH410.CICS.ADFHPROC
+
+
+        //DFHZITCL PROC LNGPRFX='PP.COBOL390.V220', Qualifier for COBOL         
+ 020000 //       LIBPRFX='CEE',              Qualifier for LE/390               
+ 030000 //       INDEX='CICSTS41.CICS',      Qualifier(s) for CICS libraries    
+ 040000 //       PROGLIB=,                   Name of appl load library          
+ 050000 //       DSCTLIB='CICSTS41.CICS.SDFHCOB',  Private macro/dsect          
+ 060000 //       OUTC=A,                     Class for print output             
+ 070000 //       REG=4M,                     Region size for all steps          
+ 080000 //       CBLPARM=('NODYNAM,LIB,RENT',  Compiler options                 
+ 090000 //          'CICS(''COBOL2'')'),       Translator options          @01C 
+ 100000 //       LNKPARM='LIST,XREF,RENT,MAP', Binder options                   
+ 110000 //       WORK=SYSDA                  Unit for work datasets             
+ 110600 //********************************************************************* 
+ 111200 //*                                                                   * 
+ 111300 //* @BANNER_START                           01                        * 
+ 111400 //* Licensed Materials - Property of IBM                              * 
+ 111500 //*                                                                   * 
+ 111600 //* 5655-S97              DFHZITCL                                    * 
+ 111700 //*                                                                   * 
+ 111800 //* (C) Copyright IBM Corp. 2001, 2004                                * 
+ 111900 //*                                                                   * 
+ 112000 //* CICS                                                              * 
+ 112100 //* (Element of CICS Transaction Server                               * 
+ 112200 //* for z/OS, Version 4 Release 1)                                    * 
+ 112300 //* @BANNER_END                                                       * 
+ 112400 //*                                                                   * 
+ 113000 //* STATUS = 6.4.0                                                    * 
+ 113700 //*                                                                   * 
+ 114400 //* CHANGE ACTIVITY :                                                 * 
+ 115100 //*                                                                   * 
+ 115800 //* $MOD(DFHZITCL),COMP(COMMAND),PROD(CICS    )                       * 
+ 116500 //*                                                                   * 
+ 117200 //*  PN= REASON REL YYMMDD HDXXIII : REMARKS                          * 
+ 117500 //* $01= A84313 640 040604 HDBGNRB : Migrate PQ84313 from SPA R630    * 
+ 117900 //* $L0= Base   620 011211 HD7OPW  : Base                             * 
+ 118200 //* $P1= D04451 630 030307 HD4PALS : remove sdfhc370 reference        * 
+ 118400 //* $P2= D08934 630 030919 HD3SCWG : DFHEILID now in SDFHSAMP         * 
+ 118500 //* $P3= D12714 640 041230 HD6KRAH : Compiler level                   * 
+ 118600 //*                                                                   *
+ 119300 //********************************************************************* 
+ 119400 //*                                                                     
+ 119500 //*   This procedure uses the Enterprise COBOL compiler and its         
+ 119600 //*        integrated CICS translater to generate a COBOL module        
+ 119700 //*        into a PDSE.                                                 
+ 119800 //*                                                                     
+ 120000 //*                                                                     
+ 130000 //*      This procedure contains 3 steps                                
+ 140000 //*      1.   Exec the COBOL compiler and integrated translator         
+ 150000 //*      2.   Reblock DFHEILID for use by the binder step               
+ 160000 //*      3.   Bind the output into dataset &PROGLIB                     
+ 165000 //*           This library must be a PDSE, not a PDS.                   
+ 170000 //*                                                                     
+ 180000 //*      The following JCL should be used                               
+ 190000 //*      to execute this procedure                                      
+ 200000 //*                                                                     
+ 210000 //*      //APPLPROG EXEC DFHZITCL,PROGLIB=dsnname                       
+ 220000 //*      //COBOL.SYSIN  DD *                                            
+ 230000 //*         .                                                           
+ 240000 //*         . Application program                                       
+ 250000 //*         .                                                           
+ 260000 //*      /*                                                             
+ 270000 //*      //LKED.SYSIN DD *                                              
+ 280000 //*         NAME anyname(R)                                             
+ 290000 //*      /*                                                             
+ 300000 //*                                                                     
+ 310000 //*      Where   anyname   is the name of your application program.     
+ 320000 //*      (Refer to the application programming guide for full details,  
+ 330000 //*      including what to do if your program contains calls to         
+ 340000 //*      the common programming interface.)                             
+ 350000 //*                                                                     
+ 360000 //COBOL  EXEC PGM=IGYCRCTL,REGION=&REG,                                 
+ 370000 //       PARM=&CBLPARM                                                  
+ 380000 //STEPLIB  DD DSN=&LNGPRFX..SIGYCOMP,DISP=SHR                           
+ 390000 //         DD DSN=&INDEX..SDFHLOAD,DISP=SHR                             
+ 400000 //SYSLIB   DD DSN=&DSCTLIB,DISP=SHR                                     
+ 410000 //         DD DSN=&INDEX..SDFHCOB,DISP=SHR                              
+ 420000 //         DD DSN=&INDEX..SDFHMAC,DISP=SHR                              
+ 430000 //         DD DSN=&INDEX..SDFHSAMP,DISP=SHR                             
+ 440000 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 450000 //SYSLIN   DD DSN=&&LOADSET,DISP=(MOD,PASS),                            
+ 460000 //            UNIT=&WORK,SPACE=(TRK,(3,3))                              
+ 470000 //SYSUT1   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 480000 //SYSUT2   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 500000 //SYSUT3   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 520000 //SYSUT4   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 540000 //SYSUT5   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 560000 //SYSUT6   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 580000 //SYSUT7   DD UNIT=&WORK,SPACE=(CYL,(1,1))                              
+ 600000 //*                                                                     
+ 620000 //COPYLINK EXEC PGM=IEBGENER,COND=(7,LT,COBOL)                          
+ 640000 //SYSUT1   DD DSN=&INDEX..SDFHSAMP(DFHEILID),DISP=SHR                   
+ 660000 //SYSUT2   DD DSN=&&COPYLINK,DISP=(NEW,PASS),                           
+ 680000 //            DCB=(LRECL=80,BLKSIZE=400,RECFM=FB),                      
+ 700000 //            UNIT=&WORK,SPACE=(400,(20,20))                            
+ 720000 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 740000 //SYSIN    DD DUMMY                                  
+ 760000 //*                                                                     
+ 780000 //LKED   EXEC PGM=IEWL,REGION=&REG,                                     
+ 800000 //            PARM='&LNKPARM',COND=(7,LT,COBOL)                         
+ 820000 //SYSLIB   DD DSN=&INDEX..SDFHLOAD,DISP=SHR                             
+ 840000 //         DD DSN=&LIBPRFX..SCEELKED,DISP=SHR                           
+ 860000 //SYSLMOD  DD DSN=&PROGLIB,DISP=SHR                                     
+ 880000 //SYSUT1   DD UNIT=&WORK,DCB=BLKSIZE=1024,                              
+ 900000 //            SPACE=(1024,(200,20))                                     
+ 920000 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 940000 //SYSLIN   DD DSN=&&COPYLINK,DISP=(OLD,DELETE)                          
+ 960000 //         DD DSN=&&LOADSET,DISP=(OLD,DELETE)                           
+ 980000 //         DD DDNAME=SYSIN                                              
+ ****** **************************** Bottom of Data ****************************
+                                                                                
