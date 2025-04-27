@@ -10,3 +10,25 @@
  ****** **************************** Bottom of Data ******
 
 JUST FIND THE JCLLIB THAT HAS THE PROCEDURE AND IN CASE MOD THE ORGINAL PROCEDURE BEFORE CALLING IT
+
+
+
+**************USING PROGLIB***************************************
+
+//CICISJOB JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //         JCLLIB ORDER=DFH410.SVSC.SAMPLES                             
+ 000007 //STEP02   EXEC DFHZITCL,PROGLIB=DFH410.CICS.SDFHLOAD                   
+ 000008 //COBOL.SYSIN   DD DSN=IBMUSER.JCL.CNTL(HI),DISP=SHR                    
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+
+
+PROGLIB IS JUST THE LOAD MODULE SO YOU DONT NEED A SYSLMOD BECAUSE IN THE PROCEDURE
+
+THERE IS A SYSLMOD DD DSN=&PROGLIB,DISP=SHR
+
