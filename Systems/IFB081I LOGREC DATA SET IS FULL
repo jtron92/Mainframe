@@ -6,7 +6,9 @@ when getting this error need to submit this jcl below
 
 
      ADCD.LIB.JCL(LOGREC) - 01.01                
-d ===>                                           
+d ===>                                    
+
+THIS ONE HERE IS THE GOAT <==============================
  ***************************** Top of Data ******
  //LOGREC  JOB (),'INIT LOGREC',MSGLEVEL=(1,1),  
  //   CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID          
