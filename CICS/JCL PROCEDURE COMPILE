@@ -1,0 +1,12 @@
+//CICISJOB JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //         JCLLIB ORDER=DFH410.SVSC.SAMPLES                             
+ 000007 //STEP02   EXEC DFHZITCL                                                
+ 000008 //COBOL.SYSIN   DD DSN=IBMUSER.JCL.CNTL(HI),DISP=SHR                    
+ 000009 //LKED.SYSLMOD  DD DSN=DFH410.CICS.SDFHLOAD(HI),DISP=SHR                
+ ****** **************************** Bottom of Data ******
+
+JUST FIND THE JCLLIB THAT HAS THE PROCEDURE AND IN CASE MOD THE ORGINAL PROCEDURE BEFORE CALLING IT
