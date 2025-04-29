@@ -1,0 +1,71 @@
+
+
+
+EDIT       ADCD.Z22A.PROCLIB(SMFCLEAR) - 01.00             Columns 00001 00072 
+ Command ===>                                                  Scroll ===> PAGE 
+ ****** ***************************** Top of Data ******************************
+ 000001 //SMFCLEAR PROC MAN='SYS1.MAN1'                                         
+ 000002 //*                                                                     
+ 000003 //* CLEAR SMF DATASET -                                                 
+ 000004 //* SMF MAN DATASET DUMPED REQUIRED MESSAGE RECIEVED                    
+ 000005 //* OR ISSUE SWITCH, I SMF, THEN THAT FILE WILL BE CLEARED              
+ 000006 //*                                                                     
+ 000007 //*                                                                     
+ 000008 //DUMP1   EXEC PGM=IFASMFDP,REGION=1M                                   
+ 000009 //INDD1    DD  DSN=&MAN,DISP=SHR                                        
+ 000010 //DUMPOUT  DD  DUMMY                                                    
+ 000011 //SYSPRINT DD  SYSOUT=D                                                 
+ 000012 //SYSIN    DD  DSN=ADCD.&SYSVER..PARMLIB(CLRMAN),DISP=SHR               
+ ****** **************************** Bottom of Data ****************************
+
+ EDIT       ADCD.Z22A.PARMLIB(CLRMAN) - 01.00               Columns 00001 00072 
+ Command ===>                                                  Scroll ===> PAGE 
+ ****** ***************************** Top of Data ******************************
+ 000001   INDD(INDD1,OPTIONS(CLEAR))                                            
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                                                                
+
+
+  *******************************************************************************
+
+  EDIT       ADCD.Z22A.PROCLIB(SMFDUMPS) - 01.05             Columns 00001 00072 
+ Command ===>                                                  Scroll ===> PAGE 
+ ****** ***************************** Top of Data ******************************
+ 000001 //SMFDUMPS PROC MAN='SYS1.MAN1'                                         
+ 000002 //*                                                                     
+ 000003 //* CLEAR SMF DATASET -                                                 
+ 000004 //* SMF MAN DATASET DUMPED REQUIRED MESSAGE RECIEVED                    
+ 000005 //* OR ISSUE SWITCH, I SMF, THEN THAT FILE WILL BE CLEARED              
+ 000006 //*                                                                     
+ 000007 //*                                                                     
+ 000008 //DUMP    EXEC PGM=IFASMFDP,REGION=4096K                                
+ 000009 //SYSPRINT  DD SYSOUT=*                                                 
+ 000010 //INDD1     DD DSN=&MAN,DISP=SHR                                        
+ 000011 //DUMPOUT   DD DSN=SYS1.SMF.DATA(+1),DISP=(NEW,CATLG),                  
+ 000012 //             UNIT=3390,VOL=SER=A2SYS1,SPACE=(CYL,(50,10),RLSE)        
+ 000013 //SYSIN     DD DSN=ADCD.&SYSVER..PARMLIB(SMFDUMP),DISP=SHR              
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+
+
+ EDIT       ADCD.Z22A.PARMLIB(SMFDUMP) - 01.03              Columns 00001 00072 
+ Command ===>                                                  Scroll ===> PAGE 
+ ****** ***************************** Top of Data ******************************
+ 000001   INDD(INDD1,OPTIONS(ALL))                                              
+ 000002   OUTDD(DUMPOUT,TYPE(1:255))                                            
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                                                                
+                             
+
+
+
+
+  
+                                                                                
+
+
+
