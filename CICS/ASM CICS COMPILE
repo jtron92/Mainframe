@@ -1,0 +1,92 @@
+        //JOB00001 JOB (MVS),'JORGE CINTRON',                                   
+ 000020 //             MSGLEVEL=(1,1),                                          
+ 000030 //             MSGCLASS=H,                                              
+ 000040 //             CLASS=A,                                                 
+ 000050 //             NOTIFY=&SYSUID                                           
+ 000100 //DFHEITAL PROC SUFFIX=1$,           Suffix for translator module       
+ 000200 //*                                                                     
+ 000300 //* This procedure has been changed since CICS/ESA Version 3            
+ 000400 //*                                                                     
+ 000500 //* Parameter INDEX2 has been removed                                   
+ 000600 //*                                                                     
+ 000700 //       ASMBLR=ASMA90,              Assembler module name              
+ 000800 //       INDEX='CICSTS13.CICS', Qualifier(s) for CICS libraries         
+ 000900 //       PROGLIB='CICSTS13.CICS.SDFHLOAD', Name of o/p library@BA25137C 
+ 001000 //       DSCTLIB='CICSTS13.CICS.SDFHMAC',  Private macro/dsect@BA25137C 
+ 001100 //       OUTC=A,                     Class for print output             
+ 001200 //       REG=2M,                     Region size for all steps          
+ 001300 //       LNKPARM='LIST,XREF',        Link edit parameters               
+ 001400 //       WORK=SYSDA                  Unit for work datasets  
+ 001500 //*                                                                     
+ 001600 //*      This procedure contains 4 steps                                
+ 001700 //*      1.   Exec the assembler translator                             
+ 001800 //*           (using the supplied suffix 1$)                            
+ 001900 //*      2.   Exec the assembler                                        
+ 002000 //*      3.   Reblock SDFHMAC(DFHEILIA) for use by the linkedit step    
+ 002100 //*      4.   Linkedit the output to dataset &PROGLIB                   
+ 002200 //*                                                                     
+ 002300 //*      The following JCL should be used                               
+ 002400 //*      to execute this procedure                                      
+ 002500 //*                                                                     
+ 002600 //*      //APPLPROG EXEC DFHEITAL                                       
+ 002700 //*      //TRN.SYSIN  DD *                                              
+ 002800 //*         .                                                           
+ 002900 //*         . Application program                                       
+ 003000 //*         .                                                           
+ 003100 //*      /*                                                             
+ 003200 //*      //LKED.SYSIN DD *                                              
+ 003300 //*         NAME anyname(R)                            
+ 003400 //*      /*                                                             
+ 003500 //*                                                                     
+ 003600 //*      Where   anyname   is the name of your application program.     
+ 003700 //*      (refer to the system definition guide for full details,        
+ 003800 //*      including what to do if your program contains calls to         
+ 003900 //*      the common programming interface.)                             
+ 004000 //*                                                                     
+ 004100 //TRN    EXEC PGM=DFHEAP&SUFFIX,                                        
+ 004200 //            REGION=&REG                                               
+ 004300 //STEPLIB  DD DSN=&INDEX..SDFHLOAD,DISP=SHR                             
+ 004400 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 004500 //SYSPUNCH DD DSN=&&SYSCIN,                                             
+ 004600 //            DISP=(,PASS),UNIT=&WORK,                                  
+ 004700 //            DCB=BLKSIZE=400,                                          
+ 004800 //            SPACE=(400,(400,100))                                     
+ 004810 //SYSIN    DD DSN=IBMUSER.JCL.CNTL(ASM),DISP=SHR                        
+ 004900 //*                                                                     
+ 005000 //ASM    EXEC PGM=&ASMBLR,                                              
+ 005100 //            REGION=&REG,        
+ 005200 //            PARM='DECK,NOOBJECT,LIST'                                 
+ 005300 //SYSLIB   DD DSN=&DSCTLIB,DISP=SHR                                     
+ 005400 //         DD DSN=&INDEX..SDFHMAC,DISP=SHR                              
+ 005500 //         DD DSN=&INDEX..SDFHSAMP,DISP=SHR                             
+ 005600 //         DD DSN=SYS1.MACLIB,DISP=SHR                                  
+ 005700 //SYSUT1   DD UNIT=&WORK,SPACE=(1700,(400,400))                         
+ 005800 //SYSUT2   DD UNIT=&WORK,SPACE=(1700,(400,400))                         
+ 005900 //SYSUT3   DD UNIT=&WORK,SPACE=(1700,(400,400))                         
+ 006000 //SYSPUNCH DD DSN=&&LOADSET,                                            
+ 006100 //            UNIT=&WORK,DISP=(,PASS),                                  
+ 006200 //            SPACE=(400,(100,100))                                     
+ 006300 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 006400 //SYSIN    DD DSN=&&SYSCIN,DISP=(OLD,DELETE)                            
+ 006500 //*                                                                     
+ 006600 //COPYLINK EXEC PGM=IEBGENER,COND=(7,LT,ASM)                            
+ 006700 //SYSUT1   DD DSN=&INDEX..SDFHMAC(DFHEILIA),DISP=SHR                    
+ 006800 //SYSUT2   DD DSN=&&COPYLINK,DISP=(NEW,PASS),                           
+ 006900 //            DCB=(LRECL=80,BLKSIZE=400,RECFM=FB),                      
+ 007000 //            UNIT=&WORK,SPACE=(400,(20,20))      
+ 007100 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 007200 //SYSIN    DD DUMMY                                                     
+ 007300 //*                                                                     
+ 007400 //LKED   EXEC PGM=IEWL,REGION=&REG,                                     
+ 007500 //            PARM='&LNKPARM',COND=(7,LT,ASM)                           
+ 007600 //SYSLIB   DD DSN=&INDEX..SDFHLOAD,DISP=SHR                             
+ 007700 //SYSLMOD  DD DSN=&PROGLIB(ASM),DISP=SHR                                
+ 007800 //SYSUT1   DD UNIT=&WORK,DCB=BLKSIZE=1024,                              
+ 007900 //            SPACE=(1024,(200,20))                                     
+ 008000 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 008100 //SYSLIN   DD DSN=&&LOADSET,DISP=(OLD,DELETE)                           
+ 008200 //         DD DSN=&&COPYLINK,DISP=(OLD,DELETE)                          
+ 008300 //         DD DDNAME=SYSIN                                              
+ 008400 //         PEND                                                         
+ 008500 //STEP01 EXEC DFHEITAL                                                  
+ ****** **************************** Bottom of Data ******
