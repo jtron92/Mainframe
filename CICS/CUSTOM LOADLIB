@@ -1,0 +1,18 @@
+IF YOU WANTED TO ADD YOUR VERY OWN LOADLIB TO CICS WHEN IT BOOTS UP GO TO
+
+SYS1.PROCLIB
+
+ BROWSE    SYS1.PROCLIB(CICSA)                        Line 00000060 Col 001 080 
+ Command ===>                                                  Scroll ===> PAGE 
+//***********************************************************                   
+//*        THE CICS LIBRARY (DFHRPL) CONCATENATION                              
+//*        If Language Environment is required, the SCEECICS                    
+//*        and SCEERUN datasets are needed in DFHRPL.                           
+//*        Refer to the Systems Definition Guide for                            
+//*        information on how to run with the native                            
+//*        runtime environments such as VS COBOL II.                            
+//***********************************************************                   
+//DFHRPL   DD DSN=&INDEX2..SDFHLOAD,DISP=SHR                                    
+//         DD DSN=CEE.SCEECICS,DISP=SHR                                         
+//         DD DSN=CEE.SCEERUN,DISP=SHR               
+ADD HERE 
