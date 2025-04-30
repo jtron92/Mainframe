@@ -1,0 +1,141 @@
+Setup OS/390 IPL parameters
+
+Change the configuration parameter: LOADPARM 0A822C.. and IPL for an initial cold start handler of DB2.
+
+Subsequent IPLs should use LOADPARM 0A822W.. to use the quicker warm start facility.
+
+DB2 parameters are left at default, because we don't know (yet) how to change them.
+APPN startup summary on OS/390 console
+
+This is where I gleaned interesting values.
+
+- 17.05.53 STC00017  DSNL004I - DDF START COMPLETE
+-            LOCATION  S390LOC
+-            LU        P390LU
+-            GENERICLU -NONE
+-            DOMAIN    -NONE
+-            TCPPORT   446
+-            RESPORT   5020
+- 17.05.53 STC00017  DSN9022I - DSNYASCP 'START DB2' NORMAL COMPLETION
+- 17.05.53 STC00024  +DSNX964I DSNX9STP THE DB2-ESTABLISHED STORED
+-  PROCEDURES ADDRESS SPACE
+-  FOR SUBSYSTEM DSN1 IS STARTED
+
+    S390LOC is (also) the default database name,
+    P390LU is the network entity (LUname) name we must connect to.
+
+FIXME: How to handle this WTO?
+
+*17.05.41 STC00017 *DSNT405E - DSNTLIDE DISPATCH PRIORITIES NOT IN SYNC:
+* IRLM    : 0020 COMPARED TO DB2     : 0021
+
+    Information but no solution: DSNT405E csect-name DISPATCH PRIORITIES NOT IN SYNC: ccccccc1: hhh1 COMPARED TO ccccccc2: hhh2
+    "The internal resource lock manager (IRLM) subsystem manages Db2 locks": Controlling the IRLM
+    What can be done about this?
+
+Use interactive SQL
+
+To get ISPF menus related to DB, use DBSPROC instead of default ISPFPROC as logon proc at logon time.
+
+The interactive SQL facility can be reached:
+
+    Type M.15 from the ISPF main menu,
+    Type 2.1 in the subsequent *DB2 Administration Menu*.
+
+Unfortunately, this can't be done in one go.
+
+Below the SQL statement: line on the appearing screen, SQL commands can be entered. Example:
+
+    CREATE DATABASE foobar
+    CREATE TABLE foobar.testtbl (id char(24))
+    INSERT INTO foobar.testtbl VALUES ('barbaz')
+    SELECT * FROM foobar.testtbl
+
+Retrieving information about available databases
+
+The tool is named DB2I. You can reach it from ISPF main menu:
+
+    Type M.13 in ISPF,
+    Type D into the the subsequent DB2I PRIMARY OPTION MENU's command line,
+    Change DB2 NAME to be DSN1,
+    Press Enter twice,
+    Type 7 in the subsequent DB2I PRIMARY OPTION MENU,
+    Choose any predefined Cmd x line, and enter:
+
+-DISPLAY DATABASE(*) LIMIT(1000)
+
+    Adjust LIMIT as needed,
+    Press Enter to see a list of defined databases.
+
+Output shows NO SPACES FOUND for our database from above. Do we need to create/assign separate table space first?
+Remote connection from OS/400
+
+To access remote databases, an according entry in the remote database directory needs to be created.
+
+addrdbdire rdb(s390loc) rmtlocname(p390lu *sna) dev(p390lu) lcllocname(*netatr) rmtnetid(*netatr) mode(ibmrdb) text('Default DB2 instance on OS/390 ADCD')
+
+OS/400 creates an according device description upon the first connection request.
+
+From strsql, a remote connection can now be initiated:
+
+CONNECT TO S390LOC USER P390 USING 'P390'
+
+    Note: Use your actual password for the P390 user.
+
+From the SQL prompt you can then issue the usual SQL commands, such as SELECTing the record inserted above:
+
+SELECT * FROM foobar.testtbl
+
+Further clarifications needed
+
+    After inserting records from OS/400, and SELECTing them in OS/390, the session hangs. A small window appears at bottom, stating SQL cost=2. Pressing PA1 ends the session with the interactive SQL facility but doesn't resolve the issue.
+        Apparently SQL cost is an estimate for the database management but not an actual error. Many operations in the DB2 Admin application seem to just hang until an eventual timeout with respective WTO output and messages on screen.
+    Which parameters are needed for crtddmf on OS/400 to access remote DB2 tables? Example (not working, need to clarify about possible 'P390.DATABASE.FILE'):
+
+crtddmf file(qgpl/p390db) rmtfile(*nonstd 'P390.DATABASE.FILE') rmtlocname(p390lu) dev(p390lu) lcllocname(*netatr) mode(ibmrdb) rmtnetid(*netatr)
+
+        Further research indicates that there might not be a counterpart for DDM access in DB2, but a Distributed FileManager/MVS component for accessing files at the data set level.
+    NO SPACES FOUND, see above. Possible clues:
+        DSNT602I NO SPACES FOUND, Db2 for z/OS, IBM
+        Usercomm - DB2 V10 Hold Data and Cover Letters for HP Release level AI00, search for UI22580 COVER LETTER START. 
+
+Weblinks
+
+    Hercules SNA support README, GitHub
+    S/390 Partners in Development: OS/390 (and z/OS) New Users Cookbook, SG24-6204-00
+    Mainframe DB2 (YouTube video) by racingmars‏
+
+Categories:
+
+    FIXMESoftware Configuration GuideSystem Administration
+
+Navigation menu
+
+    Log in
+
+    Page
+    Discussion
+
+    Read
+    View source
+    View history
+
+Search
+
+    Main page
+    All Pages
+    Categories
+    Recent changes
+    Random page
+
+Tools
+
+    What links here
+    Related changes
+    Special pages
+    Printable version
+    Permanent link
+    Page information
+
+    This page was last edited on 12 March 2025, at 00:59.
+    Content is available under GNU Free Documentation License 1.3 or later unless otherwise noted.
