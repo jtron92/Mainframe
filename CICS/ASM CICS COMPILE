@@ -90,3 +90,25 @@
  008400 //         PEND                                                         
  008500 //STEP01 EXEC DFHEITAL                                                  
  ****** **************************** Bottom of Data ******
+
+
+
+
+
+
+
+HERE IS THE PROCEDURE 
+
+
+000100 //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000200 //             MSGLEVEL=(1,1),                                          
+ 000300 //             MSGCLASS=H,                                              
+ 000400 //             CLASS=A,                                                 
+ 000500 //             NOTIFY=&SYSUID                                           
+ 000510 //         JCLLIB ORDER=CICSTS13.CICS.ADFHPROC                          
+ 000600 //STEP01   EXEC DFHEITAL                                                
+ 000700 //TRN.SYSIN DD DSN=IBMUSER.JCL.CNTL(ASM),DISP=SHR                       
+ 000800 //LKED.SYSLMOD DD DSN=CICSTS13.CICS.SDFHLOAD(ASM),DISP=SHR        
+
+
+MAKE SURE TO ADD THE JCLLIB ORDER=
