@@ -59,7 +59,38 @@ EDIT       ADCD.Z22A.PROCLIB(SMFCLEAR) - 01.00             Columns 00001 00072
                                                                                 
                                                                                 
                                                                                 
-                             
+
+
+
+//SMFCLEAR PROC                                                         
+ 000002 //*-------------------------------------------------------------------  
+ 000003 //* THIS PROCEDURE WILL CLEAR SMF DATA SETS OF YOUR SYSTEM              
+ 000004 //* USING THE SMF UTILITY PROGRAM IFASMFDP.                             
+ 000005 //*-------------------------------------------------------------------  
+ 000006 //SMFCLEAR  EXEC PGM=IFASMFDP                                           
+ 000007 //SYSPRINT  DD SYSOUT=*                                                 
+ 000008 //DUMPINA   DD DISP=SHR,                                                
+ 000009 //             DSN=SYS1.MAN1                                            
+ 000010 //DUMPINB   DD DISP=SHR,                                                
+ 000011 //             DSN=SYS1.MAN2                                            
+ 000012 //DUMPINC   DD DISP=SHR,                                                
+ 000013 //             DSN=SYS1.MAN3                                            
+ 000014 //SYSIN     DD DISP=SHR,                                                
+ 000015 //             DSN=SYS1.ADCD10.PARMLIB(CLRPARM)                         
+ ****** **************************** Bottom of Data ****************************
+
+
+DIT       SYS1.ADCD10.PARMLIB(CLRPARM) - 01.00            Columns 00001 00072 
+ Command ===>                                                  Scroll ===> CSR  
+ ****** ***************************** Top of Data ******************************
+ 000001  INDD(DUMPINA,OPTIONS(CLEAR))                                           
+ 000002  INDD(DUMPINB,OPTIONS(CLEAR))                                           
+ 000003  INDD(DUMPINC,OPTIONS(CLEAR))                                           
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                                                                
+                                          
 
 
 
