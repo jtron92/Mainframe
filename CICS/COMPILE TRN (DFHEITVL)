@@ -1,0 +1,117 @@
+//JOB0001  JOB (MVS),'JORGE CINTRON',                                   
+ 000020 //             MSGLEVEL=(1,1),                                          
+ 000030 //             MSGCLASS=H,                                              
+ 000040 //             CLASS=A,                                                 
+ 000050 //             NOTIFY=&SYSUID                                           
+ 000100 //DFHEITVL PROC SUFFIX=1$,           Suffix for translator module       
+ 000200 //*                                                                     
+ 000300 //* This procedure has been changed since CICS/ESA Version 3            
+ 000400 //*                                                                     
+ 000500 //* Parameter INDEX2 has been removed                                   
+ 000600 //*                                                                     
+ 000700 //       INDEX='CICSTS13.CICS', Qualifier(s) for CICS libraries         
+ 000800 //*      PROGLIB='CICSTS13.CICS.SDFHLOAD', Name of o/p library@BA25137C 
+ 000900 //       DSCTLIB='CICSTS13.CICS.SDFHCOB',  Private macro/dsect@BA25137C 
+ 001000 //       COMPHLQ='SYS1',             Qualifier(s) for COBOL compiler    
+ 001100 //       OUTC=A,                     Class for print output             
+ 001200 //       REG=2M,                     Region size for all steps          
+ 001300 //       LNKPARM='LIST,XREF',        Link edit parameters               
+ 001400 //       STUB='DFHEILIC',            Link edit INCLUDE for DFHECI    
+ 001500 //       LIB='SDFHCOB',              Library                            
+ 001600 //       WORK=SYSDA                  Unit for work datasets             
+ 001700 //*      This procedure contains 4 steps                                
+ 001800 //*      1.   Exec the COBOL translator                                 
+ 001900 //*           (using the supplied suffix 1$)                            
+ 002000 //*      2.   Exec the vs COBOL II compiler                             
+ 002100 //*      3.   Reblock &LIB(&STUB) for use by the linkedit step          
+ 002200 //*      4.   Linkedit the output into dataset &PROGLIB                 
+ 002300 //*                                                                     
+ 002400 //*      The following JCL should be used                               
+ 002500 //*      to execute this procedure                                      
+ 002600 //*                                                                     
+ 002700 //*      //APPLPROG EXEC DFHEITVL                                       
+ 002800 //*      //TRN.SYSIN  DD *                                              
+ 002900 //*         .                                                           
+ 003000 //*         . Application program                                       
+ 003100 //*         .                                                           
+ 003200 //*      /*                                                             
+ 003300 //*      //LKED.SYSIN DD *                                              
+ 003400 //*         NAME anyname(R)  
+ 003500 //*      /*                                                             
+ 003600 //*                                                                     
+ 003700 //*      Where   anyname   is the name of your application program.     
+ 003800 //*      (Refer to the system definition guide for full details,        
+ 003900 //*      including what to do if your program contains calls to         
+ 004000 //*      the common programming interface.)                             
+ 004100 //*                                                                     
+ 004200 //TRN    EXEC PGM=DFHECP&SUFFIX,                                        
+ 004300 //            PARM='COBOL2',                                            
+ 004400 //            REGION=&REG                                               
+ 004500 //STEPLIB  DD DSN=&INDEX..SDFHLOAD,DISP=SHR                             
+ 004600 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 004700 //SYSPUNCH DD DSN=&&SYSCIN,                                             
+ 004800 //            DISP=(,PASS),UNIT=&WORK,                                  
+ 004900 //            DCB=BLKSIZE=400,                                          
+ 005000 //            SPACE=(400,(400,100))                                     
+ 005100 //*                                                                     
+ 005200 //COB    EXEC PGM=IGYCRCTL,REGION=&REG,                                 
+ 005300 //       PARM='NODYNAM,LIB,OBJECT,RENT,RES,APOST,MAP,XREF'   
+ 005400 //STEPLIB  DD DSN=&COMPHLQ..COB2COMP,DISP=SHR                           
+ 005500 //SYSLIB   DD DSN=&DSCTLIB,DISP=SHR                                     
+ 005600 //         DD DSN=&INDEX..SDFHCOB,DISP=SHR                              
+ 005700 //         DD DSN=&INDEX..SDFHMAC,DISP=SHR                              
+ 005800 //         DD DSN=&INDEX..SDFHSAMP,DISP=SHR                             
+ 005900 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 006000 //SYSIN    DD DSN=IBMUSER.JCL.CNTL(COBOL),DISP=SHR                      
+ 006100 //SYSLIN   DD DSN=&&LOADSET,DISP=(MOD,PASS),                            
+ 006200 //            UNIT=&WORK,SPACE=(80,(250,100))                           
+ 006300 //SYSUT1   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 006400 //SYSUT2   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 006500 //SYSUT3   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 006600 //SYSUT4   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 006700 //SYSUT5   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 006800 //SYSUT6   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 006900 //SYSUT7   DD UNIT=&WORK,SPACE=(460,(350,100))                          
+ 007000 //*                                                                     
+ 007100 //COPYLINK EXEC PGM=IEBGENER,COND=(7,LT,COB)                            
+ 007200 //SYSUT1   DD DSN=&INDEX..&LIB(&STUB),DISP=SHR   
+ 007300 //SYSUT2   DD DSN=&&COPYLINK,DISP=(NEW,PASS),                           
+ 007400 //            DCB=(LRECL=80,BLKSIZE=400,RECFM=FB),                      
+ 007500 //            UNIT=&WORK,SPACE=(400,(20,20))                            
+ 007600 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 007700 //SYSIN    DD DUMMY                                                     
+ 007800 //*                                                                     
+ 007900 //LKED   EXEC PGM=IEWL,REGION=&REG,                                     
+ 008000 //            PARM='&LNKPARM',COND=(5,LT,COB)                           
+ 008100 //SYSLIB   DD DSN=&INDEX..SDFHLOAD,DISP=SHR                             
+ 008200 //         DD DSN=&COMPHLQ..COB2CICS,DISP=SHR                           
+ 008300 //         DD DSN=&COMPHLQ..COB2LIB,DISP=SHR                            
+ 008400 //SYSLMOD  DD DSN=IBMUSER.ALOAD(COBOL),DISP=SHR                         
+ 008500 //SYSUT1   DD UNIT=&WORK,DCB=BLKSIZE=1024,                              
+ 008600 //            SPACE=(1024,(200,20))                                     
+ 008700 //SYSPRINT DD SYSOUT=&OUTC                                              
+ 008800 //SYSLIN   DD DSN=&&COPYLINK,DISP=(OLD,DELETE)                          
+ 008900 //         DD DSN=&&LOADSET,DISP=(OLD,DELETE)                           
+ 009000 //         DD DDNAME=SYSIN                                              
+ 009100 //         PEND     
+ 009200 //STEP02   EXEC DFHEITVL   
+
+
+
+
+
+
+
+*****************************************************************
+
+
+HERE IS THE PROC TOO
+
+ 000001 //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP01   EXEC DFHYITVL                                                
+ 000007 //TRN.SYSIN  DD DSN=IBMUSER.JCL.CNTL(COBOL2),DISP=SHR                   
+ 000008 //LKED.SYSLMOD DD DSN=CICSTS13.CICS.SDFHLOAD(COBOL2),DISP=SHR        
