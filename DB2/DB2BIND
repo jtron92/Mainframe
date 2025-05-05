@@ -1,26 +1,27 @@
-000100 //MATEDKD JOB MSGLEVEL=(1,1),NOTIFY=&SYSUID               
-000200 //*                                                       
-000300 //*  DB2 BIND JCL                                         
-000400 //*                                                       
-000500 //BIND     EXEC PGM=IKJEFT01                              
-000600 //STEPLIB  DD  DISP=SHR,DSN=DSNA10.DBAG.SDSNEXIT          
-000700 //         DD  DISP=SHR,DSN=DSNA10.SDSNLOAD               
-000800 //DBRMLIB  DD  DSN=MATEDK.GREYDRM,DISP=SHR                
-000900 //SYSPRINT DD  SYSOUT=*                                   
-001000 //SYSTSPRT DD  SYSOUT=*                                   
-001100 //SYSUDUMP DD  SYSOUT=*                                   
-001200 //SYSTSIN  DD  *                                          
-001300 DSN SYSTEM (DBAG   )                                      
-001400 BIND  MEMBER    (DBA     )  -                             
-001500       PLAN      (MATEDKA ) -                       
-001600       ACTION    (REP)       -                      
-001700       ISOLATION (CS)        -                      
-001800       VALIDATE  (BIND)      -                      
-001900       RELEASE   (COMMIT)    -                      
-002000       OWNER     (MATEDK )  -                       
-002100       QUALIFIER (MATEDK )  -                       
-002200       ENCODING  (1047)                             
-002300 END                                                
-002400 /*                                                 
-****** **************************** Bottom of Data *******
-
+ 000100 //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000200 //             MSGLEVEL=(1,1),                                          
+ 000300 //             MSGCLASS=H,                                              
+ 000400 //             CLASS=A,                                                 
+ 000500 //             NOTIFY=&SYSUID                                           
+ 000600 //STEP01   EXEC PGM=IKJEFT01                                            
+ 000700 //STEPLIB  DD DSN=DSN910.DB9G.SDSNEXIT,DISP=SHR                         
+ 000710 //         DD DSN=DSN910.SDSNLOAD,DISP=SHR                              
+ 000800 //DBRMLIB  DD DSN=IBMUSER.JCL.CNTL,DISP=SHR        <---- pds location of the dclgen memeber                     
+ 000900 //SYSPRINT DD SYSOUT=*                                                  
+ 000910 //SYSTSPRT DD SYSOUT=*                                                  
+ 001000 //AMSDUMP  DD SYSOUT=*                                                  
+ 001100 //SYSOUT   DD SYSOUT=*                                                  
+ 001200 //SYSUDUMP DD SYSOUT=*                                                  
+ 001300 //SYSTSIN  DD *                                                         
+ 001400   DSN SYSTEM (DB9G )                <--- database system name                                                  
+ 001500   BIND MEMBER (EMP)-                <---- dclgen member name                                     
+ 001600   PLAN (SQLCODE) -                  <---- make a name up for the plan anything                                    
+ 001700   ACTION (REP) -                     
+ 001800   ISOLATION (CS) -                                                      
+ 001900   VALIDATE (BIND) -                                                     
+ 002000   RELEASE (COMMIT) -                                                    
+ 002100   OWNER (IBMUSER) -                                                     
+ 002200   QUALIFIER (IBMUSER) -                                                 
+ 002300   ENCODING (1047)                                                       
+ 002500 /*                                                                      
+ ****** **************
