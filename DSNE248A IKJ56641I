@@ -1,0 +1,43 @@
+READY                                                                           
+  DSN SYSTEM (DBBG)                                                             
+DSN                                                                             
+DSN                                                                             
+DSNE248A COMMAND ENTERED CONTAINS INVALID CHARACTERS, RESPECIFY                 
+IKJ56641I DSN      ENDED DUE TO ERROR+                                          
+IKJ56641I SYSTEM ABEND CODE 001   REASON CODE 00000000                          
+******************************** BOTTOM OF DATA ********************************
+                                                                                
+                                                                                
+                                                                                
+
+
+
+THIS IS BECAUSE I FORGOT TO REMOVE THE MINUS SIGN AT THE END
+
+//DB2BIND1 JOB (DB2),'JORGE CINTRON',                                   
+ 000002 //             MSGLEVEL=(1,1),                                          
+ 000003 //             MSGCLASS=H,                                              
+ 000004 //             CLASS=A,                                                 
+ 000005 //             NOTIFY=&SYSUID                                           
+ 000006 //STEP01   EXEC PGM=IKJEFT01                                            
+ 000007 //STEPLIB  DD DSN=DSNB10.DBBG.SDSNEXIT,DISP=SHR                         
+ 000008 //         DD DSN=DSNB10.SDSNLOAD,DISP=SHR                              
+ 000009 //DBRMLIB  DD DSN=IBMUSER.JCL.CNTL,DISP=SHR                             
+ 000010 //SYSPRINT DD SYSOUT=*                                                  
+ 000011 //AMSDUMP  DD SYSOUT=*                                                  
+ 000012 //SYSOUT   DD SYSOUT=*                                                  
+ 000013 //SYSUDUMP DD SYSOUT=*                                                  
+ 000014 //SYSTSPRT DD SYSOUT=*                                                  
+ 000015 //SYSTSIN  DD *                                                         
+ 000016   DSN SYSTEM (DBBG)                                                     
+ 000017   BIND MEMBER (EMP)-                                                    
+ 000018   PLAN (SQLCODE)-                                                       
+ 000019   ACTION (REP)-                                                         
+ 000020   ISOLATION (CS)-                                                       
+ 000021   VALIDATE (BIND)-                               
+ 000022   RELEASE (COMMIT)-                                                     
+ 000023   OWNER (IBMUSER)-                                                      
+ 000024   QUALIFIER (IBMUSER)-                                                  
+ 000025 /*                                                                      
+ ****** **************************** Bottom of Data ****************************
+              
