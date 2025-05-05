@@ -1,0 +1,133 @@
+I WAS HAVING ISSUES SUBMITTING FOR A DCLGEN I ADDED THE SOURCE TABLE EMP 
+
+BUT IN THE OPTION 15 THE SSID IS DBAG
+
+BUT IN THE OPTION 16 DB2 SYSTEM ITS DBBG
+
+
+
+                           DCLGEN                             SSID: DBAG       
+ ===>                                                                           
+ DSNE294I SYSTEM RETCODE=000      USER OR DSN RETCODE=0                         
+ Enter table name for which declarations are required:                          
+  1  SOURCE TABLE NAME ===> EMP                                                 
+                                                                                
+  2  TABLE OWNER ..... ===>                                                     
+                                                                                
+  3  AT LOCATION ..... ===>                                     (Optional)      
+ Enter destination data set:          (Can be sequential or partitioned)        
+  4  DATA SET NAME ... ===> 'IBMUSER.JCL.CNTL(EMP)'                             
+  5  DATA SET PASSWORD ===>           (If password protected)                   
+ Enter options as desired:                                                      
+  6  ACTION .......... ===> ADD       (ADD new or REPLACE old declaration)      
+  7  COLUMN LABEL .... ===> NO        (Enter YES for column label)              
+  8  STRUCTURE NAME .. ===>                                     (Optional)      
+  9  FIELD NAME PREFIX ===>                                     (Optional)      
+ 10  DELIMIT DBCS .... ===> YES       (Enter YES to delimit DBCS identifiers)   
+ 11  COLUMN SUFFIX ... ===> NO        (Enter YES to append column name)         
+ 12  INDICATOR VARS .. ===> NO        (Enter YES for indicator variables)       
+ 13  ADDITIONAL OPTIONS===> NO        (Enter YES to change additional options)  
+                                                                                
+ PRESS: ENTER to process    END to exit      HELP for more information          
+
+
+SO GO HERE
+
+                             DB2I PRIMARY OPTION MENU          SSID: DBBG       
+ COMMAND ===>                                                                   
+                                                                                
+ Select one of the following DB2 functions and press ENTER.                     
+                                                                                
+  1  SPUFI                  (Process SQL statements)                            
+  2  DCLGEN                 (Generate SQL and source language declarations)     
+  3  PROGRAM PREPARATION    (Prepare a DB2 application program to run)          
+  4  PRECOMPILE             (Invoke DB2 precompiler)                            
+  5  BIND/REBIND/FREE       (BIND, REBIND, or FREE plans or packages)           
+  6  RUN                    (RUN an SQL program)                                
+  7  DB2 COMMANDS           (Issue DB2 commands)                                
+  8  UTILITIES              (Invoke DB2 utilities)                              
+  D  DB2I DEFAULTS          (Set global parameters)                             
+  Q  QMF                    (Query Management Facility                          
+  X  EXIT                   (Leave DB2I)                                        
+                                                                                
+                                                                                
+
+
+OPTION D 
+
+CHANGE THE DB2 NAME TO WHATEVER THE SSID IS 
+
+                            DB2I DEFAULTS PANEL 1                               
+ COMMAND ===>                                                                   
+                                                                                
+ Change defaults as desired:                                                    
+                                                                                
+  1  DB2 NAME ............. ===> DBBG      (Subsystem identifier)               
+  2  DB2 CONNECTION RETRIES ===> 0         (How many retries for DB2 connection)
+  3  APPLICATION LANGUAGE   ===> IBMCOB    (ASM, C, CPP, IBMCOB, FORTRAN, PLI)  
+  4  LINES/PAGE OF LISTING  ===> 60        (A number from 5 to 999)             
+  5  MESSAGE LEVEL ........ ===> I         (Information, Warning, Error, Severe)
+  6  SQL STRING DELIMITER   ===> DEFAULT   (DEFAULT, ' or ")                    
+  7  DECIMAL POINT ........ ===> .         (. or ,)                             
+  8  STOP IF RETURN CODE >= ===> 8         (Lowest terminating return code)     
+  9  NUMBER OF ROWS ....... ===> 20        (For ISPF Tables)                    
+ 10  AS USER                ===>           (Userid to associate with the trusted
+                                            connection)                         
+                                                                                
+                                                                                
+
+
+HOW TO FIND THE REAL SSID : 
+
+
+DB2 Admin -------------- DB2 Administration Menu 11.1.0 ----------------- 16:02
+ Option ===>                                                                    
+                                                                                
+    1 - DB2 system catalog                                DB2 System: DBBG      
+    2 - Execute SQL statements                            DB2 SQL ID: IBMUSER   
+    3 - DB2 performance queries                           Userid    : IBMUSER   
+    4 - Change current SQL ID                             DB2 Schema: IBMUSER   
+    5 - Utility generation using LISTDEFs and TEMPLATEs   DB2 Rel   : 1115      
+    P - Change DB2 Admin parameters                                             
+   DD - Distributed DB2 systems                                                 
+    E - Explain                                                                 
+    Z - DB2 system administration                                               
+   SM - Space management functions                                              
+    W - Manage work statement lists                  
+
+
+
+OR  YOU CAN GO INTO THE SYS1.PARMLIBS 
+
+
+
+
+
+
+     ADCD.Z22A.PARMLIB(IEFSSNDB) - 01.17             Columns 00001 00072 
+ Command ===>                                                  Scroll ===> PAGE 
+ ****** ***************************** Top of Data ******************************
+ 000001 SUBSYS SUBNAME(SMS)                                                     
+ 000002    INITRTN(IGDSSIIN)                                                    
+ 000003    INITPARM('ID=00,PROMPT=DISPLAY')                                     
+ 000004 SUBSYS SUBNAME(JES2)           /* JES2 AS PRIMARY SUBSYSTEM */          
+ 000005   PRIMARY(YES) START(NO)                                                
+ 000006 SUBSYS SUBNAME(RACF)                   /* RACF SUBSYSTEM    */          
+ 000007   INITRTN(IRRSSI00) INITPARM('#')                                       
+ 000008 SUBSYS SUBNAME(TNF)                                                     
+ 000009 SUBSYS SUBNAME(VMCF)                                                    
+ 000010 SUBSYS SUBNAME(DBBG)                   /* DB2 SUBSYSTEM     */          
+ 000011   INITRTN(DSN3INI) INITPARM('DSN3EPX,-DBBG,S') /* DB2 11.1 SUBSYSTEM */ 
+ 000012 SUBSYS SUBNAME(DJBG)                   /*  IRLM FOR DB2 11.1 */         
+ 000013 SUBSYS SUBNAME(DBAG)                   /* DB2 SUBSYSTEM     */          
+ 000014   INITRTN(DSN3INI) INITPARM('DSN3EPX,-DBAG,S') /* DB2 10.1 SUBSYSTEM */ 
+ 000015 SUBSYS SUBNAME(DJAG)                   /*  IRLM FOR DB2 10.1 */         
+ 000016 SUBSYS SUBNAME(IRLM)                   /*  IRLM FOR IMS     */          
+ 000017 SUBSYS SUBNAME(JRLM)                   /*  IRLM FOR IMS     */          
+ 000018 SUBSYS SUBNAME(LOGR)                   /* RRS SUBSYSTEM     */          
+ 000019   INITRTN(IXGSSINT)                                                     
+
+
+
+
+
