@@ -1,0 +1,20 @@
+IF YOU GET THIS ERROR 
+
+READY                                                                           
+  DSN SYSTEM (DB9G )                                                            
+IKJ56500I COMMAND DSN NOT FOUND                                                 
+READY                                                                           
+  RUN PROGRAM (DB2CODE)  PLAN (SQLCODE)  LIBRARY ('IBMUSER.ALOAD')              
+IKJ56712I INVALID KEYWORD, (DB2CODE)                                            
+IKJ56712I INVALID KEYWORD, PLAN                                                 
+IKJ56712I INVALID KEYWORD, (SQLCODE)                                            
+IKJ56712I INVALID KEYWORD, LIBRARY                                              
+IKJ56712I INVALID KEYWORD, ('IBMUSER.ALOAD')                                    
+READY                                                                           
+END                                                
+
+
+YOU SHOULD CHECK YOUR STEP LIB AND MAKE SURE YOU HAVE THESE TWO LIBS ESP THE LOAD
+
+//STEPLIB  DD DSN=DSN910.DB9G.SDSNEXIT,DISP=SHR                         
+//         DD DSN=DSN910.SDSNLOAD,DISP=SHR    
