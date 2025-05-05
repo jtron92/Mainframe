@@ -1,0 +1,54 @@
+***************************** Top of Data ******************************
+ 000001       ******************************************************************
+ 000002       * DCLGEN TABLE(EMP)                                              *
+ 000003       *        LIBRARY(IBMUSER.JCL.CNTL(EMP))                          *
+ 000004       *        ACTION(REPLACE)                                         *
+ 000005       *        LANGUAGE(COBOL)                                         *
+ 000006       *        QUOTE                                                   *
+ 000007       * ... IS THE DCLGEN COMMAND THAT MADE THE FOLLOWING STATEMENTS   *
+ 000008       ******************************************************************
+ 000009            EXEC SQL DECLARE EMP TABLE                                   
+ 000010            ( EMPNO                          CHAR(6) NOT NULL,           
+ 000011              FIRSTNME                       VARCHAR(12) NOT NULL,       
+ 000012              MIDINIT                        CHAR(1) NOT NULL,           
+ 000013              LASTNAME                       VARCHAR(15) NOT NULL,       
+ 000014              WORKDEPT                       CHAR(3),                    
+ 000015              PHONENO                        CHAR(4),                    
+ 000016              HIREDATE                       DATE,                       
+ 000017              JOB                            CHAR(8),                    
+ 000018              EDLEVEL                        SMALLINT,                   
+ 000019              SEX                            CHAR(1),         
+ 000020              BIRTHDATE                      DATE,                       
+ 000021              SALARY                         DECIMAL(9, 2),              
+ 000022              BONUS                          DECIMAL(9, 2),              
+ 000023              COMM                           DECIMAL(9, 2)               
+ 000024            ) END-EXEC.                                                  
+ 000025       ******************************************************************
+ 000026       * COBOL DECLARATION FOR TABLE EMP                                *
+ 000027       ******************************************************************
+ 000028        01  DCLEMP.                                                      
+ 000029            10 EMPNO                PIC X(6).                            
+ 000030            10 FIRSTNME.                                                 
+ 000031               49 FIRSTNME-LEN      PIC S9(4) USAGE COMP.                
+ 000032               49 FIRSTNME-TEXT     PIC X(12).                           
+ 000033            10 MIDINIT              PIC X(1).                            
+ 000034            10 LASTNAME.                                                 
+ 000035               49 LASTNAME-LEN      PIC S9(4) USAGE COMP.                
+ 000036               49 LASTNAME-TEXT     PIC X(15).                           
+ 000037            10 WORKDEPT             PIC X(3).                            
+ 000038            10 PHONENO              PIC X(4).                            
+ 000039            10 HIREDATE             PIC X(10).         
+ 000040            10 JOB                  PIC X(8).                            
+ 000041            10 EDLEVEL              PIC S9(4) USAGE COMP.                
+ 000042            10 SEX                  PIC X(1).                            
+ 000043            10 BIRTHDATE            PIC X(10).                           
+ 000044            10 SALARY               PIC S9(7)V9(2) USAGE COMP-3.         
+ 000045            10 BONUS                PIC S9(7)V9(2) USAGE COMP-3.         
+ 000046            10 COMM                 PIC S9(7)V9(2) USAGE COMP-3.         
+ 000047       ******************************************************************
+ 000048       * THE NUMBER OF COLUMNS DESCRIBED BY THIS DECLARATION IS 14      *
+ 000049       ******************************************************************
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                         
