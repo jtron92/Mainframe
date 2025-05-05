@@ -1,20 +1,26 @@
-000100 //MATEDKD JOB MSGLEVEL=(1,1),NOTIFY=&SYSUID                      
-000200 //*                                                              
-000300 //*  COBOL DB2 RUN JCL                                           
-000400 //*                                                              
-000500 //STEP01   EXEC PGM=IKJEFT01,                                    
-000600 //             DYNAMNBR=20,REGION=4096K                          
-000700 //STEPLIB  DD  DISP=SHR,DSN=DSNA10.DBAG.SDSNEXIT                 
-000800 //         DD  DISP=SHR,DSN=DSNA10.SDSNLOAD                      
-000900 //SYSPRINT DD  SYSOUT=*                                          
-001000 //SYSTSPRT DD  SYSOUT=*                                          
-001100 //SYSUDUMP DD  SYSOUT=*                                          
-001200 //SYSOUT   DD  SYSOUT=*                                          
-001300 //SYSTSIN  DD  *                                                 
-001400 DSN SYSTEM (DBAG   )    
-001500   RUN PROGRAM   (DBA)       -   
-001600       PLAN      (MATEDKA ) -                 
-001700       LIBRARY   ('MATEDK.LOAD.LIB')          
-001800 END                                          
-001900 /*                                           
-****** **************************** Bottom of Data *
+ 000100 //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000200 //             MSGLEVEL=(1,1),                                          
+ 000300 //             MSGCLASS=H,                                              
+ 000400 //             CLASS=A,                                                 
+ 000500 //             NOTIFY=&SYSUID                                           
+ 000600 //STEP01   EXEC PGM=IKJEFT01,                                           
+ 000610 //         DYNAMNBR=20,REGION=4096K                                     
+ 000700 //STEPLIB  DD DSN=DSN910.DB9G.SDSNEXIT,DISP=SHR                         
+ 000800 //         DD DSN=DSN910.SDSNLOAD,DISP=SHR                              
+ 000900 //DBRMLIB  DD DSN=IBMUSER.JCL.CNTL,DISP=SHR                  <--- where your dclgen is so add that pds           
+ 001000 //SYSPRINT DD SYSOUT=*                                                  
+ 001100 //SYSTSPRT DD SYSOUT=*                                                  
+ 001200 //AMSDUMP  DD SYSOUT=*                                                  
+ 001300 //SYSOUT   DD SYSOUT=*                                                  
+ 001400 //SYSUDUMP DD SYSOUT=*                                                  
+ 001500 //SYSTSIN  DD *                                                         
+ 001600   DSN SYSTEM (DB9G )                <--- database system name                                    
+ 001700   RUN PROGRAM (COBOLDB2)-            <--- source code member name                                   
+ 001800   PLAN (SQLCODE) -                    <--- just make up a name 
+ 002500   LIBRARY ('IBMUSER.ALOAD')                  <----- loadlib that has your compiled code for the source                           
+ 002600 /*                                                                      
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                                                                
+                           
