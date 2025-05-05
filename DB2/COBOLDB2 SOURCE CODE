@@ -1,0 +1,25 @@
+ 000100 000100 IDENTIFICATION DIVISION.                                         
+ 000200        PROGRAM-ID. COBOLDB2.                                            
+ 000300        ENVIRONMENT DIVISION.                                            
+ 000400        DATA DIVISION.                                                   
+ 000500        WORKING-STORAGE SECTION.                                         
+ 000600            EXEC SQL INCLUDE SQLCA END-EXEC.                             
+ 000700            EXEC SQL INCLUDE EMP   END-EXEC.                             
+ 000800        PROCEDURE DIVISION.                                              
+ 000900            MOVE '000170' TO EMPNO.                                      
+ 001000            EXEC SQL                                                     
+ 001100                SELECT EMPNO, FIRSTNME, MIDINIT, LASTNAME, WORKDEPT,     
+ 001200                PHONENO, JOB, SEX, BIRTHDATE                             
+ 001300            INTO :EMPNO, :FIRSTNME, :MIDINIT, :LASTNAME, :WORKDEPT,      
+ 001400                :PHONENO, :JOB, :SEX, :BIRTHDATE                         
+ 001500            FROM EMP                                                     
+ 001600            WHERE EMPNO = :EMPNO                                         
+ 001700            END-EXEC.                                                    
+ 001710            DISPLAY EMPNO, FIRSTNME, MIDINIT, LASTNAME, WORKDEPT,        
+ 001720                    PHONENO, JOB, SEX, BIRTHDATE       
+ 001730            DISPLAY "SQLCODE : " SQLCODE                                 
+ 001800            STOP RUN.                                                    
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                 
