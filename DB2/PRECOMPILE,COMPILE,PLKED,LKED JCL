@@ -1,0 +1,88 @@
+
+        //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000020 //             MSGLEVEL=(1,1),                                          
+ 000030 //             MSGCLASS=H,                                              
+ 000040 //             CLASS=A,                                                 
+ 000050 //             NOTIFY=&SYSUID                                           
+ 000100 //********************************************************************  
+ 000200 //*        DSNHICOB  - DB2 precompile, IBM COBOL compile, pre-link,  *  
+ 000300 //*                    and link edit a DB2 SQL program.              *  
+ 000400 //********************************************************************  
+ 000500 //DSNHICOB PROC WSPC=500                                                
+ 000600 //********************************************************************  
+ 000700 //*        Precompile the IBM COBOL program                          *  
+ 000800 //********************************************************************  
+ 000900 //PC     EXEC PGM=DSNHPC,PARM='HOST(IBMCOB),XREF,SOURCE,FLAG(I),APOST'  <-- you just need host(ibmcob)
+ 001000 //DBRMLIB  DD  DSN=IBMUSER.JCL.CNTL(EMP),DISP=SHR                       
+ 001200 //STEPLIB  DD  DISP=SHR,DSN=DSN910.DB9G.SDSNEXIT                        
+ 001300 //         DD  DISP=SHR,DSN=DSN910.SDSNLOAD                             
+ 001400 //SYSCIN   DD  DSN=&&DSNHOUT,DISP=(MOD,PASS),UNIT=SYSDA,                
+ 001500 //             SPACE=(800,(&WSPC,&WSPC))           
+ 001600 //SYSLIB   DD  DSN=IBMUSER.JCL.CNTL,DISP=SHR                            
+ 001700 //SYSPRINT DD  SYSOUT=*                                                 
+ 001800 //SYSTERM  DD  SYSOUT=*                                                 
+ 001900 //SYSUDUMP DD  SYSOUT=*                                                 
+ 002000 //SYSUT1   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 002100 //SYSUT2   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 002110 //SYSIN    DD  DSN=IBMUSER.JCL.CNTL(COBOLDB2),DISP=SHR                  
+ 002200 //********************************************************************  
+ 002300 //*        Compile the IBM COBOL program if the precompile           *  
+ 002400 //*        return code is 4 or less.                                 *  
+ 002500 //********************************************************************  
+ 002600 //COB      EXEC PGM=IGYCRCTL,                                           
+ 002700 //*            PARM=(NOSEQUENCE,QUOTE,RENT,'PGMNAME(LONGUPPER)'),  <--- you can use this parm too      
+ 002800 //*            COND=(4,LT,PC)                                           it came with the system
+ 002810 //            PARM=('BUFSIZE(32760),LIST,LIB,MAP,OBJECT',               
+ 002820 //            'DATA(31),XREF,RENT')                                     
+ 002900 //SYSPRINT DD  SYSOUT=*                                                 
+ 003000 //SYSTERM  DD  SYSOUT=*                                                 
+ 003100 //SYSLIN   DD  DSN=&&LOADSET,DISP=(MOD,PASS),UNIT=SYSDA,                
+ 003200 //             SPACE=(800,(&WSPC,&WSPC))               
+ 003300 //SYSIN    DD  DSN=&&DSNHOUT,DISP=(OLD,DELETE)                          
+ 003400 //SYSUT1   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 003500 //SYSUT2   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 003600 //SYSUT3   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 003700 //SYSUT4   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 003800 //SYSUT5   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 003900 //SYSUT6   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 004000 //SYSUT7   DD  SPACE=(800,(&WSPC,&WSPC),,,ROUND),UNIT=SYSDA             
+ 004100 //********************************************************************  
+ 004200 //*  PRELINK STEP.                                                   *  
+ 004300 //********************************************************************  
+ 004400 //PLKED   EXEC PGM=EDCPRLK,COND=((4,LT,PC),(4,LT,COB))                  
+ 004500 //STEPLIB  DD  DISP=SHR,DSN=CEE.SCEERUN                                 
+ 004600 //SYSMSGS  DD  DISP=SHR,                                                
+ 004700 //             DSN=CEE.SCEEMSGP(EDCPMSGE)                               
+ 004800 //SYSIN    DD  DSN=&&LOADSET,DISP=(OLD,DELETE)                          
+ 004900 //SYSMOD   DD  DSN=&&PLKSET,UNIT=SYSDA,DISP=(MOD,PASS),                 
+ 005000 //             SPACE=(32000,(30,30)),                                   
+ 005100 //             DCB=(RECFM=FB,LRECL=80,BLKSIZE=3200)                     
+ 005200 //SYSDEFSD DD  DUMMY            
+ 005300 //SYSOUT   DD  SYSOUT=*                                                 
+ 005400 //SYSPRINT DD  SYSOUT=*                                                 
+ 005500 //SYSTERM  DD  SYSOUT=*                                                 
+ 005600 //********************************************************************  
+ 005700 //*        Linkedit if the precompile and compile                    *  
+ 005800 //*        return codes are 4 or less.                               *  
+ 005900 //********************************************************************  
+ 006000 //LKED     EXEC PGM=IEWL,PARM='MAP,XREF',        <--- you can remove xref if you want                       
+ 006100 //         COND=((4,LT,PC),(4,LT,COB))                                  
+ 006200 //SYSLIB   DD  DISP=SHR,DSN=CEE.SCEELKED                                
+ 006300 //         DD  DISP=SHR,DSN=DSN910.SDSNLOAD                             
+ 006400 //*        DD  DISP=SHR,DSN=IMSVS.RESLIB                                
+ 006500 //*        DD  DISP=SHR,DSN=CICSTS23.CICS.SDFHLOAD                      
+ 006600 //         DD  DISP=SHR,DSN=ISP.SISPLOAD                                
+ 006700 //         DD  DISP=SHR,DSN=GDDM.SADMMOD                                
+ 006710 //         DD  DSN=IBMUSER.ALOAD,DISP=SHR                               
+ 006720 //         DD  DSN=IBMUSER.JCL.CNTL,DISP=SHR                            
+ 006800 //SYSLIN   DD  DSN=&&PLKSET,DISP=(OLD,DELETE)                           
+ 006900 //         DD  DDNAME=SYSIN                                             
+ 007000 //SYSLMOD  DD  DSN=IBMUSER.ALOAD(COBOLDB2),DISP=SHR    
+ 007200 //SYSPRINT DD  SYSOUT=*                                                 
+ 007300 //SYSUT1   DD  SPACE=(1024,(50,50)),UNIT=SYSDA                          
+ 007400 //*DSNHICOB PEND        Remove * for use as an instream procedure       
+ 007500 //         PEND                                                         
+ 007600 //STEP99   EXEC DSNHICOB                                                
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                
