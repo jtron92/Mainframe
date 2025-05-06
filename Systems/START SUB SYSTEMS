@@ -1,3 +1,6 @@
+GO TO VTAMALL IN SYS1.PARMLIB 
+
+
 To fire up DB2, go to the main console and type: ‘-DB9G START DB2’
 For CICS: START CICSTS32
 
