@@ -23,7 +23,23 @@ Command ===>                                                  Scroll
 
 
 
-
+000100 //SMFJOB01 JOB (MVS),'JORGE CINTRON',                                   
+ 000200 //             MSGLEVEL=(1,1),                                          
+ 000300 //             MSGCLASS=H,                                              
+ 000400 //             CLASS=A                                                  
+ 000500 //STEP01  EXEC PGM=IFASMFDP                                             
+ 000600 //INDD1    DD DSN=SYS1.MAN2,DISP=SHR                                    
+ 000700 //OUTDD1   DD DSN=IBMUSER.MAN2,                                         
+ 000800 //            DISP=(OLD,CATLG,DELETE),                                  
+ 000900 //            UNIT=SYSDA,                                               
+ 001000 //            SPACE=(CYL,(50,50),RLSE)                                  
+ 001100 //SYSIN    DD *                                                         
+ 001200     INDD(INDD1,OPTIONS(CLEAR))                 <=== CAN CHANGE IT TO DUMP                          
+ 001300   OUTDD(OUTDD1,TYPE(14:15))                                             
+ 001400 /*                                                                      
+ 001500 //SYSPRINT DD SYSOUT=*                                                  
+ 001600 //AMSDUMP  DD SYSOUT=*                                                  
+ 001700 //SYSOUT   DD SYSOUT=*                         
 
 
 
