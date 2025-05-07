@@ -1,0 +1,96 @@
+
+Locating PARMLIB members
+
+Introduction
+
+PARMLIB (Parameter Library) is a data set, most often PDS, which stores setting for particular subsystem. z/OS itself also have it's PARMLIB which stores settings for IPL, system configuration and parameters for many low-level sub-systems. PARMLIBs are often joined together in concatenations. In such case default PARMLIB members stay unchanged but another setting is used by system. If it doesn't work as it should there you can always use default setting.
+
+Tasks
+
+1. Find out name of LOAD member and library which contains it. What is the purpose of this member?
+
+2. Identify data set name where DFSMS parameters are stored.
+
+3. Identify data set name where JES2 parameters are stored.
+Hint 1
+
+Hint 2
+
+Hint 3
+
+Solution 1
+
+Comamnd /D IPLINFO displays name of LOAD member used during IPL:
+
+IEE254I  23.55.03 IPLINFO DISPLAY 307                     
+ SYSTEM IPLED AT 04.11.46 ON 07/11/2015                   
+ RELEASE z/OS 01.13.00    LICENSE = z/OS                  
+ USED LOAD00 IN SYS1.IPLPARM ON 03300                     
+ ARCHLVL = 2   MTLSHARE = N                               
+ IEASYM LIST = 00                                         
+ IEASYS LIST = (A4) (OP)                                  
+ IODF DEVICE: ORIGINAL(03300) CURRENT(03300)              
+ IPL DEVICE: ORIGINAL(044A2) CURRENT(044A2) VOLUME(ABC432)
+
+
+So we're interested in SYS1.IPLPARM(LOAD00) data set.
+
+LOAD member contains links to other most important data sets that are used during IPL.
+Here are few important parameters in LOAD member:
+LPARNAME – name of the LPAR.
+IODF – IODF data set name.
+SYSPLEX – name of the sysplex (if LPAR is in sysplex).
+PARMLIB – concatenation of PARMLIBs.
+Solution 2
+
+SYSPARM parameter in LOADxx member defines suffix of IEASYSxx member:
+"SYSPARM  00" tells that IEASYS00 member is used.
+Note that it is possible that SYSPARM is not coded. In such case SYSPARM can be specified in IEASYMxx member, so instead of SYSPARM you could find IEASYM parameter. IEASYM is often used when LOAD member and PARMLIBs are shared among many LPARs.
+
+You can also found there data sets in PARMLIB concatenation, for example:
+PARMLIB  USER.PARMLIB
+PARMLIB  SYS1.PARMLIB
+
+Faster way to check PARMLIB concatenation is to simply use command: /D PARMLIB
+
+System searches each of these PARMLIBs for required member. If it does not exist in the first one the second PARMLIB is searched, than the third and so one. After the member is found system stops search. So even if the member is present in multiple PARMLIBs first match counts.
+
+In this example USER.PARMLIB is first in concatenation so system searches IEASYS00 member in in first. If it does not exists SYS1.PARMLIB is checked.
+
+In IEASYS00 defines suffixes for PARMLIB members of many z/OS tasks. DFSMS is one them. In "z/OS MVS Initialization and Tuning Reference" we can found description of them:
+SMS=01
+Description:
+"This parameter specifies the parmlib member, IGDSMSxx, from which the storage management subsystem (SMS) will obtain its options ..."
+
+So we're interested in IGDSMS01 member. As before we search for it in PARMLIBs concatenation.
+
+You must know how to find such information but when you simply need to check SMS options the easiest way is to simply issue command: /D SMS,OPTIONS
+
+Most of the sub-systems have similar commands. They are best way to check sub-system configuration. Another example for SMF: /D SMF,O
+
+Note:
+Usually there are many parameter members of the same kind, for example IEASYS00, IEASYS01 etc. Because of this we need always check which of those members is actually used by system.
+Solution 3
+
+JES2 Parameter member is named JES2PARM and it is not necessarily stored in PARMLIB concatenation. Because of this you must search for it in different way.
+
+In IEASYSxx member MSTJCL parameter specifies suffix for MSTJCLxx member. This member is the JCL procedure for starting Master Scheduler.
+"MSTRJCL=(00,L)" - 00 means that the procedure is called MSTRJCL00. Why we're interested in Master Scheduler? Because this task starts JES2 sub-system.
+
+We search for this member in PARMLIB concatenation. Here is example code of the member:
+
+//MSTJCL00 JOB MSGLEVEL=(1,1),TIME=1440         
+//         EXEC PGM=IEEMB860,DPRTY=(15,15)      
+//STCINRDR DD SYSOUT=(A,INTRDR)                 
+//TSOINRDR DD SYSOUT=(A,INTRDR)                 
+//IEFPDSI  DD DSN=SYS1.&SYSVER..PROCLIB,DISP=SHR
+//         DD DSN=SYS1.PROCLIB,DISP=SHR         
+//SYSUADS  DD DSN=SYS1.UADS,DISP=SHR            
+//SYSLBC   DD DSN=SYS1.BRODCAST,DISP=SHR        
+
+
+In "z/OS z/OS MVS Initialization and Tuning Reference" you can find description of each DD statement here. We're interested in IEFPDSI concatenation. This data sets contains important procedures that are used during IPL. Among them you'll find procedure for starting JES2 subsystem called "JES2".
+
+In JES2 procedure there are two DD statements worth mentioning. First is PROCxx, this DD statement defines concatenation of PROCLIBs that are used by JES2. You can run any procedure from that concatenation from you job without using JCLLIB statement.
+
+Second is HASPPARM, this DD statements points to the data set we're looking for. JES2PARM member is stored there.
