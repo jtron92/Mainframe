@@ -1,0 +1,12 @@
+/D ASM
+
+(AUXILIARY STORAGE )
+
+RESPONSE=P390                                                                  
+  IEE200I 22.17.44 DISPLAY ASM 764                                              
+  TYPE     FULL STAT   DEV  DATASET NAME                                        
+  PLPA      82%   OK  0A82  SYS1.PLPA.PAGE                                      
+  COMMON     0%   OK  0A82  SYS1.COMMON.PAGE                                    
+  LOCAL      0%   OK  0A82  SYS1.LOCAL.PAGE                                     
+  PAGEDEL COMMAND IS NOT ACTIVE    
+
