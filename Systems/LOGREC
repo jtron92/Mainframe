@@ -1,0 +1,246 @@
+/D LOGREC
+
+
+
+
+What's LOGREC?
+
+LOGREC is another name for ERDS (Error Recording Data Set). This is a data set where EREP saves all its records. LOGREC can have two forms just like SMF log, it can be saved as Data Set or Logstream (z/OS System Logger).
+
+In this assignment we'll work on LOGREC saved to data set.
+
+____________________
+
+- Where LOGREC is stored on your system?
+
+To display information about LOGREC issue 'D LOGREC' command:
+
+CURRENT MEDIUM = DATASET    
+   MEDIUM NAME = SYS1.LOGREC
+
+
+There isn't much information here. You can only see whether data set or logstream is used and what's its name.
+
+____________________
+
+Where you can define different LOGREC?
+
+LOGREC name and logging mode is defined in IEASYSxx member. See 'LOGREC' parameter in “z/OS MVS Initialization and Tuning Reference” for more details.
+
+____________________
+
+What happens when LOGREC becomes full?
+
+EREP records are appended to LOGREC data set. When data set becomes full error message is issued:
+'IFB080E LOGREC DATA SET NEAR FULL, DSN=dsname'.
+You can use this message as trigger to LOGREC offload task, use your System Automation for this task. Still, just like in the SMF case, offload task is not shipped with SMF so System Programmer must code it.
+
+When data set is full all new error records are simply lost.
+
+____________________
+
+What kind of reports you can generate with EREP Utilities?
+
+“EREP User's Guide” provides good guidance among various report types. The main types are:
+- System Summary Report;
+- Trends Report;
+- Event History Report;
+- System Exception Report Series;
+- Threshold Summary Report;
+- Detail Edit and Summary Report;
+
+Reports in the list are written in order from the most general to the most specific. In this Assignment you'll create few of them.
+Solution 2
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                            
+//COPY     EXEC PGM=IFCEREP1,PARM='CARD'                 
+//SERLOG   DD DSN=SYS1.LOGREC,DISP=OLD                   
+//ACCDEV   DD DSN=&SYSUID..LOGREC.COPY,DISP=(NEW,CATLG), 
+//         SPACE=(CYL,(20,20),RLSE),RECFM=VB,BLKSIZE=4000 
+//TOURIST  DD SYSOUT=*                                   
+//SYSIN    DD *                                          
+PRINT=NO                                                 
+ACC=Y                                                    
+ENDPARM                                
+
+
+Utility used for creating EREP reports is called IFCEREP1. You can also use it to simply copy LOGREC to another data set.
+
+- PARM='CARD' – defines that control statements will be passed in SYSIN DD statement instead of PARM parameter.
+- SERLOG – defines input data set, in this case it is active LOGREC.
+- ACCDEV – this DD defines output data set if 'ACC=Y' is coded. In this example there is no filter coded so all records are copied.
+- TOURIST – stores messages about IFCEREP1 Utility execution.
+
+- PRINT=NO – defines that LOGREC is simply copied without any modifications.
+- ACC=Y – defines that ACCDEV DD statement is used as output.
+- ENDPARM – ends control statements.
+
+LOGREC copy is also called History Data Set. EREP continuously saves new records to LOGREC, because of this before creating any reports you should copy LOGREC and work on the copy. Imagine that you want to run few jobs against actual LOGREC. With each run data in LOGREC will be different (new records are added). By having the copy you can work on consistent data. Also, you won't block active LOGREC with your jobs when working on copy.
+Solution 3
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                  
+//REPORT   EXEC PGM=IFCEREP1,PARM='CARD'       
+//ACCIN    DD DSN=&SYSUID..LOGREC.COPY,DISP=SHR 
+//DIRECTWK DD UNIT=SYSDA,SPACE=(CYL,50)        
+//EREPPT   DD SYSOUT=*                         
+//TOURIST  DD SYSOUT=*                         
+//SYSIN    DD *                                
+SYSUM                                          
+HIST                                           
+ACC=N                                          
+ENDPARM   
+
+
+- ACCIN – DD statement used if you're working on History Data Set instead of active LOGREC.
+- DIRECTWK – this is additional DD statement for temporary work storage.
+- EREPPT – defines where report will be stored. In this case it's sent to spool.
+
+- SYSUM – defines report type. System Summary in this case.
+- HIST – defines that input is History Data Set so ACCIN and DIRECTWK DD statements are required.
+- ACC=N – we're not interested is storing records that match our filter so ACCDEV DD statement so we can omit it. If we used it we would have two outputs, ERERPT would store formatted reports with selected records while ACCDEV would store the same records but in unformatted format.
+- TYPE – this control statement defines what kind of errors are included in the report. It's not coded in this example so all error types are included.
+
+System Summary displays amount of errors in different categories so it's useful only for checking in what are there are some problems. With this information you can figure out what to check in more details.
+Solution 4
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                  
+//REPORT   EXEC PGM=IFCEREP1,PARM='CARD'       
+//ACCIN    DD DSN=&SYSUID..LOGREC.COPY,DISP=SHR 
+//DIRECTWK DD UNIT=SYSDA,SPACE=(CYL,50)        
+//EREPPT   DD SYSOUT=*                         
+//TOURIST  DD SYSOUT=*                         
+//SYSIN    DD *                                
+TRENDS                                         
+DATE=(16105-16112)                             
+HIST                                           
+ACC=N                                          
+ENDPARM            
+
+
+- DATE – defines days from which records will be processed.
+
+Trends report are used for analysis of error patterns and their frequency. So it's another report type that can reviewed periodically to check if there are some new problems on the system.
+Solution 5
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                  
+//REPORT   EXEC PGM=IFCEREP1,PARM='CARD'       
+//ACCIN    DD DSN=&SYSUID..LOGREC.COPY,DISP=SHR 
+//DIRECTWK DD UNIT=SYSDA,SPACE=(CYL,50)        
+//EREPPT   DD SYSOUT=*                         
+//TOURIST  DD SYSOUT=*                         
+//SYSIN    DD *                                
+EVENT                                          
+TYPE=S                                         
+DATE=(16112)                                   
+TIME=(0900-1100)                               
+HIST                                           
+ACC=N                                          
+ENDPARM                 
+
+
+Event History Record is pretty detailed. Each event is stored in single line. TYPE=S defines that only errors related to System and Software failures are included in the report.
+
+If you want to include more than one type or errors you can simply add appropriate letter, for example:
+'TYPE=SEM' will include three types of errors (S, E and M). For details about specific error types check “EREP Reference”.
+Solution 6
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                  
+//REPORT   EXEC PGM=IFCEREP1,PARM='CARD'       
+//ACCIN    DD DSN=&SYSUID..LOGREC.COPY,DISP=SHR 
+//DIRECTWK DD UNIT=SYSDA,SPACE=(CYL,50)        
+//EREPPT   DD SYSOUT=*                         
+//TOURIST  DD SYSOUT=*                         
+//SYSIN    DD *                                
+SYSEXN                                         
+TYPE=I
+HIST                                           
+ACC=N                                          
+ENDPARM    
+
+
+IPL records store information about date and time of each IPL and amount of time LPAR was turned off.
+
+Other supported error types in System Exception Report are 'C', 'D', 'M' and 'O'. You can find supported types for each report type in “EREP Summary”.
+Solution 7
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                  
+//REPORT   EXEC PGM=IFCEREP1,PARM='CARD'       
+//ACCIN    DD DSN=&SYSUID..LOGREC.COPY,DISP=SHR 
+//DIRECTWK DD UNIT=SYSDA,SPACE=(CYL,50)        
+//EREPPT   DD SYSOUT=*                         
+//TOURIST  DD SYSOUT=*                         
+//SYSIN    DD *                                
+THRESHOLD=(50,50)                              
+HIST                                           
+ACC=N                                          
+ENDPARM                 
+
+
+THRESHOLD report is used for viewing tape drive errors. In this example drives with 50 or more read/write errors are displayed.
+Solution 8
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID,LINES=(100,CANCEL) 
+//REPORT   EXEC PGM=IFCEREP1,PARM='CARD'        
+//ACCIN    DD DSN=&SYSUID..LOGREC.COPY,DISP=SHR 
+//DIRECTWK DD UNIT=SYSDA,SPACE=(CYL,50)         
+//EREPPT   DD SYSOUT=*                          
+//TOURIST  DD SYSOUT=*                          
+//SYSIN    DD *                                 
+PRINT=AL                                        
+TYPE=ABCDEFHMOTXYZ                             
+HIST                                            
+ACC=N                                           
+ENDPARM        
+
+
+LINES parameter defines that job is canceled when it reaches certain amount of records, it is coded in thousands of lines.
+
+Detail Report gives you the most control over report. You can choose what kind of data is included and about which error types. 'AL' value defines that all available data about each error is displayed.
+Solution 9
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                             
+//         SET ERDS=SYS1.LOGREC                           
+//         SET ARCHERDS=SYSU.MVS.LOGREC(+1)               
+//COPY     EXEC PGM=IFCEREP1,PARM='CARD'                  
+//SERLOG   DD DSN=&ERDS,DISP=OLD                          
+//ACCDEV   DD DSN=&ARCHERDS,DISP=(NEW,CATLG),             
+//         SPACE=(CYL,(20,20),RLSE),RECFM=VB,BLKSIZE=4000 
+//TOURIST  DD SYSOUT=*                                    
+//SYSIN    DD *                                           
+PRINT=NO                                                  
+ACC=Y                                                     
+ENDPARM                                                   
+//CLEAR    EXEC PGM=IFCEREP1,PARM='PRINT=NO,ACC=Y,ZERO=Y', 
+//         COND=(0,NE)                                    
+//SERLOG   DD DSN=&ERDS,DISP=OLD                          
+//ACCDEV   DD DUMMY                                       
+//TOURIST  DD SYSOUT=*            
+
+
+Code for the first step is the same as for copying LOGREC. SET statement is used to define data set names.
+
+CLEAR step is executed only after first step completed with CC=0. This time control statement were coded directly in PARM parameter. In such case ENDPARM control statement is not needed.
+
+You must code ACC=Y to be able to clear LOGREC but since they were already copied in previous they can be simply discarded. DUMMY parameter does the trick.
+
+If you browse active LOGREC you'll see that all the data is still there. It wasn't cleared at all. This is because ZERO=Y just resets pointer at which new records are written so now new records will overwrite existing data from the beginning. This pointer is defined in LOGREC header. You can compare both headers to see the difference.
+
+You can use this job as LOGREC offload task in one of two ways. You can add it to your scheduling tool and offload LOGREC every day. This is simpler approach but it's not good for production system. A problem may appear that will generate unusually high number of error records and LOGREC will fill up before offload. Many records will be lost that could be especially useful in such case.
+
+Second approach is to convert the job to a started task and start it as a response to 'IFB080E LOGREC DATA SET NEAR FULL, DSN=dsname' message. System Automation tool is the best way to do it.
