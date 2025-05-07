@@ -1,0 +1,765 @@
+
+
+JCL Code:
+
+//TESTXY   JOB NOTIFY=&SYSUID                               
+//IEFPROC  EXEC PGM=IFASMFDP                                
+//DUMPIN   DD DSN=SYS1.MAN1,DISP=SHR                        
+//DUMPOUT  DD DSN=&SYSUID..SMF.DUMP,DISP=(NEW,CATLG,DELETE), 
+//            SPACE=(CYL,(50,50),RLSE)                      
+//SYSPRINT DD SYSOUT=*                                      
+//SYSIN    DD *                                             
+ INDD(DUMPIN,OPTIONS(DUMP))                                 
+ OUTDD(DUMPOUT,TYPE(14:15))       
+
+
+INDD and OUTDD control statements define input data set (SMF log) and data set where this log is to be dumped/offloaded. In this case they reference DD statements called DUMPIN and DUMPOUT.
+
+OPTIONS statement defines what action is taken for SMF log. “DUMP” will copy SMF log. “CLEAR” will erase it. “ALL” will copy log first and then clear it. We don't want to erase SMF data, only test JCL script so DUMP option is the obvious choice here.
+
+With DUMP option you can run this code even with ACTIVE log data set. Other options needs data set with DUMP REQUIRED status. You can force SMF log switch with 'I SMF' command (you'll put active log in DUMP REQUIRED status no matter how full it is).
+
+TYPE option specifies what SMF record type will be dumped. In this example only two types are copied. Normally all record types are offloaded (0:255). Sometimes there are divided, for example:
+
+INDD(DUMPIN,OPTIONS(DUMP))                                 
+OUTDD(DUMPCICS,TYPE(110))
+OUTDD(DUMPRMF,TYPE(70:79))
+OUTDD(DUMPALL,NOTYPE(70:79,110))
+
+
+In above example separate data sets are used for RMF and CICS records. Third OUTDD statement used NOTYPE option which means that all records except (70:79,110) will be stored in this data set.
+
+You don't have to specify data set parameters for OUTDD data set. IFASMFDP will take care of that:
+
+Organization  . . . : PS   
+Record format . . . : VBS  
+Record length . . . : 32767 
+Block size  . . . . : 27998 
+1st extent cylinders: 1    
+Secondary cylinders : 42   
+Solution 2
+
+First you need to allocate GDG base for archived SMF logs. It is done with IDCAMS:
+
+//DEFGDG   JOB                              
+//STEP1    EXEC PGM=IDCAMS                  
+//SYSPRINT DD SYSOUT=*                      
+//SYSIN    DD *                             
+  DEFINE GDG(NAME(SYSU.SMF.DUMP) LIMIT(200))
+
+
+In general various logs offloads are done in one of two ways:
+- By using GDG. GDG enables to easily define how many data sets are stored on DASD. In our example 200 SMF logs will be always available. When this limit is passes last GDG data set is automatically removed. If it isn't copied somewhere before that SMF data is lost. It is good way for test system because you don't have to worry about defining SMF policies or managing such GDG manually.
+- By using standard data sets with generic names, for example: SYSU.SMF.DUMP.Dyymmdd.Thhmmss
+It is better for production systems. Customer policies may define to keep SMF logs from, for example, last year. You never know how many GDG generations are needed for one year. In such case SMS policies can take care of that.
+
+DUMPXY code:
+
+//DUMPXY   EXEC PGM=IFASMFDP                                
+//DUMPIN   DD DSN=&DSN,DISP=SHR                             
+//DUMPOUT  DD DSN=SYSU.SMF.DUMP(+1),DISP=(NEW,CATLG,DELETE), 
+//            SPACE=(CYL,(50,50),RLSE)                      
+//SYSPRINT DD SYSOUT=*                                      
+//SYSIN    DD *                                             
+ INDD(DUMPIN,OPTIONS(DUMP))                                 
+ OUTDD(DUMPOUT,TYPE(0:255))  
+
+
+Note that in-stream data is allowed in procedures since z/OS 2.1. If you're using earlier version you need to store SYSIN parameters in separate data set.
+
+We're using GDG so we need to use (+1) mark in DUMPOUT DD statement to indicate that we're creating new data set generation.
+
+SPACE parameter should be calculated accordingly to the largest SMF log on your system for example:
+
+  NAME      VOLSER SIZE(BLKS) %FULL  STATUS
+P-SYS1.MAN1 SMFVOL      9000    64  ACTIVE 
+
+
+Block Size is equal to 27998. So we know that one track will store two blocks and in total we'll need 4500 tracks or 300 cylinders to offload this log. Of course this is minimal size, you should do this calculation to avoid to small SPACE quantity but with RLSE parameter it can be higher than this. In this case it would be reasonable to use SPACE=(CYL,(400,100),RLSE) quantity.
+Solution 3
+
+You can display PROCLIB concatenation with '$D PROCLIB' command. If it's not working you need to check PROCLIBs defined in PARMLIB (MSTJCLxx and JES2 members). Note that SMF logs can become full during IPL – before JES2 initialization. Because of this DUMPXY procedure should be included in PROCLIBs defined in MSTJCLxx member.
+
+After moving DUMPXY to PROCLIB concatenation you can start it as Started Task with command 'S DUMPXY'.
+
+DUMPXY must take SMF log data set as parameter, but if you'll try to run DUMPXY: 'S DUMPXY,DSN=dsname' you'll receive following error:
+IEFC611I OVERRIDDEN STEP NOT FOUND IN PROCEDURE
+
+This error is caused by DSN symbolic parameter. You can use other name to avoid it, for example 'SMFLOG' so you can start it 'S DUMPXY,SMFLOG=dsname'. But that's not our goal. DSN is JCL keyword so JES2 sees this command as overwrite attempt for DSN parameter.
+
+This problem can be fixed by using IEFRDER procedure. It points to step name and DD name in which JCL parameter can be overwritten from level of Start command. You can use it to overwrite any parameter in DD or EXEC statement, in this case it will be DSN.
+
+JCL Code:
+
+//IEFPROC  EXEC PGM=IFASMFDP                                
+//DUMPIN   DD DDNAME=IEFRDER                                
+//IEFRDER  DD DSN=&DSN,DISP=SHR                             
+//DUMPOUT  DD DSN=SYSU.SMF.DUMP(+1),DISP=(NEW,CATLG,DELETE), 
+//            SPACE=(CYL,(50,50),RLSE)                      
+//SYSPRINT DD SYSOUT=*                                      
+//SYSIN    DD *                                             
+ INDD(DUMPIN,OPTIONS(DUMP))                                 
+ OUTDD(DUMPOUT,TYPE(0:255))      
+
+
+Remember that in-stream data in procedure can be used on z/OS 2.1 and later. If your are using earlier version you to need save control statements in separate data set and pass it to SYSIN.
+
+Important keywords here are IEFPROC and IEFRDER. IEFPROC name specifies step in which substitution will be done. IEFRDER points to DD name in which parameters can be substituted.
+IEFPROC enables you to change JCL parameter when you're issuing Start command. You can change any parameter that way but only in single DD statement.
+
+You can make a little experiment and totally change this DD statement, for example:
+'S DUMPXY,DSN=userid.TEST.DATA,DISP=NEW,SPACE=(TRK,1)'
+Of course job will end in error but in output you'll find out that substitution was done correctly.
+
+'&DSN' symbolic is just a placeholder, it can be anything.
+
+If your job works correctly you'll find statistics about SMF log in SYSPRINT DD statement output, for example:
+
+START DATE-TIME  02/10/2016-13:22:47                         END DATE-TIME  02/23/2016-01:26:38 
+RECORD       RECORDS         PERCENT      AVG. RECORD   MIN. RECORD   MAX. RECORD       RECORDS 
+  TYPE          READ        OF TOTAL           LENGTH        LENGTH        LENGTH       WRITTEN 
+     0             2           .02 %            60.00            60            60             2 
+     2             0                                                                          1 
+     3             0                                                                          1 
+     4            86           .71 %           240.95           215           455            86 
+     5            54           .45 %           145.00           145           145            54 
+     8             2           .02 %           236.00           236           236             2 
+    14           935          7.75 %           374.86           344           752           935 
+    15           313          2.59 %           356.57           344           408           313
+...
+
+
+This data may be useful with determining other system problem. If some task generates unusual high number of SMF records it can indicate a problem with it.
+Solution 4
+
+In order to clear SMF data set in DUMP REQUIRED status you must simple change OPTIONS parameter from DUMP to ALL:
+
+INDD(DUMPIN,OPTIONS(ALL)) 
+OUTDD(DUMPOUT,TYPE(0:255))
+
+
+You can manually switch SMF logs with 'SWITCH SMF' command or its shorter version 'I SMF'. 
+
+Test if your task works as needed. Now you can use it to offload SMF logs anytime you want, still it is not started automatically right now, it requires operator that will monitor system status. Next Assignment will discuss how to install DUMPXY into SMF installation exit IEFU29.
+
+Note:
+During activities like this you should always have in mind other aspects of the system. You should plan where offloaded logs will be stored, on test system you can simply point to specific volume or Storage Group.
+
+On production systems SMS policies may need to be updated to enable automatic migration to tapes. RACF definitions may also require update. Of course you should always remember about updating system documentation and instructions for 1st level support.
+Installing SMF IEFU29 Exit
+
+Introduction
+
+You can view Installation Exits as programs that are automatically started in response to specific events in particular task.
+
+Many z/OS sub-systems provide set of Exits which you can use to create auto response to such events. JES2, SMF, TSO, VTAM, RACF all provide Exits you can use. IEFU29 Exit is executed when SMF data set enters DUMP REQUIRED status.
+
+Tasks
+
+1. Describe how IEFU29 exit works.
+
+2. Create IEFU29 program that will be invoked by IEFU29 Exit.
+
+3. Move compiled IEFU29 program into LPA concatenation.
+
+4. Define Exit in SMFPRMxx and PROGxx member. Check if Exit is working.
+Hint 1
+
+Hint 2
+
+Hint 3
+
+Hint 4
+
+Solution 1
+
+Here is step by step description of IEFU29 exit processing:
+
+1. SMF log data set enters DUMP REQUIRED status.
+
+2. SMF checks if IEFU29 exit is defined in PARMLIBs.
+IEFU29 must be defined in SMFPRMxx and PROGxx members.
+
+3. If IEFU29 definition is found LINKLIST concatenation is searched for program called IEFU29.
+
+4. If it's found it is executed. SMF passes one parameter to this program – name of SMF log data set.
+
+5. IEFU29 program runs, in our case this program will issue command “S DUMPXY,DSN=dsname”.
+Solution 2
+
+Sample code for IEFU29 exit should be present in SYS1.SAMPLIB(IEEU29) member (notice that member name is slightly different). It is an assembler program. When you'll take a look at the code you'll find command that is issued:
+“START DUMPXY,FILENM=XXXXXXXXX”
+
+We're using the same command only with different parameter. You never should modify such data sets so first thing you need to do is to copy IEEU29 member to data set under your user ID. Issue “/” action character and choose Copy option.
+
+Now you can modify code. We know that full SMF log will be passed to this program as parameter. It will be placed where “XXXXXXXXX” are.
+
+If you simply change:
+“START DUMPXY,FILENM=XXXXXXXXX”
+to:
+“START DUMPXY,DSN=XXXXXXXXX”
+Invalid command will be issued:
+“START DUMPXY,DSN=   SYSx.MANx“
+Because of this you also need to change column indicator where log name will be placed:
+
+CMDL     DS    0F                      START COMMAND FORMAT FOR SVC 34  
+         DC    AL2(CMDLEN),AL2(00)     LENGTH OF STRING                 
+         DC    C'START DUMPXY,FILENM=XXXXXXXXX    ' . CMND + BLANK @P1C 
+*                456789012345678901234567890123456  . CHECK COLUMNS     
+CMDLEN   EQU   *-CMDL             LENGTH OF COMMAND STRING              
+DSNCOFF  EQU   24                 OFFSET OF DSNAME FIELD IN CMD LIST    
+*                                                                       
+WTOL     WTO   'IEFU29 HAS ISSUED COMMAND ''START DUMPXY,FILENM=XXXXXXXC 
+               XX'' ',ROUTCDE=(1,2,11),MF=L                        @P1C 
+*               456789012345678901234567890 1234567890123456789012      
+WTOLEN   EQU   *-WTOL             LENGTH OF WTO STRING                  
+DSNOFF   EQU   51                 OFFSET OF DSNAME FIELD IN WTO LIST    
+
+
+DSNCOFF variable specifies where parameter will be placed. Modified version:
+
+CMDL     DS    0F                      START COMMAND FORMAT FOR SVC 34  
+         DC    AL2(CMDLEN),AL2(00)     LENGTH OF STRING                 
+         DC    C'START DUMPXY,DSN=XXXXXXXXX       ' . CMND + BLANK @P1C 
+*                456789012345678901234567890123456  . CHECK COLUMNS     
+CMDLEN   EQU   *-CMDL             LENGTH OF COMMAND STRING              
+DSNCOFF  EQU   21                 OFFSET OF DSNAME FIELD IN CMD LIST    
+*                                                                       
+WTOL     WTO   'IEFU29 HAS ISSUED COMMAND ''START DUMPXY,DSN=XXXXXXXXX C 
+                 '' ',ROUTCDE=(1,2,11),MF=L                        @P1C 
+*               456789012345678901234567890 1234567890123456789012      
+WTOLEN   EQU   *-WTOL             LENGTH OF WTO STRING                  
+DSNOFF   EQU   48                 OFFSET OF DSNAME FIELD IN WTO LIST    
+
+
+In total four places needs to be modified:
+- Command in CMDL variable.
+- Command in WTOL variable.
+- DSNCOFF variable.
+- DSNOFF variable.
+
+Note that there are four versions of assembler code in this member. Modify all of them in the same way to not worry about compilation process.
+
+
+Now you need to to compile program.
+Compilation process can be done via batch job. In your PROCLIB concatenation (most likely in SYS1.PROCLIB) you'll find following jobs: ASMAC, ASMACG, ASMACL, ASMACLG 
+They differ from each other in last characters:
+C – compile
+L – link
+G – go
+This means that ASMAC will only compile your program while ASMACLG will compile it, link it and then execute it. We're not interested in executing IEEU29 program so ASMACL is the best choice. 
+
+JCL code which executes ASMACL procedure:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                                    
+//COMPILE  EXEC ASMACL                                           
+//C.SYSIN   DD DSN=&SYSUID..MY.COMPILE(IEEU29),DISP=SHR          
+//L.SYSLMOD DD DSN=&SYSUID..MY.ASSEMBLY(IEFU29),DISP=(NEW,CATLG), 
+//          LIKE=SYS1.LINKLIB,SPACE=(CYL,(5,1))         
+
+
+Note that load modules must be stored in PDS with undefined record format. IEFU29 will be stored in LINKLIST concatenation so you can use LIKE keyword to ensure your data set has the same parameters as data set from LINKLIST. SPACE is optional but SYS1.LINKLIB is quite large so it would be waste of storage to use the same quantity for your private library.
+Solution 3
+
+You can move compiled IEFU29 routine to LPA or LINKLIST concatenation, here is order in which system will search for any program:
+- Job pack area;
+- TASKLIB;
+- STEPLIB if exists;
+- JOBLIB if exists and STEPLIB doesn't exist;
+- LPA;
+- LINKLIST.
+
+Routines in LPA are always kept in Virtual Storage. By putting it in LPA you're simply ensuring faster access to the routine.
+
+You can display LPA concatenation via ISRDDN Utility:
+- Enter ISRDDN with “TSO ISRDDN” command.
+- From ISRDDN issue “LINKLIST” command to display LINKLIST concatenation. 
+- Issue “F LPALIB” command to go to LPA concatenation.
+
+Now you have two choices:
+- You can add another PDS to this concatenation. Such change will be in effect until next IPL so to make it permanent you'll also need to modify LNKLSTxx PARMLIB member.
+- You can simply move your executable module into data set which is already defined in concatenation. We're consider this option.
+
+Here are steps you should take:
+1. Copy compiled and linked IEFU29 routine into LPA library.
+2. Add it to LPA with command: “SETPROG LPA,ADD,MODNAME=IEFU29,DSNAME=USER.LPALIB”
+3. Check your change with “D PROG,LPA,MOD=IEFU29” command.
+Solution 4
+
+SMFPRMxx:
+
+SUBSYS(STC,EXITS(IEFU29), NOINTERVAL,NODETAIL)
+
+
+According to “z/OS MVS Initialization and Tuning Reference” IEFU29 Exit is called for STCs. Most likely you'll already have such definition for different SMF Exits, in such case simply add IEFU29 after comma.
+
+PROGxx:
+
+EXIT ADD    EXITNAME(SYSSTC.IEFU29)    MODNAME(IEFU29)
+
+
+Definition in PROGxx member depends on SMFPRMxx. We've defined IEFU29 in STC category so exit name in PROGxx must start with SYSSTC.
+
+Now it's time to apply this setting. You'll need to issue two command for example:
+'SET SMF=00'
+'SET PROG=00'
+Remember to check your system setting before issuing them, often many PARMBLIs members are used for example 'PROG=(00,01,SS)'.
+
+That's all, now you can check if everything works fine:
+- Check SMF data sets with “D SMF” command.
+- Switch them manually with “I SMF” command.
+- Observe in ST or by using “D A,DUMPXY” command if DUMPXY was started by an exit.
+- Check SMF data sets again, full log should now be offloaded.
+- Check SYSLOG, you'll find message you've previously modified in assembler code:
+“IEFU29 HAS ISSUED COMMAND 'START DUMPXY,DSN=SYS1.MAN1   '”
+- Check DUMPXY output and GDG data set to which SMF log was offloaded.
+
+
+
+Managing SMF data sets
+
+Introduction
+
+SMF saves records into VSAM data sets (ESDS). Such data sets must have certain characteristics and must be preformatted before they can be used as SMF logs.
+
+In this Assignment you'll learn how to create, delete and format such VSAM data sets. You'll also find out how to add, remove or change their definition in SMFPRMxx.
+
+Tasks
+
+1. Create job that allocates data set that can be used as SMF log.
+
+2. Create job which can delete data set created in Task#1.
+
+3. Add second step in job from Task#1. This step should format data set so it is ready for use as SMF log.
+
+4. Define data set created in Task#3 to SMFPRMxx and test if it's working correctly.
+
+5. Remove from SMFPRMxx data set you have added in Task#4.
+
+6. Consider situation where SMF data sets are full and SMF buffer is filling up. You cannot use SETSMF command to increase buffer size (this function is usually disabled). You must quickly add new SMF log. Create checklist for such situation and then test it.
+Hint 1
+
+Hint 3
+
+Solution 1
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                                         
+//******************************************************************** 
+//* ALLOCATE - ALLOCATES SMF DATA SET THAT CAN BE USED AS SMF LOG     
+//*                                                                   
+//* PARAMETERS TO CONSIDER BEFORE DATA SET ALLOCATION:                
+//* NAME - FOLLOW CONVENTION USED ON TARGET SYSTEM                    
+//* VOLUME - VOLUME WHERE SMF LOGS WILL BE STORED                     
+//* CYLINDERS - ALLOCATE VALUE APPROPRIATE TO SYSTEM WORKLOAD         
+//* CONTROLINTERVALSIZE - CHECK SIZE USED BY OTHER SYS1.MAN1 DATA SETS 
+//******************************************************************** 
+//ALLOCATE EXEC PGM=IDCAMS                                            
+//SYSPRINT DD SYSOUT=*                                                
+//SYSIN    DD *                                                       
+ DEFINE CLUSTER(NAME(SYS1.MANX) -                                     
+                VOLUME(ZASMF1) -                                      
+                CYLINDERS(100) -                                      
+                CONTROLINTERVALSIZE(4096) -                           
+                RECORDSIZE(4086,32767) -                              
+                SHAREOPTIONS(2) -                                     
+                NONINDEXED -                                          
+                SPANNED -                                             
+                SPEED -                                               
+                REUSE)        
+
+
+Detailed description of each parameter is available in “z/OS System Management Facilities”. Here we'll consider four parameter which should be changed accordingly to system configuration:
+- NAME – name should follow naming convention used on the system. If last SMF data set is named SYS1.MVSA.MAN5 new one should be named SYS1.MVSA.MAN6.
+- VOLUME – each system should have special volumes or storage group defined for SMF data sets. Use those volumes.
+- CYLINDERS – this value depends on system workload, on how much SMF records are processed each day and how fast they are offloaded.
+- CONTROLINTERVALSIZE – according to SMF documentation this value should be constant for all SMF data sets, if it's not SMF will ignore such data set. Use command “TSO LISTCAT ENTRY('SYSx.MANx') ALL” to check catalog data of current SMF log. You'll find there CISIZE parameter. Use its value for new data set allocation. Default value is 4096.
+
+Note:
+It's good practice to use more than one volume for SMF data sets. Consider situation where SYS1.MAN1 just became full and SYS1.MAN2 is on the same volume. In such case SMF writes to volume at the same time when DUMPXY offloads full data set. This additional workload slows down SMF log offload.
+
+Another good practice is to store first SMF data set on possibly fastest volume like SSD. First data set is used almost all the time so it would greatly increase SMF performance.
+Solution 2
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                                         
+//******************************************************************** 
+//* DELETE - DELETES VSAM DATA SET                               
+//******************************************************************** 
+//DELETE   EXEC PGM=IDCAMS                                            
+//SYSPRINT DD SYSOUT=*                                                
+//SYSIN    DD *                                                       
+ DELETE (SYS1.MANX) CLUSTER  
+
+
+Logs used by SMF are standard ESDS data sets so you can delete them as any other VSAM data set.
+
+VSAM data sets consist of many components. ESDS consists of two components DATA and CLUSTER, KSDS have also INDEX. There are also additional components like PATH. CLUSTER option means that all VSAM data set components will be deleted.
+Solution 3
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID                                         
+//******************************************************************** 
+//* ALLOCATE - ALLOCATES SMF DATA SET THAT CAN BE USED AS SMF LOG     
+//*                                                                   
+//* PARAMETERS TO CONSIDER BEFORE DATA SET ALLOCATION:                
+//* NAME - FOLLOW CONVENTION USED ON TARGET SYSTEM                    
+//* VOLUME - VOLUME WHERE SMF LOGS WILL BE STORED                     
+//* CYLINDERS - ALLOCATE VALUE APPROPRIATE TO SYSTEM WORKLOAD         
+//* CONTROLINTERVALSIZE - CHECK SIZE USED BY OTHER SYS1.MAN1 DATA SETS 
+//******************************************************************** 
+//ALLOCATE EXEC PGM=IDCAMS                                            
+//SYSPRINT DD SYSOUT=*                                                
+//SYSIN    DD *                                                       
+ DEFINE CLUSTER(NAME(SYS1.MANX) -                                     
+                VOLUME(ZASMF1) -                                      
+                CYLINDERS(100) -                                      
+                CONTROLINTERVALSIZE(4096) -                           
+                RECORDSIZE(4086,32767) -                              
+                SHAREOPTIONS(2) -                                     
+                NONINDEXED -                                          
+                SPANNED -                                             
+                SPEED -                                               
+                REUSE)                                                
+//******************************************************************** 
+//* FORMAT - PREFORMATS DATA SET TO MAKE IT READY FOR USE AS SMF LOG  
+//*                                                                   
+//* MAKE SURE 'NEWLOG' DATA SET NAME MATCHES ONE FROM 'ALLOCATE' STEP 
+//******************************************************************** 
+//FORMAT   EXEC PGM=IFASMFDP,COND=(0,NE)                                        
+//SYSPRINT DD SYSOUT=*                                                
+//NEWLOG   DD DSN=SYS1.MANX,DISP=SHR                                  
+//SYSIN    DD *                                                       
+ INDD(NEWLOG,OPTIONS(CLEAR))
+
+
+It's good practice to always include some description and instruction for each step in jobs you're creating. Also remember about including conditional statements if needed.
+
+Second step uses IFASMFDP Utility to clear newly created data set. This will prepare it to to be used as SMF log.
+
+Note that you can add such data set without preformatting. In such case SMF will format data set during initialization. Still it is not recommended because it adds unnecessary workload to SMF which may have impact in situation where SMF log are becoming full.
+Solution 4
+
+1. Check location of SMFPRMxx member used by SMF:
+- check member name with 'D SMF,O' command.
+- check PARMLIB definition with 'D PARMLIB' command.
+
+2. Create backup copy of this member, for example SMFPRMBK.
+
+3. Edit original member. Add new data set to DSNAME parameter:
+
+DSNAME       (SYS1.MAN1, 
+              SYS1.MAN2, 
+              SYS1.MAN3, 
+              SYS1.MAN4)
+
+
+In this example SYS1.MAN4 is added.
+
+4. Use SET SMF command to activate new setting, for example 'SET SMF=00'.
+Solution 5
+
+Procedure is the similar to one described in Task#4. 
+
+1. Check with 'D SMF' command that your data set is not used as ACTIVE log.
+
+2. If you don't have current backup copy of SMFPRMxx you should create it.
+
+3. Remove data set definition from SMFPRMxx. 
+
+4. Apply changes with 'SET SMF=xx' command.
+
+5. If needed - run the job that removes the data set.
+Solution 6
+
+1. Check location of SMFPRMxx member used by SMF:
+- check member name with 'D SMF,O' command.
+- check PARMLIB definition with 'D PARMLIB' command.
+
+2. Issue 'D SMF' command and copy output. You can base new data set name, volume and space quantity on those data sets.
+
+3. Issue 'TSO LISTCAT ENTRY('SYSx.MANx') ALL' command to find out CISIZE used by current SMF logs (default is 4096).
+
+4. If you don't have the job on the system – copy JCL code from your documentation.
+
+5. Modify JCL for data set allocation with following values:
+- NAME – modify it in both steps
+- VOLUME
+- CYLINDERS
+- CISIZE
+
+6. Submit job and check in 3.4 if data set is allocated.
+
+7. Create backup copy of SMFPRMxx member.
+
+8. Define new data set in DSNAME parameter of SMFPRMxx member.
+
+9. Apply new setting with 'SET SMF=xx' command.
+
+
+If problem was temporary you may have to undo your changes. Here is checklist for that:
+
+1. Check if SMF you're about to remove isn't used as SMF ACTIVE log.
+
+2. Remove data set definition from SMFPRMxx member.
+
+3. Apply your changes with 'SET SMF=xx' command.
+
+4. Remove backup version of SMFPRMxx member.
+
+5. If you don't have the job on the system – copy it from your documentation.
+
+6. Modify JCL with data set name that is to be removed.
+
+7. Submit job and check in 3.4 if data set was removed.
+
+
+
+Extracting batch workload statistics
+
+Introduction
+
+On z/OS the main data gathering and reporting tool is RMF. With it you can easily extract system wide data regarding many aspect of system performance and workload. Unfortunately RMF does not process data of execution of specific address spaces (SMF Type 30). To do so we need to use custom made tools and scripts.
+
+In this assignment you'll configure and run one of such tools that is freely available in CBT Tape website: www.cbttape.org
+
+Tasks
+
+1. Download and unpack FILE523 and FILE617 from CBT Tape website.
+
+2. Compile and link FILE523.
+
+3. Customize SAMPJCL member from FILE617 and run the job.
+Hint 1
+
+Hint 2
+
+Hint 3
+
+Sample job for SMF records extraction is in “Creating Sample RMF Report” Assignment. You need to extract SMF record type 30.
+
+It's likely you'll encounter 013 System Abend when running this utility. Abend reason:
+'ICE070A 0 EXIT ERBPPSRT NOT FOUND'
+
+Some time ago ERBPPSRT exit was replaced with ERBPPE15 and ERBPPE35. Modify the job accordingly.
+Solution 1
+
+After data set transfer you'll need to unpack those data sets. You can do that with following commands:
+- 'RECEIVE INDATASET('JSADEK.FILE617.XMIBIN')'
+- 'DATASET ('JSADEK.FILE617.PDS')'
+- 'RECEIVE INDATASET('JSADEK.FILE523.XMIBIN')'
+- 'DATASET ('JSADEK.FILE523.PDS')'
+
+If you'll encounter B37 – you can always preallocate problematic data set.
+Solution 2
+
+Assembly code is provided in FILE523 library, all you need to do is to specify SMFSLCT source to SYSIN and output library to SYSLMOD.
+
+//ASM     EXEC PGM=ASMA90,REGION=4M,                                  
+//             PARM='NODECK,OBJECT,RENT,XREF(SHORT),NOALIGN'          
+//SYSPRINT  DD SYSOUT=*                                               
+//SYSLIB    DD DISP=SHR,DSN=SYS1.MACLIB                               
+//          DD DISP=SHR,DSN=SYS1.MODGEN                               
+//SYSUT1    DD DSN=&&SYSUT1,SPACE=(4096,(120,120),,,ROUND),           
+//             UNIT=SYSALLDA,DCB=BUFNO=1                              
+//SYSLIN    DD DSN=&&OBJ,SPACE=(3040,(40,40),,,ROUND),UNIT=SYSALLDA,  
+//             DISP=(MOD,PASS),                                       
+//             DCB=(BLKSIZE=3040,LRECL=80,RECFM=FBS,BUFNO=1)          
+//SYSIN     DD DISP=SHR,DSN=&SYSUID..FILE523.PDS(SMFSLCT)             
+//LKED    EXEC PGM=HEWL,REGION=4M,COND=(0,LT),                        
+//             PARM='LIST,MAP,RENT,REUS,REFR'                         
+//SYSPRINT  DD SYSOUT=*                                               
+//SYSLIN    DD DSN=&&OBJ,DISP=(OLD,DELETE)                            
+//          DD DDNAME=SYSIN                                           
+//SYSUT1    DD DSN=&&SYSUT1,SPACE=(1024,(120,120),,,ROUND),UNIT=VIO,  
+//             DCB=BUFNO=1                                            
+//SYSLMOD   DD DSN=&SYSUID..FILE523.LOADLIB(SMFSLCT),DISP=(NEW,CATLG),
+//             SPACE=(TRK,(3,3,5)),RECFM=U,LRECL=0,BLKSIZE=32760      
+Solution 3
+
+JCL Code:
+
+//SMFPROC  PROC OUT=                                                   
+//SORT     EXEC PGM=ICEMAN                                             
+//SYSOUT   DD SYSOUT=*                                                 
+//SYSPRINT DD SYSOUT=*                                                 
+//SORTWK00 DD SPACE=(CYL,(100,100)),UNIT=SYSDA                         
+//SORTWK01 DD SPACE=(CYL,(100,100)),UNIT=SYSDA                         
+//SORTWK02 DD SPACE=(CYL,(100,100)),UNIT=SYSDA                         
+//SORTWK03 DD SPACE=(CYL,(100,100)),UNIT=SYSDA                         
+//SORTIN   DD DISP=SHR,DCB=BUFNO=80,                                   
+//         DSN=&SYSUID..SMF.DUMP30                  <== SMF DATA       
+//SORTOUT  DD DSN=&&TEMP1,DISP=(,PASS,DELETE),UNIT=(SYSDA,5),          
+//         DCB=(*.SORTIN,BUFNO=80),SPACE=(CYL,(200,200),RLSE)          
+//STEP1    EXEC PGM=SMFSLCT,REGION=6M                                  
+//STEPLIB  DD DISP=SHR,DSN=&SYSUID..FILE523.LOADLIB <== CBT FILE 523   
+//SYSUT1   DD DISP=SHR,DCB=BUFNO=80,DSN=&&TEMP1                        
+//DDOUT    DD DSN=&&TEMP2,DISP=(,PASS,DELETE),SPACE=(CYL,(30,30),RLSE),
+//         UNIT=SYSDA,LRECL=32756,BLKSIZE=32760,RECFM=VB,BUFNO=80      
+//SYSPRINT DD DUMMY                                                    
+//STEP3    EXEC PGM=IRXJCL,PARM='REXSMF30'                             
+//INPUT    DD DSN=&&TEMP2,DISP=SHR,DCB=BUFNO=80                        
+//SYSTSPRT DD SYSOUT=*                                                 
+//OUTPUT   DD DISP=(NEW,CATLG),LRECL=248,BLKSIZE=24800,RECFM=VB,       
+//            SPACE=(CYL,(20,20),RLSE),DSN=&OUT                        
+//SYSEXEC  DD DISP=SHR,DSN=&SYSUID..FILE617.PDS     <== CBT FILE 617   
+//         PEND                                                        
+//SMFSTR EXEC SMFPROC,OUT=&SYSUID..FILE617.OUTPUT   <== OUTPUT         
+//SORT.SYSIN DD *                                                      
+  SORT FIELDS=(11,4,CH,A,7,4,CH,A),EQUALS,FILSZ=E10000000              
+  MODS E15=(ERBPPE15,500,,N),                                          
+  E35=(ERBPPE35,500,,N)                                                
+  SUM  FIELDS=NONE                                                     
+//STEP1.SYSIN DD *                                                     
+INCLUDE=30                                                             
+START=2000001                                                          
+END=2050001                                                            
+SEQUENCE=YES                                                           
+OUTPUT=DDOUT                                                           
+
+
+Modifications:
+- Remove DATE from procedure parameters.
+- Remove DELETE step.
+- Replace SORTOUT & SYSUT1 with &&TEMP1.
+- Replace DDOUT & INPUT with &&TEMP2.
+- Replace ERBPPSRT with ERBPPE15 and ERBPPE35, a long time ago ERBPPSRT was replaced with those two exits.
+- Remove JOBNAME from STEP1.SYSIN unless you want to extract data about jobs with specific prefix.
+- Change START and END dates in STEP1.SYSIN.
+- Supply SMF records to SORT.SORTIN.
+- Add OUT symbolic parameter.
+- Supply Output data set to OUT symbolic parameter.
+
+For more information about parameters you can use when running SMFSLCT program see $$$$$DOC member of FILE523.
+Creating Sample RMF Report
+
+Introduction
+
+RMF (Resource Management Facility) stores various data about system performance in SMF records. In order to view them you first need to extract them. RMF is shipped with Postprocessor program which can be used in both ways - through RMF panels or in a batch job. This program is used to convert SMF record to formatted data that can be read by any user.
+
+Tasks
+
+1. Find out what type of SMF records is used by RMF. What records can be used by in RMF Postprocessor?
+
+2. Extract only RMF records from 10 latest archived SMF logs. Save is in a data set with HLQ equal to your user ID.
+
+3. Use ERBSCAN function to view SMF records you've extracted. Use ERBSHOW command to view details about selected record.
+
+4. Sort records extracted in Task#3. Save them into data set with HLQ equal to your user ID. Date should be primary sort criteria and time secondary.
+
+5. Use sorted SMF records from Task#5. Create RMF report with all possible details included in SMF records. Do it via batch job. Save it in data set with HLQ equal to your user ID.
+Hint 1
+
+Hint 2
+
+Hint 3
+
+Hint 4
+
+Hint 5
+
+Solution 1
+
+RMF Postprocessor is one of reporting components provided in RMF. Other main components are Monitor I, II and III. Postprocessor is used for analysis and report creation based on historical data. It may be very useful when you'll need to determine periodical performance problems. For real-time monitoring you need to use Monitor II or III.
+
+You can use Postprocessor directly in TSO but most often it is used in a batch job.
+
+Postprocessor can process following SMF records:
+- RMF records - type 70-79
+- HTTP Server records - type 103 
+- Lotus Domino Server records - type 108 
+
+In this Assignment we're interested only in RMF records so we'll use type 70 to 79. Note that each type can have many sub-types. For example record type 74 has 9 sub-types, each for different statistical data.
+Solution 2
+
+First thing you need for this Task are archived SMF logs. Their location should be included in system documentation. If you cannot find it there ask System Administrator or check job that is offloading active SMF logs, it is often called DUMPXY or DUMPSMF.
+
+IFASMFDP Utility is used to extract SMF records, it is also used in DUMP* jobs mentioned earlier.
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID,MSGLEVEL=(1,1)                 
+//DELSTEP  EXEC PGM=IEFBR14                                  
+//DELDD    DD DSN=&SYSUID..SMF.DUMP,DISP=(MOD,DELETE,DELETE), 
+//         SPACE=(TRK,(1,1))                                 
+//STEP01   EXEC PGM=IFASMFDP                                 
+//SMFIN    DD DSN=SMF.DUMP.G5911V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5912V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5913V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5914V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5915V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5916V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5917V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5918V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5919V00,DISP=SHR        
+//         DD DSN=SMF.DUMP.G5920V00,DISP=SHR        
+//SMFOUT   DD DSN=&SYSUID..SMF.DUMP,DISP=(MOD,CATLG),        
+//         SPACE=(CYL,(20,20),RLSE)                          
+//SYSPRINT DD SYSOUT=*                                       
+//SYSIN    DD *                                              
+  INDD(SMFIN,OPTIONS(DUMP))                                  
+  OUTDD(SMFOUT,TYPE(70:79))        
+
+
+Job uses concatenation to read ten archived SMF logs. In exactly the same way you can dump active SMF logs. Be careful when you are dumping active SMF logs, OPTIONS sub-parameter in INDD control statements specifies if data from active logs will be copied or copied and cleared.
+STEPDEL isn't required but may be useful when you'll need to rerun job many times. This way you won't have to delete this data set manually.
+Solution 3
+
+ERBSCAN is RMF utility used to display SMF records used by RMF (Type 70-79). To use is enter ERBSCAN line command in 3.4 panel next to the data set that contains SMF records extracted in Task#2.
+
+Panel will appear where you will be able to see records in readable format (SMF records are binary ERBSCAN will translate them).
+
+From there command ERBSHOW 15 will show all details about record number 15, including binary and character view of the record.
+Solution 4
+
+Every SMF record has header which is common for all types of SMF records. Header contain among other information Record Type, Date and Time, for this reason we can sort all records with the same criteria. Two fields that we're using is Date (starting at column 11) and Time (starting at column 7).
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID,MSGLEVEL=(1,1)                        
+//DELSTEP  EXEC PGM=IEFBR14                                         
+//DELDD    DD DSN=&SYSUID..SMF.DUMP.SORTED,DISP=(MOD,DELETE,DELETE), 
+//         SPACE=(TRK,(1,1))                                        
+//STEP1    EXEC PGM=SORT                                            
+//SORTIN   DD DSN=&SYSUID..SMF.DUMP,DISP=SHR                        
+//SORTOUT  DD DSN=&SYSUID..SMF.DUMP.SORTED,DISP=(NEW,CATLG),        
+//         LIKE=&SYSUID..SMF.DUMP                                   
+//SYSOUT   DD SYSOUT=*                                              
+//SYSIN    DD *                                                     
+  SORT FIELDS=(11,4,CH,A,7,4,CH,A)      
+
+
+In records description included in "z/OS MVS System Management Facility" we have given only offset of specific fields. In order to know real position of field we're interested in we need to add 1 to the offset.
+
+Note:
+While processing RMF SMF records it is recommended to use RMF exits:
+
+MODS E15=(ERBPPE15,36000,,N),E35=(ERBPPE35,3000,,N)
+
+
+You can read more about it in "Preparing SMF records for postprocessing" chapter of "RMF User's Guide".
+								
+Solution 5
+
+JCL Code:
+
+//JSADEK01 JOB NOTIFY=&SYSUID,MSGLEVEL=(1,1)                   
+//DELSTEP  EXEC PGM=IEFBR14                                    
+//DELDD    DD DSN=&SYSUID..RMF.REPALL,DISP=(MOD,DELETE,DELETE), 
+//         SPACE=(TRK,(1,1))                                   
+//STEP01   EXEC PGM=ERBRMFPP,REGION=0M                         
+//MFPINPUT DD DSN=&SYSUID..SMF.DUMP.SORTED,DISP=SHR            
+//PPRPTS   DD DSN=&SYSUID..RMF.REPALL,DISP=(NEW,CATLG),        
+//         SPACE=(CYL,(20,20),RLSE)                            
+//SYSIN    DD *                                                
+  REPORTS(ALL)                        
+
+
+MFPINPUT DD statement uses sorted SMF records as input. These records will be processed according to control statements provided in SYSIN DD statement. In this case all possible details will be included in the report.
+
+PPRPTS DD statement defines output data set where the report are going to be written. It does not require any additional parameters, LRECL, BKLSIZE and RECFM parameters are automatically set by ERBRMFPP Utility.
+
+Report created that way will contain all possible statistics made by RMF from a particular period of time.
