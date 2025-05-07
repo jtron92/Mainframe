@@ -1,0 +1,17 @@
+/$DSPOOLDEF
+
+RESPONSE=P390                                                                  
+  $HASP844 SPOOLDEF                                                             
+  $HASP844 SPOOLDEF  BUFSIZE=3856,DSNAME=SYS1.HASPACE,                          
+  $HASP844           FENCE=(ACTIVE=NO,VOLUMES=1),                               
+  $HASP844           LASTSVAL=(2025.127,13:06:53),SPOOLNUM=32,                  
+  $HASP844           TGSIZE=33,TGSPACE=(MAX=16288,DEFINED=780,                  
+  $HASP844           ACTIVE=780,PERCENT=8.5897,FREE=713,WARN=80),               
+  $HASP844           TRKCELL=3,VOLUME=OS39M                                     
+
+
+- SPOOLNUM – maximum number of spool volumes to use. Usually it's set to 32 and you don't need to do anything with it.
+- TGSPACE=MAX – this is maximum size of all active spool volumes. If you are already close to that limit you need to increase this value. It's must be the multiplication of 16288, but don't worry about it, JES2 will automatically round up your value to the closes multiplication of 16288.
+- VOLUME - defines that only volumes starting with JESYS* can be used as spool.
+
+What's spool volume? Spool itself is simply a data set called by default SYS1.HASPACE, since there can be only one such data set on volume, a volume that contains it is called Spool volume. It's the same situation as with Master Catalog Volume – it's simply a volume that contains Master Catalog.
