@@ -1,0 +1,383 @@
+
+IPL Basics
+
+Introduction
+
+IPL stands for Initial Program Load. This is term used to describe process of starting any MVS system including z/OS. IPL itself is actually smart part of system restart. It consists of four stages: sub-systems shutdown, system reset, system load (IPL) and sub-systems start. “IPL” term most often refers to those four stages. This is theoretical assignment in which you'll learn various aspects of IPL process.
+
+Tasks
+
+1. Answer following questions:
+- What information do you need to know to perform IPL?
+- Describe Load Parameter.
+- How often and when IPLs are normally done?
+- Describe structure of SYSRES volume.
+- What is HMC?
+- What is SE?
+
+2. Point out LOADxx member name, IODF device, Nucleus setting and IMSI setting for following Load Parameters:
+- 31FF01A2
+- 0AACIO
+- 3FG111S2
+- 333A..C
+- 124399.9
+- ....99A1
+- A323XZB
+- 0011
+
+3. Describe System Load process from technical point of view. What are stages of System Load?
+
+4. Describe IPL process from operational point view. What should you check before and after IPL?
+Hint 1-3
+
+Solution 1
+
+What information do you need to know to perform IPL?
+
+First you must know machine and LPAR image name to identify LPAR in HMC. This information should be included in system documentation. You can also confirm them with command 'D M=CPU':
+CPC NAME = ZB2046 
+LP NAME = ZB06
+
+- CPC NAME – Central Processor Complex name identifies “book” that is used by the system. One mainframe can have up to four “books”. Each book have CPC, dedicated to it central storage and many other components. You can see “book” as very sophisticated motherboard with its components.
+
+- LP NAME – LPAR image name. Note that LPAR name is not equal to SYSNAME.
+
+For the IPL itself you need three parameters:
+Load type: Normal, Clear, SCSI, SCSI dump.
+IPL device: XXXX
+Load parameter: AAAABBCD
+
+- Load type – this parameter depends on system configuration. Almost always 'normal' load is done. Clear options will clear all central storage to zeros. This is usually done via Reset Clear option so it's not needed during load.
+
+- IPL device – device number of SYSRES volume. As every device number it consists of four hexadecimal characters.
+
+- Load parameter has 8 characters and consists of four sub-parameters.
+
+____________________
+
+Describe Load Parameter.
+
+Load parameter format: AAAABBCD
+
+AAAA – device number of IODF. IODF is basically a data set that stores Hardware configuration for particular system. It is usually shared among LPARs.
+
+BB – LOAD member suffix (00 by default). Defines name of LOAD member “LOAD00” for instance.
+
+C – IMSI character (Initialization Message Suppression Indicator). It defines what kind of messages will be sent to consoles during system load.
+
+D – Nucleus suffix (1 by default). Defines name of nucleus. IEANUC0x is it's name, 'x' suffix is defined in Load parameter. It also depends on architecture type. In case of z/OS system two nucleus members will be used IEANUC0x which is universal one and IEANUC2x which is specific for 64-bit z/OS architecture.
+
+____________________
+
+How often and when IPLs are normally done?
+
+There is no rule here, some well configured system can be IPLed once a year or even less often. Others can be even IPLed every week.
+Test systems are IPLed more often since they don't have to be available to customers.
+IPLs are most often done because of various system maintenance activities. During time change or for installation of some system updates. Tasks that runs on system can be often updated without IPL.
+
+____________________
+
+Describe structure of SYSRES volume.
+
+Each disk used by z/OS must be preformatted. It is done with ICKDSF Utility. Here is universal format of such devices (R = record):
+R1 = Bootstrap 1 - it defines if DASD is IPL volume. If yes, Bootstrap 2 is read. 
+R2 = Bootstrap 2 - it contains pointer to IPL Text and loads it. 
+R3 = VOLSER - standard volume label. 
+Rx = User VOLSERs (optional).
+Ry = IPL text (optional) - IEAIPL00 program that initiates IPL.
+
+Even if DASD is not SYSRES it has reserved two first records as shown above.
+
+____________________
+
+What is HMC?
+
+HMC (Hardware Management Console) is simply PC or laptop connected to the mainframe with installed HMC software. Of course each mainframe have many such PCs in case one of them fails. Because of this you should always have access to many HMCs.
+
+HMC provides remote access and this is how it's usually used.
+
+It provides many functions related to the machine hardware and LPARs that are defined on it. Most common HMC activities are:
+- IPLs – reset and load command.
+- changing MIPS setting.
+- access to 'Operating System Messages' which provides similar function as Master Console and can be used for problem determination when TSO is unavailable.
+
+____________________
+
+What is SE?
+
+SE (Support Element) is a laptop inside mainframe. Each machine has two SEs. It provides the same interface and similar functions as HMC.
+Solution 2
+
+IMSI functions:
+- Display Informational Messages
+- Prompt for Master Catalog Response
+- Prompt for System Parameter Response
+In this example 'YYN' means that first two types of message will appear but not Prompt for System Parameter Response.
+
+1. 31FF01A2
+LOAD member: LOAD01
+IDOF device: 31FF
+IMSI: YYY
+Nucleus: IEANUC02 & IEANUC22
+
+2. 0AACIO
+LOAD member: LOADIO
+IDOF device: 0AAC
+IMSI: NNN (default)
+Nucleus: IEANUC01 & IEANUC21 (default)
+
+3. 3FG111S2
+Invalid – IODF is device number coded in HEX mode. 'G' does not exist in HEX numeric system.
+
+4. 333A..C
+LOAD member: LOAD00 (default)
+IDOF device: 333A 
+IMSI: NYN
+Nucleus: IEANUC01 & IEANUC21 (default)
+'.' character can be used to skip LOADxx or IMSI value when you need to code some parameter after it.
+
+5. 124399.9
+LOAD member: LOAD99
+IDOF device: 1243
+IMSI: NNN (default)
+Nucleus: IEANUC09 & IEANUC29
+
+6. ....99A1
+Invalid – there is no default IODF value so you cannot use '.' in this case.
+
+7. A323XZB
+Invalid – there is no 'B' IMSI mode.
+
+8. 0011
+LOAD member: LOAD00 (default)
+IDOF device: 0011
+IMSI: NNN (default)
+Nucleus: IEANUC01 & IEANUC21 (default)
+
+You can skip all sub-parameters except IODF without using '.'. This is how IPL is usually done.
+Solution 3
+
+1. Issuing load command via HMC.
+
+It can be also done via SE, but this is rarely done this way. To issue load command choose Load option. You'll be prompted with dialog where you'll have to specify IPL parameters.
+- IPL device - SYSRES device number.
+- Load paramter – as already mentioned it consists of IODF device number, suffix of LOAD member, IMSI and nucleus suffix.
+- Load mode: Normal, Clear, SCSI or SCSI dump.
+
+
+2. Bootstrap module load.
+
+Bootstrap is located on first record of first track on SYSRES volume. Bootstrap executes IEAIPL00 program.
+
+IPL at the beginning is done by single CPU but the process itself is very fast so it doesn't need more processing power at this stage.
+
+
+3. IEAIPL00 processing.
+
+IEAIPL00 program is also called IPL Text.
+
+It clears central storage and prepares Central Storage for Master Scheduler address space.
+
+Then it executes IRIMs which are located in SYS1.NUCLEUS.
+
+
+4. IRIMs processing.
+
+IRIMs (IPL Resource Initialization Modules) perform many functions during IPL.
+
+4.1. LOADxx member is located and read. 'xx' suffix is passed in Load Parameter, if not LOAD00 is used. IRIM searches for LOADxx member in following data sets:
+SYS0.IPLPARM on IODF device
+SYS1.IPLPARM 
+…
+SYS9.IPLPARM 
+SYS1.PARMLIB on IODF device
+SYS1.PARMLIB on SYSRES device
+
+4.2. IODF data set is processed. Name of IODF is defined in LOADxx member, for example:
+“IODF     99 SYS1”
+IODF keyword defines HQL and suffix of IODF data set, it always has two segments from which second one is IODFxx. Overall format is “IODF XX YYY” - it points to YYY.IODFXX data set.
+in this example IODF is called SYS1.IODF99
+
+4.3. System nucleus is loaded.
+Nucleus is located in SYS1.NUCLEUS. Two nucleus members are used in z/OS: IEANUC0x and IEANUC2x, second nucleus name depends on architecture type.
+If you specified nucleus suffix in Load Parameter – it defines which nucleus is used.
+If not, LOADxx member is searched for NUCLEUS keyword which defines this suffix.
+If it's also not found default suffix is used: IEANUC01.
+
+4.4. Master Scheduler initialization.
+After that Master Scheduler address space is started by IRIMs. Master Scheduler is always started as first address space so it has ASID=1.
+
+4.5. Central Storage management is started.
+
+4.6. Last thing that IRIMs do is the initialization of NIP (Nucleus Initialization Program).
+
+
+5. NIP processing.
+
+At this point multithreading starts. Earlier only one CPU for used for the IPL process.
+
+5.1. NIP executes RIMs (Resource Initialization Modules) which initialize basic system resources and devices.
+
+5.2. PARMLIBs specified in LOADxx member are read. IEASYMxx, IEASYSxx, IEASVCxx and many other system members.
+IEASYSxx stores most important system parameters and points to other PARMLIB members. NIP always reads IEASYS00 first and often alternate IEASYSxx which was defined by System Programmer. If the same parameter is defined in both IEASYS00 and IEASYSxx then IEASYSxx overwrites parameter from IEASYS00.
+
+5.2. Load modules are read into PLPA, FLPA and MLPA.
+PLPA – stores load modules that can be paged out (moved from Central to Auxiliary storage).
+FLPA – stores load modules that cannot be paged out. That are fixed in Central Storage.
+MLPA – this is temporary area which is used only during IPL. It can be used if you want to test particular load module during IPL.
+
+5.3. Basic system services start.
+RIMs start most important address spaces and services used by system, for example: SRM, DUMPSRV, XCFAS, GRS, CATALOG, WLM, OMVS etc.
+
+5.4. At the end RIMs pass control to Master Scheduler.
+
+
+6. Master Scheduler initialization and processing.
+
+Master Scheduler address space already exists but the task itself really starts now.
+
+6.1. Finalization of Master Scheduler subsystem.
+MSTJCLxx PARMLIB member contains parameter for Master Scheduler initialization.
+
+MSTJCLxx code sample:
+
+//MSTJCL00 JOB MSGLEVEL=(1,1),TIME=1440     
+//         EXEC PGM=IEEMB860,DPRTY=(15,15)  
+//STCINRDR DD SYSOUT=(A,INTRDR)             
+//TSOINRDR DD SYSOUT=(A,INTRDR)             
+//IEFPDSI  DD DSN=SYS1.MVSA.PROCLIB,DISP=SHR 
+//         DD DSN=SYS1.PROCLIB,DISP=SHR     
+//SYSUADS  DD DSN=SYS1.UADS,DISP=SHR        
+//SYSLBC   DD DSN=SYS1.BRODCAST,DISP=SHR    
+
+
+JES2 normally takes care about all JCL processing but Master Scheduler startup procedure must run without JES2. Because of this it is passed directly to Internal Reader (INTRDR) it can execute such procedure without JES2.
+
+Another thing to notice is the IEFPDSI DD statement which defines most basics PROCLIBs on the system. Master Scheduler will search them for JES2 startup procedure called simply “JES2”.
+
+6.2. JES2 startup and initialization:
+
+//JES2      PROC MEMBER=JES2PARM,ALTMEM=JES2BACK               
+//IEFPROC   EXEC PGM=HASJES20,DPRTY=(15,15),TIME=1440,PERFORM=9 
+//HASPPARM  DD   DSN=SYS1.PARMLIB(&MEMBER),DISP=SHR       
+//ALTPARM   DD   DSN=SYS1.PARMLIB(&ALTMEM),DISP=SHR       
+//PROC00    DD   DSN=USER.PROCLIB,DISP=SHR                     
+//          DD   DSN=SYS1.MVSA.PROCLIB,DISP=SHR                                
+//          DD   DSN=SYS1.PROCLIB,DISP=SHR                     
+//HASPLIST  DD   DDNAME=IEFRDER                   
+
+
+JES2 startup procedure has another PROCLIB concatenation. Every started task procedure must be in this concatenation if it runs under JES2.
+
+HASPPARM defines member that contains JES2 setting almost always called JES2PARM.
+
+
+You can see JES2 initialization as the end of the System Load itself but after it many other critical subsystems must start like DB2s, TSO, VTAM etc. they are usually started by Automation Tool but you can also write your own CLIST or REXX script that will perform this function.
+
+From technical point of view System Load contains of three main states:
+- IPL (Initial Program Load);
+- NIP (Nucleus Initialization Program);
+- MSI (Master Scheduler Initialization).
+Solution 4
+
+1. Requirements – to be done when you are assigned to IPL.
+
+Before any IPL you must ensure that you have all the information you need, this of course depends on your site but here are some universal items you should know:
+- Change number and description of this particular IPL.
+- CPC and LPAR name.
+- IPL parameters. If you need to lad system with current parameters check them with '/D IPLINFO' command.
+- Contact to higher level support.
+- Contact to customer or SPOC (Single Point Of Contact is a team/person that has direct contact with customer).
+- If you're doing IPL on particular system for the first time, or you haven't logon to it for a long time, ensure you have appropriate access.
+
+
+2. IPL preparation – to be done one or two hours before IPL.
+
+You should logon to all necessary tools some time before IPL in case some technical or authorization problems will appear.
+- Logon to TSO.
+- Logon to Automation Tool if available, for example NetView System Automation.
+- Logon to HMC.
+- Logon to Master Console or Operating System Messages in HMC.
+
+
+3. Pre-IPL checks – to be done 5-10 minutes before IPL.
+
+In this step you gather system data that may be useful if any problems appear during IPL. You'll also use this data with Post-IPL checks for comparison of system state before and after IPL. Many commands here depend on tools used at your site. Below, except standard MVS command, NetView System Automation commands are also included, this is one of the most popular automation tool out there.
+
+'F CNMS,DISPTREE CNMS'
+Shows task dependency tree. Almost always one task can be started only when another is already running. For example you cannot run *DBM1 DB2 address space without *MSTR. The same is true for many other tasks. You need this information in case you'll need to manually close or start some tasks without automation tool.
+
+'F CNMS,DISPSTAT OUTMODE=LINE'
+'F CNMS,INGLKUP'
+First command shows all tasks that are managed by NetView System Automation along with their statuses. Second command shows tasks that are not managed by Automation. You need this data mostly for comparison during Post-IPL checks. This way you know which tasks were up and which down before IPL. Your goal is to ensure that all tasks have the same status after IPL unless you have different instructions.
+
+'D IPLINFO'
+Information about current SYSRES device, IODF device and LOADxx member.
+
+'D M=CPU'
+CPC name and LPAR name is what you'll need from this command.
+
+'$DI'
+Status of initiators.
+
+'D A,L'
+Shows all STC, TSU and JOB active address spaces on the system. System address spaces aren't there, to see them you can use 'D A,A' command although it's not needed in this case.
+
+'D O'
+Prefixes of important subsystems like JES2, DB2, MQ etc. You'll need those in case you'll need to issue any command to such subsystems.
+
+'D R,R'
+List of WTORs. You need this list for comparison with Post-IPL checks.
+
+Those are few basic checks but depending on your system configuration and customer demands they can be many more of those, for example Lines, Nodes, Printers status in case you'll need to start some of them after IPL, Sysplex status etc.
+
+
+4. System shutdown – to be done at specific time or after confirmation.
+
+z/OS is specific in many ways, one funny characteristic of this system is that it does not have shutdown command. System Automation closes all tasks running on the system and then System Reset is done which you can see as system power off, although it simply clears Central Storage (RAM).
+
+- Stop job submission in scheduling tool (like Control-7 or TWS if needed)
+- Stop initiators controlled by JES2: '$PI'
+- Stop initiators controlled by WLM (if needed): '$PXEQ'
+- Check if jobs are running: 'DA OJOB' in SDSF. In case some jobs are running you'll have to either wait until they're done or cancel them. New jobs won't start because initiators are already stopped. Note that some tasks like CICS may run as a job, other jobs may run for days so you cannot wait too long. You should have specific instructions what you can do with running jobs before shutdown.
+- Issue Automation command (or run script) that will close all running tasks.
+- During system shutdown monitor tasks closure via Master Console or HMC OSM(Operating System Messages). Use 'D A,L' command. 'D R,R' and '$DJES2' commands are also very handy during shutdown.
+- If some subsystem is stuck you should try to close it manually from Master Console or HMC OSM.
+- When all tasks are down you must issue 'Z EOD' command. This command closes System Log and moves SMF records from buffer to SMF data sets. Without this command SMF records stored in buffer will be lost.
+- Now you can perform System Reset. Double check CPC and LPAR name before reset. Usually Reset Clear is done.
+
+
+5. System Load – to be done immediately after System Reset unless you have different instructions.
+
+- Select Load option from HMC.
+- There you can specify IPL parameter load type, IPL device number (SYSRES) and Load Parameter (usually only first 4 characters - IODF)
+- Double check if all parameters are correct and confirm them.
+- Soon after that Master Console or Operating System Messages in HMC will start working. You must wait a while until system will be ready to process MVS commands.
+- Now you can monitor system load using the same commands: 'D A,L' and 'D R,R'. Sometimes you'll need to vary your console online before issuing any command.
+- You should wait for three tasks: VTAM, TCPIP and TSO. When they are up you should be able to logon to TSO and your System Automation tool.
+
+Of course during System Shutdown and especially System Load you can face all kinds of errors and problems. Most of them are too rare or installation specific to include them here but you'll also find few exercises later in that category.
+
+
+6. Post-IPL checks – to be done when all or almost all tasks are up.
+
+In that phase system is up but you must check if all tasks and system setting are in correct state.
+
+- Again check status of all tasks and compare it with Pre-IPL list.
+In case of NetView System Automation you'll need to issue two commands:
+- 'F CNMS,DISPSTAT OUTMODE=LINE' - for tasks managed by NetView.
+- 'F CNMS,INGLKUP' – for task not managed by NetView.
+If task is in incorrect  status you should probably start/close such task to fix it. But as always it depends on system documentation or other instructions.
+
+- Start initiators under JES2: '$SI1-3' (note that when starting initiators you cannot simply issue '$SI' you must specify number of initiators to be started.
+- Start initiators under WLM (if needed, WLM initiators are usually started automatically): '$SXEQ'
+- Start job submission in Scheduling Tool (if needed).
+
+Those were basic checks, other checks may include:
+- Checking Lines, Nodes and Printer in SDSF. You may need to start some of them.
+- 'D R,R' – WTORs, if you're not sure if you should investigate particular WTOR you can compare it with Pre-IPL WTORs. Usually there are some WTORs that are always present on the system.
+- 'D XCF' – you may need to check if LPAR returned to Sysplex although this should be done automatically.
+- Jobs in error – it's possible that after starting initiators some jobs will end in error because of problems caused by IPL. Check your scheduling tool is clear of such jobs.
+- Functionality of some tasks – sometimes customer may need to check certain functions for specific task. Sometimes after each IPL and sometime only after particular changes.
+
+This is small list created to give you basic picture of things you need to have in mind. Everything really depends on customer needs and specific installation. Standard IPL action should be included in system documentation while non-standard action should be included in the Change related to the IPL.
