@@ -1,0 +1,31 @@
+Start FTP session
+
+
+ftp 192.168.0.150
+Log in
+
+
+Name: IBMUSER
+Password: SYS1
+Set binary mode  type binary
+(prevents corruption for any non-text files or control characters)
+
+
+binary
+Set passive mode 
+(solves 425 data connection issues on modern networks)
+
+
+passive
+Upload file
+
+To a sequential dataset:
+
+
+put test.txt 'IBMUSER.TEST.DATA'
+To a PDS member (only if PDS already exists):
+
+
+put test.txt 'IBMUSER.JCL.CNTL(MYJOB)'
+Quit
+
