@@ -1,0 +1,110 @@
+✅ Final Working Setup: Hercules + z/OS + TUN/TAP + Clean Internet
+🔧 1. Ensure TUN/TAP is enabled on Linux
+
+ls /dev/net/tun
+
+If it doesn't exist:
+
+sudo mkdir -p /dev/net
+sudo mknod /dev/net/tun c 10 200
+sudo chmod 666 /dev/net/tun
+
+Check kernel has TUN:
+
+sudo modprobe tun
+dmesg | grep tun
+
+🔧 2. Correct your Hercules network config
+
+Edit your config file (e.g., s390.CONF) and make sure you use only this line for LCS:
+
+0E20.2 LCS -n /dev/net/tun
+
+Don't add IPs or use tap0 directly.
+🧠 3. Edit your z/OS TCP/IP PROFILE
+
+Use this full config (this is the final, corrected version):
+
+DEVICE LCS1   LCS E20 AUTORESTART
+LINK   ETH1   ETHERNET 0 LCS1
+HOME   192.168.4.150 ETH1
+
+ROUTE 192.168.4.0    255.255.255.0   =         ETH1   MTU DEFAULTSIZE
+ROUTE DEFAULT        192.168.4.250               ETH1   MTU DEFAULTSIZE
+
+START LCS1
+ENDRoutes
+
+    .150 = z/OS IP
+
+    .250 = Linux TAP gateway IP (we’ll assign this next)
+
+💻 4. Start Hercules as root
+
+sudo hercules -f /path/to/s390.CONF
+
+You should see:
+
+HHC00901I 0:0E20 LCS: Interface tap0, type TAP opened
+
+🌐 5. Configure tap0 on the Linux host
+
+Set the TAP interface to a non-conflicting IP (e.g., .250):
+
+sudo ip link set tap0 up
+sudo ip addr del 192.168.4.1/24 dev tap0  # only if previously assigned
+sudo ip addr add 192.168.4.250/24 dev tap0
+
+Verify:
+
+ip addr show tap0
+
+You should see:
+
+inet 192.168.4.250/24 scope global tap0
+
+🔁 6. Recycle z/OS TCP/IP stack
+
+From SDSF or console:
+
+P TCPIP
+S TCPIP
+
+Check with:
+
+NETSTAT HOME
+PING 192.168.4.250
+
+📶 7. Test connectivity
+
+From Linux:
+
+ping 192.168.4.150
+
+From z/OS:
+
+PING 192.168.4.250
+
+Both directions should work flawlessly.
+✅ 8. (Optional) Enable Internet Access for z/OS (if desired)
+
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo iptables -t nat -A POSTROUTING -o wlp3s0 -j MASQUERADE
+
+Replace wlp3s0 with your real internet interface (ip route shows this).
+🧼 9. (Optional) Disable IP forwarding/NAT if you don’t need internet
+
+sudo iptables -t nat -D POSTROUTING -o wlp3s0 -j MASQUERADE
+sudo sysctl -w net.ipv4.ip_forward=0
+
+🎉 Done!
+
+You now have:
+
+    Full z/OS ↔ Linux networking via TAP
+
+    Clean, conflict-free IP setup
+
+    No internet slowdown
+
+    Optional z/OS outbound internet (if enabled)
