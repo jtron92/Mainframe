@@ -1,3 +1,26 @@
+(base) jorgecintron@Jorges-MacBook-Air ~ % ftp 192.168.0.150
+
+Connected to 192.168.0.150.
+220-FTPD1 IBM FTP CS V1R11 at adcd.dfw.ibm.com, 15:50:55 on 2025-05-08.
+220 Connection will close if idle for more than 5 minutes.
+Name (192.168.0.150:jorgecintron): ibmuser
+331 Send password please.
+Password: 
+230 IBMUSER is logged on.  Working directory is "IBMUSER.".
+ftp> binary
+200 Representation type is Image
+ftp> passive
+Passive mode on.
+ftp> ascii
+200 Representation type is Ascii NonPrint
+ftp> put test.txt 'IBMUSER.TEST.DATA'
+227 Entering Passive Mode (192,168,0,150,4,3)
+125 Storing data set IBMUSER.TEST.DATA
+250 Transfer completed successfully.
+29 bytes sent in 0.0016 seconds (18.1540 kbytes/s)
+ftp> 
+
+
 Start FTP session
 
 
