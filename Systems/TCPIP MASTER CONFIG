@@ -108,3 +108,14 @@ You now have:
     No internet slowdown
 
     Optional z/OS outbound internet (if enabled)
+
+
+
+*************to chnage ips
+
+
+sudo ip addr flush dev tap0
+sudo ip addr add 192.168.0.250/24 dev tap0
+sudo ip link set dev tap0 up
+
+
