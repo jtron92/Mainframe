@@ -120,6 +120,23 @@ sudo ip link set dev tap0 up
 
 
 
+jtron@jtron-ThinkPad-T480:~$ ip addr show tap0   <==== to view if the ip can be pinged 
+7: tap0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 1000
+    link/ether 9e:ed:29:27:4e:76 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::9ced:29ff:fe27:4e76/64 scope link 
+       valid_lft forever preferred_lft forever                              theres no ip
+***************************************************************************************
+jtron@jtron-ThinkPad-T480:~$ sudo ip addr flush dev tap0                <=== flush it incase
+sudo ip addr add 192.168.4.250/24 dev tap0                               <=== add it back
+[sudo] password for jtron: 
+jtron@jtron-ThinkPad-T480:~$ ip addr show tap0
+7: tap0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 1000
+    link/ether 9e:ed:29:27:4e:76 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.4.250/24 scope global tap0                          <===
+       valid_lft forever preferred_lft forever
+jtron@jtron-ThinkPad-T480:~$ 
+
+
 *****************************for IP
 
 STEP 7: Test Ping
