@@ -187,3 +187,21 @@ HOME 192.168.0.150 ETH1
 ROUTE DEFAULT 192.168.0.251 ETH1 MTU DEFAULTSIZE
 
 
+
+
+
+
+
+
+
+************remove ip forwarding
+
+❌ To remove the NAT rule you just added:
+
+Run the exact same command as before, but with -D (delete) instead of -A (add):
+
+sudo iptables -t nat -D POSTROUTING -s 192.168.4.0/24 -o wlp3s0 -j MASQUERADE
+
+❌ To turn off IP forwarding:
+
+sudo sysctl -w net.ipv4.ip_forward=0
