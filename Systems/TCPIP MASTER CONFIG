@@ -97,6 +97,30 @@ Replace wlp3s0 with your real internet interface (ip route shows this).
 sudo iptables -t nat -D POSTROUTING -o wlp3s0 -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=0
 
+
+*********************ping
+
+✅ Step-by-step on Linux:
+1. Enable IP forwarding (so Linux can act as a router temporarily):
+
+sudo sysctl -w net.ipv4.ip_forward=1
+
+    🔁 This will reset after reboot unless you make it permanent (optional).
+
+2. Enable NAT for the z/OS subnet (192.168.4.0/24):
+
+First, find your internet-facing interface (likely wlp3s0, eth0, or similar):
+
+ip route | grep default
+
+Look at the interface name at the end (e.g., dev wlp3s0).
+
+Then, run this command (replacing wlp3s0 if needed):
+
+sudo iptables -t nat -A POSTROUTING -s 192.168.4.0/24 -o wlp3s0 -j MASQUERADE
+
+***************************************************
+
 🎉 Done!
 
 You now have:
