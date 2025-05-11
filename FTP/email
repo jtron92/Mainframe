@@ -1,0 +1,82 @@
+✅ Full Setup: Send Email from z/OS via Postfix on Linux
+🧱 Part 1: Install and configure Postfix
+
+    Install Postfix on your Linux machine:
+
+sudo apt install postfix mailutils
+
+    During the Postfix setup:
+
+        Select: "Internet with smarthost"
+
+        Enter your system mail name: e.g., localhost or mainframe.local
+
+        For SMTP relay host, enter:
+
+        [smtp.gmail.com]:587
+
+🛠 Part 2: Configure Gmail as your relay (securely)
+
+    Edit /etc/postfix/main.cf:
+
+sudo nano /etc/postfix/main.cf
+
+Add these lines at the bottom (to avoid duplicates):
+
+# Enable TLS and SASL
+smtp_use_tls = yes
+smtp_tls_security_level = encrypt
+smtp_tls_note_starttls_offer = yes
+
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+
+relayhost = [smtp.gmail.com]:587
+
+🔐 Part 3: Create App Password in Google
+
+You need this because Gmail blocks Postfix from using your real password.
+
+🔗 Get your Gmail App Password here
+
+    📌 You must have 2-Step Verification turned on for your Google account first.
+
+🔏 Part 4: Store credentials securely
+
+    Create /etc/postfix/sasl_passwd:
+
+sudo nano /etc/postfix/sasl_passwd
+
+Add this line (replace with your email + real app password):
+
+[smtp.gmail.com]:587    your.email@gmail.com:your_app_password
+
+✅ Example:
+
+[smtp.gmail.com]:587    jorgegcintron@gmail.com:caqy xogp qcuq ihlc
+
+    Secure the file and generate the hash:
+
+sudo chmod 600 /etc/postfix/sasl_passwd
+sudo postmap /etc/postfix/sasl_passwd
+
+    Reload Postfix to apply changes:
+
+sudo systemctl reload postfix
+
+✉️ Part 5: Test email sending
+
+Send a test email:
+
+echo "This is a test from z/OS bridge" | mail -s "Mainframe Alert" your@email.com
+
+✅ You should see the email appear in your inbox.
+🧪 Optional: Check logs if something breaks
+
+sudo journalctl -u postfix -e
+
+or
+
+tail -n 50 /var/log/mail.log
+
