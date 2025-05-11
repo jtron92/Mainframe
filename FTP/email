@@ -310,3 +310,75 @@ JCL FOR EMAIL
  ****** **************************** Bottom 
 
 
+to change email 
+
+
+✅ Here's what to fix:
+
+Edit your script:
+
+nano /home/jtron/send_email_if_exists.sh
+
+Then find this line:
+
+TO="jorgegcintron@gmail.com"
+
+👉 Change that to your new email address, for example:
+
+TO="your.new.email@gmail.com"
+
+
+
+sudo nano /etc/postfix/sasl_passwd
+
+Add this line (replace with your email + real app password):
+
+[smtp.gmail.com]:587    your.email@gmail.com:your_app_password
+
+✅ Example:
+
+[smtp.gmail.com]:587    jorgegcintron@gmail.com:caqy xogp qcuq ihlc
+
+
+******************How to Generate a Gmail App Password
+
+    Go to: https://myaccount.google.com/security
+
+    Scroll to the "Signing in to Google" section
+
+    Make sure:
+
+        2-Step Verification is turned ON ✅
+
+        If it’s not on, you’ll need to enable it first — otherwise, App Passwords won't show up
+
+    After that, go to:
+    👉 https://myaccount.google.com/apppasswords
+
+    You’ll be prompted to log in again
+
+    Choose:
+
+        App: Select "Mail"
+
+        Device: Select "Other" and type something like Postfix
+
+    Click Generate
+
+    It’ll show you a 16-character password — use that in your /etc/postfix/sasl_passwd like:
+
+[smtp.gmail.com]:587 jorgegcintron@gmail.com:abcx defg hijk lmno
+
+(No spaces, that's just how it's displayed — it’s all one string.)
+
+*********************************************************************
+
+    Secure the file and generate the hash:
+
+sudo chmod 600 /etc/postfix/sasl_passwd
+sudo postmap /etc/postfix/sasl_passwd
+
+    Reload Postfix to apply changes:
+
+sudo systemctl reload postfix
+
