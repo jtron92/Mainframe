@@ -269,7 +269,7 @@ JCL FOR EMAIL
  000004 //INPUT    DD *                                                         
  000005 192.168.4.250                                                           
  000006 jtron                                                                   
- 000007 !Soldierghost92                                                         
+ 000007 PASSWORD FOR LINUX                                                      
  000008 put 'IBMUSER.FLAT' email.txt                                            
  000009 quit                                                                    
  000010 /*                                                                      
