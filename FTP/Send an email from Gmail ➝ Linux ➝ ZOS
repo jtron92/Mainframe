@@ -74,3 +74,21 @@ ftp.storbinary(f"STOR '{TARGET_DATASET}'", f)
 
     ✅ Confirmed clean EBCDIC-readable text!
 
+
+
+
+
+You can also add logging to verify cron is running it:
+
+*/1 * * * * /usr/bin/python3 /home/jtron/gmail_to_zos.py >> /home/jtron/imap_to_zos.log 2>&1
+
+Then run:
+
+tail -f /home/jtron/imap_to_zos.log
+
+That’ll show you each run in real time.
+
+Let me know if you want it to delete emails or route to different datasets based on subject line!
+
+
+
