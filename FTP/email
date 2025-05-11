@@ -80,3 +80,34 @@ or
 
 tail -n 50 /var/log/mail.log
 
+
+
+
+
+
+
+
+
+✅ Basic Command to Send Email:
+
+echo "Your message body" | mail -s "Your Subject Here" recipient@email.com
+
+📌 Examples:
+Send a simple message:
+
+echo "Mainframe job completed successfully." | mail -s "Job Status" jorgegcintron@gmail.com
+
+Send the contents of a file (like a report or log):
+
+mail -s "Mainframe Report" jorgegcintron@gmail.com < /path/to/file.txt
+
+🧠 Tips
+
+    You can run this from any shell script or cron job.
+
+    You can FTP a file from z/OS to Linux, then:
+
+mail -s "z/OS Alert" jorgegcintron@gmail.com < /home/jtron/ftp/zmsg.txt
+
+You can also attach files with mutt or mailx if needed — just ask if you want that.
+
