@@ -85,8 +85,16 @@ From z/OS:
 
 PING 192.168.4.250
 
+jtron@jtron-ThinkPad-T480:~$ ip route                   <==============
+default via 192.168.4.1 dev wlp3s0 proto dhcp src 192.168.4.109 metric 600 
+192.168.4.0/24 dev tap0 proto kernel scope link src 192.168.4.250 
+192.168.4.0/22 dev wlp3s0 proto kernel scope link src 192.168.4.109 metric 600 
+jtron@jtron-ThinkPad-T480:~$ 
+
+
+
 Both directions should work flawlessly.
-✅ 8. (Optional) Enable Internet Access for z/OS (if desired)
+✅ 8. (Optional) Enable Internet Access for z/OS (if desired)                                     <=================================================== do this one for first for wifi
 
 sudo sysctl -w net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -o wlp3s0 -j MASQUERADE
