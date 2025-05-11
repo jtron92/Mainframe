@@ -6,7 +6,7 @@ from ftplib import FTP
 
 # Gmail IMAP credentials
 EMAIL = "jxcsys92@gmail.com"
-APP_PASSWORD = "bzgaspflzimpsnpc"
+APP_PASSWORD = "************"
 
 # Mainframe FTP details
 FTP_HOST = "192.168.4.150"
