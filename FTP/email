@@ -111,3 +111,82 @@ mail -s "z/OS Alert" jorgegcintron@gmail.com < /home/jtron/ftp/zmsg.txt
 
 You can also attach files with mutt or mailx if needed — just ask if you want that.
 
+
+
+🧱 1. Set up FTP server on Linux (vsftpd)
+
+sudo apt install vsftpd
+
+Then edit the config:
+
+sudo nano /etc/vsftpd.conf
+
+✅ Ensure these lines are set:
+
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+allow_writeable_chroot=YES
+
+    These lines are critical — they:
+
+    Enable local user logins
+
+    Allow writing
+
+    Jail users to their home directory (for security)
+
+    Allow that home to be writable (vsftpd blocks this by default unless explicitly allowed)
+
+Then restart the service:
+
+sudo systemctl restart vsftpd
+
+🛡️ 2. Fix Linux permissions
+
+You were using the user jtron, so you ran:
+
+sudo chown -R jtron:jtron /home/jtron
+sudo chmod 755 /home/jtron
+
+At one point, we tested with incoming_mail, but due to chroot jail, you couldn’t cd into that from FTP. So we simplified by writing directly into the home directory.
+🧪 3. Tested FTP login from Linux
+
+ftp localhost
+
+    Username: jtron
+
+    Password: !Soldierghost92
+
+Verified that login worked ✅
+🧪 4. Validated the login from z/OS TSO
+
+From the TSO READY prompt:
+
+ftp 192.168.4.250
+
+Then you entered:
+
+User: jtron
+Password: !Soldierghost92
+
+cd .     <-- This kept you in the home directory
+bin
+put 'IBMUSER.EMAIL.MSG' email.txt
+quit
+
+✅ This finally worked, and you saw:
+
+226 Transfer complete.
+
+And the file appeared in /home/jtron/email.txt.
+🧾 Optional: How you prepared the dataset
+
+From ISPF (option 3.4), you created or edited IBMUSER.EMAIL.MSG with:
+
+Mainframe to Linux FTP bridge working!
+This will be sent by Postfix email.
+
+📥 End Result
+
+You successfully uploaded a mainframe dataset as a Linux file, paving the way for automated email via Postfix.
