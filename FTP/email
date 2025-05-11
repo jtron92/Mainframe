@@ -258,3 +258,21 @@ Save and exit.
     The file is then deleted, and a log entry is made
 
 
+
+
+JCL FOR EMAIL
+
+****** ***************************** Top of Data ******************************
+ 000001 //FTPMAIL  JOB CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID                        
+ 000002 //FTP     EXEC PGM=FTP,PARM='(EXIT'                                     
+ 000003 //SYSPRINT DD SYSOUT=*                                                  
+ 000004 //INPUT    DD *                                                         
+ 000005 192.168.4.250                                                           
+ 000006 jtron                                                                   
+ 000007 !Soldierghost92                                                         
+ 000008 put 'IBMUSER.FLAT' email.txt                                            
+ 000009 quit                                                                    
+ 000010 /*                                                                      
+ ****** **************************** Bottom 
+
+
