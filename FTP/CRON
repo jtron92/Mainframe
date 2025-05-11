@@ -1,0 +1,69 @@
+✅ GOAL: Run scripts automatically without needing to manually trigger them
+🔹 1. Opened the crontab editor
+
+In your Linux terminal:
+
+crontab -e
+
+This opened the user's personal crontab for scheduling tasks.
+🔹 2. Chose the editor (first time only)
+
+It asked:
+
+Select an editor. To change later, run 'select-editor'.
+1. /bin/nano        <---- easiest
+2. /usr/bin/vim.tiny
+3. /bin/ed
+
+You typed 1 and hit Enter.
+
+✅ This opened the nano editor for crontab.
+🔹 3. Added two scheduled tasks
+
+Inside the crontab file, we added these lines:
+
+* * * * * /home/jtron/send_email_if_exists.sh
+*/1 * * * * /usr/bin/python3 /home/jtron/gmail_to_zos.py
+
+What they do:
+Script	Purpose	Frequency
+send_email_if_exists.sh	Checks if email.txt exists and sends it via Postfix	Every minute
+gmail_to_zos.py	Checks Gmail for new messages and FTPs them to z/OS	Every 1 minute
+🔹 4. Fixed typos (like pytho n3)
+
+We spotted and corrected:
+
+    pytho n3 ➝ should be python3
+
+    Also verified that the full path is correct by running:
+
+    which python3
+
+Result: /usr/bin/python3
+🔹 5. (Optional) Added logging to debug
+
+To track script output, you could log it like this:
+
+*/1 * * * * /usr/bin/python3 /home/jtron/gmail_to_zos.py >> /home/jtron/imap_to_zos.log 2>&1
+
+View logs with:
+
+tail -f /home/jtron/imap_to_zos.log
+
+🔹 6. Saved and exited the crontab
+
+Inside nano:
+
+    Ctrl + O → Save
+
+    Enter → Confirm
+
+    Ctrl + X → Exit
+
+✅ Final Outcome
+
+Both directions now run hands-free:
+
+    Mainframe ➝ Email: via send_email_if_exists.sh
+
+    Email ➝ Mainframe: via gmail_to_zos.py
