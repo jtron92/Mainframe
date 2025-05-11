@@ -190,3 +190,71 @@ This will be sent by Postfix email.
 📥 End Result
 
 You successfully uploaded a mainframe dataset as a Linux file, paving the way for automated email via Postfix.
+
+
+
+
+
+
+✅ Step-by-Step: Email the Message From Linux
+🔹 1. Make sure mail is installed
+
+You likely already have it from earlier, but to confirm:
+
+sudo apt install mailutils
+
+🔹 2. Create the email sending script
+
+Create a new file:
+
+nano /home/jtron/send_email_if_exists.sh
+
+Paste this into the file:
+
+#!/bin/bash
+
+FILE="/home/jtron/email.txt"
+TO="jorgegcintron@gmail.com"
+
+if [[ -f "$FILE" ]]; then
+    mail -s "Mainframe Message" "$TO" < "$FILE"
+    echo "[$(date)] Sent email.txt to $TO" >> /home/jtron/mail_log.txt
+    rm "$FILE"
+fi
+
+Then save and exit: Ctrl + O, Enter, Ctrl + X
+🔹 3. Make the script executable
+
+chmod +x /home/jtron/send_email_if_exists.sh
+
+🔹 4. Add it to cron to check every minute
+
+Edit your crontab:
+
+crontab -e
+
+✅ Choose option 1 — /bin/nano — it’s the easiest and exactly what you want.
+
+So go ahead and type:
+
+1
+
+Then, when the crontab editor opens, scroll to the bottom and add:
+
+* * * * * /home/jtron/send_email_if_exists.sh
+
+
+Add this line at the bottom:
+
+* * * * * /home/jtron/send_email_if_exists.sh
+
+Save and exit.
+✅ How it works
+
+    Every minute, cron runs the script
+
+    If email.txt exists, it sends it to your Gmail address via Postfix
+
+    The file is then deleted, and a log entry is made
+
+
