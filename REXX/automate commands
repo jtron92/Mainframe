@@ -1,0 +1,11 @@
+/* REXX */                                                              
+ 000002 RC=ISFCALLS("ON")                                                       
+ 000003 IF RC <> 0 THEN EXIT 16                                                 
+ 000004 CMD = "/S SMF1"                                                         
+ 000005 ADDRESS "SDSF" "ISFEXEC '"CMD"'"                                        
+ 000006 DO I = 1 TO ISFULOG.0                                                   
+ 000007 SAY "MSG="ISFULOG.I                                                     
+ 000008 END                                                                     
+ 000009 RC=ISFCALLS("OFF")                                                      
+ 000010 EXIT                                                                    
+ ****** **************************
