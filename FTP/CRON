@@ -67,3 +67,158 @@ Both directions now run hands-free:
     Mainframe ➝ Email: via send_email_if_exists.sh
 
     Email ➝ Mainframe: via gmail_to_zos.py
+
+
+
+************************************automation
+
+
+
+
+🧱 STEP 1: Create the JCL that Linux will submit
+
+This is the JCL that runs your REXX (SUBJCL) on z/OS. It triggers the actual submission of the dataset IBMUSER.JCL.INPUT.
+🔹 Create this file on Linux:
+
+File path: /home/jtron/submit_subjcl.jcl
+
+Contents:
+
+//AUTOSUB  JOB CLASS=A,MSGCLASS=A,NOTIFY=IBMUSER
+//STEP1    EXEC PGM=IKJEFT01,DYNAMNBR=20
+//SYSEXEC  DD DSN=IBMUSER.REXX,DISP=SHR
+//SYSTSPRT DD SYSOUT=*
+//SYSTSIN  DD *
+  EX 'IBMUSER.REXX.SUBJCL'
+/*
+
+✅ This JCL will:
+
+    Run your REXX script called SUBJCL
+
+    Which will then:
+
+        Read IBMUSER.JCL.INPUT
+
+        Submit it using SUBMIT
+
+        Delete it after
+
+Once this file is in place, you can proceed to Step 2 to build the Linux FTP script that submits it automatically.
+
+Want to continue to Step 2?
+You said:
+OK STEP02
+ChatGPT said:
+
+Awesome — here’s STEP 2:
+🚀 STEP 2: Create the Linux Script That Submits Your JCL via FTP
+🔹 Create this file on your Linux machine:
+
+File path: /home/jtron/send_subjcl_job.sh
+🧾 Script contents:
+
+#!/bin/bash
+
+ftp -n 192.168.4.150 <<EOF
+quote USER IBMUSER
+quote PASS YOUR_MF_PASSWORD
+quote SITE FILETYPE=JES
+put /home/jtron/submit_subjcl.jcl
+quit
+EOF
+
+🔐 What to update:
+
+Replace:
+
+YOUR_MF_PASSWORD
+
+With your actual z/OS FTP password.
+✅ Make it executable:
+
+chmod +x /home/jtron/send_subjcl_job.sh
+
+🔍 Optional: Test manually first
+
+Run:
+
+bash /home/jtron/send_subjcl_job.sh
+
+Then go to SDSF on your mainframe and look for job:
+
+AUTOSUB
+
+You should see it submitted — and its SYSOUT should show your SUBJCL REXX script being executed.
+
+✅ Let me know when that’s working and we’ll move to STEP 3: Automate with cron.
+You said:
+IT WORKS
+ChatGPT said:
+
+🔥 LET’S GOOOOO!! You’ve just automated Gmail ➝ Linux ➝ z/OS ➝ job submission — and it actually runs without you lifting a finger now. That’s real mainframe orchestration, my friend.
+🎉 Here's What You've Built:
+
+    Gmail ➝ send JCL as a message
+
+    Linux ➝ pulls message, writes it to IBMUSER.JCL.INPUT
+
+    Linux Cron ➝ submits submit_subjcl.jcl via FTP
+
+    z/OS ➝ runs SUBJCL REXX to submit the actual job
+
+    Mainframe ➝ executes the JCL
+
+    🔁 All hands-free — no CA7, no Tivoli, no button clicks
+
+✅ Ready for STEP 3?
+
+You can now automate it fully by letting cron run send_subjcl_job.sh every few minutes.
+
+Want to do that now?
+You said:
+YES
+ChatGPT said:
+
+Awesome — let’s lock this in 🔐
+✅ STEP 3: Automate Submission via cron
+
+This will tell Linux to run your send_subjcl_job.sh script every few minutes, checking for new JCL and submitting it automatically.
+🔹 1. Open your crontab
+
+crontab -e
+
+If it asks for an editor, choose option 1 (/bin/nano).
+🔹 2. Add this line to the bottom:
+
+*/2 * * * * /home/jtron/send_subjcl_job.sh
+
+This tells cron:
+
+    “Run this script every 2 minutes.”
+
+✅ You can change */2 to:
+
+    */1 → every minute
+
+    */5 → every 5 minutes
+
+🔹 3. Save and exit
+
+In nano:
+
+    Press Ctrl + O to save
+
+    Press Enter
+
+    Press Ctrl + X to exit
+
+🔍 Optional: Add logging
+
+To keep a log of every cron-triggered run:
+
+*/2 * * * * /home/jtron/send_subjcl_job.sh >> /home/jtron/subjcl_cron.log 2>&1
+
+Then check with:
+
+tail -f /home/jtron/subjcl_cron.log
