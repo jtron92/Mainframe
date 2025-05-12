@@ -115,6 +115,10 @@ or
 tail -n 50 /var/log/mail.log
 
 
+*****************to change email 
+
+nano /home/jtron/send_email_if_exists.sh
+
 
 
 
