@@ -1,0 +1,21 @@
+Command ===>                                                  Scroll ===> CSR  
+ ****** ***************************** Top of Data ******************************
+ 000001 /* REXX */                                                              
+ 000002 RC=ISFCALLS("ON")                                                       
+ 000003 IF RC <> 0 THEN EXIT 16                                                 
+ 000004 CMD = "/D SMF"                                                          
+ 000005 ADDRESS "SDSF" "ISFEXEC '"CMD"'"                                        
+ 000006 DSN = "'IBMUSER.FLAT'"                                                  
+ 000007 ADDRESS TSO "ALLOC F(OUTDD) DA("DSN") SHR REUSE"                        
+ 000008 IF DATATYPE(ISFULOG.0, 'N') & ISFULOG.0 > 0 THEN DO                     
+ 000009 DO I = 1 TO ISFULOG.0                                                   
+ 000010 OUT.I = ISFULOG.I                                                       
+ 000011 END                                                                     
+ 000012 ADDRESS TSO "EXECIO" ISFULOG.0 "DISKW OUTDD (STEM OUT. FINIS"           
+ 000013 END                                                                     
+ 000014 ELSE DO                                                                 
+ 000015 SAY "NO SMF OUTPUT RECEIVED OR SDSF COMMAND FAILED."                    
+ 000016 END                                                                     
+ 000017 ADDRESS TSO "FREE F(OUTDD)"                                             
+ 000018 RC = ISFCALLS("OFF")                                                    
+ 000019 EXIT                                       
