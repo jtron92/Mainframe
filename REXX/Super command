@@ -19,3 +19,35 @@ Command ===>                                                  Scroll ===> CSR
  000017 ADDRESS TSO "FREE F(OUTDD)"                                             
  000018 RC = ISFCALLS("OFF")                                                    
  000019 EXIT                                       
+
+
+
+********************************to make a new dsn 
+
+ 000001 /* REXX */                                                              
+ 000002 RC=ISFCALLS("ON")                                                       
+ 000003 IF RC <> 0 THEN EXIT 16                                                 
+ 000004 CMD = "/D SMF"                                                          
+ 000005 ADDRESS "SDSF" "ISFEXEC '"CMD"'"                                        
+ 000006 DSN = "'IBMUSER.FLAT2'"                                                 
+ 000007 ADDRESS TSO "ALLOC F(OUTDD) DA("DSN") NEW"         ||,                  
+ 000008              " SPACE(1,1) TRACKS"                  ||,                  
+ 000009             " LRECL(133) RECFM(F,B)"              ||,                   
+ 000010              " BLKSIZE(1330) DSORG(PS) UNIT(SYSDA)"                     
+ 000011 IF DATATYPE(ISFULOG.0, 'N') & ISFULOG.0 > 0 THEN DO                     
+ 000012 DO I = 1 TO ISFULOG.0                                                   
+ 000013 OUT.I = ISFULOG.I                                                       
+ 000014 END                                                                     
+ 000015 ADDRESS TSO "EXECIO" ISFULOG.0 "DISKW OUTDD (STEM OUT. FINIS"           
+ 000016 END                                                                     
+ 000017 ELSE DO                                                                 
+ 000018 SAY "NO SMF OUTPUT RECEIVED OR SDSF COMMAND FAILED."                    
+ 000019 END     
+ 000020 ADDRESS TSO "FREE F(OUTDD)"                                             
+ 000021 RC = ISFCALLS("OFF")                                                    
+ 000022 EXIT                                                                    
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                                                                
+                               
