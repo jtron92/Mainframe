@@ -36,6 +36,19 @@ SBSYS1 3390   2025/05/15  1   45  FB      80  3200  PO  'IBMUSER.JCL.CNTL'
 SBSYS1 3390   2025/05/15  2  900  VBS  32760 32760  PS  'IBMUSER.MAN1'
 SBSYS1 3390   2025/05/15  1    9  VA     125   129  PS  'IBMUSER.SPFLOG1.LIST'
 SBSYS1 3390   2025/05/15  1    1  FB      80   800  PS  'IBMUSER.SPFTEMP0.CNTL'
+
+
+==============================
+
+
+ftp> get 'IBMUSER.MAN1'
+227 Entering Passive Mode (192,168,4,155,4,19)
+125 Sending data set IBMUSER.MAN1
+250 Transfer completed successfully.
+25346881 bytes received in 2.7237 seconds (8.8750 Mbytes/s)
+ftp> 
+
+
 SBSYS1 3390   2024/09/22  1    5  FB      80 27920  PO  'IBMUSER.WLM.SAVE01'
 250 List completed successfully.
 ftp> 
