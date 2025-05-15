@@ -2,4 +2,4 @@ openssl s_client -connect example.com:443
 
 traceroute google.com
 
-curl google.ocm
+curl -v https://example.com
