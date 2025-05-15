@@ -60,7 +60,7 @@ which is tap 1 so you would set up tap1 :::::
 
 sudo ip link set tap1 up
 sudo ip addr del 192.168.4.1/24 dev tap1  # only if previously assigned  <============== dont need this one 
-sudo ip addr add 192.168.4.250/24 dev tap1                                <=========== make this your home network ip to your mainframe   ............. sudo ip addr add 192.168.4.155/24 dev tap1 
+sudo ip addr add 192.168.4.250/24 dev tap1                                <=========== make this your home network network from the machine to the mainframe , do not copy your wifi ip or mainframe ip just use 250 to be safe
 
 
 
