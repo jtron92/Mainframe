@@ -51,6 +51,9 @@ HHC00901I 0:0E20 LCS: Interface tap0, type TAP opened
 
 Set the TAP interface to a non-conflicting IP (e.g., .250):
 
+
+*** make sure to look ar hercules it will tell you which tap to use in the console
+it can be lcs interface tap# using mac address so its 0 or 1
 sudo ip link set tap0 up
 sudo ip addr del 192.168.4.1/24 dev tap0  # only if previously assigned
 sudo ip addr add 192.168.4.250/24 dev tap0
