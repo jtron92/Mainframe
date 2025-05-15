@@ -228,4 +228,84 @@ You currently have multiple MASQUERADE rules in the POSTROUTING chain of the nat
 
     The first rule shows that 2,655 packets and 276KB have been processed — this is active and in use.
 
+
+
+
+
+
+
+🔹 192.168.4.0/24 (Subnet)
+
+    ✅ Correct for use in iptables to match a range of IPs
+
+    It covers all IPs from 192.168.4.1 to 192.168.4.254
+
+    Typically used in MASQUERADE rules when sharing internet with a local subnet
+
+🔹 192.168.4.1 (Single Host IP)
+
+    ❌ Only matches that specific IP
+
+    Not useful if you're trying to allow many clients on your network to use NAT
+
+
+If you're still unsure about your exact subnet, you can run:
+
+ip a | grep inet
+
+Look for your internal interface (like wlan0, enpXsY, etc.), and you’ll see something like:
+
+inet 192.168.4.1/24
+
+That /24 is your subnet — so you'd use 192.168.4.0/24 in iptables.
+
+Let me know if you'd like help interpreting your actual IP layout.
+
+
+
+
+Interfaces & Subnets:
+
+    wlp3s0 (your real internet interface):
+
+inet 192.168.4.146/22
+
+This means the subnet is: 192.168.4.0/22
+(covers 192.168.4.1 → 192.168.7.254)
+
+tap1 (likely a virtual interface for a VM or VPN):
+
+    inet 192.168.4.250/24
+
+    This is a smaller subnet: 192.168.4.0/24
+
+✅ Correct IP Range for NAT (MASQUERADE)
+
+If you're sharing internet from wlp3s0 to clients behind tap1, you want:
+
+sudo iptables -t nat -A POSTROUTING -o wlp3s0 -s 192.168.4.0/24 -j MASQUERADE
+
+Because:
+
+    tap1 has 192.168.4.250/24, so the traffic will come from 192.168.4.0/24
+
+    You are sending that traffic out through wlp3s0, which is your uplink
+
+❗ Be Careful
+
+If you instead use:
+
+-s 192.168.4.0/22
+
+That will match a broader range, including IPs like 192.168.6.55, which may not be what you want.
+✅ Recommendation:
+
+Stick with:
+
+-s 192.168.4.0/24
+
+unless you intentionally want to cover the full /22 range.
+
+Let me know what you're trying to route/NAT exactly (like a VM, container, or subnet), and I can confirm the best rule.
+
     The rest have 0 packets and bytes, meaning those rules are not being used right now but are still present.
