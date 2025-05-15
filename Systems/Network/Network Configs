@@ -147,180 +147,85 @@ sudo ip link set dev tap0 up
 
 
 
-jtron@jtron-ThinkPad-T480:~$ ip addr show tap0   <==== to view if the ip can be pinged 
-7: tap0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 1000
-    link/ether 9e:ed:29:27:4e:76 brd ff:ff:ff:ff:ff:ff
-    inet6 fe80::9ced:29ff:fe27:4e76/64 scope link 
-       valid_lft forever preferred_lft forever                              theres no ip
-***************************************************************************************
-jtron@jtron-ThinkPad-T480:~$ sudo ip addr flush dev tap0                <=== flush it incase
-sudo ip addr add 192.168.4.250/24 dev tap0                               <=== add it back
-[sudo] password for jtron: 
-jtron@jtron-ThinkPad-T480:~$ ip addr show tap0
-7: tap0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 1000
-    link/ether 9e:ed:29:27:4e:76 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.4.250/24 scope global tap0                          <===
-       valid_lft forever preferred_lft forever
-jtron@jtron-ThinkPad-T480:~$ 
 
 
-*****************************for IP
+ping =============
 
-STEP 7: Test Ping
------------------
-From Linux:
-ping 192.168.0.150
-From z/OS:
-PING 192.168.0.250
-STEP 8: (Optional) Allow z/OS to access the internet
------------------------------------------------------
-Enable NAT and IP forwarding on Linux:
-sudo sysctl -w net.ipv4.ip_forward=1
-sudo iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o enp0s31f6 -j MASQUERADE
-Revert:
-sudo iptables -t nat -D POSTROUTING -s 192.168.0.0/24 -o enp0s31f6 -j MASQUERADE
-sudo sysctl -w net.ipv4.ip_forward=0
-STEP 9: Change TAP IP (if needed)
----------------------------------
-To switch IP (e.g., to 192.168.0.251):
-sudo ip addr flush dev tap0
-sudo ip addr add 192.168.0.251/24 dev tap0
-Also update z/OS TCPIP:
-HOME 192.168.0.150 ETH1
-ROUTE DEFAULT 192.168.0.251 ETH1 MTU DEFAULTSIZE
-
-
-
-
-
-
-
-
-
-************remove ip forwarding
-
-❌ To remove the NAT rule you just added:
-
-Run the exact same command as before, but with -D (delete) instead of -A (add):
-
-sudo iptables -t nat -D POSTROUTING -s 192.168.4.0/24 -o wlp3s0 -j MASQUERADE
-
-❌ To turn off IP forwarding:
-
-sudo sysctl -w net.ipv4.ip_forward=0
-
-
-
-
-
-
-
-
-
-
-
-
-
-************************************************
-
-
-✅ Step-by-step Solution:
-1. Verified TAP setup
-
-    Confirmed tap0 had 192.168.0.250/24 and was UP on Linux.
-
-    Confirmed z/OS had 192.168.0.150 with the gateway set to 192.168.0.250.
-
-2. Enabled IP forwarding on Linux
 
 sudo sysctl -w net.ipv4.ip_forward=1
-echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf  # Make it permanent
 
-3. Configured NAT (MASQUERADE) to allow Linux to forward z/OS traffic to the internet
 
-    Added NAT rules on both interfaces:
+sudo iptables -t nat -A POSTROUTING -o wlp3s0 -s 192.168.4.0/22 -j MASQUERADE
+==========================================================================
 
-sudo iptables -t nat -A POSTROUTING -o enp0s31f6 -j MASQUERADE  # Ethernet
-sudo iptables -t nat -A POSTROUTING -o wlp3s0 -j MASQUERADE     # Wi-Fi
+deactive it --------
 
-4. Handled dual default gateways
-
-    Your Linux host had two default routes, one via Ethernet and one via Wi-Fi.
-
-    We confirmed that Linux preferred Ethernet due to its lower routing metric.
-
-5. Cleaned up duplicate NAT rules
-
-    Identified redundant (0-packet) MASQUERADE rules using:
-
-sudo iptables -t nat -L POSTROUTING --line-numbers
-
-    Removed duplicates (from bottom up) using:
-
-sudo iptables -t nat -D POSTROUTING [rule_number]
-
-6. Confirmed success
-
-    Ran ping 8.8.8.8 from z/OS and used tcpdump on Linux (tap0, wlp3s0, or enp0s31f6) to verify:
-
-        ICMP packets were leaving z/OS
-
-        MASQUERADE rules were being used (non-zero packet counters)
-
-        Replies were being received ✅
-
-🧠 Optional: Shortcuts You Can Use Going Forward
-🔁 Switch to Wi-Fi for outbound traffic:
-
-sudo ip route del default via 192.168.0.1 dev enp0s31f6
-
-🔁 Switch back to Ethernet:
-
-sudo ip route add default via 192.168.0.1 dev enp0s31f6
-
-🧼 List iptables NAT rules with line numbers:
-
-sudo iptables -t nat -L POSTROUTING --line-numbers
+sudo sysctl -w net.ipv4.ip_forward=0
+sudo iptables -t nat -D POSTROUTING -o wlp3s0 -s 192.168.4.0/22 -j MASQUERADE
 
 
 
 
-**********************wifi
+🔍 1. Check if IP forwarding is enabled
+
+Run:
+
+cat /proc/sys/net/ipv4/ip_forward
+
+    If it returns 1 → IP forwarding is enabled
+
+    If it returns 0 → IP forwarding is disabled
+
+Alternatively:
+
+sysctl net.ipv4.ip_forward
 
 
- To set up z/OS routing via Wi-Fi (if you're not already):
 
-    Make sure your Wi-Fi is connected.
-    You can confirm with:
 
-ip addr show wlp3s0
+2. Check if NAT (MASQUERADE) is enabled
 
-Ensure tap0 has IP 192.168.0.250 (your z/OS gateway).
+To see if the MASQUERADE rule is in place:
 
-Make sure z/OS is using 192.168.0.250 as its gateway.
-You’ve already done this in TCPIP config with something like:
+sudo iptables -t nat -L POSTROUTING -n -v
 
-    GATEWAY 192.168.0.250 192.168.0.0 ETH1
+Look for a line similar to:
 
-✅ Add/verify MASQUERADE rule for Wi-Fi:
+MASQUERADE  all  --  0.0.0.0/0  0.0.0.0/0  /* maybe your interface listed */
 
-sudo iptables -t nat -A POSTROUTING -o wlp3s0 -j MASQUERADE
+    If such a rule exists for your interface (e.g. wlp3s0), then NAT is enabled
 
-✅ If needed: Delete Ethernet default route to force Wi-Fi usage
+    If no such rule exists, NAT is disabled
 
-sudo ip route del default via 192.168.0.1 dev enp0s31f6
+🧼 To Disable:
 
-Now, all outbound traffic (including from z/OS) will go through wlp3s0.
-✅ Final Test:
+You can disable both using:
 
-From z/OS:
+sudo sysctl -w net.ipv4.ip_forward=0
+sudo iptables -t nat -D POSTROUTING -o wlp3s0 -j MASQUERADE
 
-ping 8.8.8.8
+Replace wlp3s0 with your actual internet-facing interface (found via ip route or ip a).
 
-From Linux:
+Let me know if you want help identifying your interface or parsing the iptables output.
+You said:
+jtron@archt480 ~]$ sudo iptables -t nat -L POSTROUTING -n -v
+Chain POSTROUTING (policy ACCEPT 418 packets, 27860 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 2655  276K MASQUERADE  all  --  *      wlp3s0  192.168.4.0/24       0.0.0.0/0           
+    0     0 MASQUERADE  all  --  *      wlp3s0  192.168.4.0/22       0.0.0.0/0           
+    0     0 MASQUERADE  all  --  *      wlp3s0  192.168.4.0/22       0.0.0.0/0           
+    0     0 MASQUERADE  all  --  *      wlp3s0  192.168.155.0/24     0.0.0.0/0           
+    0     0 MASQUERADE  all  --  *      wlp3s0  192.168.100.0/24     0.0.0.0/0           
+[jtron@archt480 ~]$ 
+ChatGPT said:
 
-sudo tcpdump -i wlp3s0 icmp
+Thanks for sharing the output — here's what it means:
+✅ IPTables MASQUERADE (NAT) Status: ENABLED
 
-You should see ICMP requests and replies.
+You currently have multiple MASQUERADE rules in the POSTROUTING chain of the nat table:
 
-Let me know if you want to default to Wi-Fi every time you boot — I can help you script that or adjust metrics to make Wi-Fi preferred.
+2655  276K MASQUERADE  all  --  *  wlp3s0  192.168.4.0/24     0.0.0.0/0
+
+    The first rule shows that 2,655 packets and 276KB have been processed — this is active and in use.
+
+    The rest have 0 packets and bytes, meaning those rules are not being used right now but are still present.
