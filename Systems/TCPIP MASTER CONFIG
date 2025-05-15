@@ -62,6 +62,8 @@ sudo ip link set tap1 up
 ip addr show tap1
 Verify:
 
+sudo ip addr add 192.168.4.4/24 dev tap1
+
 ip addr show tap0
 
 You should see:
