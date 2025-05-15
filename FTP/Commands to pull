@@ -1,0 +1,42 @@
+******
+mget 'IBMUSER.JCL.CNTL(*)'
+******
+mget 'IBMUSER.JCL.CNTL(*)'
+mget 'IBMUSER.JCL.CNTL(SDSF)'? Y
+227 Entering Passive Mode (192,168,4,155,4,13)
+125 Sending data set IBMUSER.JCL.CNTL(SDSF) FIXrecfm 80
+250 Transfer completed successfully.
+880 bytes received in 0.0144 seconds (59.4724 kbytes/s)
+mget 'IBMUSER.JCL.CNTL(SMF1)'? Y
+227 Entering Passive Mode (192,168,4,155,4,14)
+125 Sending data set IBMUSER.JCL.CNTL(SMF1) FIXrecfm 80
+250 Transfer completed successfully.
+1440 bytes received in 0.0152 seconds (92.4700 kbytes/s)
+mget 'IBMUSER.JCL.CNTL(SMF2)'? Y
+227 Entering Passive Mode (192,168,4,155,4,15)
+125 Sending data set IBMUSER.JCL.CNTL(SMF2) FIXrecfm 80
+250 Transfer completed successfully.
+1440 bytes received in 0.0161 seconds (87.3087 kbytes/s)
+mget 'IBMUSER.JCL.CNTL(SMF3)'? Y
+227 Entering Passive Mode (192,168,4,155,4,16)
+125 Sending data set IBMUSER.JCL.CNTL(SMF3) FIXrecfm 80
+250 Transfer completed successfully.
+1440 bytes received in 0.0219 seconds (64.3564 kbytes/s)
+ftp> 
+
+=============================
+ls 'IBMUSER.*'
+
+ftp> ls 'IBMUSER.*'
+227 Entering Passive Mode (192,168,4,155,4,18)
+125 List started OK
+Volume Unit    Referred Ext Used Recfm Lrecl BlkSz Dsorg Dsname
+SBSYS1 3390   2025/05/15  2    6  FB      80  3120  PO  'IBMUSER.ISPF.ISPPROF'
+SBSYS1 3390   2025/05/15  1   45  FB      80  3200  PO  'IBMUSER.JCL.CNTL'
+SBSYS1 3390   2025/05/15  2  900  VBS  32760 32760  PS  'IBMUSER.MAN1'
+SBSYS1 3390   2025/05/15  1    9  VA     125   129  PS  'IBMUSER.SPFLOG1.LIST'
+SBSYS1 3390   2025/05/15  1    1  FB      80   800  PS  'IBMUSER.SPFTEMP0.CNTL'
+SBSYS1 3390   2024/09/22  1    5  FB      80 27920  PO  'IBMUSER.WLM.SAVE01'
+250 List completed successfully.
+ftp> 
+
