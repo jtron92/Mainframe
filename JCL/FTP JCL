@@ -10,3 +10,25 @@
  000009 quit                                                                    
  000010 /*                                                                      
  ****** **************************** Bottom 
+
+
+youre going to need to do this for the jcl to work
+
+run this 
+
+[jtron@archt480 ~]$ sudo nano /etc/vsftpd.conf
+
+uncomment these lines 
+
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+
+
+restart it 
+
+0 ~]$ sudo systemctl restart vsftpd
+
+
+
