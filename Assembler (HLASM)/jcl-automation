@@ -1,0 +1,110 @@
+This program demonstrates how to use IBM Assembler to dynamically generate and write a JCL job stream into a sequential dataset. 
+
+The workflow consists of:
+- An Assembler program (`ASM`) that writes out a complete JCL job (line by line) to a dataset.
+- A compile-and-link JCL (`JCL`) that assembles the `ASM` program and creates a load module.
+- A REXX script (`REXX`) that submits the generated JCL job from the output dataset.
+
+This setup mimics a self-contained job automation pipeline, reducing manual JCL editing and enabling rapid test job generation. Technologies used: Assembler, JCL, REXX.
+
+
+         CSECT
+         YREGS
+         SAVE (14,12)
+         STM  14,12,12(13)
+         BASR 12,0
+         USING *,12
+         ST   13,SAVEA+4
+         LA   13,SAVEA
+         OPEN (OFILE,OUTPUT)
+         PUT  OFILE,JCL1
+         PUT  OFILE,JCL2
+         PUT  OFILE,JCL3
+         PUT  OFILE,JCL4
+         PUT  OFILE,JCL5
+         PUT  OFILE,JCL6
+         PUT  OFILE,JCL7
+         PUT  OFILE,JCL8
+         PUT  OFILE,JCL9
+         PUT  OFILE,JCL10
+         PUT  OFILE,JCL11
+         PUT  OFILE,JCL12
+         PUT  OFILE,JCL13
+         PUT  OFILE,JCL14
+         PUT  OFILE,JCL15
+EXIT     CLOSE (OFILE)
+         L    13,SAVEA+4
+         RETURN (14,12),RC=0
+         LM   14,12,12(13)
+         LA   15,0
+         BR   14
+SAVEA    DS   18F
+OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSORG=PS,LRECL=80,EODAD=EXIT
+JCL1     DC   CL80'//MATEDK01 JOB (MVS),'
+JCL2     DC   CL80'//             MSGLEVEL=(1,1),'
+JCL3     DC   CL80'//             MSGCLASS=H,'
+JCL4     DC   CL80'//             CLASS=A'
+JCL5     DC   CL80'//STEP01   EXEC PGM=IEBGENER'
+JCL6     DC   CL80'//SYSUT1   DD DSN=Z3790.JCL.CNTL(JCL),DISP=SHR'
+JCL7     DC   CL80'//SYSUT2   DD DSN=Z3790.TRIGGER,'
+JCL8     DC   CL80'//            DISP=(NEW,CATLG,DELETE),'
+JCL9     DC   CL80'//            UNIT=SYSDA,'
+JCL10    DC   CL80'//            SPACE=(TRK,(2,2),RLSE),'
+JCL11    DC   CL80'//  DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=3200)'
+JCL12    DC   CL80'//SYSIN    DD DUMMY'
+JCL13    DC   CL80'//SYSPRINT DD SYSOUT=*'
+JCL14    DC   CL80'//SYSOUT   DD SYSOUT=*'
+JCL15    DC   CL80'//AMSDUMP  DD SYSOUT=*'
+         END
+
+
+
+
+//MATEDK01 JOB (MVS),
+//             MSGLEVEL=(1,1),
+//             MSGCLASS=H,
+//             CLASS=A,
+//             NOTIFY=&SYSUID
+//STEP01   EXEC PGM=ASMA90
+//SYSLIB   DD DSN=SYS1.MACLIB,DISP=SHR
+//SYSIN    DD DSN=IBMUSER.JCL.CNTL(ASM),DISP=SHR
+//SYSUT1   DD DSN=&&SYSUT1,SPACE=(4080,(120,120),,,ROUND),
+//            UNIT=VIO,DCB=BUFNO=1
+//SYSLIN   DD DSN=&&OBJ,DISP=(MOD,PASS),
+//            UNIT=VIO,
+//            SPACE=(3080,(80,80),,,ROUND),
+//            DCB=(LRECL=80,RECFM=FBS,BLKSIZE=3200,BUFNO=1)
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//AMSDUMP  DD SYSOUT=*
+//STEP02   EXEC PGM=HEWL
+//SYSLMOD  DD DSN=Z3790.ALOAD(ASM),DISP=SHR
+//SYSUT1   DD DSN=&&SYSUT1,SPACE=(4080,(120,120),,,ROUND),
+//            UNIT=VIO,DCB=BUFNO=1
+//SYSLIN   DD DSN=&&OBJ,DISP=(OLD,DELETE)
+//SYSPRINT DD SYSOUT=*
+//AMSDUMP  DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//RUN      EXEC PGM=*.STEP02.SYSLMOD
+//SYSPRINT DD SYSOUT=*
+//AMSDUMP  DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//OFILE    DD DSN=&SYSUID..THIRD,
+//            DISP=(OLD,CATLG,DELETE),
+//            UNIT=SYSDA,
+//            SPACE=(TRK,(2,2),RLSE),
+//            DCB=(DSORG=PS,LRECL=80,RECFM=FB,BLKSIZE=3200)
+//STEP0R   EXEC PGM=IKJEFT01
+//SYSTSIN  DD *
+  EXEC 'Z3790.JCL.CNTL(REXX)'
+/*
+//SYSTSPRT DD SYSOUT=*
+//AMSDUMP  DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+
+
+
+
+/* REXX */
+ADDRESS TSO "SUBMIT 'Z3790.THIRD'"
+EXIT

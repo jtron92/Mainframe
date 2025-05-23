@@ -1,0 +1,14 @@
+to add contuination gotta have an X on line 72 and make sure your operands are on line 16
+
+
+ Command ===>                                                  Scroll ===> PAGE 
+ =COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+ 001510 HELLOMSG DC    CL80'ONE DAY WE WILL ALL BE FREE'                        
+ 001520 OFILE    DCB   MACRF=PM,                                               X
+ 001530                DDNAME=OFILE,                                           X
+ 001540                DSORG=PS,                                               X
+ 001550                LRECL=80,                                               X
+ 001560                RECFM=FB,                                               X
+ 001570                EODAD=EXIT                                               
+ 001600          END                                                            
+ ****** **************************** Bottom of Data *******
