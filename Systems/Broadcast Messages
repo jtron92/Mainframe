@@ -1,3 +1,0 @@
-SEND 'Hello, user!' USER(ibmuser)              
-SEND 'This is an urgent message' NOW           
-SEND 'This is a broadcast message to all users'
