@@ -1,7 +1,7 @@
 I addded parmeters and made the jcl which was orginally a job at first to a proc with the parms in place you can just plugin what you need and it will execute on the bottom 
 where it says STEP01 EXEC HLASMJOB then it goes thru the entire compile link and run process
 
- 000010 //HLASMJO  JOB (MVS),'JORGE CINTRON',                                   
+ 000010 //HLASMJO  JOB (MVS),                                   
  000020 //             MSGLEVEL=(1,1),                                          
  000030 //             MSGCLASS=H,                                              
  000040 //             CLASS=A,                                                 
@@ -49,7 +49,7 @@ ALSO YOU CAN ADD A OUTPUT FILE AS WELL 'ODSN' OUTPUT DATASET
 
 
 
-//HLASMJO  JOB (MVS),'JORGE CINTRON',                                   
+         //HLASMJO  JOB (MVS),                                   
  000020 //             MSGLEVEL=(1,1),                                          
  000030 //             MSGCLASS=H,                                              
  000040 //             CLASS=A,                                                 
@@ -149,7 +149,7 @@ OFILE DD DSN=
 SO LIKE THIS =*.STEP02.RUN.OFILE,DISP=SHR
 
 
- 000000 //HLASMJO  JOB (MVS),'JORGE CINTRON',                                   
+ 000000 //HLASMJO  JOB (MVS),                                   
  000020 //             MSGLEVEL=(1,1),                                          
  000030 //             MSGCLASS=H,                                              
  000040 //             CLASS=A,                                                 
