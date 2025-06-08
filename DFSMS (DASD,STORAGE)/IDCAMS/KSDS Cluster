@@ -1,4 +1,4 @@
-//MATEDK91 JOB (MVS),'JORGE CINTRON',                    
+//MATEDK91 JOB (MVS),                 
 //             MSGLEVEL=(1,1),                           
 //             MSGCLASS=H,                               
 //             CLASS=A,                                  
@@ -35,10 +35,9 @@
 //SYSPRINT DD SYSOUT=*                                 
 //AMSDUMP  DD SYSOUT=*                       
 //SYSOUT   DD SYSOUT=*                       
-//INDD     DD *                              
-123456     JORGE CINTRON                     
-135435     JAMES MCGEEE                      
-485023     JEROME HARRIS                     
+//INDD     DD *                                                
+135435     JAMES MCDONALDS                      
+485023     JEROME JAMES                   
 /*                                           
 //OUTDD    DD DSN=MATEDK.GLOBAL.TWO,DISP=SHR 
 //         ENDIF                       
