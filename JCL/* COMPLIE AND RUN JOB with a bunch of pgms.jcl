@@ -1,4 +1,4 @@
-//Z38515AC JOB (MVS),'JORGE',                     
+//Z38515AC JOB (MVS),                     
 //             MSGLEVEL=(1,1),                            
 //             MSGCLASS=H,                                
 //             CLASS=A,                                   
