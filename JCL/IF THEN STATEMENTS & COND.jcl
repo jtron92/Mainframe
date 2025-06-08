@@ -1,4 +1,4 @@
-//MATEDK01 JOB (MVS),'JORGE',              
+//MATEDK01 JOB (MVS),             
 //             MSGLEVEL=(1,1),                     
 //             MSGCLASS=H,                         
 //             CLASS=A,                            
@@ -96,7 +96,7 @@ IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 4
 
 FOR FUN THIS IS HOW YOU WOULD WRITE IT WITH CONDS
 
-//MATEDK01 JOB (MVS),'JORGE CINTRON',                          
+//MATEDK01 JOB (MVS),                          
 //             MSGLEVEL=(1,1),                                 
 //             MSGCLASS=H,                                     
 //             CLASS=A,                                        
