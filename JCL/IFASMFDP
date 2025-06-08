@@ -1,7 +1,7 @@
 EDIT       IBMUSER.AJCL1(MAN) - 01.22                      Columns 0
 Command ===>                                                  Scroll
 ****** ***************************** Top of Data *******************
-000001 //MATEDK01 JOB (MVS),'JORGE CINTRON',                        
+000001 //MATEDK01 JOB (MVS),                        
 000002 //             MSGLEVEL=(1,1),                               
 000003 //             MSGCLASS=H,                                   
 000004 //             CLASS=A,                                      
@@ -23,7 +23,7 @@ Command ===>                                                  Scroll
 
 
 
-000100 //SMFJOB01 JOB (MVS),'JORGE CINTRON',                                   
+000100 //SMFJOB01 JOB (MVS),                                   
  000200 //             MSGLEVEL=(1,1),                                          
  000300 //             MSGCLASS=H,                                              
  000400 //             CLASS=A                                                  
