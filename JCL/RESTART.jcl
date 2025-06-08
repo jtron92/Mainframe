@@ -1,5 +1,5 @@
 IN CASE NEED TO RETART FROM A STEP PROC
-//MATEDK01 JOB (MVS),'JORGE',                       
+//MATEDK01 JOB (MVS),                       
 //             MSGLEVEL=(1,1),                              
 //             MSGCLASS=H,                                  
 //             CLASS=A,                                     
@@ -280,7 +280,7 @@ OFILE DD DSN=
 SO LIKE THIS =*.STEP02.RUN.OFILE,DISP=SHR
 
 
- 000000 //HLASMJO  JOB (MVS),'JORGE CINTRON',                                   
+ 000000 //HLASMJO  JOB (MVS),                                   
  000020 //             MSGLEVEL=(1,1),                                          
  000030 //             MSGCLASS=H,                                              
  000040 //             CLASS=A,                                                 
