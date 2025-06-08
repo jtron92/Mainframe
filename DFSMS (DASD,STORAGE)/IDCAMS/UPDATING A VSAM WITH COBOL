@@ -1,6 +1,6 @@
 AFTER DEFINING THE CLUSTER AND USING REPRO TO LOAD DATA INTO THE FILE , ALSO YOU CAN UPDATE IT WITH COBOL AS WELL
 
-//Z38515A  JOB (MVS),'JORGE CINTRON',             
+//Z38515A  JOB (MVS),             
 //             MSGLEVEL=(1,1),                    
 //             MSGCLASS=H,                        
 //             CLASS=A,                           
@@ -70,7 +70,7 @@ P100.
     OPEN I-O IFILE.               
 P200.                             
     MOVE  7777  TO EMP-ID         
-    MOVE 'CINTRON' TO EMP-NAME    
+    MOVE 'TYSON' TO EMP-NAME    
     WRITE IFILE-RECS.             
 P300.                             
     CLOSE IFILE.                  
@@ -84,7 +84,7 @@ Key                                          Col 1       Insert Length 80
        <==>+----10---+----2----+----3----+----4----+----5----+----6----+---
 ****** ****  Top of data  ****                                             
 000001 0004  JORGE                                                         
-000002 7777......CINTRON    ...............................................
+000002 7777......TYSON    ...............................................
 ****** ****  End of data  ****                                             
                                                                            
 
@@ -101,7 +101,7 @@ P100.
     OPEN I-O IFILE.               
 P200.                             
     MOVE  7777  TO EMP-ID         
-    MOVE 'CINTRON' TO EMP-NAME    
+    MOVE 'TYSON' TO EMP-NAME    
     DELETE IFILE.                 
 P300.                             
     CLOSE IFILE.                  
