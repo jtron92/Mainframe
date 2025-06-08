@@ -1,6 +1,6 @@
 
                             JOBNAME-ON- DEVNAME ----PROGRAMMER NAME---FROM--TEXT-->
-17.53.06 JOB07757  $HASP100 JCLRUN11 ON INTRDR      JORGE CINTRON      FROM JOB07756 Z38515CF
+17.53.06 JOB07757  $HASP100 JCLRUN11 ON INTRDR      MARK DRAWN      FROM JOB07756 Z38515CF
 
 
 A JOB statement has been detected in the input stream from the indicated device, and JES2 has assigned the associated job a JES2 job identifier. The programmer name is displayed if it was specified on the JOB statement. In the message, text is one of the following:
