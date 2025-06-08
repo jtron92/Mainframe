@@ -62,7 +62,7 @@ JCL
 
 Different installations procs can be different this happens to be what IBM training mainframe setup is 
 
-//Z38515A  JOB (MVS),'JORGE CINTRON',                         
+//Z38515A  JOB (MVS),                         
 //             MSGLEVEL=(1,1),                                
 //             MSGCLASS=H,                                    
 //             CLASS=A,                                       
@@ -83,7 +83,7 @@ Different installations procs can be different this happens to be what IBM train
 
 I believe this JCL below is probably more universal 
 
-//MATEDK91 JOB (MVS),'JORGE CINTRON',                     
+//MATEDK91 JOB (MVS),                     
 //             MSGLEVEL=(1,1),                            
 //             MSGCLASS=H,                                
 //             CLASS=A,                                   
