@@ -1,4 +1,4 @@
-000100 //IEFBR14  JOB (DSNJOB),JORGE,                           
+000100 //IEFBR14  JOB (DSNJOB),                      
 000200 //             CLASS=A,                                          
 000300 //             MSGCLASS=H,                                       
 000400 //             MSGLEVEL=(1,1),                                   
@@ -41,7 +41,7 @@ COND EVEN AND ONLY ***********************
 
 
 
-000100 //IEFBR14  JOB (DSNJOB),JORGe,                                
+000100 //IEFBR14  JOB (DSNJOB),                              
 000200 //             CLASS=A,                                               
 000300 //             MSGCLASS=H,                                            
 000400 //             MSGLEVEL=(1,1),                                        
@@ -96,7 +96,7 @@ MEANING EVEN IF STEP01 ABENDS STEP03 WILL EXECUTE AS SHOWN BELOW :
 
 NOW APPLYING ONLY CONDITION
 
-000100 //IEFBR14  JOB (DSNJOB),JORGE,                       
+000100 //IEFBR14  JOB (DSNJOB),                       
 000200 //             CLASS=A,                                      
 000300 //             MSGCLASS=H,                                   
 000400 //             MSGLEVEL=(1,1),                               
