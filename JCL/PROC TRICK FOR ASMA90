@@ -4,7 +4,7 @@ you can just have it at the bottom with step01 executing the proc and have the p
 
 kinda the same thing but just somewhere else
 
-        //HLASMJOB JOB (MVS),'JORGE CINTRON',                                   
+        //HLASMJOB JOB (MVS),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
