@@ -53,7 +53,7 @@ JCL8     DC   CL80'           STOP RUN.'
 Now the JCL to complie bind and run the asm pgm
 
 ***************************** Top of Data ******************
-//MATEDK01 JOB (MVS),'JORGE CINTRON',                       
+//MATEDK01 JOB (MVS),                       
 //             MSGLEVEL=(1,1),                              
 //             MSGCLASS=H,                                  
 //             CLASS=A,                                     
