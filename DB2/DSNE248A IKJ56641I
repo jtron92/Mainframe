@@ -14,7 +14,7 @@ IKJ56641I SYSTEM ABEND CODE 001   REASON CODE 00000000
 
 THIS IS BECAUSE I FORGOT TO REMOVE THE MINUS SIGN AT THE END
 
-//DB2BIND1 JOB (DB2),'JORGE CINTRON',                                   
+        //DB2BIND1 JOB (DB2),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
