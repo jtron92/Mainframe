@@ -104,7 +104,7 @@ COPYING A FILE FROM THE SERVER INTO A NEW DSN
 
 
 
- //READFILE JOB (MVS),'JORGE CINTRON',                                   
+         //READFILE JOB (MVS),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
