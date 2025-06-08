@@ -28,7 +28,7 @@ if I wanted this to work again I would uncomment everything out and add back the
 2 IEFC005I PROC STATEMENT WITHOUT MATCHING PEND STATEMENT
 
 
- 000010 //*LASMJO  JOB (MVS),'JORGE CINTRON',                                   
+ 000010 //*LASMJO  JOB (MVS),                                   
  000020 //*            MSGLEVEL=(1,1),                                          
  000030 //*            MSGCLASS=H,                                              
  000040 //*            CLASS=A,                                                 
