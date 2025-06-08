@@ -1,4 +1,4 @@
-000001 //ASMJOB01 JOB (ACCOUNT1),JORGE.CINTRON,                               
+000001 //ASMJOB01 JOB (ACCOUNT1),                               
 000002 //             CLASS=A,                                                
 000003 //             MSGCLASS=H,                                             
 000004 //             MSGLEVEL=(1,1),                                         
@@ -73,7 +73,7 @@ OUTPUT:
 13.07.17 JOB   51  ASMJOB01   STEP01    GO        LOADER    RC= 0000          
 13.07.17 JOB   51  IEF404I ASMJOB01 - ENDED - TIME=13.07.17                   
 13.07.17 JOB   51  $HASP395 ASMJOB01 ENDED                                    
-    1     //ASMJOB01 JOB (ACCOUNT1),JORGE.CINTRON,                            
+    1     //ASMJOB01 JOB (ACCOUNT1),                            
           //             CLASS=A,                                             
           //             MSGCLASS=H,                                          
           //             MSGLEVEL=(1,1),                                      
