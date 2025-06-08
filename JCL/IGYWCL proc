@@ -3,7 +3,7 @@ SO YOU CAN HAVE THE JCL IN TWO WAYS BUT YOU MUST HAVE IT POINTED TO IGY420 IN ST
 
 1. STEPLIB 
 
-        //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+        //MATEDK01 JOB (MVS),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
@@ -18,7 +18,7 @@ THIS ONE POINTS IT TO IGY420.SIGYCOMP BECUASSE THE PROCEDURE IGYWCL NEEDS OR IS 
 SO WHEN YOU RUN THE PROC IT EXECUTES IT THEN TIES BACK TO SIGYPROC FOR THE PARMS AND SINCE THE MEMBER IS ALREADY THERE
 
 
-/MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+        //MATEDK01 JOB (MVS),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
