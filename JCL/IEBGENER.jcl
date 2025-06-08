@@ -1,4 +1,4 @@
-//Z38515A  JOB (MVS),'JORGE',                              
+//Z38515A  JOB (MVS),                              
 //             MSGLEVEL=(1,1),                                     
 //             MSGCLASS=H,                                         
 //             CLASS=A,                                            
@@ -87,7 +87,7 @@ IF YOU WANT TO ADD A MEMBER TO AN EXISTING PO FILE :
 
 JUST ADD THE PDS FILE AND ADD THE MEMBER AT THE END OF IT 
 
-000100 //Z38515A  JOB (ACCT),'JORGE CINTRON',           
+000100 //Z38515A  JOB (ACCT),           
 000200 //             CLASS=A,                          
 000300 //             MSGLEVEL=(1,1),                   
 000400 //             MSGCLASS=H,                       
