@@ -115,7 +115,7 @@ ERROR 4 SINCE I COMMENTED OUT THE PARMS LIKE PGMLIB IT WONT WORK BUT I JUST LEFT
 
 
 ****** ***************************** Top of Data ******************************
- 000001 //MATEDK01 JOB (MVS),'JORGE CINTRON',                                   
+ 000001 //MATEDK01 JOB (MVS),                                  
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
