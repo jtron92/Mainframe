@@ -51,7 +51,7 @@ OFILE    DCB  MACRF=PM,DDNAME=OFILE,DSORG=PS,LRECL=80,EODAD=EXIT
 EXIT     DS   0H                                                 
 SAVEA    DS   18F                                                
 OUTREC1  DS   CL80                                               
-JCL1     DC   CL80'//MATEDK11 JOB (MVS),JORGE.CINTRON,'          
+JCL1     DC   CL80'//MATEDK11 JOB (MVS),'          
 OUTREC2  DS   CL80                                             
 JCL2     DC   CL80'//             MSGLEVEL=(1,1),'             
 OUTREC3  DS   CL80                                             
@@ -93,7 +93,7 @@ below is the compile bind and run jcl
 
 
 
-//MATEDK91 JOB (MVS),'JORGE CINTRON',                            
+//MATEDK91 JOB (MVS),                            
 //             MSGLEVEL=(1,1),                                   
 //             MSGCLASS=H,                                       
 //             CLASS=A,                                          
@@ -127,7 +127,7 @@ below is the compile bind and run jcl
 below is the &SYSUID..AJCLX and the JCL that the Assmbler added
 
 ***************************** Top of Data ***********
-//MATEDK11 JOB (MVS),JORGE.CINTRON,                  
+//MATEDK11 JOB (MVS),                  
 //             MSGLEVEL=(1,1),                       
 //             MSGCLASS=H,                           
 //             CLASS=A                               
