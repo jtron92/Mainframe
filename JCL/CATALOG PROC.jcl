@@ -2,7 +2,7 @@ EDIT       MATEDK.ABOOK1(SOLD) - 01.00
 Command ===>                                            
 =COLS> ----+----1----+----2----+----3----+----4----+----
 ****** ***************************** Top of Data *******
-000100 //MATEDK01 JOB (MVS),'JORGE',            
+000100 //MATEDK01 JOB (MVS),            
 000200 //             MSGLEVEL=(1,1),                   
 000300 //             MSGCLASS=H,                       
 000400 //             CLASS=A,                          
