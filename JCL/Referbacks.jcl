@@ -31,7 +31,7 @@ VOL=REF=*.stepname.procstepname.ddname
 
 
 
-000100 //Z38515A  JOB (ACCT),'JORGE',               
+000100 //Z38515A  JOB (ACCT),               
 000200 //             MSGCLASS=H,                           
 000300 //             MSGLEVEL=(1,1),                       
 000400 //             CLASS=A,                              
@@ -53,7 +53,7 @@ VOL=REF=*.stepname.procstepname.ddname
 *********** FROM A PROC 
 
 
-000100 //Z38515A  JOB (ACCT),'JORGE',                        
+000100 //Z38515A  JOB (ACCT),                        
 000200 //             MSGCLASS=H,                                    
 000300 //             MSGLEVEL=(1,1),                                
 000400 //             CLASS=A,                                       
@@ -139,7 +139,7 @@ OFILE DD DSN=
 SO LIKE THIS =*.STEP02.RUN.OFILE,DISP=SHR
 
 
- 000000 //HLASMJO  JOB (MVS),'JORGE CINTRON',                                   
+ 000000 //HLASMJO  JOB (MVS),                                   
  000020 //             MSGLEVEL=(1,1),                                          
  000030 //             MSGCLASS=H,                                              
  000040 //             CLASS=A,                                                 
