@@ -77,9 +77,7 @@ Command ===>
 000003 BRAXTON                               
 000004 EMPLOYEE NAME                         
 000005 EMPLOYEE NAME                         
-000006 JACKIE                                
-000007 JORGE                                 
-000008 SETH                                  
+000006 JACKIE                                                                                             
 000009 TANNER                                
 000010 TIFFANY                               
 ****** **************************** Bottom of
