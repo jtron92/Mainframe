@@ -1,4 +1,4 @@
-000100 //JCLCOMB1 JOB (ACCT),'JORGE',                                
+000100 //JCLCOMB1 JOB (ACCT),                                
 000200 //             CLASS=A,                                               
 000300 //             MSGLEVEL=(1,1),                                        
 000400 //             MSGCLASS=H,                                            
