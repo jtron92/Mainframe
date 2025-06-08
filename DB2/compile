@@ -37,7 +37,7 @@ DSN910.PROCLIB
 
 
 
-//WECDB22  JOB (DB2),'JORGE CINTRON',                                 
+//WECDB22  JOB (DB2),                                 
 //             MSGLEVEL=(1,1),                                        
 //             MSGCLASS=H,                                            
 //             CLASS=A,                                               
@@ -65,7 +65,7 @@ DSN910.PROCLIB
 
 
 ***************************** Top of Data **************
-//WECDB23  JOB (DB2),'JORGE CINTRON',                   
+//WECDB23  JOB (DB2),                   
 //             MSGLEVEL=(1,1),                          
 //             CLASS=A,                                 
 //             MSGCLASS=H,                              
@@ -81,7 +81,7 @@ DSN910.PROCLIB
 
 
 
-//MATEDK01 JOB (MVS),'JORGE CINTRON',                          
+//MATEDK01 JOB (MVS),                          
 //             MSGLEVEL=(1,1),                                 
 //             MSGCLASS=H,                                     
 //             CLASS=A,                                        
@@ -109,7 +109,7 @@ DSN910.PROCLIB
 
 
 
-//MATEDK01 JOB (MVS),'JORGE CINTRON',                       
+//MATEDK01 JOB (MVS),                       
 //             MSGLEVEL=(1,1),                              
 //             MSGCLASS=H,                                  
 //             CLASS=A,                                     
