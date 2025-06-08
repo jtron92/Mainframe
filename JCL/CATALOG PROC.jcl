@@ -106,7 +106,7 @@ STEP01.PSTEP3
 ALSO HERE IS HOW YOU WOULD HAVE AN IF ELSE STATEMENT IF NEEDED
 
 ***************************** Top of Data ******
-//MATEDK01 JOB (MVS),'JORGE',           
+//MATEDK01 JOB (MVS),           
 //             MSGLEVEL=(1,1),                  
 //             MSGCLASS=H,                      
 //             CLASS=A,                         
