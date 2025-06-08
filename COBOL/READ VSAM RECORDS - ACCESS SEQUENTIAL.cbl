@@ -70,7 +70,6 @@ View             Z38515.EMPLOYEE                                   Top of
 Key                                          Col 1       Insert Length 80
        <==>+----10---+----2----+----3----+----4----+----5----+----6----+-
 ****** ****  Top of data  ****                                           
-000001 1111CINTRON                       JORGE               032018-05-01
 000002 1122JENKINS                       DEBORAH             052016-09-01
 000003 1992MCGEE                         JAMES               102020-12-01
 000004 2021WAYNE                         BRUCE               2023-01-0123
