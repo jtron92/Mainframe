@@ -8,7 +8,7 @@ X/ or +/- These symbols indicate an override has been coded for this statement i
 
 
 
-1 //MONDAY01 JOB 1,'JORGE.CINTRON',                                     //  <-- This indicates a JCL statement directly from the job submitted
+1 //MONDAY01 JOB 1,                                     //  <-- This indicates a JCL statement directly from the job submitted
   //             MSGCLASS=H,                                            
   //             MSGLEVEL=(1,1),                                        
   //             NOTIFY=&SYSUID,                                        
@@ -42,7 +42,7 @@ X/ or +/- These symbols indicate an override has been coded for this statement i
 
 
 
-1 //JCLRUN91 JOB (ACCT),'JORGE.CINTRON',MSGLEVEL=(1,1),CLASS=A,         
+1 //JCLRUN91 JOB (ACCT),MSGLEVEL=(1,1),CLASS=A,         
   //             MSGCLASS=H,NOTIFY=&SYSUID                              
   IEFC653I SUBSTITUTION JCL - (ACCT),'JORGE.CINTRON',MSGLEVEL=(1,1),CLAS
 2 //PROCLOC  JCLLIB ORDER=Z38515.ALPHA                                  
