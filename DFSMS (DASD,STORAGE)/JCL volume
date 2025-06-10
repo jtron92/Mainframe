@@ -1,4 +1,4 @@
-//TAPEJOB1 JOB (TAPE),'JORGE CINRTON',                     
+//TAPEJOB1 JOB (TAPE),         
 //             MSGCLASS=H,                                 
 //             MSGLEVEL=(1,1),                             
 //             CLASS=A,                                    
@@ -15,7 +15,7 @@ The explain above shown, the first two subparameters are bypassed using a comma,
 subparamater is the volume sequence number. So when this job runs it will initially request the second volume assoicated 
 with this tape data set to be mounted
 
-//TAPEJOB1 JOB (TAPE),'JORGE CINRTON',                     
+//TAPEJOB1 JOB (TAPE),                   
 //             MSGCLASS=H,                                 
 //             MSGLEVEL=(1,1),                             
 //             CLASS=A,                                    
