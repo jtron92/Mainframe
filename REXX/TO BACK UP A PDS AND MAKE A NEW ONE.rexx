@@ -35,7 +35,7 @@ SAY "GENERATING BACKUP JCL FOR DATASET" || DSN || ,
     "WITH BACKUP " || BDSN                                          
 ADDRESS TSO "ALLOCATE DD (FALLDSN) DSN('" || DSN ||".BACKUP.JCL')", 
 "NEW SPACE(1,1) LRECL(80) BLKSIZE(800) RECFM(F,B) DSORG(PS)"      
-JCLLINES.1 = "//MATEDK01 JOB (MVS),'JORGE CINTRON',"              
+JCLLINES.1 = "//MATEDK01 JOB (MVS),"              
 JCLLINES.2 = "//             MSGLEVEL=(1,1),"                     
 JCLLINES.3 = "//             MSGCLASS=H,"                         
 JCLLINES.4 = "//             CLASS=A,"                            
