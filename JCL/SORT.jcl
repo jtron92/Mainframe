@@ -1,5 +1,5 @@
 ***************************** Top of Data ***********
-//Z38515A  JOB (MVS),'JORGE',                
+//Z38515A  JOB (MVS),              
 //             CLASS=A,                              
 //             MSGLEVEL=(1,1),                       
 //             MSGCLASS=H,                           
