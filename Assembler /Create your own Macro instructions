@@ -1,15 +1,14 @@
 If you wanted to create your own macro and add it to your source and point it to the jcl for reference here is an example
 
 
-if this dsn called Z38515.ALL.MIGHT(JORGE) , i called the macro my name JORGE also that i found out that its best to call your macro
-the same name as your member name in the pds
+i
 
 
-EDIT       Z38515.ALL.MIGHT(JORGE) - 01.02       
+EDIT       Z38515.ALL.MIGHT(TEST) - 01.02       
 Command ===>                                     
 ****** ***************************** Top of Data 
 000100          MACRO                            
-000200          JORGE                            
+000200          TEST                           
 000300 R0       EQU  0                           
 000400 R1       EQU  1                           
 000500 R2       EQU  2                           
@@ -39,7 +38,7 @@ then add macroname
 EDIT       Z38515.ALL.MIGHT(TRX) - 01.33                   Colum
 Command ===>                                                  Sc
 ****** ***************************** Top of Data ***************
-000010          COPY JORGE                                 <----     use COPY (marconame)
+000010          COPY TEST                                <----     use COPY (marconame)
 000100          CSECT                                           
 000200          JORGE                                       <----    then add macroname
 000300          SAVE (14,12)                                    
