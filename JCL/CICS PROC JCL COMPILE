@@ -1,4 +1,4 @@
-//CICISJOB JOB (MVS),'JORGE CINTRON',                                   
+//CICISJOB JOB (MVS),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
@@ -15,7 +15,7 @@ JUST FIND THE JCLLIB THAT HAS THE PROCEDURE AND IN CASE MOD THE ORGINAL PROCEDUR
 
 **************USING PROGLIB***************************************
 
-//CICISJOB JOB (MVS),'JORGE CINTRON',                                   
+//CICISJOB JOB (MVS),                                   
  000002 //             MSGLEVEL=(1,1),                                          
  000003 //             MSGCLASS=H,                                              
  000004 //             CLASS=A,                                                 
