@@ -16,9 +16,3 @@ These projects reflect my journey and continued learning in the world of IBM Z.
 - **Utilities** – Use of tools like IDCAMS, IEBGENER, IEBCOPY, SORT
 
 ---
-
-## Other Notes
-
-- Systems experience: IPL, ZFS mounting, subsystem bring-up , USS
-- IBM Z Xplore: Top 5 globally  
-- IBM Z Certs: [Credly Profile](https://www.credly.com/users/jxcsys001)
